@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
 
-    private float mapBound = 10;
-
     public float mouseSens = 2.0f;
 
     private Vector3 moveDirection = Vector3.zero;
