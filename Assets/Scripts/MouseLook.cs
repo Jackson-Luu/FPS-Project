@@ -19,8 +19,8 @@ public class MouseLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
-    void Update()
+    // Late update lets the camera wait for movement calculations to occur first to reduce jittering
+    void LateUpdate()
     {
         // Get mouse up/down and right/left movement
         float mouseX = Input.GetAxisRaw("Mouse X");
