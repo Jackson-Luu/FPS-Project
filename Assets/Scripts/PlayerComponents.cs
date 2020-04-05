@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+[RequireComponent(typeof(Player))]
 public class PlayerComponents : NetworkBehaviour
 {
     [SerializeField]
@@ -15,15 +16,17 @@ public class PlayerComponents : NetworkBehaviour
     void Start()
     {
         DisableComponents();
-
-        RegisterPlayer();
         AssignRemoteLayer();
     }
 
-    void RegisterPlayer()
+    public override void OnStartClient()
     {
-        string playerID = "Player " + GetComponent<NetworkIdentity>().netId;
-        transform.name = playerID;
+        base.OnStartClient();
+
+        string netID = GetComponent<NetworkIdentity>().netId.ToString();
+        Player player = GetComponent<Player>();
+
+        GameManager.RegisterPlayer(netID, player);
     }
 
     void DisableComponents()
@@ -42,5 +45,10 @@ public class PlayerComponents : NetworkBehaviour
     void AssignRemoteLayer()
     {
         gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
+    }
+
+    void OnDisable()
+    {
+        GameManager.UnRegisterPlayer(transform.name);
     }
 }

@@ -41,18 +41,21 @@ public class PlayerShoot : NetworkBehaviour
         
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
         {
-            if (hit.collider.CompareTag("Player"))
+            if (hit.collider.CompareTag("Player") && hit.collider.transform.name != transform.name) // Second case removes self damage bug at time of writing
             {
-                CmdPlayerShot(hit.collider.name);
+                CmdPlayerShot(hit.collider.name, weapon.damage);
             }
         }
     }
 
     // Method only called on server
     [Command]
-    void CmdPlayerShot(string id)
+    void CmdPlayerShot(string playerID, float damage)
     {
-        Debug.Log(id + " has been shot.");
+        Debug.Log(playerID + " has been shot.");
+
+        Player player = GameManager.GetPlayer(playerID);
+        player.TakeDamage(damage);
     }
 
 }
