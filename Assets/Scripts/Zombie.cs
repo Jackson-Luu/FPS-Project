@@ -10,6 +10,7 @@ public class Zombie : MonoBehaviour
     private Rigidbody zombieRb;
     private GameObject player;
 
+    /*
     // Start is called before the first frame update
     void Start()
     {
@@ -25,4 +26,5 @@ public class Zombie : MonoBehaviour
         playerDirection.y = 0;
         zombieRb.MovePosition(transform.position + playerDirection * speed * Time.deltaTime);
     }
+    */
 }

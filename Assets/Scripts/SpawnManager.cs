@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : NetworkBehaviour
 {
     public GameObject[] enemies;
     public GameObject[] powerups;
@@ -16,7 +17,7 @@ public class SpawnManager : MonoBehaviour
     private float spawnInterval = 2.0f;
 
     // Start is called before the first frame update
-    void Start()
+    public override void OnStartServer()
     {
         xSpawnRange = zSpawnRange = (GameObject.Find("Ground").GetComponent<Renderer>().bounds.size.x / 2) - edgeMargin;
         InvokeRepeating("SpawnEnemy", startDelay, spawnInterval);
@@ -34,6 +35,7 @@ public class SpawnManager : MonoBehaviour
         float randomZ = Random.Range(-zSpawnRange, zSpawnRange);
         Vector3 spawnPos = new Vector3(randomX, enemies[randomIndex].transform.position.y, randomZ);
 
-        Instantiate(enemies[randomIndex], spawnPos, enemies[randomIndex].transform.rotation);
+        GameObject enemy = Instantiate(enemies[randomIndex], spawnPos, enemies[randomIndex].transform.rotation);
+        //NetworkServer.Spawn(enemy);
     }
 }

@@ -8,21 +8,39 @@ public class PlayerComponents : NetworkBehaviour
     [SerializeField]
     Behaviour[] componentsToDisable;
 
+    [SerializeField]
+    string remoteLayerName = "RemotePlayer";
+
     // Start is called before the first frame update
     void Start()
     {
-        if(!isLocalPlayer)
+        DisableComponents();
+
+        RegisterPlayer();
+        AssignRemoteLayer();
+    }
+
+    void RegisterPlayer()
+    {
+        string playerID = "Player " + GetComponent<NetworkIdentity>().netId;
+        transform.name = playerID;
+    }
+
+    void DisableComponents()
+    {
+        if (!isLocalPlayer)
         {
             for (int i = 0; i < componentsToDisable.Length; i++)
             {
                 componentsToDisable[i].enabled = false;
             }
         }
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+    void AssignRemoteLayer()
     {
-        
+        gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
     }
 }

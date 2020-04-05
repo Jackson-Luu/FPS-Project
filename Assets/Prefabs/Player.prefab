@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 212466795052579924}
   - component: {fileID: 212466795052579925}
   - component: {fileID: 212466795052579922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -113,10 +113,11 @@ GameObject:
   - component: {fileID: 212466796382139198}
   - component: {fileID: 212466796382139197}
   - component: {fileID: -7690100317141515077}
+  - component: {fileID: 5817435983997789641}
   - component: {fileID: -2422718430464458456}
   - component: {fileID: 8348150383810990697}
   - component: {fileID: 2005915993}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -238,6 +239,30 @@ MonoBehaviour:
   - {fileID: 212466795052579924}
   - {fileID: 212466795052579925}
   - {fileID: 212466795052579922}
+  - {fileID: 5817435983997789641}
+  remoteLayerName: RemotePlayer
+--- !u!114 &5817435983997789641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212466796382139187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ae75e7667b81947af1c417c2b3c372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  weapon:
+    name: AK47
+    damage: 10
+    range: 100
+  cam: {fileID: 212466795052579924}
+  mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &-2422718430464458456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,9 +322,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 212466795052579923}
     m_Modifications:
+    - target: {fileID: 1324608018887474, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452442627303592, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1487774384131766, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
       propertyPath: m_Name
       value: AK74
+      objectReference: {fileID: 0}
+    - target: {fileID: 1487774384131766, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927369336514790, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4519716788627816, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
       propertyPath: m_LocalPosition.x
