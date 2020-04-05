@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         // as an acceleration (ms^-2)
         moveDirection.y -= gravity * Time.deltaTime;
 
-        characterController.Move(moveDirection * Time.deltaTime);
+        characterController.Move(moveDirection * Time.deltaTime);        
     }
 
     void ConstrainPlayerPosition()
