@@ -12,13 +12,45 @@ public class PlayerComponents : NetworkBehaviour
     [SerializeField]
     string remoteLayerName = "RemotePlayer";
 
+    [SerializeField]
+    string dontDrawLayer = "DontDraw";
+
+    [SerializeField]
+    GameObject playerGraphics;
+
+    [SerializeField]
+    GameObject playerUIPrefab;
+    private GameObject playerUIInstance;
+
     // Start is called before the first frame update
     void Start()
     {
-        DisableComponents();
-        AssignRemoteLayer();
+        if (!isLocalPlayer)
+        {
+            DisableComponents();
+            AssignRemoteLayer();
+        } else
+        {
+            // Hide player model graphics from the player themselves
+            SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayer));
+
+            // Create Player UI
+            playerUIInstance = Instantiate(playerUIPrefab);
+            playerUIInstance.name = playerUIPrefab.name;
+        }
 
         GetComponent<Player>().Setup();
+    }
+
+    // Add all children recursively to new layer
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
     }
 
     public override void OnStartClient()
@@ -33,15 +65,10 @@ public class PlayerComponents : NetworkBehaviour
 
     void DisableComponents()
     {
-        if (!isLocalPlayer)
+        for (int i = 0; i < componentsToDisable.Length; i++)
         {
-            for (int i = 0; i < componentsToDisable.Length; i++)
-            {
-                componentsToDisable[i].enabled = false;
-            }
+            componentsToDisable[i].enabled = false;
         }
-
-
     }
 
     void AssignRemoteLayer()
@@ -51,6 +78,8 @@ public class PlayerComponents : NetworkBehaviour
 
     void OnDisable()
     {
+        Destroy(playerUIInstance);
+
         GameManager.UnRegisterPlayer(transform.name);
     }
 }

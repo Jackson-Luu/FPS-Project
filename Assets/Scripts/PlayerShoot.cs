@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+[RequireComponent(typeof(WeaponManager))]
 public class PlayerShoot : NetworkBehaviour
 {
-    public PlayerWeapon weapon;
-
     [SerializeField]
     private Camera cam;
 
     // Layer mask to restrict what objects player can hit
     [SerializeField]
     private LayerMask mask;
+
+    private WeaponManager weaponManager;
+    private PlayerWeapon currentWeapon;
 
     // Start is called before the first frame update
     void Start()
@@ -22,28 +24,52 @@ public class PlayerShoot : NetworkBehaviour
             Debug.Log("No camera referenced.");
             this.enabled = false;
         }
+
+        weaponManager = GetComponent<WeaponManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        currentWeapon = weaponManager.GetCurrentWeapon();
+
+        // Non-auto weapon
+        if (currentWeapon.fireRate <= 0)
         {
-            Shoot();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+
+                // May have to use waitForSeconds to prevent spamming a non-auto weapon
+            }
+
+        // Automatic weapon
+        } else
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                InvokeRepeating("Shoot", 0f, 1f / currentWeapon.fireRate);
+            } else if (Input.GetButtonUp("Fire1"))
+            {
+                CancelInvoke("Shoot");
+            }
         }
+
     }
 
     // Method only called on client
     [Client]
     void Shoot()
     {
+        Debug.Log("SHOOT!" + Time.time);
+
         RaycastHit hit;
         
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentWeapon.range, mask))
         {
             if (hit.collider.CompareTag("Player") && hit.collider.transform.name != transform.name) // Second case removes self damage bug at time of writing
             {
-                CmdPlayerShot(hit.collider.name, weapon.damage);
+                CmdPlayerShot(hit.collider.name, currentWeapon.damage);
             }
         }
     }
