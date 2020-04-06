@@ -10,6 +10,8 @@ public class WeaponManager : NetworkBehaviour
     private Transform weaponHolder;
 
     private PlayerWeapon currentWeapon;
+    private WeaponGraphics weaponGraphics;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,26 +24,27 @@ public class WeaponManager : NetworkBehaviour
 
         GameObject weaponInstance = Instantiate(weapon.graphics, weaponHolder.position, weaponHolder.rotation);
         weaponInstance.transform.SetParent(weaponHolder);
+
+        weaponGraphics = weaponInstance.GetComponent<WeaponGraphics>();
+        if (weaponGraphics == null)
+        {
+            Debug.LogError("No WeaponGraphics on weapon: " + weaponInstance.name);
+        }
+
         if (isLocalPlayer)
         {
             // Add weapon to weapon camera layer to prevent seeing gun clipping into objects
-            SetLayerRecursively(weaponInstance, LayerMask.NameToLayer("Weapon"));
-        }
-    }
-
-    // Add all children recursively to new layer
-    void SetLayerRecursively(GameObject obj, int newLayer)
-    {
-        obj.layer = newLayer;
-
-        foreach (Transform child in obj.transform)
-        {
-            SetLayerRecursively(child.gameObject, newLayer);
+            Util.SetLayerRecursively(weaponInstance, LayerMask.NameToLayer("Weapon"));
         }
     }
 
     public PlayerWeapon GetCurrentWeapon()
     {
         return currentWeapon;
+    }
+
+    public WeaponGraphics GetWeaponGraphics()
+    {
+        return weaponGraphics;
     }
 }

@@ -14,10 +14,10 @@ TagManager:
   - UI
   - 
   - 
-  - Lighting
-  - Ground
-  - Postprocessing
-  - 
+  - LocalPlayer
+  - RemotePlayer
+  - DontDraw
+  - Weapon
   - 
   - 
   - 

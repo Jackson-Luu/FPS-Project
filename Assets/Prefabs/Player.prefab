@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 309662760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,6 @@ MonoBehaviour:
   - {fileID: 212466795052579924}
   - {fileID: 212466795052579925}
   - {fileID: 212466795052579922}
-  - {fileID: 5817435983997789641}
   - {fileID: 137953025}
   - {fileID: 654834826}
   remoteLayerName: RemotePlayer
@@ -503,7 +502,7 @@ MonoBehaviour:
     name: AK47
     damage: 10
     range: 100
-    fireRate: 0
+    fireRate: 10
     graphics: {fileID: 3279740696676372436, guid: ca376a012899bde419cc097db75630f4,
       type: 3}
   weaponHolder: {fileID: 309662760}

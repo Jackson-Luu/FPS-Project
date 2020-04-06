@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Editor", "Mirror.Edi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.CompilerSymbols", "Mirror.CompilerSymbols.csproj", "{862291E5-38F8-BC5C-EA8B-CF026C882728}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{8E48406D-FFC7-843D-FDC7-753C8243A5AA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,10 +61,6 @@ Global
 		{862291E5-38F8-BC5C-EA8B-CF026C882728}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{862291E5-38F8-BC5C-EA8B-CF026C882728}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{862291E5-38F8-BC5C-EA8B-CF026C882728}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E48406D-FFC7-843D-FDC7-753C8243A5AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E48406D-FFC7-843D-FDC7-753C8243A5AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E48406D-FFC7-843D-FDC7-753C8243A5AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E48406D-FFC7-843D-FDC7-753C8243A5AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

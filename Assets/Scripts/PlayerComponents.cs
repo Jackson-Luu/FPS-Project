@@ -32,7 +32,7 @@ public class PlayerComponents : NetworkBehaviour
         } else
         {
             // Hide player model graphics from the player themselves
-            SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayer));
+            Util.SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayer));
 
             // Create Player UI
             playerUIInstance = Instantiate(playerUIPrefab);
@@ -40,17 +40,6 @@ public class PlayerComponents : NetworkBehaviour
         }
 
         GetComponent<Player>().Setup();
-    }
-
-    // Add all children recursively to new layer
-    void SetLayerRecursively(GameObject obj, int newLayer)
-    {
-        obj.layer = newLayer;
-
-        foreach (Transform child in obj.transform)
-        {
-            SetLayerRecursively(child.gameObject, newLayer);
-        }
     }
 
     public override void OnStartClient()
