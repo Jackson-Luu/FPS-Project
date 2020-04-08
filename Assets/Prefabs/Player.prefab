@@ -128,7 +128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809381846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3585381395089761462}
@@ -201,7 +201,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 823
+    m_Bits: 4919
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -271,7 +271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212466796382139187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.01, z: 0}
+  m_LocalPosition: {x: 0, y: 1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 212466795052579923}
@@ -291,7 +291,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -310,9 +310,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  jumpSpeed: 6
+  jumpSpeed: 5
   gravity: 20
   mouseSens: 2
+  sprintMultiplier: 3
+  staminaBurnRate: 1.5
+  staminaRegenRate: 0.7
 --- !u!114 &-8844148147066375850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +334,9 @@ MonoBehaviour:
   disableOnDeath:
   - {fileID: 212466796382139197}
   - {fileID: 5817435983997789641}
+  disableGameObjectsOnDeath:
+  - {fileID: 1809381846}
+  - {fileID: 212466795052579926}
 --- !u!114 &-7690100317141515077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +363,7 @@ MonoBehaviour:
   playerGraphics: {fileID: 1809381846}
   playerUIPrefab: {fileID: 7129251778665541008, guid: 28fa5e87b4d07714fb55880a0ae18415,
     type: 3}
+  playerUIInstance: {fileID: 0}
 --- !u!114 &5817435983997789641
 MonoBehaviour:
   m_ObjectHideFlags: 0

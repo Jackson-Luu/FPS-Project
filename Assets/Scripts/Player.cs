@@ -2,6 +2,7 @@
 using UnityEngine;
 using Mirror;
 
+[RequireComponent(typeof(PlayerComponents))]
 public class Player : NetworkBehaviour
 {
     [SyncVar]
@@ -22,23 +23,44 @@ public class Player : NetworkBehaviour
     private Behaviour[] disableOnDeath;
     private bool[] wasEnabled;
 
-    public void Setup()
+    [SerializeField]
+    private GameObject[] disableGameObjectsOnDeath;
+
+    private bool firstSetup = true;
+
+    public void SetupPlayer()
     {
-        wasEnabled = new bool[disableOnDeath.Length];
-        for (int i = 0; i < wasEnabled.Length; i++)
+        if (isLocalPlayer)
         {
-            wasEnabled[i] = disableOnDeath[i].enabled;
+            // Switch cameras
+            GameManager.instance.SetSceneCameraActive(false);
+            GetComponent<PlayerComponents>().playerUIInstance.SetActive(true);
         }
-        setDefaults();    
+
+        CmdBroadcastNewPlayerSetup();
     }
 
-    void Update()
+    [Command]
+    private void CmdBroadcastNewPlayerSetup()
     {
-        if (!isLocalPlayer) { return; }
-        if (Input.GetKeyDown(KeyCode.K))
+        RpcSetupPlayerOnAllClients();
+    }
+
+    [ClientRpc]
+    private void RpcSetupPlayerOnAllClients()
+    {
+        if (firstSetup)
         {
-            RpcTakeDamage(9999);
+            wasEnabled = new bool[disableOnDeath.Length];
+            for (int i = 0; i < wasEnabled.Length; i++)
+            {
+                wasEnabled[i] = disableOnDeath[i].enabled;
+            }
+
+            firstSetup = false;
         }
+
+        setDefaults();
     }
 
     public void setDefaults()
@@ -46,9 +68,16 @@ public class Player : NetworkBehaviour
         isDead = false;
         currentHealth = maxHealth;
 
+        // Enable player components
         for (int i = 0; i < disableOnDeath.Length; i++)
         {
             disableOnDeath[i].enabled = wasEnabled[i];
+        }
+
+        // Enable player gameObjects
+        for (int i = 0; i < disableGameObjectsOnDeath.Length; i++)
+        {
+            disableGameObjectsOnDeath[i].SetActive(true);
         }
 
         // Enable collider (colliders are not behaviours hence the special case)
@@ -75,15 +104,30 @@ public class Player : NetworkBehaviour
     {
         isDead = true;
 
+        // Disable components
         for (int i = 0; i < disableOnDeath.Length; i++)
         {
             disableOnDeath[i].enabled = false;
         }
 
+        // Disable player gameObjects
+        for (int i = 0; i < disableGameObjectsOnDeath.Length; i++)
+        {
+            disableGameObjectsOnDeath[i].SetActive(false);
+        }
+
+        // Disable collider
         Collider col = GetComponent<Collider>();
         if (col != null)
         {
             col.enabled = false;
+        }
+
+        // Switch cameras
+        if (isLocalPlayer)
+        {
+            GameManager.instance.SetSceneCameraActive(true);
+            GetComponent<PlayerComponents>().playerUIInstance.SetActive(false);
         }
 
         StartCoroutine(Respawn());
@@ -97,8 +141,12 @@ public class Player : NetworkBehaviour
         transform.position = spawnPoint.position;
         transform.rotation = spawnPoint.rotation;
 
+        // Switch cameras
+        GameManager.instance.SetSceneCameraActive(false);
+        GetComponent<PlayerComponents>().playerUIInstance.SetActive(true);
+
         // Reactivate playerController after position has been set to avoid reverting to pre-death position
         yield return new WaitForSeconds(0.1f);
-        setDefaults();
+        SetupPlayer();
     }
 }

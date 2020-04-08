@@ -9,20 +9,34 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
 
     // Move variables
-    public float speed = 3.0f;
-    public float jumpSpeed = 8.0f;
+    [SerializeField]
+    private float speed = 3.0f;
+    public float jumpSpeed = 5.0f;
     public float gravity = 20.0f;
 
     public float mouseSens = 2.0f;
+
+    [SerializeField]
+    private float sprintMultiplier = 3f;
+
+    [SerializeField]
+    private float staminaBurnRate = 1.5f;
+
+    [SerializeField]
+    private float staminaRegenRate = 0.7f;
+    private float stamina = 5f;
+    private float maxStamina = 5f;
 
     private Vector3 moveDirection = Vector3.zero;
     private float groundRadius;
 
     private Animator animator;
+    private Collider playerCollider;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        playerCollider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
 
         // Hide Cursor
@@ -55,6 +69,23 @@ public class PlayerController : MonoBehaviour
                 moveDirection.y = jumpSpeed;
             }
 
+            if (Input.GetButton("Sprint") && stamina > 0f)
+            {
+                stamina -= staminaBurnRate * Time.deltaTime;
+                if (stamina >= 0.01f)
+                {
+                    moveDirection.x *= sprintMultiplier;
+                    moveDirection.y *= 1.05f;
+                    moveDirection.z *= sprintMultiplier;
+                }
+            } else
+            {
+                stamina += staminaRegenRate * Time.deltaTime;
+            }
+
+            // Restrict max stamina
+            stamina = Mathf.Clamp(stamina, 0f, maxStamina);
+
             // Animate movement
             animator.SetFloat("Speed", moveZ);
         }
@@ -65,6 +96,14 @@ public class PlayerController : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
 
         characterController.Move(moveDirection * Time.deltaTime);        
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Units"))
+        {
+            Physics.IgnoreCollision(playerCollider, collision.collider);
+        }
     }
 
     void ConstrainPlayerPosition()

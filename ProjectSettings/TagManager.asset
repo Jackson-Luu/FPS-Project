@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shootable
+  - Wall
+  - Ground
+  - Zombie
   layers:
   - Default
   - TransparentFX
