@@ -502,12 +502,12 @@ PrefabInstance:
     - target: {fileID: 4674341173655912304, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4674341173655912304, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4674341173716652935, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
         type: 3}
@@ -614,15 +614,25 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4674341174272085130, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4674341174339000108, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4674341174470955424, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
         type: 3}
       propertyPath: m_Name
       value: ServerList
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674341174470955424, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3617bf4103b6ef24bb6e9c4d611d0964, type: 3}
@@ -632,18 +642,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1180333321}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1180333323 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4674341175116517417, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
-    type: 3}
-  m_PrefabInstance: {fileID: 1180333321}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1180333324 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4674341173773906500, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
@@ -686,12 +684,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1180333328 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4674341174339000108, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
-    type: 3}
-  m_PrefabInstance: {fileID: 1180333321}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1180333329 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4674341174478868223, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
@@ -704,9 +696,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1180333330 stripped
+--- !u!1 &1180333331 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 4674341174470955424, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
+  m_CorrespondingSourceObject: {fileID: 4674341174339000109, guid: 3617bf4103b6ef24bb6e9c4d611d0964,
     type: 3}
   m_PrefabInstance: {fileID: 1180333321}
   m_PrefabAsset: {fileID: 0}
@@ -1386,7 +1378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1919602818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1809,16 +1801,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4106758218130366466, guid: e4a03a3a63fb34245ba31db0b90c0c54,
-        type: 3}
-      propertyPath: offlineScene
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4106758218130366466, guid: e4a03a3a63fb34245ba31db0b90c0c54,
-        type: 3}
-      propertyPath: onlineScene
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4106758218130366469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
         type: 3}
       propertyPath: m_Name
@@ -1827,39 +1809,37 @@ PrefabInstance:
     - target: {fileID: 4106758218130366469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4106758218964250650, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+        type: 3}
+      propertyPath: popup
+      value: 
+      objectReference: {fileID: 1180333325}
+    - target: {fileID: 4106758218964250650, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+        type: 3}
+      propertyPath: mainStatusText
+      value: 
+      objectReference: {fileID: 1180333329}
+    - target: {fileID: 4106758218964250650, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+        type: 3}
+      propertyPath: popupStatusText
+      value: 
+      objectReference: {fileID: 1180333324}
+    - target: {fileID: 4106758218964250650, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+        type: 3}
+      propertyPath: ListElementContainer
+      value: 
+      objectReference: {fileID: 1180333331}
+    - target: {fileID: 4106758218964250650, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+        type: 3}
+      propertyPath: refreshButton
+      value: 
+      objectReference: {fileID: 1180333327}
+    - target: {fileID: 4106758218964250650, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+        type: 3}
+      propertyPath: bonusButton
+      value: 
+      objectReference: {fileID: 1180333326}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a03a3a63fb34245ba31db0b90c0c54, type: 3}
---- !u!1 &4106758218964250648 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4106758218130366469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
-    type: 3}
-  m_PrefabInstance: {fileID: 4106758218964250647}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4106758218964250649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4106758218964250648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69f796b44735c414783d66f47b150c5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listServerIp: 127.0.0.1
-  gameServerToListenPort: 8887
-  clientToListenPort: 8888
-  gameServerTitle: Deathmatch
-  mainPanel: {fileID: 1180333330}
-  content: {fileID: 1180333328}
-  statusText: {fileID: 1180333329}
-  slotPrefab: {fileID: 114611570997501482, guid: 611330311f6094567ad2f8012b470129,
-    type: 3}
-  serverAndPlayButton: {fileID: 1180333327}
-  serverOnlyButton: {fileID: 1180333326}
-  connectingPanel: {fileID: 1180333325}
-  connectingText: {fileID: 1180333324}
-  connectingCancelButton: {fileID: 1180333323}
