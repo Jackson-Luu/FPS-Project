@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
@@ -28,7 +26,6 @@ public class PlayerController : MonoBehaviour
     private float maxStamina = 5f;
 
     private Vector3 moveDirection = Vector3.zero;
-    private float groundRadius;
 
     private Animator animator;
     private Collider playerCollider;
@@ -41,15 +38,12 @@ public class PlayerController : MonoBehaviour
 
         // Hide Cursor
         Cursor.lockState = CursorLockMode.Locked;
-
-        // Get terrain radius (square)
-        groundRadius = GameObject.Find("Ground").GetComponent<Renderer>().bounds.size.x / 2;
     }
 
     void Update()
     {
+        if (PauseMenu.isOn) { return; }
         MovePlayer();
-        ConstrainPlayerPosition();
     }
 
     void MovePlayer()
@@ -103,29 +97,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Units"))
         {
             Physics.IgnoreCollision(playerCollider, collision.collider);
-        }
-    }
-
-    void ConstrainPlayerPosition()
-    {
-        if (transform.position.x > groundRadius)
-        {
-            transform.position = new Vector3(groundRadius, transform.position.y, transform.position.z);
-        }
-
-        if (transform.position.z > groundRadius)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, groundRadius);
-        }
-
-        if (transform.position.x < -groundRadius)
-        {
-            transform.position = new Vector3(-groundRadius, transform.position.y, transform.position.z);
-        }
-
-        if (transform.position.z < -groundRadius)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -groundRadius);
         }
     }
 }

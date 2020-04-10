@@ -131,6 +131,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3087988364514736469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
         type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087988364514736469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+        type: 3}
       propertyPath: offlineScene
       value: Assets/Scenes/Lobby.unity
       objectReference: {fileID: 0}
@@ -138,6 +143,17 @@ PrefabInstance:
         type: 3}
       propertyPath: onlineScene
       value: Assets/Scenes/Game.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087988364514736469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875,
+        type: 3}
+    - target: {fileID: 3087988364514736469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4106758218130366465, guid: e4a03a3a63fb34245ba31db0b90c0c54,
         type: 3}
@@ -197,12 +213,17 @@ PrefabInstance:
     - target: {fileID: 4106758218130366468, guid: e4a03a3a63fb34245ba31db0b90c0c54,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4106758218130366469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
         type: 3}
       propertyPath: m_Name
       value: NetworkManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106758218130366469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4106758218964250650, guid: e4a03a3a63fb34245ba31db0b90c0c54,
         type: 3}

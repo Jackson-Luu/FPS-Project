@@ -31,6 +31,8 @@ public class PlayerShoot : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.isOn) { return; }
+
         currentWeapon = weaponManager.GetCurrentWeapon();
 
         // Non-auto weapon

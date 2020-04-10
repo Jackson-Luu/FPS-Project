@@ -22,6 +22,8 @@ public class MouseLook : MonoBehaviour
     // Late update lets the camera wait for movement calculations to occur first to reduce jittering
     void LateUpdate()
     {
+        if (PauseMenu.isOn) { return; }
+
         // Get mouse up/down and right/left movement
         float mouseX = Input.GetAxisRaw("Mouse X");
         float mouseY = Input.GetAxisRaw("Mouse Y");
