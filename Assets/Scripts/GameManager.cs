@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     public MatchSettings matchSettings;
-
-    [SerializeField]
-    private GameObject sceneCamera;
 
     void Awake ()
     {
@@ -23,23 +21,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetSceneCameraActive (bool isActive)
-    {
-        if (sceneCamera == null) { return; }
-
-        sceneCamera.SetActive(isActive);
-    }
-
     #region Player Tracking Stuff (Click to Expand)
 
     private const string PLAYER_PREFIX = "Player ";
 
-    private static Dictionary<string, Player> players = new Dictionary<string, Player>();
+    public static Dictionary<string, Player> players = new Dictionary<string, Player>();
 
-    public Dictionary<string, Player> GetPlayers {
+    /*public Dictionary<string, Player> GetPlayers {
         get {
             return players; }
-    }
+    }*/
 
     public static void RegisterPlayer(string netID, Player player)
     {
@@ -64,5 +55,11 @@ public class GameManager : MonoBehaviour
     {
         return players.Count;
     }
+
+    public static Player[] GetAllPlayers()
+    {
+        return players.Values.ToArray();
+    }
+
     #endregion
 }

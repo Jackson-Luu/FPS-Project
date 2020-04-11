@@ -77,11 +77,6 @@ public class PlayerComponents : NetworkBehaviour
     {
         Destroy(playerUIInstance);
 
-        if (isLocalPlayer)
-        {
-            GameManager.instance.SetSceneCameraActive(true);
-        }
-
         GameManager.UnRegisterPlayer(transform.name);
     }
 }

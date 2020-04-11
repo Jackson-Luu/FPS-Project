@@ -28,13 +28,14 @@ public class SpawnManager : NetworkBehaviour
     void SpawnEnemy()
     {
         Debug.Log(GameManager.GetPlayerCount() + "PLAYERS ONLINE");
-        foreach (KeyValuePair<string, Player> entry in GameManager.instance.GetPlayers)
+        /*foreach (Player entry in GameManager.GetAllPlayers())
         {
+            Debug.Log(entry.name);
             int randomIndex = Random.Range(0, enemies.Length);
             GameObject enemy = Instantiate(enemies[randomIndex], RandomPosition(randomIndex), enemies[randomIndex].transform.rotation);
-            enemy.GetComponent<EnemyMove>().SetPlayer = entry.Value.gameObject;
+            enemy.GetComponent<EnemyMove>().SetPlayer = entry.gameObject;
             NetworkServer.Spawn(enemy);
-        }
+        }*/
     }
 
     private Vector3 RandomPosition(int enemy)

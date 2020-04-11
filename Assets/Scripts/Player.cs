@@ -32,13 +32,28 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            // Switch cameras
-            GameManager.instance.SetSceneCameraActive(false);
-            GetComponent<PlayerComponents>().playerUIInstance.SetActive(true);
+            // De-activate death screen
+            if (isLocalPlayer)
+            {
+                GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>().deathScreen.SetActive(false);
+            }
         }
 
         CmdBroadcastNewPlayerSetup();
     }
+
+    
+    void Update()
+    {
+    	if (!isLocalPlayer)
+    		return;
+
+    	if (Input.GetKeyDown(KeyCode.K))
+    	{
+    		RpcTakeDamage(99999);
+    	}
+    }
+    
 
     [Command]
     private void CmdBroadcastNewPlayerSetup()
@@ -123,11 +138,10 @@ public class Player : NetworkBehaviour
             col.enabled = false;
         }
 
-        // Switch cameras
+        // Activate death screen
         if (isLocalPlayer)
         {
-            GameManager.instance.SetSceneCameraActive(true);
-            GetComponent<PlayerComponents>().playerUIInstance.SetActive(false);
+            GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>().deathScreen.SetActive(true);
         }
 
         StartCoroutine(Respawn());
@@ -140,10 +154,6 @@ public class Player : NetworkBehaviour
         Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = spawnPoint.position;
         transform.rotation = spawnPoint.rotation;
-
-        // Switch cameras
-        GameManager.instance.SetSceneCameraActive(false);
-        GetComponent<PlayerComponents>().playerUIInstance.SetActive(true);
 
         // Reactivate playerController after position has been set to avoid reverting to pre-death position
         yield return new WaitForSeconds(0.1f);

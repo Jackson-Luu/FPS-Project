@@ -7,6 +7,9 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     GameObject pauseMenu;
 
+    [SerializeField]
+    public GameObject deathScreen;
+
     public void SetController (PlayerController c)
     {
         controller = c;
