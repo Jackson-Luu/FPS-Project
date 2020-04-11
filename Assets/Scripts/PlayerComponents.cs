@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Mirror;
 
 [RequireComponent(typeof(Player))]
@@ -55,8 +53,13 @@ public class PlayerComponents : NetworkBehaviour
         base.OnStartClient();
 
         string netID = GetComponent<NetworkIdentity>().netId.ToString();
-        Player player = GetComponent<Player>();
+        //Player player = GetComponent<Player>();
+        CmdRegisterPlayer(netID, gameObject);
+    }
 
+    [Command]
+    void CmdRegisterPlayer(string netID, GameObject player)
+    {
         GameManager.RegisterPlayer(netID, player);
     }
 

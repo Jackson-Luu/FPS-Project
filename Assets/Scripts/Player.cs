@@ -30,13 +30,10 @@ public class Player : NetworkBehaviour
 
     public void SetupPlayer()
     {
+        // De-activate death screen
         if (isLocalPlayer)
         {
-            // De-activate death screen
-            if (isLocalPlayer)
-            {
-                GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>().deathScreen.SetActive(false);
-            }
+            GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>().deathScreen.SetActive(false);
         }
 
         CmdBroadcastNewPlayerSetup();

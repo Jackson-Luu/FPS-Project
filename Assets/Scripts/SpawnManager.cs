@@ -1,15 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Mirror;
 
 public class SpawnManager : NetworkBehaviour
 {
     public GameObject[] enemies;
     public GameObject[] powerups;
-
-    //[SerializeField]
-    //private GameManager gameManager;
+    public GameObject[] players;
 
     private float xSpawnRange;
     private float zSpawnRange;
@@ -27,15 +23,15 @@ public class SpawnManager : NetworkBehaviour
 
     void SpawnEnemy()
     {
-        Debug.Log(GameManager.GetPlayerCount() + "PLAYERS ONLINE");
-        /*foreach (Player entry in GameManager.GetAllPlayers())
+        players = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log(players.Length + " PLAYERS ONLINE");
+        foreach (GameObject player in players)
         {
-            Debug.Log(entry.name);
             int randomIndex = Random.Range(0, enemies.Length);
             GameObject enemy = Instantiate(enemies[randomIndex], RandomPosition(randomIndex), enemies[randomIndex].transform.rotation);
-            enemy.GetComponent<EnemyMove>().SetPlayer = entry.gameObject;
+            enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
             NetworkServer.Spawn(enemy);
-        }*/
+        }
     }
 
     private Vector3 RandomPosition(int enemy)

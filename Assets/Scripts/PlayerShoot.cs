@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Mirror;
 
 [RequireComponent(typeof(WeaponManager))]
@@ -117,7 +115,7 @@ public class PlayerShoot : NetworkBehaviour
     {
         Debug.Log(playerID + " has been shot.");
 
-        Player player = GameManager.GetPlayer(playerID);
+        Player player = GameManager.GetPlayer(playerID).GetComponent<Player>();
         player.RpcTakeDamage(damage);
     }
 }

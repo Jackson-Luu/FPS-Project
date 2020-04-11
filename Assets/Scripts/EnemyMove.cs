@@ -19,8 +19,15 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 playerDirection = (targetPlayer.transform.position - transform.position).normalized;
-        playerDirection.y = 0;
+        Vector3 playerDirection;
+        if (targetPlayer != null)
+        {
+            playerDirection = (targetPlayer.transform.position - transform.position).normalized;
+            playerDirection.y = 0;
+        } else
+        {
+            playerDirection = Vector3.zero;
+        }
         enemyRb.MovePosition(transform.position + playerDirection * speed * Time.deltaTime);
     }
 }

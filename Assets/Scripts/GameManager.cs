@@ -21,32 +21,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    #region Player Tracking Stuff (Click to Expand)
-
     private const string PLAYER_PREFIX = "Player ";
 
-    public static Dictionary<string, Player> players = new Dictionary<string, Player>();
+    private static Dictionary<string, GameObject> players = new Dictionary<string, GameObject>();
 
-    /*public Dictionary<string, Player> GetPlayers {
-        get {
-            return players; }
-    }*/
-
-    public static void RegisterPlayer(string netID, Player player)
+    public static void RegisterPlayer(string netID, GameObject player)
     {
         string playerID = PLAYER_PREFIX + netID;
         players.Add(playerID, player);
         player.transform.name = playerID;
-        Debug.Log("HI" + players.Count + " PLAYER(S)");
     }
 
     public static void UnRegisterPlayer(string playerID)
     {
-        Debug.Log("NOOO");
         players.Remove(playerID);
     }
 
-    public static Player GetPlayer(string playerID)
+    public static GameObject GetPlayer(string playerID)
     {
         return players[playerID];
     }
@@ -56,10 +47,8 @@ public class GameManager : MonoBehaviour
         return players.Count;
     }
 
-    public static Player[] GetAllPlayers()
+    public static GameObject[] GetAllPlayers()
     {
         return players.Values.ToArray();
     }
-
-    #endregion
 }
