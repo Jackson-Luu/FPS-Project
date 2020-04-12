@@ -53,8 +53,12 @@ public class PlayerComponents : NetworkBehaviour
         base.OnStartClient();
 
         string netID = GetComponent<NetworkIdentity>().netId.ToString();
-        //Player player = GetComponent<Player>();
-        CmdRegisterPlayer(netID, gameObject);
+
+        GameManager.RegisterPlayer(netID, gameObject);
+        if (isLocalPlayer)
+        {
+            CmdRegisterPlayer(netID, gameObject);
+        }
     }
 
     [Command]

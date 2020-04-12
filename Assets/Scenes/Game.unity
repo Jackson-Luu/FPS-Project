@@ -1006,7 +1006,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875, type: 3}
   powerups: []
-  gameServer: {fileID: 0}
+  players: []
 --- !u!114 &1679994018
 MonoBehaviour:
   m_ObjectHideFlags: 0

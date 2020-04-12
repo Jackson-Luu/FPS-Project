@@ -70,8 +70,10 @@ public class PlayerShoot : NetworkBehaviour
         
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentWeapon.range, mask))
         {
-            if (hit.collider.CompareTag("Player") && hit.collider.transform.name != transform.name) // Second case removes self damage bug at time of writing
+            Debug.Log("Checkpoint 1");
+            if (hit.collider.CompareTag("Player")) // Second case removes self damage bug at time of writing && hit.collider.transform.name != transform.name
             {
+                Debug.Log("Checkpoint 2");
                 CmdPlayerShot(hit.collider.name, currentWeapon.damage);
             }
 
@@ -116,6 +118,7 @@ public class PlayerShoot : NetworkBehaviour
         Debug.Log(playerID + " has been shot.");
 
         Player player = GameManager.GetPlayer(playerID).GetComponent<Player>();
+        player.TakeDamage(damage);
         player.RpcTakeDamage(damage);
     }
 }

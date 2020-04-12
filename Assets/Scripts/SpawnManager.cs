@@ -12,8 +12,8 @@ public class SpawnManager : NetworkBehaviour
     private float groundRadius;
     private float edgeMargin = 5;
 
-    private float startDelay = 2.0f;
-    private float spawnInterval = 4.0f;
+    private float startDelay = 5.0f;
+    private float spawnInterval = 8.0f;
 
     public override void OnStartServer()
     {
@@ -23,15 +23,17 @@ public class SpawnManager : NetworkBehaviour
 
     void SpawnEnemy()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log(players.Length + " PLAYERS ONLINE");
+        players = GameManager.GetAllPlayers();
+        string dict = "";
         foreach (GameObject player in players)
         {
+            dict += player.transform.name + ", ";
             int randomIndex = Random.Range(0, enemies.Length);
             GameObject enemy = Instantiate(enemies[randomIndex], RandomPosition(randomIndex), enemies[randomIndex].transform.rotation);
             enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
             NetworkServer.Spawn(enemy);
         }
+        Debug.Log(dict);
     }
 
     private Vector3 RandomPosition(int enemy)

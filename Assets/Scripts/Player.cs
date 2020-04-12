@@ -39,7 +39,7 @@ public class Player : NetworkBehaviour
         CmdBroadcastNewPlayerSetup();
     }
 
-    
+    /*
     void Update()
     {
     	if (!isLocalPlayer)
@@ -50,16 +50,24 @@ public class Player : NetworkBehaviour
     		RpcTakeDamage(99999);
     	}
     }
-    
+    */
 
+    // Setup remote players on server
     [Command]
     private void CmdBroadcastNewPlayerSetup()
     {
         RpcSetupPlayerOnAllClients();
+        SetupRemotePlayer();
     }
 
+    // Setup remote players on other clients
     [ClientRpc]
     private void RpcSetupPlayerOnAllClients()
+    {
+        SetupRemotePlayer();
+    }
+
+    private void SetupRemotePlayer()
     {
         if (firstSetup)
         {
@@ -102,6 +110,11 @@ public class Player : NetworkBehaviour
 
     [ClientRpc]
     public void RpcTakeDamage(float amount)
+    {
+        TakeDamage(amount);
+    }
+
+    public void TakeDamage(float amount)
     {
         if (isDead) { return; }
 

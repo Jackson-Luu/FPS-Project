@@ -21,13 +21,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private const string PLAYER_PREFIX = "Player ";
-
     private static Dictionary<string, GameObject> players = new Dictionary<string, GameObject>();
 
-    public static void RegisterPlayer(string netID, GameObject player)
+    public static void RegisterPlayer(string playerID, GameObject player)
     {
-        string playerID = PLAYER_PREFIX + netID;
         players.Add(playerID, player);
         player.transform.name = playerID;
     }
