@@ -26,10 +26,10 @@ public class PlayerUI : MonoBehaviour
         {
             TogglePauseMenu();
             Cursor.lockState = CursorLockMode.None;
-        }    
+        }
     }
 
-    void TogglePauseMenu()
+    public void TogglePauseMenu()
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         PauseMenu.isOn = pauseMenu.activeSelf;

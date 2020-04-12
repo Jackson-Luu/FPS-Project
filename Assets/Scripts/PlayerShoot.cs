@@ -63,6 +63,12 @@ public class PlayerShoot : NetworkBehaviour
     {
         if (!isLocalPlayer) { return; }
 
+        if (currentWeapon.bullets <= 0) {
+            weaponManager.Reload();
+            return;
+        }
+
+        currentWeapon.bullets--;
         // Call OnShoot method on server
         CmdOnShoot();
 
@@ -70,11 +76,9 @@ public class PlayerShoot : NetworkBehaviour
         
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentWeapon.range, mask))
         {
-            Debug.Log("Checkpoint 1");
             if (hit.collider.CompareTag("Player")) // Second case removes self damage bug at time of writing && hit.collider.transform.name != transform.name
             {
-                Debug.Log("Checkpoint 2");
-                CmdPlayerShot(hit.collider.name, currentWeapon.damage);
+                CmdPlayerShot(hit.collider.name, currentWeapon.damage, gameObject.name);
             }
 
             // Call hit effects on impact point
@@ -113,12 +117,12 @@ public class PlayerShoot : NetworkBehaviour
 
     // Method only called on server
     [Command]
-    void CmdPlayerShot(string playerID, float damage)
+    void CmdPlayerShot(string playerID, float damage, string sourceID)
     {
         Debug.Log(playerID + " has been shot.");
 
         Player player = GameManager.GetPlayer(playerID).GetComponent<Player>();
-        player.TakeDamage(damage);
-        player.RpcTakeDamage(damage);
+        player.TakeDamage(damage, sourceID);
+        player.RpcTakeDamage(damage, sourceID);
     }
 }

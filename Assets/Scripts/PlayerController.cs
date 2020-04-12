@@ -35,9 +35,6 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerCollider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
-
-        // Hide Cursor
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -48,6 +45,12 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
+        // Lock and hide cursor
+        if (Cursor.lockState != CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         if (characterController.isGrounded)
         {
             // We are grounded, so recalculate

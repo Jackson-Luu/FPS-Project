@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 3310441021300284296}
   - component: {fileID: 3301832434461470570}
   - component: {fileID: 1756661500}
+  - component: {fileID: 1921560177}
   m_Layer: 0
   m_Name: AK47
   m_TagString: Untagged
@@ -295,8 +296,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3279740696676372436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0.311, z: 0.536}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.08740135, y: 0.04, z: -0.015}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 3285373300738695974}
   - {fileID: 3285126464746878706}
@@ -367,6 +368,25 @@ MonoBehaviour:
   muzzleFlash: {fileID: 198234348172792469}
   impactEffectPrefab: {fileID: 4979655930806489650, guid: 65949bc99ed15cd4fbe27b1b3dc3f76a,
     type: 3}
+--- !u!95 &1921560177
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279740696676372436}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 005d02e78519879429c1f712367dec47, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1831161807
 PrefabInstance:
   m_ObjectHideFlags: 0

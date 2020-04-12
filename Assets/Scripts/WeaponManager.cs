@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Mirror;
 
 public class WeaponManager : NetworkBehaviour
@@ -11,6 +12,8 @@ public class WeaponManager : NetworkBehaviour
 
     private PlayerWeapon currentWeapon;
     private WeaponGraphics weaponGraphics;
+
+    private bool isReloading = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,5 +49,20 @@ public class WeaponManager : NetworkBehaviour
     public WeaponGraphics GetWeaponGraphics()
     {
         return weaponGraphics;
+    }
+
+    public void Reload()
+    {
+        if (isReloading) { return; }
+        StartCoroutine(Reload_Coroutine());
+    }
+
+    private IEnumerator Reload_Coroutine()
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(currentWeapon.reloadTime);
+
+        currentWeapon.bullets = currentWeapon.maxBullets;
+        isReloading = false;
     }
 }

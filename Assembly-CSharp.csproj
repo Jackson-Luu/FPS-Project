@@ -64,6 +64,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\EnemyMove.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\KillFeed.cs" />
+    <Compile Include="Assets\Scripts\KillFeedItem.cs" />
     <Compile Include="Assets\Scripts\MatchSettings.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />

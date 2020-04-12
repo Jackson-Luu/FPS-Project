@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 
     public MatchSettings matchSettings;
 
+    public delegate void OnPlayerKilledCallback(string player, string source);
+    public OnPlayerKilledCallback onPlayerKilledCallback;
+
     void Awake ()
     {
         // Ensure only one GameManager exists

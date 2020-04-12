@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
@@ -43,7 +41,7 @@ public class MouseLook : MonoBehaviour
         // Rotate player left/right, camera will follow automatically
         playerBody.Rotate(Vector3.up * mouseX);
 
-        // Rotate only camera up/right (not player) but clamp it to prevent looking behind
+        // Rotate only camera up/down (not player) but clamp it to prevent looking behind
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);

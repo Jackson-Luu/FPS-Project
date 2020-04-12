@@ -36,7 +36,10 @@ public class Player : NetworkBehaviour
             GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>().deathScreen.SetActive(false);
         }
 
-        CmdBroadcastNewPlayerSetup();
+        if (!isServer)
+        {
+            CmdBroadcastNewPlayerSetup();
+        }
     }
 
     /*
@@ -109,25 +112,31 @@ public class Player : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcTakeDamage(float amount)
+    public void RpcTakeDamage(float amount, string sourceID)
     {
-        TakeDamage(amount);
+        TakeDamage(amount, sourceID);
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount, string sourceID)
     {
         if (isDead) { return; }
 
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
-            Die();
+            Die(sourceID);
         }
     }
 
-    private void Die()
+    private void Die(string sourceID)
     {
         isDead = true;
+
+        // Show kill feed event
+        if (!isServer)
+        {
+            GameManager.instance.onPlayerKilledCallback.Invoke(gameObject.name, sourceID);
+        }
 
         // Disable components
         for (int i = 0; i < disableOnDeath.Length; i++)
