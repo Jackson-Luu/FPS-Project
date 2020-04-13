@@ -13,7 +13,7 @@ public class WeaponManager : NetworkBehaviour
     private PlayerWeapon currentWeapon;
     private WeaponGraphics weaponGraphics;
 
-    private bool isReloading = false;
+    public bool isReloading = false;
 
     // Start is called before the first frame update
     void Start()
@@ -60,9 +60,26 @@ public class WeaponManager : NetworkBehaviour
     private IEnumerator Reload_Coroutine()
     {
         isReloading = true;
+        CmdOnReload();
         yield return new WaitForSeconds(currentWeapon.reloadTime);
 
         currentWeapon.bullets = currentWeapon.maxBullets;
         isReloading = false;
+    }
+
+    [Command]
+    void CmdOnReload()
+    {
+        RpcOnReload();
+    }
+
+    [ClientRpc]
+    void RpcOnReload()
+    {
+        Animator anim = weaponGraphics.GetComponent<Animator>();
+        if (anim != null)
+        {
+            anim.SetTrigger("Reload");
+        }
     }
 }

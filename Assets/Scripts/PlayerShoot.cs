@@ -33,6 +33,15 @@ public class PlayerShoot : NetworkBehaviour
 
         currentWeapon = weaponManager.GetCurrentWeapon();
 
+        if (currentWeapon.bullets < currentWeapon.maxBullets)
+        {
+            if (Input.GetButton("Reload"))
+            {
+                weaponManager.Reload();
+                return;
+            }
+        }
+
         // Non-auto weapon
         if (currentWeapon.fireRate <= 0)
         {
@@ -61,7 +70,7 @@ public class PlayerShoot : NetworkBehaviour
     [Client]
     void Shoot()
     {
-        if (!isLocalPlayer) { return; }
+        if (!isLocalPlayer || weaponManager.isReloading) { return; }
 
         if (currentWeapon.bullets <= 0) {
             weaponManager.Reload();
@@ -83,6 +92,11 @@ public class PlayerShoot : NetworkBehaviour
 
             // Call hit effects on impact point
             CmdOnHit(hit.point, hit.normal);
+        }
+
+        if (currentWeapon.bullets <= 0)
+        {
+            weaponManager.Reload();
         }
     }
 

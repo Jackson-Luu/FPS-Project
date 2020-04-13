@@ -19,6 +19,11 @@ public class Player : NetworkBehaviour
     [SyncVar]
     private float currentHealth;
 
+    public float GetHealthPct()
+    {
+        return (float)currentHealth / maxHealth;
+    }
+
     [SerializeField]
     private Behaviour[] disableOnDeath;
     private bool[] wasEnabled;
@@ -27,6 +32,13 @@ public class Player : NetworkBehaviour
     private GameObject[] disableGameObjectsOnDeath;
 
     private bool firstSetup = true;
+
+    private WeaponManager weaponManager;
+
+    private void Start()
+    {
+        weaponManager = GetComponent<WeaponManager>();
+    }
 
     public void SetupPlayer()
     {
@@ -90,6 +102,7 @@ public class Player : NetworkBehaviour
     {
         isDead = false;
         currentHealth = maxHealth;
+        weaponManager.GetCurrentWeapon().bullets = weaponManager.GetCurrentWeapon().maxBullets;
 
         // Enable player components
         for (int i = 0; i < disableOnDeath.Length; i++)

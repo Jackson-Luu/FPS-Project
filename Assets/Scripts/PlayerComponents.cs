@@ -42,7 +42,7 @@ public class PlayerComponents : NetworkBehaviour
             PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
             if (ui == null) { Debug.LogError("No PlayerUI on PlayerUI Prefab."); }
 
-            ui.SetController(GetComponent<PlayerController>());
+            ui.SetPlayer(GetComponent<Player>());
 
             GetComponent<Player>().SetupPlayer();
         }
