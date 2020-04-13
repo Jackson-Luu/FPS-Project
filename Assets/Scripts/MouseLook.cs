@@ -7,6 +7,8 @@ public class MouseLook : MonoBehaviour
 
     private Transform playerBody;
 
+    private Animator animator;
+
     // Store vertical rotation so we can clamp
     private float xRotation = 0f;
 
@@ -14,6 +16,7 @@ public class MouseLook : MonoBehaviour
     void Start()
     {
         playerBody = transform.parent;
+        animator = playerBody.GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -41,9 +44,12 @@ public class MouseLook : MonoBehaviour
         // Rotate player left/right, camera will follow automatically
         playerBody.Rotate(Vector3.up * mouseX);
 
-        // Rotate only camera up/down (not player) but clamp it to prevent looking behind
+        // Rotate only camera up/down and arms but clamp it to prevent looking behind
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        // Rotate arms/weapon up/down
+        animator.SetFloat("LookAngle", xRotation);
     }
 }
