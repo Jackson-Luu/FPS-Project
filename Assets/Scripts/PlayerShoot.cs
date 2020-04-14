@@ -38,7 +38,6 @@ public class PlayerShoot : NetworkBehaviour
             if (Input.GetButton("Reload"))
             {
                 weaponManager.Reload();
-                return;
             }
         }
 
@@ -85,9 +84,9 @@ public class PlayerShoot : NetworkBehaviour
         
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentWeapon.range, mask))
         {
-            if (hit.collider.CompareTag("Player")) // Second case removes self damage bug at time of writing && hit.collider.transform.name != transform.name
+            if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Enemy")) // Second case removes self damage bug at time of writing && hit.collider.transform.name != transform.name
             {
-                CmdPlayerShot(hit.collider.name, currentWeapon.damage, gameObject.name);
+                CmdTargetShot(hit.collider.gameObject, currentWeapon.damage, gameObject.name);
             }
 
             // Call hit effects on impact point
@@ -131,12 +130,12 @@ public class PlayerShoot : NetworkBehaviour
 
     // Method only called on server
     [Command]
-    void CmdPlayerShot(string playerID, float damage, string sourceID)
+    void CmdTargetShot(GameObject target, float damage, string sourceID)
     {
-        Debug.Log(playerID + " has been shot.");
+        Debug.Log(target.name + " has been shot.");
 
-        Player player = GameManager.GetPlayer(playerID).GetComponent<Player>();
-        player.TakeDamage(damage, sourceID);
-        player.RpcTakeDamage(damage, sourceID);
+        CharacterStats character = target.GetComponent<CharacterStats>();
+        character.TakeDamage(damage, sourceID);
+        character.RpcTakeDamage(damage, sourceID);
     }
 }

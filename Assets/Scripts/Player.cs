@@ -14,17 +14,6 @@ public class Player : NetworkBehaviour
     }
 
     [SerializeField]
-    private float maxHealth = 100f;
-
-    [SyncVar]
-    private float currentHealth;
-
-    public float GetHealthPct()
-    {
-        return (float)currentHealth / maxHealth;
-    }
-
-    [SerializeField]
     private Behaviour[] disableOnDeath;
     private bool[] wasEnabled;
 
@@ -33,10 +22,12 @@ public class Player : NetworkBehaviour
 
     private bool firstSetup = true;
 
+    private PlayerStats playerStats;
     private WeaponManager weaponManager;
 
     private void Start()
     {
+        playerStats = GetComponent<PlayerStats>();
         weaponManager = GetComponent<WeaponManager>();
     }
 
@@ -54,7 +45,7 @@ public class Player : NetworkBehaviour
         }
     }
 
-    /*
+    
     void Update()
     {
     	if (!isLocalPlayer)
@@ -62,10 +53,10 @@ public class Player : NetworkBehaviour
 
     	if (Input.GetKeyDown(KeyCode.K))
     	{
-    		RpcTakeDamage(99999);
+    		Die("KEK");
     	}
     }
-    */
+    
 
     // Setup remote players on server
     [Command]
@@ -101,7 +92,7 @@ public class Player : NetworkBehaviour
     public void setDefaults()
     {
         isDead = false;
-        currentHealth = maxHealth;
+        playerStats.SetDefaults();
         weaponManager.GetCurrentWeapon().bullets = weaponManager.GetCurrentWeapon().maxBullets;
 
         // Enable player components
@@ -124,24 +115,7 @@ public class Player : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    public void RpcTakeDamage(float amount, string sourceID)
-    {
-        TakeDamage(amount, sourceID);
-    }
-
-    public void TakeDamage(float amount, string sourceID)
-    {
-        if (isDead) { return; }
-
-        currentHealth -= amount;
-        if (currentHealth <= 0)
-        {
-            Die(sourceID);
-        }
-    }
-
-    private void Die(string sourceID)
+    public void Die(string sourceID)
     {
         isDead = true;
 

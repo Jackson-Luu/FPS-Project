@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public delegate void OnPlayerKilledCallback(string player, string source);
     public OnPlayerKilledCallback onPlayerKilledCallback;
 
+    #region Singleton
+
     void Awake ()
     {
         // Ensure only one GameManager exists
@@ -23,6 +25,10 @@ public class GameManager : MonoBehaviour
             Debug.Log(this + " " + instance);
         }
     }
+
+    #endregion
+
+    #region Player Tracking
 
     private static Dictionary<string, GameObject> players = new Dictionary<string, GameObject>();
 
@@ -51,4 +57,7 @@ public class GameManager : MonoBehaviour
     {
         return players.Values.ToArray();
     }
+
+    #endregion
+
 }

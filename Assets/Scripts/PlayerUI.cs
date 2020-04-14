@@ -16,14 +16,14 @@ public class PlayerUI : MonoBehaviour
     public GameObject deathScreen;
 
     private Player player;
-    private PlayerController controller;
+    private PlayerStats playerStats;
     private WeaponManager weaponManager;
 
     public void SetPlayer (Player _player)
     {
         player = _player;
-        controller = player.GetComponent<PlayerController>();
         weaponManager = player.GetComponent<WeaponManager>();
+        playerStats = player.GetComponent<PlayerStats>();
     }
 
     void Start()
@@ -33,7 +33,7 @@ public class PlayerUI : MonoBehaviour
 
     void Update()
     {
-        SetHealth(player.GetHealthPct());
+        SetHealth(playerStats.GetHealthPct());
         SetAmmo(weaponManager.GetCurrentWeapon().bullets, weaponManager.GetCurrentWeapon().maxBullets);
 
         if (Input.GetKeyDown(KeyCode.Escape))

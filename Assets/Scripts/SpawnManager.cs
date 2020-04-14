@@ -15,8 +15,11 @@ public class SpawnManager : NetworkBehaviour
     private float startDelay = 5.0f;
     private float spawnInterval = 8.0f;
 
+    private ObjectPooler objectPooler;
+
     public override void OnStartServer()
     {
+        objectPooler = ObjectPooler.Instance;
         xSpawnRange = zSpawnRange = (GameObject.Find("Ground").GetComponent<Renderer>().bounds.size.x / 2) - edgeMargin;
         InvokeRepeating("SpawnEnemy", startDelay, spawnInterval);
     }
@@ -24,16 +27,13 @@ public class SpawnManager : NetworkBehaviour
     void SpawnEnemy()
     {
         players = GameManager.GetAllPlayers();
-        string dict = "";
         foreach (GameObject player in players)
         {
-            dict += player.transform.name + ", ";
             int randomIndex = Random.Range(0, enemies.Length);
-            GameObject enemy = Instantiate(enemies[randomIndex], RandomPosition(randomIndex), enemies[randomIndex].transform.rotation);
+            GameObject enemy = objectPooler.SpawnFromPool(enemies[randomIndex].name, RandomPosition(randomIndex), enemies[randomIndex].transform.rotation);
             enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
             NetworkServer.Spawn(enemy);
         }
-        Debug.Log(dict);
     }
 
     private Vector3 RandomPosition(int enemy)
