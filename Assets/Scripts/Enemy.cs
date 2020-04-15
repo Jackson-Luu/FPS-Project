@@ -11,12 +11,8 @@ public class Enemy : NetworkBehaviour
 
     private bool firstSetup = true;
 
-    void Start()
+    void Awake()
     {
-        if (isServer)
-        {
-            objectPooler = ObjectPooler.Instance;
-        }
         enemyStats = GetComponent<EnemyStats>();
     }
 
@@ -28,6 +24,14 @@ public class Enemy : NetworkBehaviour
         if (isServer)
         {
             RpcEnable();
+        }
+    }
+
+    void Start()
+    {
+        if (isServer)
+        {
+            objectPooler = ObjectPooler.Instance;
         }
     }
 
@@ -54,6 +58,10 @@ public class Enemy : NetworkBehaviour
             col.enabled = true;
         }
 
+        if (enemyStats == null)
+        {
+            Debug.Log("WTF");
+        }
         enemyStats.SetDefaults();
     }
 

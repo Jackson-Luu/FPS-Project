@@ -48,6 +48,10 @@ public class ObjectPooler : NetworkBehaviour
 
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
     {
+        Queue<GameObject> q = poolDictionary[tag];
+        if (q.Count == 0) {
+            return null;
+        }
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
         objectToSpawn.SetActive(true);

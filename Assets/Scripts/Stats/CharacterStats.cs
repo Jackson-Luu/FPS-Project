@@ -31,25 +31,17 @@ public class CharacterStats : NetworkBehaviour
         if (currHealth <= 0)
         {
             Die(sourceID);
+            if (isServer)
+            {
+                RpcDie(sourceID);
+            }
         }
     }
 
     [ClientRpc]
-    public void RpcTakeDamage(float damage, string sourceID)
+    public void RpcDie(string sourceID)
     {
-        if (currHealth < damage)
-        {
-            currHealth = 0;
-        }
-        else
-        {
-            currHealth -= damage;
-        }
-
-        if (currHealth <= 0)
-        {
-            Die(sourceID);
-        }
+        Die(sourceID);
     }
 
     public virtual void Die(string sourceID)

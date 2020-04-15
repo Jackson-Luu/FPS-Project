@@ -20,6 +20,9 @@ public class PlayerNameplate : MonoBehaviour
     void LateUpdate()
     {
         // Rotate nameplate to face(LookAt) camera of whoever is looking
-        transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
+        if (cam != null)
+        {
+            transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
+        }
     }
 }

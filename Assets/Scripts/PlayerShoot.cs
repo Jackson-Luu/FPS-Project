@@ -136,6 +136,6 @@ public class PlayerShoot : NetworkBehaviour
 
         CharacterStats character = target.GetComponent<CharacterStats>();
         character.TakeDamage(damage, sourceID);
-        character.RpcTakeDamage(damage, sourceID);
+        //character.RpcTakeDamage(damage, sourceID);
     }
 }

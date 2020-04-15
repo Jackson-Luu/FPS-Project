@@ -117,6 +117,7 @@ public class Player : NetworkBehaviour
 
     public void Die(string sourceID)
     {
+        if (isDead) { return; }
         isDead = true;
 
         // Show kill feed event

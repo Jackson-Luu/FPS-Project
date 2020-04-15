@@ -31,8 +31,11 @@ public class SpawnManager : NetworkBehaviour
         {
             int randomIndex = Random.Range(0, enemies.Length);
             GameObject enemy = objectPooler.SpawnFromPool(enemies[randomIndex].name, RandomPosition(randomIndex), enemies[randomIndex].transform.rotation);
-            enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
-            NetworkServer.Spawn(enemy);
+            if (enemy != null)
+            {
+                enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
+                NetworkServer.Spawn(enemy);
+            }
         }
     }
 

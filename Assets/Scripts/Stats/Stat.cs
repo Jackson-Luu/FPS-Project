@@ -10,7 +10,7 @@ public class Stat
 
     public float GetValue()
     {
-        return finalValue;
+        return baseValue + finalValue;
     }
 
     public void AddModifier(float modifier)
