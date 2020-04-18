@@ -4,27 +4,33 @@ using Mirror;
 
 public class GenerateNavMesh : NetworkBehaviour
 {
-    private void OnEnable()
+    private MapMagic.MapMagic mapMagic;
+
+    [SerializeField]
+    private GameObject cameras;
+
+    // Generate map seed and enable terrain generator (server)
+    public override void OnStartServer()
     {
-        if (isServer)
-        {
-            MapMagic.MapMagic.OnApplyCompleted += BuildMesh;
-        }
+        mapMagic = GetComponent<MapMagic.MapMagic>();
+        mapMagic.seed = (int)(System.DateTime.Now.Ticks % 1000000);
+        //mapMagic.totalMeshes = cameras.transform.childCount * 4;
+        mapMagic.totalMeshes = 4;
+        mapMagic.enabled = true;
+        //MapMagic.MapMagic.OnApplyCompleted += BuildMesh;
     }
 
-    public void BuildMesh(Terrain terrain)
+    // Enable terrain generator (client)
+    public override void OnStartClient()
     {
-        Debug.Log("BUILDING MESH @ " + Time.deltaTime);
+        GetComponent<MapMagic.MapMagic>().enabled = true;
+    }
+
+    public void BuildMesh()
+    {
+        mapMagic.enabled = false;
+        cameras.SetActive(false);
         GetComponent<NavMeshSurface>().BuildNavMesh();
-        Debug.Log("MESH FINISHED @ " + Time.deltaTime);
-    }
-
-    private void OnDisable()
-    {
-        if (isServer)
-        {
-            MapMagic.MapMagic.OnApplyCompleted -= BuildMesh;
-        }
     }
 }
 

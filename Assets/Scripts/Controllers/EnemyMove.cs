@@ -34,7 +34,6 @@ public class EnemyMove : NetworkBehaviour
         if (targetPlayer != null)
         {
             Vector3 player = targetPlayer.transform.position;
-            player.y = 0;
             agent.SetDestination(player);
 
             if (Vector3.Distance(player, transform.position) <= agent.stoppingDistance) {

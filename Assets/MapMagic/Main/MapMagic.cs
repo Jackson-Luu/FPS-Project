@@ -5,13 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
 using MapMagic;
+using Mirror;
 
 namespace MapMagic 
 {
 	[SelectionBase]
 	[ExecuteInEditMode]
 	[HelpURL("https://gitlab.com/denispahunov/mapmagic/wikis/home")]
-	public class MapMagic : MonoBehaviour, ISerializationCallbackReceiver, IMapMagic
+	public class MapMagic : NetworkBehaviour, ISerializationCallbackReceiver, IMapMagic
 	{
         public static readonly int version = 199; 
 		public static readonly string versionName = "1.10.8"; 
@@ -23,7 +24,12 @@ namespace MapMagic
 		//public static Dictionary<Transform,ObjectPool> pools = new Dictionary<Transform, ObjectPool>(); //serialized with a callback
 		[SerializeField] public ObjectPool objectsPool = new ObjectPool();
 
+        // Chunks finished building at runtime
+        public int meshesBuilt = 0;
+        public int totalMeshes = 0;
+
         //main parameters
+        [SyncVar]
         public int seed = 12345;
         public bool changeSeed = false;
 		public int terrainSize = 1000; //should be int to avoid terrain start between pixels
@@ -194,7 +200,7 @@ public bool guiInstantUpdateEnabled = false;
 			//changing seed on playmode start
 			if (changeSeed && Extensions.isPlaying)
 			{
-				seed = (int)(System.DateTime.Now.Ticks % 1000000);
+				//seed = (int)(System.DateTime.Now.Ticks % 1000000);
 				ClearResults();
 				Generate(force:true);
 			}
@@ -222,9 +228,8 @@ public bool guiInstantUpdateEnabled = false;
 			#endif
 		}
 
-
-		public void Update () 
-		{ 
+        public void Update () 
+		{
 			//shifting world
 			if (!isEditor && shift) WorldShifter.Update(shiftThreshold, shiftExcludeLayers);
 			position = transform.position;
@@ -234,28 +239,27 @@ public bool guiInstantUpdateEnabled = false;
 		
 			//do nothing if chink size is zero
 			if (terrainSize < 0.1f) return;
-
-			//finding camera positions
-			camPoses = Extensions.GetCamPoses(genAroundMainCam:genAroundMainCam, genAroundTag:genAroundObjsTag? genAroundTag : null, camPoses:camPoses);
-			if (camPoses.Length == 0) return; //no cameras to deploy Voxeland
-			transform.InverseTransformPoint(camPoses); 
 				
 			//deploy
 			if (!isEditor && generateInfinite) 
 			{
-				//finding deploy rects
-				if (deployRects == null || deployRects.Length!=camPoses.Length)
-				{
-					deployRects = new CoordRect[camPoses.Length]; 
-					removeRects = new CoordRect[camPoses.Length];
-				}
-				
-				for (int r=0; r<camPoses.Length; r++) //TODO: add cam pos change check
-				{
-					deployRects[r] = CoordRect.PickIntersectingCellsByPos(camPoses[r], generateRange, cellSize:terrainSize);
-					removeRects[r] = CoordRect.PickIntersectingCellsByPos(camPoses[r], removeRange, cellSize:terrainSize);
-				}
+                //finding camera positions
+                camPoses = Extensions.GetCamPoses(genAroundMainCam: genAroundMainCam, genAroundTag: genAroundObjsTag ? genAroundTag : null, camPoses: camPoses);
+                if (camPoses.Length == 0) return; //no cameras to deploy Voxeland
+                transform.InverseTransformPoint(camPoses);
 
+                //finding deploy rects
+                if (deployRects == null || deployRects.Length != camPoses.Length)
+                {
+                    deployRects = new CoordRect[camPoses.Length];
+                    removeRects = new CoordRect[camPoses.Length];
+                }
+
+                for (int r = 0; r < camPoses.Length; r++) //TODO: add cam pos change check
+                {
+                    deployRects[r] = CoordRect.PickIntersectingCellsByPos(camPoses[r], generateRange, cellSize: terrainSize);
+                    removeRects[r] = CoordRect.PickIntersectingCellsByPos(camPoses[r], removeRange, cellSize: terrainSize);
+                }
 				//checking and deploying
 				bool chunksChange = chunks.CheckDeploy(deployRects);
 				if (chunksChange) chunks.Deploy(deployRects, removeRects, parent:this, allowMove:useTerrainPooling);
@@ -284,8 +288,20 @@ public bool guiInstantUpdateEnabled = false;
 						} 
 				else 
 				{ 
-					if (!chunk.terrain.gameObject.activeSelf) 
-						chunk.terrain.gameObject.SetActive(true); 
+					if (!chunk.terrain.gameObject.activeSelf)
+                    {
+                        chunk.terrain.gameObject.SetActive(true);
+
+                        // Check if terrain finished generating, then build navmesh
+                        if (isServer)
+                        {
+                            meshesBuilt++;
+                            if (meshesBuilt >= totalMeshes)
+                            {
+                                StartCoroutine(BuildMesh());
+                            }
+                        }
+                    }
 				}
 					
 
@@ -302,6 +318,12 @@ public bool guiInstantUpdateEnabled = false;
 			ThreadWorker.Refresh();
 
 		}
+
+        private IEnumerator BuildMesh()
+        {
+            yield return new WaitForSeconds(0.5f);
+            GetComponent<GenerateNavMesh>().BuildMesh();
+        }
 
 		public void ClearResults (Generator gen)
 		{

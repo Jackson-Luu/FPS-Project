@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Mirror;
 
 public class ObjectPooler : NetworkBehaviour
@@ -54,9 +55,9 @@ public class ObjectPooler : NetworkBehaviour
         }
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
+        objectToSpawn.GetComponent<NavMeshAgent>().Warp(position);
+        objectToSpawn.transform.rotation = rotation;
         objectToSpawn.SetActive(true);
-        objectToSpawn.transform.position = position;
-        objectToSpawn.transform.rotation = rotation;       
 
         return objectToSpawn;
     }

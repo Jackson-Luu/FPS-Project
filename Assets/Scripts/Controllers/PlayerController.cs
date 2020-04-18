@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
@@ -35,6 +36,16 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerCollider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
+
+        StartCoroutine(ActivateGravity());
+    }
+
+    private IEnumerator ActivateGravity()
+    {
+        float temp = gravity;
+        gravity = 0f;
+        yield return new WaitForSeconds(GameManager.instance.matchSettings.playerLoadTime);
+        gravity = temp;
     }
 
     void Update()

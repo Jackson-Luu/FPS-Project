@@ -1,0 +1,2277 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 3
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 705507994}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 11
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 500
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 2
+    m_PVRDenoiserTypeDirect: 0
+    m_PVRDenoiserTypeIndirect: 0
+    m_PVRDenoiserTypeAO: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 0
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_UseShadowmask: 1
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 1
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &26422720
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 26422721}
+  m_Layer: 0
+  m_Name: New Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &26422721
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26422720}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20110.467, y: 0, z: -1.1470947}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &97185537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 97185540}
+  - component: {fileID: 97185538}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &97185538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97185537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3497061058
+  serverOnly: 1
+  m_AssetId: 
+--- !u!4 &97185540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97185537}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3000, y: 0, z: 3000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &161177441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 161177444}
+  - component: {fileID: 161177443}
+  - component: {fileID: 161177442}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &161177442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161177441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &161177443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161177441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &161177444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161177441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &195285988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195285989}
+  - component: {fileID: 195285990}
+  m_Layer: 0
+  m_Name: Camera (10)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &195285989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195285988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: -1000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &195285990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195285988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2235282805
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &290284452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 290284454}
+  - component: {fileID: 290284453}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &290284453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290284452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f84591ce72545258ea98cb7518d8b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &290284454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290284452}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3658, y: 274, z: -1764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &383046923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9bc43e142692db4e92eef81e1903ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldId: 0
+  oldCount: 0
+  guiScroll: {x: -1019, y: -10}
+  guiZoom: 1
+  serializedVersion: 199
+  classes:
+  - "<MapMagic.Generator[] length=26>\r\n\t<item0 type=MapMagic.Generator link=1/>\r\n\t<item1
+    type=MapMagic.Generator link=5/>\r\n\t<item2 type=MapMagic.Generator link=11/>\r\n\t<item3
+    type=MapMagic.Generator link=24/>\r\n\t<item4 type=MapMagic.Generator link=17/>\r\n\t<item5
+    type=MapMagic.Generator link=14/>\r\n\t<item6 type=MapMagic.Generator link=32/>\r\n\t<item7
+    type=MapMagic.Generator link=44/>\r\n\t<item8 type=MapMagic.Generator link=38/>\r\n\t<item9
+    type=MapMagic.Generator link=35/>\r\n\t<item10 type=MapMagic.Generator link=48/>\r\n\t<item11
+    type=MapMagic.Generator link=53/>\r\n\t<item12 type=MapMagic.Generator link=62/>\r\n\t<item13
+    type=MapMagic.Generator link=73/>\r\n\t<item14 type=MapMagic.Generator link=58/>\r\n\t<item15
+    type=MapMagic.Generator link=77/>\r\n\t<item16 type=MapMagic.Generator link=125/>\r\n\t<item17
+    type=MapMagic.Generator link=111/>\r\n\t<item18 type=MapMagic.Generator link=122/>\r\n\t<item19
+    type=MapMagic.Generator link=70/>\r\n\t<item20 type=MapMagic.Generator link=67/>\r\n\t<item21
+    type=MapMagic.Generator link=130/>\r\n\t<item22 type=MapMagic.Generator link=82/>\r\n\t<item23
+    type=MapMagic.Generator link=94/>\r\n\t<item24 type=MapMagic.Generator link=91/>\r\n\t<item25
+    type=MapMagic.Generator link=99/>\r\n</MapMagic.Generator[]>\r\n"
+  - "<MapMagic.NoiseGenerator182>\r\n\t<seed type=System.Int32 value=12345/>\r\n\t<high
+    type=System.Single value=0.9/>\r\n\t<low type=System.Single value=0/>\r\n\t<size
+    type=System.Single value=1600/>\r\n\t<detail type=System.Single value=0.5/>\r\n\t<turbulence
+    type=System.Single value=0/>\r\n\t<offset type=MapMagic.Coord x=-4000 z=4000/>\r\n\t<type
+    type=MapMagic.NoiseGenerator182+Type value=0/>\r\n\t<input type=MapMagic.Generator+Input
+    link=2/>\r\n\t<maskIn type=MapMagic.Generator+Input link=3/>\r\n\t<output type=MapMagic.Generator+Output
+    link=4/>\r\n\t<enabled type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean
+    value=False/>\r\n\t<guiRect type=UnityEngine.Rect x=877 y=163 width=160 height=210/>\r\n</MapMagic.NoiseGenerator182>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=872 y=183 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=872 y=203 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1024 y=183 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.CurveGenerator>\r\n\t<curve type=UnityEngine.AnimationCurve link=6/>\r\n\t<extended
+    type=System.Boolean value=True/>\r\n\t<min type=UnityEngine.Vector2 x=0 y=0/>\r\n\t<max
+    type=UnityEngine.Vector2 x=1 y=1/>\r\n\t<input type=MapMagic.Generator+Input
+    link=8/>\r\n\t<maskIn type=MapMagic.Generator+Input link=9/>\r\n\t<output type=MapMagic.Generator+Output
+    link=10/>\r\n\t<enabled type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean
+    value=False/>\r\n\t<guiRect type=UnityEngine.Rect x=1077 y=163 width=160 height=120/>\r\n</MapMagic.CurveGenerator>\r\n"
+  - "<UnityEngine.AnimationCurve>\r\n\t<keys type=UnityEngine.Keyframe[] link=7/>\r\n\t<preWrapMode
+    type=UnityEngine.WrapMode value=8/>\r\n\t<postWrapMode type=UnityEngine.WrapMode
+    value=8/>\r\n</UnityEngine.AnimationCurve>\r\n"
+  - "<UnityEngine.Keyframe[] length=2>\r\n\t<item0 type=UnityEngine.Keyframe time=0
+    value=0 in=0 out=0 mode=0 inWeight=0 outWeight=0/>\r\n\t<item1 type=UnityEngine.Keyframe
+    time=1 value=1 in=2.5 out=1 mode=0 inWeight=0 outWeight=0/>\r\n</UnityEngine.Keyframe[]>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=4/>\r\n\t<linkGen type=MapMagic.Generator
+    link=1/>\r\n\t<guiRect type=UnityEngine.Rect x=1072 y=183 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1072 y=203 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1224 y=183 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.HeightOutput>\r\n\t<input type=MapMagic.Generator+Input link=12/>\r\n\t<output
+    type=MapMagic.Generator+Output link=23/>\r\n\t<scale type=System.Int32 value=1/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1709 y=163 width=160 height=64/>\r\n\t<layer type=System.Single
+    value=0/>\r\n</MapMagic.HeightOutput>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=13/>\r\n\t<linkGen type=MapMagic.Generator
+    link=14/>\r\n\t<guiRect type=UnityEngine.Rect x=1704 y=183 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1650 y=187 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.ErosionGenerator>\r\n\t<heightIn type=MapMagic.Generator+Input link=15/>\r\n\t<maskIn
+    type=MapMagic.Generator+Input link=20/>\r\n\t<heightOut type=MapMagic.Generator+Output
+    link=13/>\r\n\t<cliffOut type=MapMagic.Generator+Output link=21/>\r\n\t<sedimentOut
+    type=MapMagic.Generator+Output link=22/>\r\n\t<iterations type=System.Int32 value=5/>\r\n\t<terrainDurability
+    type=System.Single value=0.9/>\r\n\t<erosionAmount type=System.Single value=1/>\r\n\t<sedimentAmount
+    type=System.Single value=0.75/>\r\n\t<fluidityIterations type=System.Int32 value=5/>\r\n\t<ruffle
+    type=System.Single value=0.4/>\r\n\t<safeBorders type=System.Int32 value=10/>\r\n\t<cliffOpacity
+    type=System.Single value=1/>\r\n\t<sedimentOpacity type=System.Single value=1/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1503 y=167 width=160 height=280/>\r\n</MapMagic.ErosionGenerator>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=16/>\r\n\t<linkGen type=MapMagic.Generator
+    link=17/>\r\n\t<guiRect type=UnityEngine.Rect x=1498 y=187 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1430 y=184 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TerraceGenerator>\r\n\t<input type=MapMagic.Generator+Input link=18/>\r\n\t<maskIn
+    type=MapMagic.Generator+Input link=19/>\r\n\t<output type=MapMagic.Generator+Output
+    link=16/>\r\n\t<seed type=System.Int32 value=12345/>\r\n\t<num type=System.Int32
+    value=10/>\r\n\t<uniformity type=System.Single value=0.5/>\r\n\t<steepness type=System.Single
+    value=0.1/>\r\n\t<intensity type=System.Single value=1/>\r\n\t<enabled type=System.Boolean
+    value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1283 y=164 width=160 height=138/>\r\n</MapMagic.TerraceGenerator>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=10/>\r\n\t<linkGen type=MapMagic.Generator
+    link=5/>\r\n\t<guiRect type=UnityEngine.Rect x=1278 y=184 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1278 y=204 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1498 y=207 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1650 y=207 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1650 y=227 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=427 y=12 width=0 height=0/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TexturesOutput>\r\n\t<baseLayers type=MapMagic.TexturesOutput+Layer[]
+    link=25/>\r\n\t<selected type=System.Int32 value=1/>\r\n\t<_defaultTex type=UnityEngine.Texture2D
+    null/>\r\n\t<enabled type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean
+    value=False/>\r\n\t<guiRect type=UnityEngine.Rect x=2109.904 y=382.5607 width=160
+    height=120/>\r\n</MapMagic.TexturesOutput>\r\n"
+  - "<MapMagic.TexturesOutput+Layer[] length=3>\r\n\t<item0 type=MapMagic.TexturesOutput+Layer
+    link=26/>\r\n\t<item1 type=MapMagic.TexturesOutput+Layer link=29/>\r\n\t<item2
+    type=MapMagic.TexturesOutput+Layer link=41/>\r\n</MapMagic.TexturesOutput+Layer[]>\r\n"
+  - "<MapMagic.TexturesOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=27/>\r\n\t<output
+    type=MapMagic.Generator+Output link=28/>\r\n\t<name type=System.String value=Layer/>\r\n\t<opacity
+    type=System.Single value=1/>\r\n\t<prototype type=UnityEngine.TerrainLayer object=0/>\r\n</MapMagic.TexturesOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=6.904175 y=132.5607 width=0 height=0/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2256.904 y=478.5607 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TexturesOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=30/>\r\n\t<output
+    type=MapMagic.Generator+Output link=40/>\r\n\t<name type=System.String value=Background/>\r\n\t<opacity
+    type=System.Single value=1/>\r\n\t<prototype type=UnityEngine.TerrainLayer object=1/>\r\n</MapMagic.TexturesOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=31/>\r\n\t<linkGen type=MapMagic.Generator
+    link=32/>\r\n\t<guiRect type=UnityEngine.Rect x=2104.904 y=452.5607 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2047 y=465 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.SlopeGenerator1>\r\n\t<input type=MapMagic.Generator+Input link=33/>\r\n\t<output
+    type=MapMagic.Generator+Output link=31/>\r\n\t<steepness type=UnityEngine.Vector2
+    x=88 y=90/>\r\n\t<range type=System.Single value=2/>\r\n\t<enabled type=System.Boolean
+    value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1900 y=445 width=160 height=82/>\r\n</MapMagic.SlopeGenerator1>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=34/>\r\n\t<linkGen type=MapMagic.Generator
+    link=35/>\r\n\t<guiRect type=UnityEngine.Rect x=1895 y=465 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1855 y=345 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.Portal>\r\n\t<input type=MapMagic.Generator+Input link=36/>\r\n\t<output
+    type=MapMagic.Generator+Output link=34/>\r\n\t<name type=System.String value=Portal/>\r\n\t<type
+    type=MapMagic.Generator+InoutType value=0/>\r\n\t<form type=MapMagic.Portal+PortalForm
+    value=1/>\r\n\t<drawConnections type=System.Boolean value=False/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1708 y=325 width=160 height=58/>\r\n</MapMagic.Portal>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=37/>\r\n\t<linkGen type=MapMagic.Generator
+    link=38/>\r\n\t<guiRect type=UnityEngine.Rect x=1708 y=350 width=0 height=0/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1867 y=276 width=0 height=0/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.Portal>\r\n\t<input type=MapMagic.Generator+Input link=39/>\r\n\t<output
+    type=MapMagic.Generator+Output link=37/>\r\n\t<name type=System.String value=Height/>\r\n\t<type
+    type=MapMagic.Generator+InoutType value=0/>\r\n\t<form type=MapMagic.Portal+PortalForm
+    value=0/>\r\n\t<drawConnections type=System.Boolean value=False/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1707 y=251 width=160 height=58/>\r\n</MapMagic.Portal>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=13/>\r\n\t<linkGen type=MapMagic.Generator
+    link=14/>\r\n\t<guiRect type=UnityEngine.Rect x=1702 y=271 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2256.904 y=452.5607 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TexturesOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=42/>\r\n\t<output
+    type=MapMagic.Generator+Output link=47/>\r\n\t<name type=System.String value=Layer/>\r\n\t<opacity
+    type=System.Single value=1/>\r\n\t<prototype type=UnityEngine.TerrainLayer object=2/>\r\n</MapMagic.TexturesOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=43/>\r\n\t<linkGen type=MapMagic.Generator
+    link=44/>\r\n\t<guiRect type=UnityEngine.Rect x=2104.904 y=426.5607 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2050 y=271 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.CavityGenerator1>\r\n\t<input type=MapMagic.Generator+Input link=45/>\r\n\t<maskIn
+    type=MapMagic.Generator+Input link=46/>\r\n\t<output type=MapMagic.Generator+Output
+    link=43/>\r\n\t<type type=MapMagic.CavityGenerator1+CavityType value=0/>\r\n\t<intensity
+    type=System.Single value=10/>\r\n\t<spread type=System.Single value=10/>\r\n\t<normalize
+    type=System.Boolean value=True/>\r\n\t<safeBorders type=System.Int32 value=3/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1903 y=251 width=160 height=174/>\r\n</MapMagic.CavityGenerator1>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=34/>\r\n\t<linkGen type=MapMagic.Generator
+    link=35/>\r\n\t<guiRect type=UnityEngine.Rect x=1898 y=271 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=1898 y=291 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2256.904 y=426.5607 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.GrassOutput>\r\n\t<baseLayers type=MapMagic.GrassOutput+Layer[] link=49/>\r\n\t<selected
+    type=System.Int32 value=0/>\r\n\t<maskIn type=MapMagic.Generator+Input link=56/>\r\n\t<patchResolution
+    type=System.Int32 value=16/>\r\n\t<obscureLayers type=System.Boolean value=True/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2700.263 y=542.4903 width=160 height=320/>\r\n</MapMagic.GrassOutput>\r\n"
+  - "<MapMagic.GrassOutput+Layer[] length=1>\r\n\t<item0 type=MapMagic.GrassOutput+Layer
+    link=50/>\r\n</MapMagic.GrassOutput+Layer[]>\r\n"
+  - "<MapMagic.GrassOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=51/>\r\n\t<output
+    type=MapMagic.Generator+Output link=54/>\r\n\t<det type=UnityEngine.DetailPrototype
+    link=55/>\r\n\t<name type=System.String null/>\r\n\t<density type=System.Single
+    value=2/>\r\n\t<renderMode type=MapMagic.GrassOutput+Layer+GrassRenderMode value=1/>\r\n</MapMagic.GrassOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=52/>\r\n\t<linkGen type=MapMagic.Generator
+    link=53/>\r\n\t<guiRect type=UnityEngine.Rect x=2695.263 y=645.4903 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2450.869 y=628.0458 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.ConstantGenerator>\r\n\t<output type=MapMagic.Generator+Output link=52/>\r\n\t<level
+    type=System.Single value=1/>\r\n\t<enabled type=System.Boolean value=True/>\r\n\t<mandatory
+    type=System.Boolean value=False/>\r\n\t<guiRect type=UnityEngine.Rect x=2303.869
+    y=608.0458 width=160 height=64/>\r\n</MapMagic.ConstantGenerator>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2847.263 y=645.4903 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<UnityEngine.DetailPrototype>\r\n\t<prototype type=UnityEngine.GameObject null/>\r\n\t<prototypeTexture
+    type=UnityEngine.Texture2D object=3/>\r\n\t<minWidth type=System.Single value=1/>\r\n\t<maxWidth
+    type=System.Single value=2/>\r\n\t<minHeight type=System.Single value=1/>\r\n\t<maxHeight
+    type=System.Single value=2/>\r\n\t<noiseSpread type=System.Single value=0.1/>\r\n\t<bendFactor
+    type=System.Single value=0.1/>\r\n\t<healthyColor type=UnityEngine.Color r=0.1189006
+    g=0.3867925 b=0.08210219 a=1/>\r\n\t<dryColor type=UnityEngine.Color r=0.6603774
+    g=0.6086059 b=0.1152545 a=1/>\r\n\t<renderMode type=UnityEngine.DetailRenderMode
+    value=0/>\r\n\t<usePrototypeMesh type=System.Boolean value=False/>\r\n</UnityEngine.DetailPrototype>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=57/>\r\n\t<linkGen type=MapMagic.Generator
+    link=58/>\r\n\t<guiRect type=UnityEngine.Rect x=2695.263 y=562.4903 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2659.361 y=438.8214 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.NoiseGenerator182>\r\n\t<seed type=System.Int32 value=12345/>\r\n\t<high
+    type=System.Single value=3/>\r\n\t<low type=System.Single value=0/>\r\n\t<size
+    type=System.Single value=5/>\r\n\t<detail type=System.Single value=0.5/>\r\n\t<turbulence
+    type=System.Single value=0.3/>\r\n\t<offset type=MapMagic.Coord x=0 z=0/>\r\n\t<type
+    type=MapMagic.NoiseGenerator182+Type value=0/>\r\n\t<input type=MapMagic.Generator+Input
+    link=59/>\r\n\t<maskIn type=MapMagic.Generator+Input link=60/>\r\n\t<output type=MapMagic.Generator+Output
+    link=57/>\r\n\t<enabled type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean
+    value=False/>\r\n\t<guiRect type=UnityEngine.Rect x=2512.361 y=418.8214 width=160
+    height=210/>\r\n</MapMagic.NoiseGenerator182>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2507.361 y=438.8214 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=61/>\r\n\t<linkGen type=MapMagic.Generator
+    link=62/>\r\n\t<guiRect type=UnityEngine.Rect x=2507.361 y=458.8214 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2451.598 y=498.6898 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.CurveGenerator>\r\n\t<curve type=UnityEngine.AnimationCurve link=63/>\r\n\t<extended
+    type=System.Boolean value=True/>\r\n\t<min type=UnityEngine.Vector2 x=0 y=0/>\r\n\t<max
+    type=UnityEngine.Vector2 x=1 y=1/>\r\n\t<input type=MapMagic.Generator+Input
+    link=65/>\r\n\t<maskIn type=MapMagic.Generator+Input link=72/>\r\n\t<output type=MapMagic.Generator+Output
+    link=61/>\r\n\t<enabled type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean
+    value=False/>\r\n\t<guiRect type=UnityEngine.Rect x=2304.598 y=478.6898 width=160
+    height=120/>\r\n</MapMagic.CurveGenerator>\r\n"
+  - "<UnityEngine.AnimationCurve>\r\n\t<keys type=UnityEngine.Keyframe[] link=64/>\r\n\t<preWrapMode
+    type=UnityEngine.WrapMode value=8/>\r\n\t<postWrapMode type=UnityEngine.WrapMode
+    value=8/>\r\n</UnityEngine.AnimationCurve>\r\n"
+  - "<UnityEngine.Keyframe[] length=2>\r\n\t<item0 type=UnityEngine.Keyframe time=0.7958272
+    value=0 in=0 out=0 mode=0 inWeight=0 outWeight=0/>\r\n\t<item1 type=UnityEngine.Keyframe
+    time=1 value=1 in=2 out=2 mode=0 inWeight=0 outWeight=0/>\r\n</UnityEngine.Keyframe[]>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=66/>\r\n\t<linkGen type=MapMagic.Generator
+    link=67/>\r\n\t<guiRect type=UnityEngine.Rect x=2299.598 y=498.6898 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2259.387 y=553.4731 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.Portal>\r\n\t<input type=MapMagic.Generator+Input link=68/>\r\n\t<output
+    type=MapMagic.Generator+Output link=66/>\r\n\t<name type=System.String value=Portal/>\r\n\t<type
+    type=MapMagic.Generator+InoutType value=0/>\r\n\t<form type=MapMagic.Portal+PortalForm
+    value=1/>\r\n\t<drawConnections type=System.Boolean value=False/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2112.387 y=533.4731 width=160 height=58/>\r\n</MapMagic.Portal>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=69/>\r\n\t<linkGen type=MapMagic.Generator
+    link=70/>\r\n\t<guiRect type=UnityEngine.Rect x=2112.387 y=558.4731 width=0 height=0/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2465.359 y=435.4674 width=0 height=0/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.Portal>\r\n\t<input type=MapMagic.Generator+Input link=71/>\r\n\t<output
+    type=MapMagic.Generator+Output link=69/>\r\n\t<name type=System.String value=Grass/>\r\n\t<type
+    type=MapMagic.Generator+InoutType value=0/>\r\n\t<form type=MapMagic.Portal+PortalForm
+    value=0/>\r\n\t<drawConnections type=System.Boolean value=False/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2305.359 y=410.4674 width=160 height=58/>\r\n</MapMagic.Portal>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=28/>\r\n\t<linkGen type=MapMagic.Generator
+    link=24/>\r\n\t<guiRect type=UnityEngine.Rect x=2300.359 y=430.4674 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2299.598 y=518.6898 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.NoiseGenerator182>\r\n\t<seed type=System.Int32 value=12345/>\r\n\t<high
+    type=System.Single value=1/>\r\n\t<low type=System.Single value=0/>\r\n\t<size
+    type=System.Single value=200/>\r\n\t<detail type=System.Single value=0.5/>\r\n\t<turbulence
+    type=System.Single value=0/>\r\n\t<offset type=MapMagic.Coord x=0 z=0/>\r\n\t<type
+    type=MapMagic.NoiseGenerator182+Type value=0/>\r\n\t<input type=MapMagic.Generator+Input
+    link=74/>\r\n\t<maskIn type=MapMagic.Generator+Input link=75/>\r\n\t<output type=MapMagic.Generator+Output
+    link=76/>\r\n\t<enabled type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean
+    value=False/>\r\n\t<guiRect type=UnityEngine.Rect x=832 y=111 width=160 height=210/>\r\n</MapMagic.NoiseGenerator182>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=827 y=131 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=827 y=151 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=979 y=131 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TreesOutput>\r\n\t<biomeBlendType type=MapMagic.TreesOutput+BiomeBlendType
+    value=1/>\r\n\t<baseLayers type=MapMagic.TreesOutput+Layer[] link=78/>\r\n\t<selected
+    type=System.Int32 value=0/>\r\n\t<enabled type=System.Boolean value=True/>\r\n\t<mandatory
+    type=System.Boolean value=False/>\r\n\t<guiRect type=UnityEngine.Rect x=2942.82
+    y=-43.90919 width=160 height=355/>\r\n</MapMagic.TreesOutput>\r\n"
+  - "<MapMagic.TreesOutput+Layer[] length=7>\r\n\t<item0 type=MapMagic.TreesOutput+Layer
+    link=79/>\r\n\t<item1 type=MapMagic.TreesOutput+Layer link=102/>\r\n\t<item2
+    type=MapMagic.TreesOutput+Layer link=105/>\r\n\t<item3 type=MapMagic.TreesOutput+Layer
+    link=108/>\r\n\t<item4 type=MapMagic.TreesOutput+Layer link=133/>\r\n\t<item5
+    type=MapMagic.TreesOutput+Layer link=136/>\r\n\t<item6 type=MapMagic.TreesOutput+Layer
+    link=139/>\r\n</MapMagic.TreesOutput+Layer[]>\r\n"
+  - "<MapMagic.TreesOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=80/>\r\n\t<output
+    type=MapMagic.Generator+Output link=101/>\r\n\t<prefab type=UnityEngine.GameObject
+    object=4/>\r\n\t<relativeHeight type=System.Boolean value=True/>\r\n\t<rotate
+    type=System.Boolean value=False/>\r\n\t<widthScale type=System.Boolean value=False/>\r\n\t<heightScale
+    type=System.Boolean value=False/>\r\n\t<color type=UnityEngine.Color r=1 g=1
+    b=1 a=1/>\r\n\t<bendFactor type=System.Single value=0/>\r\n</MapMagic.TreesOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=81/>\r\n\t<linkGen type=MapMagic.Generator
+    link=82/>\r\n\t<guiRect type=UnityEngine.Rect x=2937.82 y=23.09081 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2841.859 y=-20.0274 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.SplitGenerator>\r\n\t<baseLayers type=MapMagic.SplitGenerator+Layer[]
+    link=83/>\r\n\t<selected type=System.Int32 value=0/>\r\n\t<input type=MapMagic.Generator+Input
+    link=89/>\r\n\t<matchType type=MapMagic.SplitGenerator+MatchType value=1/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2694.859 y=-106.0274 width=160 height=234/>\r\n</MapMagic.SplitGenerator>\r\n"
+  - "<MapMagic.SplitGenerator+Layer[] length=3>\r\n\t<item0 type=MapMagic.SplitGenerator+Layer
+    link=84/>\r\n\t<item1 type=MapMagic.SplitGenerator+Layer link=85/>\r\n\t<item2
+    type=MapMagic.SplitGenerator+Layer link=87/>\r\n</MapMagic.SplitGenerator+Layer[]>\r\n"
+  - "<MapMagic.SplitGenerator+Layer>\r\n\t<name type=System.String value=Object\\_Layer/>\r\n\t<output
+    type=MapMagic.Generator+Output link=81/>\r\n\t<heightCondition type=UnityEngine.Vector2
+    x=0 y=1/>\r\n\t<rotationCondition type=UnityEngine.Vector2 x=0 y=360/>\r\n\t<scaleCondition
+    type=UnityEngine.Vector2 x=0 y=100/>\r\n\t<chance type=System.Single value=1/>\r\n</MapMagic.SplitGenerator+Layer>\r\n"
+  - "<MapMagic.SplitGenerator+Layer>\r\n\t<name type=System.String value=Object\\_Layer/>\r\n\t<output
+    type=MapMagic.Generator+Output link=86/>\r\n\t<heightCondition type=UnityEngine.Vector2
+    x=0 y=1/>\r\n\t<rotationCondition type=UnityEngine.Vector2 x=0 y=360/>\r\n\t<scaleCondition
+    type=UnityEngine.Vector2 x=0 y=100/>\r\n\t<chance type=System.Single value=1/>\r\n</MapMagic.SplitGenerator+Layer>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2841.859 y=77.9726 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.SplitGenerator+Layer>\r\n\t<name type=System.String value=Object\\_Layer/>\r\n\t<output
+    type=MapMagic.Generator+Output link=88/>\r\n\t<heightCondition type=UnityEngine.Vector2
+    x=0 y=1/>\r\n\t<rotationCondition type=UnityEngine.Vector2 x=0 y=360/>\r\n\t<scaleCondition
+    type=UnityEngine.Vector2 x=0 y=100/>\r\n\t<chance type=System.Single value=1/>\r\n</MapMagic.SplitGenerator+Layer>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2841.859 y=103.9726 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=90/>\r\n\t<linkGen type=MapMagic.Generator
+    link=91/>\r\n\t<guiRect type=UnityEngine.Rect x=2689.859 y=-86.0274 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2642.016 y=-90.5578 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.ForestGenerator1>\r\n\t<seedlingsIn type=MapMagic.Generator+Input
+    link=92/>\r\n\t<otherTreesIn type=MapMagic.Generator+Input link=96/>\r\n\t<soilIn
+    type=MapMagic.Generator+Input link=97/>\r\n\t<treesOut type=MapMagic.Generator+Output
+    link=90/>\r\n\t<years type=System.Int32 value=75/>\r\n\t<density type=System.Single
+    value=3/>\r\n\t<fecundity type=System.Single value=0.5/>\r\n\t<seedDist type=System.Single
+    value=10/>\r\n\t<reproductiveAge type=System.Single value=10/>\r\n\t<survivalRate
+    type=System.Single value=0.5/>\r\n\t<lifeAge type=System.Single value=100/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2495.016 y=-110.5578 width=160 height=212/>\r\n</MapMagic.ForestGenerator1>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=93/>\r\n\t<linkGen type=MapMagic.Generator
+    link=94/>\r\n\t<guiRect type=UnityEngine.Rect x=2490.016 y=-90.5578 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2452.7 y=-119.7817 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.ScatterGenerator184>\r\n\t<probability type=MapMagic.Generator+Input
+    link=95/>\r\n\t<output type=MapMagic.Generator+Output link=93/>\r\n\t<seed type=System.Int32
+    value=12345/>\r\n\t<algorithm type=MapMagic.ScatterGenerator184+Algorithm value=0/>\r\n\t<density
+    type=System.Single value=50/>\r\n\t<uniformity type=System.Single value=0.1/>\r\n\t<relax
+    type=System.Single value=0.1/>\r\n\t<safeBorders type=System.Int32 value=2/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2305.7 y=-139.7817 width=160 height=154/>\r\n</MapMagic.ScatterGenerator184>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2300.7 y=-119.7817 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2490.016 y=-70.5578 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=98/>\r\n\t<linkGen type=MapMagic.Generator
+    link=99/>\r\n\t<guiRect type=UnityEngine.Rect x=2490.016 y=-50.5578 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2447.401 y=55.94721 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.Portal>\r\n\t<input type=MapMagic.Generator+Input link=100/>\r\n\t<output
+    type=MapMagic.Generator+Output link=98/>\r\n\t<name type=System.String value=Portal/>\r\n\t<type
+    type=MapMagic.Generator+InoutType value=0/>\r\n\t<form type=MapMagic.Portal+PortalForm
+    value=1/>\r\n\t<drawConnections type=System.Boolean value=False/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2300.401 y=35.94721 width=160 height=58/>\r\n</MapMagic.Portal>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=69/>\r\n\t<linkGen type=MapMagic.Generator
+    link=70/>\r\n\t<guiRect type=UnityEngine.Rect x=2300.401 y=60.94721 width=0 height=0/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=31.70483 y=-248.6322 width=0 height=0/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TreesOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=103/>\r\n\t<output
+    type=MapMagic.Generator+Output link=104/>\r\n\t<prefab type=UnityEngine.GameObject
+    object=5/>\r\n\t<relativeHeight type=System.Boolean value=True/>\r\n\t<rotate
+    type=System.Boolean value=False/>\r\n\t<widthScale type=System.Boolean value=False/>\r\n\t<heightScale
+    type=System.Boolean value=False/>\r\n\t<color type=UnityEngine.Color r=1 g=1
+    b=1 a=1/>\r\n\t<bendFactor type=System.Single value=0/>\r\n</MapMagic.TreesOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=86/>\r\n\t<linkGen type=MapMagic.Generator
+    link=82/>\r\n\t<guiRect type=UnityEngine.Rect x=2937.82 y=157.0908 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=31.70483 y=-248.6322 width=0 height=0/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TreesOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=106/>\r\n\t<output
+    type=MapMagic.Generator+Output link=107/>\r\n\t<prefab type=UnityEngine.GameObject
+    object=6/>\r\n\t<relativeHeight type=System.Boolean value=True/>\r\n\t<rotate
+    type=System.Boolean value=False/>\r\n\t<widthScale type=System.Boolean value=False/>\r\n\t<heightScale
+    type=System.Boolean value=False/>\r\n\t<color type=UnityEngine.Color r=1 g=1
+    b=1 a=1/>\r\n\t<bendFactor type=System.Single value=0/>\r\n</MapMagic.TreesOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=88/>\r\n\t<linkGen type=MapMagic.Generator
+    link=82/>\r\n\t<guiRect type=UnityEngine.Rect x=2937.82 y=183.0908 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=31.70483 y=-248.6322 width=0 height=0/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TreesOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=109/>\r\n\t<output
+    type=MapMagic.Generator+Output link=132/>\r\n\t<prefab type=UnityEngine.GameObject
+    object=7/>\r\n\t<relativeHeight type=System.Boolean value=True/>\r\n\t<rotate
+    type=System.Boolean value=False/>\r\n\t<widthScale type=System.Boolean value=False/>\r\n\t<heightScale
+    type=System.Boolean value=False/>\r\n\t<color type=UnityEngine.Color r=1 g=1
+    b=1 a=1/>\r\n\t<bendFactor type=System.Single value=0/>\r\n</MapMagic.TreesOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=110/>\r\n\t<linkGen type=MapMagic.Generator
+    link=111/>\r\n\t<guiRect type=UnityEngine.Rect x=2937.82 y=209.0908 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2849.589 y=291.8307 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.SplitGenerator>\r\n\t<baseLayers type=MapMagic.SplitGenerator+Layer[]
+    link=112/>\r\n\t<selected type=System.Int32 value=0/>\r\n\t<input type=MapMagic.Generator+Input
+    link=120/>\r\n\t<matchType type=MapMagic.SplitGenerator+MatchType value=1/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2702.589 y=205.8307 width=160 height=260/>\r\n</MapMagic.SplitGenerator>\r\n"
+  - "<MapMagic.SplitGenerator+Layer[] length=4>\r\n\t<item0 type=MapMagic.SplitGenerator+Layer
+    link=113/>\r\n\t<item1 type=MapMagic.SplitGenerator+Layer link=114/>\r\n\t<item2
+    type=MapMagic.SplitGenerator+Layer link=116/>\r\n\t<item3 type=MapMagic.SplitGenerator+Layer
+    link=118/>\r\n</MapMagic.SplitGenerator+Layer[]>\r\n"
+  - "<MapMagic.SplitGenerator+Layer>\r\n\t<name type=System.String value=Object\\_Layer/>\r\n\t<output
+    type=MapMagic.Generator+Output link=110/>\r\n\t<heightCondition type=UnityEngine.Vector2
+    x=0 y=1/>\r\n\t<rotationCondition type=UnityEngine.Vector2 x=0 y=360/>\r\n\t<scaleCondition
+    type=UnityEngine.Vector2 x=1 y=1/>\r\n\t<chance type=System.Single value=1/>\r\n</MapMagic.SplitGenerator+Layer>\r\n"
+  - "<MapMagic.SplitGenerator+Layer>\r\n\t<name type=System.String value=Object\\_Layer/>\r\n\t<output
+    type=MapMagic.Generator+Output link=115/>\r\n\t<heightCondition type=UnityEngine.Vector2
+    x=0 y=1/>\r\n\t<rotationCondition type=UnityEngine.Vector2 x=0 y=360/>\r\n\t<scaleCondition
+    type=UnityEngine.Vector2 x=1 y=1/>\r\n\t<chance type=System.Single value=1/>\r\n</MapMagic.SplitGenerator+Layer>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2849.589 y=389.8307 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.SplitGenerator+Layer>\r\n\t<name type=System.String value=Object\\_Layer/>\r\n\t<output
+    type=MapMagic.Generator+Output link=117/>\r\n\t<heightCondition type=UnityEngine.Vector2
+    x=0 y=1/>\r\n\t<rotationCondition type=UnityEngine.Vector2 x=0 y=360/>\r\n\t<scaleCondition
+    type=UnityEngine.Vector2 x=1 y=1/>\r\n\t<chance type=System.Single value=1/>\r\n</MapMagic.SplitGenerator+Layer>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2849.589 y=415.8307 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.SplitGenerator+Layer>\r\n\t<name type=System.String value=Object\\_Layer/>\r\n\t<output
+    type=MapMagic.Generator+Output link=119/>\r\n\t<heightCondition type=UnityEngine.Vector2
+    x=0 y=1/>\r\n\t<rotationCondition type=UnityEngine.Vector2 x=0 y=360/>\r\n\t<scaleCondition
+    type=UnityEngine.Vector2 x=1 y=1/>\r\n\t<chance type=System.Single value=1/>\r\n</MapMagic.SplitGenerator+Layer>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2849.589 y=441.8307 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=121/>\r\n\t<linkGen type=MapMagic.Generator
+    link=122/>\r\n\t<guiRect type=UnityEngine.Rect x=2697.589 y=225.8307 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2665.581 y=204.8008 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.ForestGenerator1>\r\n\t<seedlingsIn type=MapMagic.Generator+Input
+    link=123/>\r\n\t<otherTreesIn type=MapMagic.Generator+Input link=127/>\r\n\t<soilIn
+    type=MapMagic.Generator+Input link=128/>\r\n\t<treesOut type=MapMagic.Generator+Output
+    link=121/>\r\n\t<years type=System.Int32 value=500/>\r\n\t<density type=System.Single
+    value=3/>\r\n\t<fecundity type=System.Single value=0.5/>\r\n\t<seedDist type=System.Single
+    value=10/>\r\n\t<reproductiveAge type=System.Single value=10/>\r\n\t<survivalRate
+    type=System.Single value=0.5/>\r\n\t<lifeAge type=System.Single value=100/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2518.581 y=184.8008 width=160 height=212/>\r\n</MapMagic.ForestGenerator1>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=124/>\r\n\t<linkGen type=MapMagic.Generator
+    link=125/>\r\n\t<guiRect type=UnityEngine.Rect x=2513.581 y=204.8008 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2452.796 y=149.2897 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.ScatterGenerator184>\r\n\t<probability type=MapMagic.Generator+Input
+    link=126/>\r\n\t<output type=MapMagic.Generator+Output link=124/>\r\n\t<seed
+    type=System.Int32 value=12345/>\r\n\t<algorithm type=MapMagic.ScatterGenerator184+Algorithm
+    value=0/>\r\n\t<density type=System.Single value=50/>\r\n\t<uniformity type=System.Single
+    value=0.1/>\r\n\t<relax type=System.Single value=0.1/>\r\n\t<safeBorders type=System.Int32
+    value=2/>\r\n\t<enabled type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean
+    value=False/>\r\n\t<guiRect type=UnityEngine.Rect x=2305.796 y=129.2897 width=160
+    height=154/>\r\n</MapMagic.ScatterGenerator184>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output null/>\r\n\t<linkGen type=MapMagic.Generator null/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2300.796 y=149.2897 width=18 height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=90/>\r\n\t<linkGen type=MapMagic.Generator
+    link=91/>\r\n\t<guiRect type=UnityEngine.Rect x=2513.581 y=224.8008 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=129/>\r\n\t<linkGen type=MapMagic.Generator
+    link=130/>\r\n\t<guiRect type=UnityEngine.Rect x=2513.581 y=244.8008 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2450.102 y=330.0315 width=18 height=18/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.Portal>\r\n\t<input type=MapMagic.Generator+Input link=131/>\r\n\t<output
+    type=MapMagic.Generator+Output link=129/>\r\n\t<name type=System.String value=Portal/>\r\n\t<type
+    type=MapMagic.Generator+InoutType value=0/>\r\n\t<form type=MapMagic.Portal+PortalForm
+    value=1/>\r\n\t<drawConnections type=System.Boolean value=False/>\r\n\t<enabled
+    type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean value=False/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=2303.102 y=310.0315 width=160 height=58/>\r\n</MapMagic.Portal>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=0/>\r\n\t<link
+    type=MapMagic.Generator+Output link=69/>\r\n\t<linkGen type=MapMagic.Generator
+    link=70/>\r\n\t<guiRect type=UnityEngine.Rect x=2303.102 y=335.0315 width=0 height=0/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=31.70483 y=-248.6322 width=0 height=0/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TreesOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=134/>\r\n\t<output
+    type=MapMagic.Generator+Output link=135/>\r\n\t<prefab type=UnityEngine.GameObject
+    object=8/>\r\n\t<relativeHeight type=System.Boolean value=True/>\r\n\t<rotate
+    type=System.Boolean value=False/>\r\n\t<widthScale type=System.Boolean value=False/>\r\n\t<heightScale
+    type=System.Boolean value=False/>\r\n\t<color type=UnityEngine.Color r=1 g=1
+    b=1 a=1/>\r\n\t<bendFactor type=System.Single value=0/>\r\n</MapMagic.TreesOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=115/>\r\n\t<linkGen type=MapMagic.Generator
+    link=111/>\r\n\t<guiRect type=UnityEngine.Rect x=2937.82 y=235.0908 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=31.70483 y=-248.6322 width=0 height=0/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TreesOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=137/>\r\n\t<output
+    type=MapMagic.Generator+Output link=138/>\r\n\t<prefab type=UnityEngine.GameObject
+    object=9/>\r\n\t<relativeHeight type=System.Boolean value=True/>\r\n\t<rotate
+    type=System.Boolean value=False/>\r\n\t<widthScale type=System.Boolean value=False/>\r\n\t<heightScale
+    type=System.Boolean value=False/>\r\n\t<color type=UnityEngine.Color r=1 g=1
+    b=1 a=1/>\r\n\t<bendFactor type=System.Single value=0/>\r\n</MapMagic.TreesOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=117/>\r\n\t<linkGen type=MapMagic.Generator
+    link=111/>\r\n\t<guiRect type=UnityEngine.Rect x=2937.82 y=261.0908 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=31.70483 y=-248.6322 width=0 height=0/>\r\n</MapMagic.Generator+Output>\r\n"
+  - "<MapMagic.TreesOutput+Layer>\r\n\t<input type=MapMagic.Generator+Input link=140/>\r\n\t<output
+    type=MapMagic.Generator+Output link=141/>\r\n\t<prefab type=UnityEngine.GameObject
+    object=10/>\r\n\t<relativeHeight type=System.Boolean value=True/>\r\n\t<rotate
+    type=System.Boolean value=False/>\r\n\t<widthScale type=System.Boolean value=False/>\r\n\t<heightScale
+    type=System.Boolean value=True/>\r\n\t<color type=UnityEngine.Color r=1 g=1 b=1
+    a=1/>\r\n\t<bendFactor type=System.Single value=0/>\r\n</MapMagic.TreesOutput+Layer>\r\n"
+  - "<MapMagic.Generator+Input>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<link
+    type=MapMagic.Generator+Output link=119/>\r\n\t<linkGen type=MapMagic.Generator
+    link=111/>\r\n\t<guiRect type=UnityEngine.Rect x=2937.82 y=287.0908 width=18
+    height=18/>\r\n</MapMagic.Generator+Input>\r\n"
+  - "<MapMagic.Generator+Output>\r\n\t<type type=MapMagic.Generator+InoutType value=1/>\r\n\t<guiRect
+    type=UnityEngine.Rect x=407.1656 y=-264.5073 width=0 height=0/>\r\n</MapMagic.Generator+Output>\r\n"
+  objects:
+  - {fileID: 8574412962073106934, guid: 5db67b6261d9576449ffa39526f601c6, type: 2}
+  - {fileID: 8574412962073106934, guid: 08c60a933dcfa0d418a269ff6b5a7df4, type: 2}
+  - {fileID: 8574412962073106934, guid: 2f56ae2d8d1c88646b6c42c157d72905, type: 2}
+  - {fileID: 2800000, guid: 2d7920c469694f64ba7da7a59ea19dfb, type: 3}
+  - {fileID: 1864895582813394, guid: 3daccbb011e093542a4a588010495b45, type: 3}
+  - {fileID: 1730842416734614, guid: 17a6c9710a9446e40b3d913d8b94b41a, type: 3}
+  - {fileID: 1971407674315862, guid: 8416d9e3329700d4ebd12cfb86f99e4d, type: 3}
+  - {fileID: 173842, guid: 328a624ea5604e545a89dcf1cd1969d8, type: 3}
+  - {fileID: 180528, guid: 20acd468a284d3d4cb578f2de11760f0, type: 3}
+  - {fileID: 128938, guid: 20ec469bcb2e4614ab2785ed8fc5ecbd, type: 3}
+  - {fileID: 117020, guid: 62ac714ef8a64514c9306f4ce1ee8ef5, type: 3}
+  floats: []
+  setDirty: 1
+  serializer:
+    entities: []
+  listNum: 0
+--- !u!1 &468963737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 468963738}
+  m_Layer: 0
+  m_Name: TestingCamera
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &468963738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468963737}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &585014841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 585014843}
+  - component: {fileID: 585014842}
+  m_Layer: 0
+  m_Name: SpawnPoint 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &585014842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585014841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f84591ce72545258ea98cb7518d8b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &585014843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585014841}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 300, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &705507993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 705507995}
+  - component: {fileID: 705507994}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &705507994
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705507993}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 1
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &705507995
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705507993}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &741431513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 741431514}
+  - component: {fileID: 741431515}
+  m_Layer: 0
+  m_Name: Camera (11)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &741431514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741431513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3000, y: 0, z: -1000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &741431515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741431513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3238598442
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &976776168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 976776169}
+  - component: {fileID: 976776170}
+  m_Layer: 0
+  m_Name: Camera (6)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &976776169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976776168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: 1000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &976776170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976776168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 950251502
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &998652920
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 998652921}
+  m_Layer: 0
+  m_Name: New Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &998652921
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998652920}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2809.1365, y: -0.00012207031, z: 896.69934}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &999507034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 999507035}
+  m_Layer: 0
+  m_Name: TerrainCameras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &999507035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999507034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 97185540}
+  - {fileID: 1307419935}
+  - {fileID: 1475585688}
+  - {fileID: 1552679507}
+  - {fileID: 1964149576}
+  - {fileID: 1948722714}
+  - {fileID: 976776169}
+  - {fileID: 1634457306}
+  - {fileID: 1290491902}
+  - {fileID: 1614954128}
+  - {fileID: 195285989}
+  - {fileID: 741431514}
+  - {fileID: 1862323745}
+  - {fileID: 1910259309}
+  - {fileID: 1573175021}
+  - {fileID: 1541816669}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1290491901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1290491902}
+  - component: {fileID: 1290491903}
+  m_Layer: 0
+  m_Name: Camera (8)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1290491902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290491901}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3000, y: 0, z: -1000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1290491903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290491901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2461590724
+  serverOnly: 1
+  m_AssetId: 
+--- !u!21 &1292695199
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Nature/Terrain/Standard
+  m_Shader: {fileID: 10623, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TerrainHolesTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1307419934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1307419935}
+  - component: {fileID: 1307419936}
+  m_Layer: 0
+  m_Name: Camera (1)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1307419935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307419934}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1000, y: 0, z: 3000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1307419936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307419934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1836267150
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1475585687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1475585688}
+  - component: {fileID: 1475585689}
+  m_Layer: 0
+  m_Name: Camera (2)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1475585688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475585687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: 3000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1475585689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475585687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 164858431
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1493113141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1493113143}
+  - component: {fileID: 1493113142}
+  - component: {fileID: 1493113144}
+  - component: {fileID: 1493113145}
+  - component: {fileID: 1493113146}
+  m_Layer: 0
+  m_Name: Map Magic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1493113142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493113141}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c503e08679b9d8d408f0a3e55874ae93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  gens: {fileID: 383046923}
+  objectsPool:
+    allowReposition: 1
+    regardPrefabRotation: 0
+    regardPrefabScale: 0
+    instantiateClones: 0
+    created: 0
+    moved: 0
+    deleted: 0
+    serializedPrefabs: []
+    serializedInstances: []
+  meshesBuilt: 0
+  totalMeshes: 4
+  seed: 12345
+  changeSeed: 1
+  terrainSize: 1000
+  terrainHeight: 1200
+  resolution: 512
+  lodResolution: 128
+  useTerrainPooling: 1
+  previewShader: {fileID: 4800000, guid: 269634effee7d93468ae3894f4722e51, type: 3}
+  mouseButton: -1
+  generateInfinite: 1
+  generateRange: 350
+  removeRange: 400
+  enableRange: 300
+  instantGenerate: 1
+  saveIntermediate: 1
+  heightWeldMargins: 5
+  splatsWeldMargins: 2
+  hideWireframe: 1
+  hideFarTerrains: 1
+  copyLayersTags: 1
+  copyComponents: 0
+  applyColliders: 1
+  drawInstanced: 0
+  autoConnect: 1
+  genAroundMainCam: 0
+  genAroundObjsTag: 1
+  genAroundTag: Player
+  shift: 0
+  shiftThreshold: 4000
+  shiftExcludeLayers: 0
+  pixelError: 1
+  baseMapDist: 1000
+  showBaseMap: 1
+  castShadows: 0
+  reflectionProbeUsage: 0
+  customTerrainMaterial: {fileID: 1292695199}
+  detailDraw: 1
+  detailDistance: 160
+  detailDensity: 1
+  treeDistance: 1000
+  treeBillboardStart: 200
+  treeFadeLength: 5
+  treeFullLod: 150
+  bakeLightProbesForTrees: 0
+  windSpeed: 0.5
+  windSize: 0.5
+  windBending: 0.5
+  grassTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  multithreading: 1
+  maxThreads: 3
+  autoMaxThreads: 1
+  maxApplyTime: 15
+  selected: 0
+  guiScroll: {x: 0, y: 0}
+  guiZoom: 1
+  guiHideWireframe: 0
+  guiGenerators: 1
+  guiSettings: 1
+  guiTerrainSettings: 0
+  guiTreesGrassSettings: 1
+  guiMassPin: 0
+  guiPinRect:
+    offset:
+      x: 0
+      z: 0
+    size:
+      x: 0
+      z: 0
+  guiInstantUpdate: 0
+  guiInstantUpdateEnabled: 0
+  guiAbout: 0
+  sceneRedrawObject: {fileID: 26422720}
+  guiGeneratorWidth: 160
+  setDirty: 0
+  serializedChunks: []
+  serializedChunkCoords: []
+  serializedChunkPin: 
+  serializedPools: []
+  serializer:
+    entities: []
+--- !u!4 &1493113143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493113141}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1493113144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493113141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3435440474
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &1493113145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493113141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!114 &1493113146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493113141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a768205c2a3a1304dbcfa50096a62be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  cameras: {fileID: 999507034}
+--- !u!1 &1541816668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1541816669}
+  - component: {fileID: 1541816670}
+  m_Layer: 0
+  m_Name: Camera (15)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1541816669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541816668}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3000, y: 0, z: -3000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541816670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541816668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3133090427
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1552679506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1552679507}
+  - component: {fileID: 1552679508}
+  m_Layer: 0
+  m_Name: Camera (3)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1552679507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552679506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3000, y: 0, z: 3000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1552679508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552679506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 560073154
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1573175020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1573175021}
+  - component: {fileID: 1573175022}
+  m_Layer: 0
+  m_Name: Camera (14)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1573175021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573175020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: -3000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1573175022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573175020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3559543411
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1614954127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1614954128}
+  - component: {fileID: 1614954129}
+  m_Layer: 0
+  m_Name: Camera (9)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1614954128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614954127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1000, y: 0, z: -1000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1614954129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614954127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3009210470
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1634457305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1634457306}
+  - component: {fileID: 1634457307}
+  m_Layer: 0
+  m_Name: Camera (7)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1634457306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634457305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3000, y: 0, z: 1000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1634457307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634457305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2831795233
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1679994015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1679994016}
+  - component: {fileID: 1679994017}
+  - component: {fileID: 1679994018}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1679994016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679994015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1679994017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679994015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8625c3bcc306c4585a0f336b0df7bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  enemies:
+  - {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875, type: 3}
+  powerups: []
+  players: []
+--- !u!114 &1679994018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679994015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 874373010
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1736755470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1736755471}
+  - component: {fileID: 1736755472}
+  - component: {fileID: 1736755473}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1736755471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736755470}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1736755472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736755470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 4246055379
+  serverOnly: 1
+  m_AssetId: 
+--- !u!114 &1736755473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736755470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa9de71c81825149a3a3cf07117aff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  pools:
+  - tag: Zombie
+    prefab: {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875,
+      type: 3}
+    size: 5
+--- !u!1 &1852091592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1852091596}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1852091596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852091592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 8000, y: 800, z: 8000}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1862323744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1862323745}
+  - component: {fileID: 1862323746}
+  m_Layer: 0
+  m_Name: Camera (12)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1862323745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862323744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3000, y: 0, z: -3000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1862323746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862323744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2823263413
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1910259308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1910259309}
+  - component: {fileID: 1910259310}
+  m_Layer: 0
+  m_Name: Camera (13)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1910259309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910259308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1000, y: 0, z: -3000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1910259310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910259308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3405302221
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1948722713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1948722714}
+  - component: {fileID: 1948722715}
+  m_Layer: 0
+  m_Name: Camera (5)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1948722714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948722713}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1000, y: 0, z: 1000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1948722715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948722713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2600433073
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1 &1964149575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1964149576}
+  - component: {fileID: 1964149577}
+  m_Layer: 0
+  m_Name: Camera (4)
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1964149576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964149575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3000, y: 0, z: 1000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999507035}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1964149577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964149575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2315137718
+  serverOnly: 1
+  m_AssetId: 
+--- !u!1001 &298359902323345021
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6578454534823021287, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471222055888681824, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2d248cea692e3c24d8c86ec58dc8ea29, type: 3}
