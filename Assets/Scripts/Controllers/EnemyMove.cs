@@ -53,7 +53,6 @@ public class EnemyMove : NetworkBehaviour
         {
             currVelocity = agent.velocity.magnitude;
         }
-        Debug.Log(currVelocity);
         animator.SetFloat("Speed", currVelocity);
     }
 

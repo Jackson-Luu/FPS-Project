@@ -580,11 +580,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4a8bbb22d71cb4787c68abc1c457c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 30
   jumpSpeed: 5
   gravity: 20
   mouseSens: 2
-  sprintMultiplier: 3
+  sprintMultiplier: 2
   staminaBurnRate: 1.5
   staminaRegenRate: 0.7
 --- !u!114 &-8844148147066375850

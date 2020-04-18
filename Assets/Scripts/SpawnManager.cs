@@ -7,8 +7,7 @@ public class SpawnManager : NetworkBehaviour
     public GameObject[] powerups;
     public GameObject[] players;
 
-    private float xSpawnRange;
-    private float zSpawnRange;
+    private float spawnRadius = 50;
     private float groundRadius;
     private float edgeMargin = 5;
 
@@ -20,7 +19,6 @@ public class SpawnManager : NetworkBehaviour
     public override void OnStartServer()
     {
         objectPooler = ObjectPooler.Instance;
-        xSpawnRange = zSpawnRange = (GameObject.Find("Ground").GetComponent<Renderer>().bounds.size.x / 2) - edgeMargin;
         InvokeRepeating("SpawnEnemy", startDelay, spawnInterval);
     }
 
@@ -30,7 +28,7 @@ public class SpawnManager : NetworkBehaviour
         foreach (GameObject player in players)
         {
             int randomIndex = Random.Range(0, enemies.Length);
-            GameObject enemy = objectPooler.SpawnFromPool(enemies[randomIndex].name, RandomPosition(randomIndex), enemies[randomIndex].transform.rotation);
+            GameObject enemy = objectPooler.SpawnFromPool(enemies[randomIndex].name, RandomPosition(player.transform, randomIndex), enemies[randomIndex].transform.rotation);
             if (enemy != null)
             {
                 enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
@@ -39,10 +37,13 @@ public class SpawnManager : NetworkBehaviour
         }
     }
 
-    private Vector3 RandomPosition(int enemy)
+    private Vector3 RandomPosition(Transform player, int enemy)
     {
-        float randomX = Random.Range(-xSpawnRange, xSpawnRange);
-        float randomZ = Random.Range(-zSpawnRange, zSpawnRange);
-        return new Vector3(randomX, enemies[enemy].transform.position.y, randomZ);
+        float randomX = Random.Range(player.position.x  - spawnRadius, player.position.x + spawnRadius);
+        float randomZ = Random.Range(player.position.z - spawnRadius, player.position.z + spawnRadius);
+        Vector3 position = new Vector3(randomX, 0, randomZ);
+        position.y = Terrain.activeTerrain.SampleHeight(position);
+        Debug.Log(position);
+        return position;
     }
 }
