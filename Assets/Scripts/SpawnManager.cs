@@ -18,7 +18,7 @@ public class SpawnManager : NetworkBehaviour
     public override void OnStartServer()
     {
         objectPooler = ObjectPooler.Instance;
-        InvokeRepeating("SpawnEnemy", GameManager.instance.matchSettings.playerLoadTime, spawnInterval);
+        //InvokeRepeating("SpawnEnemy", GameManager.instance.matchSettings.playerLoadTime, spawnInterval);
     }
 
     void SpawnEnemy()

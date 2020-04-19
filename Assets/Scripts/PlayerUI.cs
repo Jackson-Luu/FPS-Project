@@ -10,14 +10,22 @@ public class PlayerUI : MonoBehaviour
     TMP_Text ammoText;
 
     [SerializeField]
+    TMP_Text itemPickup;
+    private const string ITEM_PICKUP = "Press <color=yellow>F</color> to pickup ";
+
+    [SerializeField]
     GameObject pauseMenu;
 
     [SerializeField]
     public GameObject deathScreen;
 
-    private Player player;
+    public Player player;
     private PlayerStats playerStats;
     private WeaponManager weaponManager;
+
+    // Notify item, player has picked it up
+    public delegate void OnItemPickUp(Player player);
+    public OnItemPickUp onItemPickUpCallback;
 
     public void SetPlayer (Player _player)
     {
@@ -33,13 +41,25 @@ public class PlayerUI : MonoBehaviour
 
     void Update()
     {
+        // Update UI health and ammo elements
         SetHealth(playerStats.GetHealthPct());
         SetAmmo(weaponManager.GetCurrentWeapon().bullets, weaponManager.GetCurrentWeapon().maxBullets);
 
+        // Toggle pause menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePauseMenu();
             Cursor.lockState = CursorLockMode.None;
+        }
+
+        if (!PauseMenu.isOn)
+        {
+            // Pick up item
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                ItemPickupDisable();
+                onItemPickUpCallback.Invoke(player);
+            }
         }
     }
 
@@ -47,6 +67,17 @@ public class PlayerUI : MonoBehaviour
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         PauseMenu.isOn = pauseMenu.activeSelf;
+    }
+
+    public void ItemPickupEnable(string source)
+    {
+        itemPickup.text = ITEM_PICKUP + source;
+        itemPickup.gameObject.SetActive(true);
+    }
+
+    public void ItemPickupDisable()
+    {
+        itemPickup.gameObject.SetActive(false);
     }
 
     void SetHealth(float amount)

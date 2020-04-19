@@ -518,6 +518,7 @@ GameObject:
   - component: {fileID: -7690100317141515077}
   - component: {fileID: 5817435983997789641}
   - component: {fileID: -74100932089430960}
+  - component: {fileID: 5817474979236058699}
   - component: {fileID: -2422718430464458456}
   - component: {fileID: 8348150383810990697}
   - component: {fileID: 2005915993}
@@ -580,7 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4a8bbb22d71cb4787c68abc1c457c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 10
   jumpSpeed: 5
   gravity: 20
   mouseSens: 2
@@ -669,6 +670,20 @@ MonoBehaviour:
   maxHealth: 100
   damage:
     baseValue: 0
+--- !u!114 &5817474979236058699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212466796382139187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c3f1e58ccad34448f0c39d38f85afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  space: 20
+  items: []
 --- !u!114 &-2422718430464458456
 MonoBehaviour:
   m_ObjectHideFlags: 0

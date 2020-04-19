@@ -38,6 +38,17 @@ public class CharacterStats : NetworkBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        if (currHealth + amount > maxHealth)
+        {
+            currHealth = maxHealth;
+        } else
+        {
+            currHealth += amount;
+        }
+    }
+
     [ClientRpc]
     public void RpcDie(string sourceID)
     {
