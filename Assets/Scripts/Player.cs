@@ -159,7 +159,7 @@ public class Player : NetworkBehaviour
         yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
 
         Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
-        transform.position = spawnPoint.position;
+        transform.position = new Vector3(spawnPoint.position.x, Terrain.activeTerrain.SampleHeight(spawnPoint.position) + (float)1.01, spawnPoint.position.z);
         transform.rotation = spawnPoint.rotation;
 
         // Reactivate playerController after position has been set to avoid reverting to pre-death position
