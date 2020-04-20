@@ -116,11 +116,14 @@
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GenerateNavMesh.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Equipment.cs" />
+    <Compile Include="Assets\Scripts\Inventory\EquipmentManager.cs" />
+    <Compile Include="Assets\Scripts\Inventory\HealItem.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventoryUI.cs" />
-    <Compile Include="Assets\Scripts\Item.cs" />
-    <Compile Include="Assets\Scripts\ItemPickup.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Item.cs" />
+    <Compile Include="Assets\Scripts\Inventory\ItemPickup.cs" />
     <Compile Include="Assets\Scripts\KillFeed.cs" />
     <Compile Include="Assets\Scripts\KillFeedItem.cs" />
     <Compile Include="Assets\Scripts\MatchSettings.cs" />

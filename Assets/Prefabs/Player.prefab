@@ -519,13 +519,14 @@ GameObject:
   - component: {fileID: 5817435983997789641}
   - component: {fileID: -74100932089430960}
   - component: {fileID: 5817474979236058699}
+  - component: {fileID: 8702296398958034433}
+  - component: {fileID: -3707440466752629860}
   - component: {fileID: -2422718430464458456}
   - component: {fileID: 8348150383810990697}
   - component: {fileID: 2005915993}
   - component: {fileID: 137953025}
   - component: {fileID: 6970178912602358531}
   - component: {fileID: 1254987786}
-  - component: {fileID: -3707440466752629860}
   - component: {fileID: 6938551982098692216}
   - component: {fileID: 3179816551095780777}
   m_Layer: 8
@@ -682,8 +683,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c3f1e58ccad34448f0c39d38f85afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   space: 20
   items: []
+--- !u!114 &8702296398958034433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212466796382139187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768ea469245ad20408c71873b5ea6e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3707440466752629860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212466796382139187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28caeb4ee58d06444af7e266fad66f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  primaryWeapon:
+    name: AK47
+    damage: 10
+    range: 100
+    fireRate: 10
+    maxBullets: 20
+    bullets: 20
+    reloadTime: 1
+    graphics: {fileID: 3279740696676372436, guid: ca376a012899bde419cc097db75630f4,
+      type: 3}
+  weaponHolder: {fileID: 309662760}
+  isReloading: 0
 --- !u!114 &-2422718430464458456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,32 +834,6 @@ MonoBehaviour:
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
   target: {fileID: 7157650202582296483}
---- !u!114 &-3707440466752629860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212466796382139187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28caeb4ee58d06444af7e266fad66f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  primaryWeapon:
-    name: AK47
-    damage: 10
-    range: 100
-    fireRate: 10
-    maxBullets: 20
-    bullets: 20
-    reloadTime: 1
-    graphics: {fileID: 3279740696676372436, guid: ca376a012899bde419cc097db75630f4,
-      type: 3}
-  weaponHolder: {fileID: 309662760}
-  isReloading: 0
 --- !u!114 &6938551982098692216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,18 +961,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 249dd196757ff9940844710b987c1b28, type: 3}
---- !u!4 &7904710338807206637 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7904710339736155628, guid: 249dd196757ff9940844710b987c1b28,
-    type: 3}
-  m_PrefabInstance: {fileID: 1487054593}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4798223067280512368 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4798223068767302257, guid: 249dd196757ff9940844710b987c1b28,
-    type: 3}
-  m_PrefabInstance: {fileID: 1487054593}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7157650202582296483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7157650203527938210, guid: 249dd196757ff9940844710b987c1b28,
@@ -973,6 +976,18 @@ Transform:
 --- !u!4 &145790321455098593 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 145790320794652128, guid: 249dd196757ff9940844710b987c1b28,
+    type: 3}
+  m_PrefabInstance: {fileID: 1487054593}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7904710338807206637 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7904710339736155628, guid: 249dd196757ff9940844710b987c1b28,
+    type: 3}
+  m_PrefabInstance: {fileID: 1487054593}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4798223067280512368 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4798223068767302257, guid: 249dd196757ff9940844710b987c1b28,
     type: 3}
   m_PrefabInstance: {fileID: 1487054593}
   m_PrefabAsset: {fileID: 0}

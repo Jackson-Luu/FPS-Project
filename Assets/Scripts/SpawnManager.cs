@@ -10,11 +10,11 @@ public class SpawnManager : NetworkBehaviour
 
     // Enemy spawning variables
     private float spawnRadius = 50;
-    private float spawnInterval = 8.0f;
+    private float spawnInterval = 15.0f;
 
     // Object spawning variables (poisson)
-    private float radius = 300;
-    private Vector2 regionSize = new Vector2(8000, 8000);
+    private float radius = 20;
+    private Vector2 regionSize = new Vector2(1000, 1000);
     private int rejectionSamples = 30;
     //private Vector2 offset = new Vector2(-4000, -4000);
 
@@ -23,7 +23,7 @@ public class SpawnManager : NetworkBehaviour
     public override void OnStartServer()
     {
         objectPooler = ObjectPooler.Instance;
-        //InvokeRepeating("SpawnEnemy", GameManager.instance.matchSettings.playerLoadTime, spawnInterval);
+        InvokeRepeating("SpawnEnemy", GameManager.instance.matchSettings.playerLoadTime, spawnInterval);
         Invoke("SpawnObjects", 20.0f);
     }
 

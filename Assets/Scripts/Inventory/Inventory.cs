@@ -11,6 +11,15 @@ public class Inventory : NetworkBehaviour
 
     public List<Item> items = new List<Item>();
 
+    public EquipmentManager equipmentManager;
+    public Player player;
+
+    private void Start()
+    {
+        equipmentManager = GetComponent<EquipmentManager>();
+        player = GetComponent<Player>();
+    }
+
     public bool Add (Item item)
     {
         if (items.Count >= space)
@@ -29,5 +38,11 @@ public class Inventory : NetworkBehaviour
         items.Remove(item);
 
         if (onItemChangedCallback != null) { onItemChangedCallback.Invoke(); }
+    }
+
+    public void UseItem(Item item)
+    {
+        item.Use(player);
+        Remove(item);
     }
 }

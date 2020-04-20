@@ -57,4 +57,15 @@ public class InventoryUI : MonoBehaviour
             }
         }
     }
+
+    public void UseItem(Item item)
+    {
+        if (item is Equipment)
+        {
+            inventory.equipmentManager.Equip((Equipment)item);
+        } else
+        {
+            inventory.UseItem(item);
+        }
+    }
 }
