@@ -166,4 +166,27 @@ public class Player : NetworkBehaviour
         yield return new WaitForSeconds(0.1f);
         SetupPlayer();
     }
+
+    public void TakeItem(GameObject itemObject)
+    {
+        CmdPickup(itemObject);
+    }
+
+    [Command]
+    void CmdPickup(GameObject itemObject)
+    {
+        if (itemObject != null)
+        {
+            ItemPickup pickup = itemObject.GetComponent<ItemPickup>();
+            GetComponent<Inventory>().Add(pickup.item);
+            TargetAddToInventory(connectionToClient, itemObject);
+            pickup.Despawn();
+        }
+    }
+
+    [TargetRpc]
+    public void TargetAddToInventory(NetworkConnection target, GameObject itemObject)
+    {
+        GetComponent<Inventory>().Add(itemObject.GetComponent<ItemPickup>().item);
+    }
 }

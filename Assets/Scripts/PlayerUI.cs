@@ -23,9 +23,7 @@ public class PlayerUI : MonoBehaviour
     private PlayerStats playerStats;
     private WeaponManager weaponManager;
 
-    // Notify item, player has picked it up
-    public delegate void OnItemPickUp(Player player);
-    public OnItemPickUp onItemPickUpCallback;
+    private GameObject item;
 
     public void SetPlayer (Player _player)
     {
@@ -58,7 +56,7 @@ public class PlayerUI : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 ItemPickupDisable();
-                onItemPickUpCallback.Invoke(player);
+                player.TakeItem(item);
             }
         }
     }
@@ -69,10 +67,11 @@ public class PlayerUI : MonoBehaviour
         PauseMenu.isOn = pauseMenu.activeSelf;
     }
 
-    public void ItemPickupEnable(string source)
+    public void ItemPickupEnable(GameObject itemObject, string source)
     {
         itemPickup.text = ITEM_PICKUP + source;
         itemPickup.gameObject.SetActive(true);
+        item = itemObject;
     }
 
     public void ItemPickupDisable()

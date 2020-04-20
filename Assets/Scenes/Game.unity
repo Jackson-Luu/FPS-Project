@@ -145,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26422720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3247.106, y: 0, z: 1025.3787}
+  m_LocalPosition: {x: 9197.642, y: 0, z: -1293.9534}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -366,8 +366,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldId: 0
   oldCount: 0
-  guiScroll: {x: -1187.8905, y: -94.3038}
-  guiZoom: 0.70462483
+  guiScroll: {x: -1689.8809, y: 646.1791}
+  guiZoom: 0.8127311
   serializedVersion: 199
   classes:
   - "<MapMagic.Generator[] length=28>\r\n\t<item0 type=MapMagic.Generator link=1/>\r\n\t<item1
@@ -918,7 +918,7 @@ MonoBehaviour:
   - "<MapMagic.ScatterGenerator184>\r\n\t<probability type=MapMagic.Generator+Input
     link=143/>\r\n\t<output type=MapMagic.Generator+Output link=144/>\r\n\t<seed
     type=System.Int32 value=12345/>\r\n\t<algorithm type=MapMagic.ScatterGenerator184+Algorithm
-    value=0/>\r\n\t<density type=System.Single value=100/>\r\n\t<uniformity type=System.Single
+    value=0/>\r\n\t<density type=System.Single value=0/>\r\n\t<uniformity type=System.Single
     value=0.1/>\r\n\t<relax type=System.Single value=0.1/>\r\n\t<safeBorders type=System.Int32
     value=2/>\r\n\t<enabled type=System.Boolean value=True/>\r\n\t<mandatory type=System.Boolean
     value=False/>\r\n\t<guiRect type=UnityEngine.Rect x=2321.859 y=-678.1881 width=160
@@ -1567,7 +1567,7 @@ MonoBehaviour:
   guiZoom: 1
   guiHideWireframe: 0
   guiGenerators: 1
-  guiSettings: 1
+  guiSettings: 0
   guiTerrainSettings: 0
   guiTreesGrassSettings: 1
   guiMassPin: 0
@@ -1941,8 +1941,9 @@ MonoBehaviour:
   syncInterval: 0.1
   enemies:
   - {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875, type: 3}
-  powerups: []
   players: []
+  objects:
+  - {fileID: 2364266859732139422, guid: 8f6b15dc12872944d8598e03c25c09a1, type: 3}
 --- !u!114 &1679994018
 MonoBehaviour:
   m_ObjectHideFlags: 0

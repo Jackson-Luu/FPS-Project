@@ -12,8 +12,7 @@ public class ItemPickup : NetworkBehaviour
         if (other.CompareTag("Player") && other.GetComponent<Player>().isLocalPlayer)
         {
             playerUI = other.gameObject.GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>();
-            playerUI.ItemPickupEnable(item.name);
-            playerUI.onItemPickUpCallback += PickUp;
+            playerUI.ItemPickupEnable(gameObject, item.name);
         }
     }
 
@@ -23,22 +22,11 @@ public class ItemPickup : NetworkBehaviour
         {
             playerUI = other.gameObject.GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>();
             playerUI.ItemPickupDisable();
-            playerUI.onItemPickUpCallback -= PickUp;
         }
     }
 
-    void PickUp(Player player)
+    public void Despawn()
     {
-        Debug.Log("HELLO SERVER");
-        player.GetComponent<Inventory>().Add(item);
-        CmdPickUp(player.gameObject);
-    }
-
-    [Command]
-    void CmdPickUp(GameObject player)
-    {
-        Debug.Log("HELLO SERVER B");
-        player.GetComponent<Inventory>().Add(item);
-        Destroy(gameObject);
+        NetworkServer.Destroy(gameObject);
     }
 }

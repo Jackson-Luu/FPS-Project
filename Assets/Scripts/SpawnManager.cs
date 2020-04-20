@@ -1,17 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Mirror;
 
 public class SpawnManager : NetworkBehaviour
 {
     public GameObject[] enemies;
-    public GameObject[] powerups;
     public GameObject[] players;
+    public GameObject[] objects;
 
+    // Enemy spawning variables
     private float spawnRadius = 50;
-    private float groundRadius;
-    private float edgeMargin = 5;
-
     private float spawnInterval = 8.0f;
+
+    // Object spawning variables (poisson)
+    private float radius = 300;
+    private Vector2 regionSize = new Vector2(8000, 8000);
+    private int rejectionSamples = 30;
+    //private Vector2 offset = new Vector2(-4000, -4000);
 
     private ObjectPooler objectPooler;
 
@@ -19,11 +24,11 @@ public class SpawnManager : NetworkBehaviour
     {
         objectPooler = ObjectPooler.Instance;
         //InvokeRepeating("SpawnEnemy", GameManager.instance.matchSettings.playerLoadTime, spawnInterval);
+        Invoke("SpawnObjects", 20.0f);
     }
 
     void SpawnEnemy()
-    {
-        
+    {     
         players = GameManager.GetAllPlayers();        
         foreach (GameObject player in players)
         {
@@ -37,6 +42,22 @@ public class SpawnManager : NetworkBehaviour
         }
     }
 
+    void SpawnObjects()
+    {
+        List<Vector2> points;
+        points = PoissonDiscSample.GeneratePoints(radius, regionSize, rejectionSamples);
+
+        foreach (Vector2 point in points)
+        {
+            GameObject objectPrefab = objects[Random.Range(0, objects.Length)];
+            Vector3 spawnPoint = new Vector3(point.x, 0, point.y);
+            spawnPoint.y = Terrain.activeTerrain.SampleHeight(spawnPoint);
+            GameObject spawnObject = Instantiate(objectPrefab, spawnPoint, objectPrefab.transform.rotation);
+            AlignTransform(spawnObject.transform);
+            NetworkServer.Spawn(spawnObject);
+        }
+    }
+
     private Vector3 RandomPosition(Transform player)
     {
         float randomX = Random.Range(player.position.x  - spawnRadius, player.position.x + spawnRadius);
@@ -44,5 +65,27 @@ public class SpawnManager : NetworkBehaviour
         Vector3 position = new Vector3(randomX, 0, randomZ);
         position.y = Terrain.activeTerrain.SampleHeight(position);
         return position;
+    }
+
+    // Rotate objects to align with terrain
+    private void AlignTransform(Transform transform)
+    {
+        Vector3 sample = SampleNormal(transform.position);
+
+        Vector3 proj = transform.forward - (Vector3.Dot(transform.forward, sample)) * sample;
+        transform.rotation = Quaternion.LookRotation(proj, sample);
+    }
+
+    private Vector3 SampleNormal(Vector3 position)
+    {
+        Terrain terrain = Terrain.activeTerrain;
+        var terrainLocalPos = position - terrain.transform.position;
+        var normalizedPos = new Vector2(
+            Mathf.InverseLerp(0f, terrain.terrainData.size.x, terrainLocalPos.x),
+            Mathf.InverseLerp(0f, terrain.terrainData.size.z, terrainLocalPos.z)
+        );
+        var terrainNormal = terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y);
+
+        return terrainNormal;
     }
 }
