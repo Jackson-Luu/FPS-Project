@@ -47,7 +47,6 @@ public class PlayerUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePauseMenu();
-            Cursor.lockState = CursorLockMode.None;
         }
 
         if (!PauseMenu.isOn)
@@ -65,6 +64,16 @@ public class PlayerUI : MonoBehaviour
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         PauseMenu.isOn = pauseMenu.activeSelf;
+        if (pauseMenu.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     public void ItemPickupEnable(GameObject itemObject, string source)

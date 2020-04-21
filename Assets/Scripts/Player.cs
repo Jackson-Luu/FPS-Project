@@ -178,9 +178,11 @@ public class Player : NetworkBehaviour
         if (itemObject != null)
         {
             ItemPickup pickup = itemObject.GetComponent<ItemPickup>();
-            GetComponent<Inventory>().Add(pickup.item);
-            TargetAddToInventory(connectionToClient, itemObject);
-            pickup.Despawn();
+            if (GetComponent<Inventory>().Add(pickup.item))
+            {
+                TargetAddToInventory(connectionToClient, itemObject);
+                pickup.Despawn();
+            }
         }
     }
 

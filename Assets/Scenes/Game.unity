@@ -1567,7 +1567,7 @@ MonoBehaviour:
   guiZoom: 1
   guiHideWireframe: 0
   guiGenerators: 1
-  guiSettings: 0
+  guiSettings: 1
   guiTerrainSettings: 0
   guiTreesGrassSettings: 1
   guiMassPin: 0
@@ -1944,7 +1944,13 @@ MonoBehaviour:
   players: []
   objects:
   - {fileID: 2364266859732139422, guid: 8f6b15dc12872944d8598e03c25c09a1, type: 3}
+  - {fileID: 5191661886609915004, guid: ab310e3091ca06f47bf8e55466d66d09, type: 3}
   - {fileID: 2626519321626455741, guid: 65a23c740ba86a14bae99936f61594b6, type: 3}
+  - {fileID: 4692779303801206382, guid: 768900a41796ee24584cd8fbc0c7a2fa, type: 3}
+  - {fileID: 424505108706323481, guid: 449ecc2dbb680104a89496beecbcccc5, type: 3}
+  - {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc, type: 3}
+  - {fileID: 6742913958889674848, guid: 889e8039dc0677848933031f29d1ca11, type: 3}
+  - {fileID: 8245253345615090683, guid: 52098555a751b364a98ec252a2c0a976, type: 3}
 --- !u!114 &1679994018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2247,6 +2253,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: gameWeapons.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: gameWeapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 424505108706323481, guid: 449ecc2dbb680104a89496beecbcccc5,
+        type: 3}
+    - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: gameWeapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc,
+        type: 3}
+    - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: gameWeapons.Array.data[2]
+      value: 
+      objectReference: {fileID: 6742913958889674848, guid: 889e8039dc0677848933031f29d1ca11,
+        type: 3}
+    - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: gameWeapons.Array.data[3]
+      value: 
+      objectReference: {fileID: 8245253345615090683, guid: 52098555a751b364a98ec252a2c0a976,
+        type: 3}
     - target: {fileID: 6578454534823021287, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
         type: 3}
       propertyPath: m_Name

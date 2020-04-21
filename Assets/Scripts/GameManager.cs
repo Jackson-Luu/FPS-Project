@@ -8,8 +8,18 @@ public class GameManager : MonoBehaviour
 
     public MatchSettings matchSettings;
 
+    [SerializeField]
+    private GameObject[] gameWeapons;
+
     public delegate void OnPlayerKilledCallback(string player, string source);
     public OnPlayerKilledCallback onPlayerKilledCallback;
+
+    private static Dictionary<string, GameObject> weapons = new Dictionary<string, GameObject>();
+
+    public static GameObject GetWeapon(string weaponName)
+    {
+        return weapons[weaponName];
+    }
 
     #region Singleton
 
@@ -22,7 +32,10 @@ public class GameManager : MonoBehaviour
         } else
         {
             instance = this;
-            Debug.Log(this + " " + instance);
+            for (int i = 0; i < gameWeapons.Length; i++)
+            {
+                weapons.Add(gameWeapons[i].name, gameWeapons[i]);
+            }
         }
     }
 
@@ -59,5 +72,4 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
-
 }

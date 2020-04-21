@@ -17,6 +17,8 @@ public class PlayerWeapon
     
     public GameObject graphics;
 
+    public Weapon weapon;
+
     public PlayerWeapon()
     {
         bullets = maxBullets;

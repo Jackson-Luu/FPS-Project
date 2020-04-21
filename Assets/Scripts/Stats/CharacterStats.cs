@@ -9,6 +9,7 @@ public class CharacterStats : NetworkBehaviour
     protected float currHealth;
 
     public Stat damage;
+    public Stat armor;
 
     private void Awake()
     {
@@ -22,6 +23,9 @@ public class CharacterStats : NetworkBehaviour
 
     public void TakeDamage(float damage, string sourceID)
     {
+        damage -= armor.GetValue();
+        damage = Mathf.Clamp(damage, 0, int.MaxValue);
+
         if (currHealth < damage) {
             currHealth = 0;
         } else {

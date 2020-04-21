@@ -56,12 +56,6 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        // Lock and hide cursor
-        if (Cursor.lockState != CursorLockMode.Locked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-
         if (characterController.isGrounded)
         {
             // We are grounded, so recalculate

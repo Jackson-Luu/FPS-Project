@@ -119,7 +119,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5644310668966508818}
-        m_MethodName: UseItem
+        m_MethodName: UnEquip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -251,4 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a07625fe9b77f408c82f9cf45588cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   icon: {fileID: 8189892521414130552}
+  item: {fileID: 0}
+  inventoryUI: {fileID: 0}

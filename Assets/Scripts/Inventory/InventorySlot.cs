@@ -3,9 +3,17 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
+    public int index;
     public Image icon;
+    public Item item;
 
-    Item item;
+    public InventoryUI inventoryUI;
+    private Inventory inventory;
+
+    private void Start()
+    {
+        inventory = inventoryUI.inventory;
+    }
 
     public void AddItem(Item newItem)
     {
@@ -21,5 +29,22 @@ public class InventorySlot : MonoBehaviour
 
         icon.sprite = null;
         icon.enabled = false;
+    }
+
+    public void UseItem()
+    {
+        if (item is Equipment)
+        {
+            inventory.equipItem(index);
+        }
+        else
+        {
+            inventory.UseItem(index);
+        }
+    }
+
+    public void UnEquip()
+    {
+        inventory.UnEquipItem(index);
     }
 }

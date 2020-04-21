@@ -118,12 +118,14 @@
     <Compile Include="Assets\Scripts\GenerateNavMesh.cs" />
     <Compile Include="Assets\Scripts\Inventory\Equipment.cs" />
     <Compile Include="Assets\Scripts\Inventory\EquipmentManager.cs" />
+    <Compile Include="Assets\Scripts\Inventory\EquipmentToggle.cs" />
     <Compile Include="Assets\Scripts\Inventory\HealItem.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\Inventory\ItemPickup.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Weapon.cs" />
     <Compile Include="Assets\Scripts\KillFeed.cs" />
     <Compile Include="Assets\Scripts\KillFeedItem.cs" />
     <Compile Include="Assets\Scripts\MatchSettings.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Assets\Scripts\Util.cs" />
     <Compile Include="Assets\Scripts\WeaponGraphics.cs" />
     <Compile Include="Assets\Scripts\WeaponManager.cs" />
+    <Compile Include="Assets\Scripts\WeaponSwitching.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\ScriptTemplates\51-Mirror__Network Authenticator-NewNetworkAuthenticator.cs.txt" />

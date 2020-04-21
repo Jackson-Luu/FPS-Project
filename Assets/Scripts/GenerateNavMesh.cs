@@ -30,7 +30,7 @@ public class GenerateNavMesh : NetworkBehaviour
     {
         mapMagic.enabled = false;
         cameras.SetActive(false);
-        GetComponent<NavMeshSurface>().BuildNavMesh();
+        //GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 }
 

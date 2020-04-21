@@ -7,4 +7,4 @@ public class Equipment : Item
     public int armorModifier;
 }
 
-public enum EquipmentSlot { Head, Chest }
+public enum EquipmentSlot { Head, Chest, Legs, Feet, Primary, Secondary, Melee, Grenade, Utility }

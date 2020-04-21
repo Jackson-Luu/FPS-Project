@@ -18,12 +18,13 @@ public class MouseLook : MonoBehaviour
         playerBody = transform.parent;
         animator = playerBody.GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Late update lets the camera wait for movement calculations to occur first to reduce jittering
     void LateUpdate()
     {
-        if (PauseMenu.isOn) { return; }
+        if (PauseMenu.isOn || InventoryUI.isOn) { return; }
 
         // Get mouse up/down and right/left movement
         float mouseX = Input.GetAxisRaw("Mouse X");

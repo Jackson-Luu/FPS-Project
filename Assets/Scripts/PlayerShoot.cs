@@ -69,7 +69,7 @@ public class PlayerShoot : NetworkBehaviour
     [Client]
     void Shoot()
     {
-        if (!isLocalPlayer || weaponManager.isReloading) { return; }
+        if (!isLocalPlayer || weaponManager.isReloading || InventoryUI.isOn) { return; }
 
         if (currentWeapon.bullets <= 0) {
             weaponManager.Reload();
@@ -132,10 +132,7 @@ public class PlayerShoot : NetworkBehaviour
     [Command]
     void CmdTargetShot(GameObject target, float damage, string sourceID)
     {
-        Debug.Log(target.name + " has been shot.");
-
         CharacterStats character = target.GetComponent<CharacterStats>();
         character.TakeDamage(damage, sourceID);
-        //character.RpcTakeDamage(damage, sourceID);
     }
 }
