@@ -173,6 +173,8 @@ GameObject:
   - component: {fileID: -7956127745296563905}
   - component: {fileID: -7648849397871142726}
   - component: {fileID: -3360168855521249720}
+  - component: {fileID: -3469351024013843014}
+  - component: {fileID: -1772919376209287458}
   m_Layer: 0
   m_Name: LMG
   m_TagString: Untagged
@@ -188,7 +190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424505108706323481}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: -0.15, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 0.15}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 426857300973273067}
@@ -289,7 +291,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  item: {fileID: 11400000, guid: 73ece5c53cd4c8240b24d779d789f9c3, type: 2}
+  item: {fileID: 11400000, guid: 5f2bad2a34c5e1d4cafbc0f8bce7d348, type: 2}
+--- !u!114 &-3469351024013843014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424505108706323481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afe0c5df74d1f5429c8e7386fa9f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: 057970efee4c397458b71ef719fe9dce, type: 2}
+--- !u!114 &-1772919376209287458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424505108706323481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be652d58144cd7d458c5bfbe396f925e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzleFlash: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
+    type: 3}
+  impactEffectPrefab: {fileID: 4979655930806489650, guid: 65949bc99ed15cd4fbe27b1b3dc3f76a,
+    type: 3}
 --- !u!1 &424677685882122139
 GameObject:
   m_ObjectHideFlags: 0

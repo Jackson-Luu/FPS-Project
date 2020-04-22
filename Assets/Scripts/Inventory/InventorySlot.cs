@@ -33,7 +33,9 @@ public class InventorySlot : MonoBehaviour
 
     public void UseItem()
     {
-        if (item is Equipment)
+        if (item.name == "Ammo" ) { 
+            // do nothing
+        } else if (item is Equipment)
         {
             inventory.equipItem(index);
         }

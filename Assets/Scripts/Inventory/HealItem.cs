@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Heal", menuName = "Inventory/HealItem")]
-public class HealItem : Item
+public class HealItem : Consumable
 {
-    float heal = 50;
-
-    public override void Use(Player player)
+    public override bool Use(Player player)
     {
-        player.GetComponent<CharacterStats>().Heal(heal);
+        player.GetComponent<CharacterStats>().Heal(value);
+        return true;
     }
 }

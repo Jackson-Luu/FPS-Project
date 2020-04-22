@@ -4,7 +4,12 @@ using Mirror;
 
 public class Inventory : NetworkBehaviour
 {
+    private const int STARTING_AMMO = 90;
+
     public int space = 15;
+
+    public int ammo = STARTING_AMMO;
+    private Item ammoItem;
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
@@ -36,6 +41,12 @@ public class Inventory : NetworkBehaviour
         items.Add(item);
         if (onItemChangedCallback != null) { onItemChangedCallback.Invoke(); }
 
+        if (item.name == "Ammo")
+        {
+            ammo += 120;
+            ammoItem = item;
+        }
+
         return true;
     }
     
@@ -44,6 +55,16 @@ public class Inventory : NetworkBehaviour
         items.Remove(item);
 
         if (onItemChangedCallback != null) { onItemChangedCallback.Invoke(); }
+    }
+
+    public void RemoveAmmo()
+    {
+        if (ammoItem != null)
+        {
+            items.Remove(ammoItem);
+
+            if (onItemChangedCallback != null) { onItemChangedCallback.Invoke(); }
+        }
     }
 
     public void UseItem(int slot)

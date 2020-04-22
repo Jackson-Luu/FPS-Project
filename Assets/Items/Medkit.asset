@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Medkit
   icon: {fileID: 21300000, guid: 817fc99d7500de74f9df24387fffb382, type: 3}
-  equippable: 0
+  value: 50

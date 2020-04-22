@@ -39,7 +39,7 @@ public class EquipmentManager : MonoBehaviour
 
         if (newItem.equipmentSlot == EquipmentSlot.Primary)
         {
-            //weaponManager.EquipWeapon();
+            weaponManager.EquipWeapon(newItem.name);
         }
     }
 
@@ -67,5 +67,10 @@ public class EquipmentManager : MonoBehaviour
     public Equipment GetEquipment(EquipmentSlot slot)
     {
         return currentEquipment[(int)slot];
+    }
+
+    public void EquipDefault(Transform weaponHolder)
+    {
+        Equip((Equipment)weaponHolder.GetChild(0).GetComponent<ItemPickup>().item);
     }
 }

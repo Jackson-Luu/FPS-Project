@@ -180,14 +180,14 @@ public class Player : NetworkBehaviour
             ItemPickup pickup = itemObject.GetComponent<ItemPickup>();
             if (GetComponent<Inventory>().Add(pickup.item))
             {
-                TargetAddToInventory(connectionToClient, itemObject);
+                RpcAddToInventory(itemObject);
                 pickup.Despawn();
             }
         }
     }
 
-    [TargetRpc]
-    public void TargetAddToInventory(NetworkConnection target, GameObject itemObject)
+    [ClientRpc]
+    public void RpcAddToInventory(GameObject itemObject)
     {
         GetComponent<Inventory>().Add(itemObject.GetComponent<ItemPickup>().item);
     }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LMGItem
   m_EditorClassIdentifier: 
   name: LMG
-  icon: {fileID: 21300000, guid: 4d01dc2d5ed79fe418413f8244bcd2e1, type: 3}
+  icon: {fileID: 21300000, guid: f7374fc8a98ab484fab3725c952b0427, type: 3}
   equipmentSlot: 4
   armorModifier: 0

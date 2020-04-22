@@ -1,47 +1,89 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
 public class WeaponManager : NetworkBehaviour
 {
     [SerializeField]
-    private PlayerWeapon primaryWeapon;
+    public string defaultWeapon = "AK47";
+
+    [HideInInspector]
+    public Weapon primaryWeapon;
+    [HideInInspector]
+    public Weapon secondaryWeapon;
 
     [SerializeField]
     private Transform weaponHolder;
 
-    private PlayerWeapon currentWeapon;
+    private Weapon currentWeapon;
     private WeaponGraphics weaponGraphics;
 
+    private WeaponSwitching weaponSwitcher;
+
+    private Dictionary<string, Weapon> weapons = new Dictionary<string, Weapon>();
+
     public bool isReloading = false;
+
+    [SerializeField]
+    private Inventory inventory;
 
     // Start is called before the first frame update
     void Start()
     {
-        EquipWeapon(primaryWeapon);
+        weaponSwitcher = weaponHolder.GetComponent<WeaponSwitching>();
+        EquipWeapon(defaultWeapon);
+        GetComponent<EquipmentManager>().EquipDefault(weaponHolder);
     }
 
-    public void EquipWeapon(PlayerWeapon weapon)
+    public void EquipWeapon(string weaponName)
     {
-        currentWeapon = weapon;
-
-        GameObject weaponInstance = Instantiate(weapon.graphics, weaponHolder.position, weaponHolder.rotation);
-        weaponInstance.transform.SetParent(weaponHolder);
-
-        weaponGraphics = weaponInstance.GetComponent<WeaponGraphics>();
-        if (weaponGraphics == null)
+        if (weapons.ContainsKey(weaponName))
         {
-            Debug.LogError("No WeaponGraphics on weapon: " + weaponInstance.name);
+            weaponSwitcher.SelectWeapon(weaponName);
+        } else
+        {
+            GameObject weaponPrefab = GameManager.GetWeapon(weaponName);
+            GameObject weaponInstance = Instantiate(weaponPrefab, weaponHolder.position, weaponHolder.rotation);
+            weaponInstance.transform.SetParent(weaponHolder);
+            weaponInstance.transform.localRotation = weaponPrefab.transform.rotation;
+            weaponInstance.transform.localPosition = weaponPrefab.transform.position;
+            weaponInstance.name = weaponName;
+            weaponInstance.GetComponent<Collider>().enabled = false;
+
+
+            weaponGraphics = weaponInstance.GetComponent<WeaponGraphics>();
+            if (weaponGraphics == null)
+            {
+                Debug.LogError("No WeaponGraphics on weapon: " + weaponInstance.name);
+            }
+
+            if (isLocalPlayer)
+            {
+                // Add weapon to weapon camera layer to prevent seeing gun clipping into objects
+                Util.SetLayerRecursively(weaponInstance, LayerMask.NameToLayer("Weapon"));
+            }
+
+            weapons[weaponName] = weaponInstance.GetComponent<WeaponStats>().weapon;
+            weaponSwitcher.SelectWeapon(weaponName);
+            weapons[weaponName].SetBullets();
         }
 
-        if (isLocalPlayer)
+        currentWeapon = weapons[weaponName];
+    }
+
+    public void SwitchWeapon()
+    {
+        if (currentWeapon == primaryWeapon)
         {
-            // Add weapon to weapon camera layer to prevent seeing gun clipping into objects
-            Util.SetLayerRecursively(weaponInstance, LayerMask.NameToLayer("Weapon"));
+            currentWeapon = secondaryWeapon;
+        } else
+        {
+            currentWeapon = primaryWeapon;
         }
     }
 
-    public PlayerWeapon GetCurrentWeapon()
+    public Weapon GetCurrentWeapon()
     {
         return currentWeapon;
     }
@@ -63,7 +105,7 @@ public class WeaponManager : NetworkBehaviour
         CmdOnReload();
         yield return new WaitForSeconds(currentWeapon.reloadTime);
 
-        currentWeapon.bullets = currentWeapon.maxBullets;
+        currentWeapon.bullets = Mathf.Min(currentWeapon.maxBullets, inventory.ammo);
         isReloading = false;
     }
 

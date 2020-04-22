@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField]
     RectTransform healthBar;
+
+    [SerializeField]
+    RectTransform ammoPanel;
 
     [SerializeField]
     TMP_Text ammoText;
@@ -19,9 +23,11 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     public GameObject deathScreen;
 
+    [HideInInspector]
     public Player player;
     private PlayerStats playerStats;
     private WeaponManager weaponManager;
+    private Inventory inventory;
 
     private GameObject item;
 
@@ -30,6 +36,7 @@ public class PlayerUI : MonoBehaviour
         player = _player;
         weaponManager = player.GetComponent<WeaponManager>();
         playerStats = player.GetComponent<PlayerStats>();
+        inventory = player.GetComponent<Inventory>();
     }
 
     void Start()
@@ -41,7 +48,9 @@ public class PlayerUI : MonoBehaviour
     {
         // Update UI health and ammo elements
         SetHealth(playerStats.GetHealthPct());
-        SetAmmo(weaponManager.GetCurrentWeapon().bullets, weaponManager.GetCurrentWeapon().maxBullets);
+        int bullets = weaponManager.GetCurrentWeapon().bullets;
+        SetAmmo(Mathf.Min(bullets, inventory.ammo), Mathf.Max(0, inventory.ammo - bullets));   // min updates weapon ammo to inventory ammo after switching, max clamps ammo > 0 
+        LayoutRebuilder.ForceRebuildLayoutImmediate(ammoPanel);
 
         // Toggle pause menu
         if (Input.GetKeyDown(KeyCode.Escape))

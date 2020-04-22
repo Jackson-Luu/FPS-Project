@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: LMG
   m_EditorClassIdentifier: 
   name: LMG
-  icon: {fileID: 21300000, guid: 4d01dc2d5ed79fe418413f8244bcd2e1, type: 3}
-  damage: 10
-  range: 100
-  fireRate: 10
-  maxBullets: 20
-  reloadTime: 2
+  damage: 7.7
+  range: 325
+  fireRate: 13
+  maxBullets: 100
+  reloadTime: 6.45
   graphics: {fileID: 424505108706323481, guid: 449ecc2dbb680104a89496beecbcccc5, type: 3}
+  bullets: 20

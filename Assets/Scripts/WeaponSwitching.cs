@@ -2,50 +2,72 @@
 
 public class WeaponSwitching : MonoBehaviour
 {
-    public int selectedWeapon = 0;
+    [SerializeField]
+    private WeaponManager weaponManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        SelectWeapon();    
-    }
+    string selectedWeapon;
 
     // Update is called once per frame
     void Update()
     {
-        int previousWeapon = selectedWeapon;
+        selectedWeapon = weaponManager.GetCurrentWeapon().name;
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        /*if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             selectedWeapon++;
 
             // Wrap around if > number of weapons
-            selectedWeapon %= transform.childCount;
+            selectedWeapon %= 2;
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
             selectedWeapon--;
-            selectedWeapon %= transform.childCount;
+            selectedWeapon %= 2;
         }
 
         if (previousWeapon != selectedWeapon)
         {
-            SelectWeapon();
+            SelectWeapon(selectedWeapon);
+        }
+        */
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            selectedWeapon = weaponManager.primaryWeapon.name;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            selectedWeapon = weaponManager.secondaryWeapon.name;
+        }
+
+        if (selectedWeapon != weaponManager.GetCurrentWeapon().name)
+        {
+            SelectWeapon(selectedWeapon);
+            weaponManager.SwitchWeapon();
         }
     }
 
-    void SelectWeapon()
+    public void SelectWeapon(string weaponName)
     {
-        int i = 0;
         foreach (Transform weapon in transform)
         {
-            if (i == selectedWeapon)
+            if (weapon.name == weaponName)
             {
                 weapon.gameObject.SetActive(true);
             } else
             {
                 weapon.gameObject.SetActive(false);
             }
+        }
+    }
+
+    private void CheckWeapon()
+    {
+        if (selectedWeapon != weaponManager.GetCurrentWeapon().name)
+        {
+            SelectWeapon(selectedWeapon);
+            weaponManager.SwitchWeapon();
         }
     }
 }

@@ -12,7 +12,8 @@ public class PlayerShoot : NetworkBehaviour
     private LayerMask mask;
 
     private WeaponManager weaponManager;
-    private PlayerWeapon currentWeapon;
+    private Weapon currentWeapon;
+    private Inventory inventory;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class PlayerShoot : NetworkBehaviour
         }
 
         weaponManager = GetComponent<WeaponManager>();
+        inventory = GetComponent<Inventory>();
     }
 
     // Update is called once per frame
@@ -69,14 +71,17 @@ public class PlayerShoot : NetworkBehaviour
     [Client]
     void Shoot()
     {
-        if (!isLocalPlayer || weaponManager.isReloading || InventoryUI.isOn) { return; }
+        if (!isLocalPlayer || weaponManager.isReloading || InventoryUI.isOn || inventory.ammo <= 0) { return; }
 
         if (currentWeapon.bullets <= 0) {
             weaponManager.Reload();
             return;
         }
 
+        // Use gun bullets and inventory ammo
         currentWeapon.bullets--;
+        inventory.ammo--;
+
         // Call OnShoot method on server
         CmdOnShoot();
 
@@ -95,7 +100,13 @@ public class PlayerShoot : NetworkBehaviour
 
         if (currentWeapon.bullets <= 0)
         {
-            weaponManager.Reload();
+            if (inventory.ammo > 0)
+            {
+                weaponManager.Reload();
+            } else
+            {
+                inventory.RemoveAmmo();
+            }
         }
     }
 

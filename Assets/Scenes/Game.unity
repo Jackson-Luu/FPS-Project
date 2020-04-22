@@ -1950,7 +1950,7 @@ MonoBehaviour:
   - {fileID: 424505108706323481, guid: 449ecc2dbb680104a89496beecbcccc5, type: 3}
   - {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc, type: 3}
   - {fileID: 6742913958889674848, guid: 889e8039dc0677848933031f29d1ca11, type: 3}
-  - {fileID: 8245253345615090683, guid: 52098555a751b364a98ec252a2c0a976, type: 3}
+  - {fileID: 6800427894362089940, guid: 0c52873e8642460438b663c4c8555363, type: 3}
 --- !u!114 &1679994018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2256,13 +2256,13 @@ PrefabInstance:
     - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
         type: 3}
       propertyPath: gameWeapons.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
         type: 3}
       propertyPath: gameWeapons.Array.data[0]
       value: 
-      objectReference: {fileID: 424505108706323481, guid: 449ecc2dbb680104a89496beecbcccc5,
+      objectReference: {fileID: 3279740696676372436, guid: ca376a012899bde419cc097db75630f4,
         type: 3}
     - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
         type: 3}
@@ -2280,7 +2280,13 @@ PrefabInstance:
         type: 3}
       propertyPath: gameWeapons.Array.data[3]
       value: 
-      objectReference: {fileID: 8245253345615090683, guid: 52098555a751b364a98ec252a2c0a976,
+      objectReference: {fileID: 6800427894362089940, guid: 0c52873e8642460438b663c4c8555363,
+        type: 3}
+    - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: gameWeapons.Array.data[4]
+      value: 
+      objectReference: {fileID: 424505108706323481, guid: 449ecc2dbb680104a89496beecbcccc5,
         type: 3}
     - target: {fileID: 6578454534823021287, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
         type: 3}

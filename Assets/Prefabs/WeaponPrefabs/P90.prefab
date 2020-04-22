@@ -172,6 +172,8 @@ GameObject:
   - component: {fileID: 3305615687788987575}
   - component: {fileID: -323227013066200255}
   - component: {fileID: -8099009584010086335}
+  - component: {fileID: -5439921935486976598}
+  - component: {fileID: -4081300548368975826}
   m_Layer: 0
   m_Name: P90
   m_TagString: Untagged
@@ -187,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8409054689440713046}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 8405860024333006028}
@@ -285,7 +287,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  item: {fileID: 11400000, guid: 9ab472b2f3cb6c74ab2140edfacb37fd, type: 2}
+  item: {fileID: 11400000, guid: 798593685ee02dd48ac60930c7f1aa45, type: 2}
+--- !u!114 &-5439921935486976598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409054689440713046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afe0c5df74d1f5429c8e7386fa9f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: a446053bf0fde154c9683b76a989597b, type: 2}
+--- !u!114 &-4081300548368975826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409054689440713046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be652d58144cd7d458c5bfbe396f925e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzleFlash: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
+    type: 3}
+  impactEffectPrefab: {fileID: 4979655930806489650, guid: 65949bc99ed15cd4fbe27b1b3dc3f76a,
+    type: 3}
 --- !u!1 &8409226269657976904
 GameObject:
   m_ObjectHideFlags: 0

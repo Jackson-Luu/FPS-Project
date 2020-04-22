@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: P90
   m_EditorClassIdentifier: 
   name: P90
-  icon: {fileID: 21300000, guid: 4d01dc2d5ed79fe418413f8244bcd2e1, type: 3}
-  damage: 10
-  range: 100
-  fireRate: 10
+  damage: 7
+  range: 150
+  fireRate: 13
   maxBullets: 20
-  reloadTime: 2
+  reloadTime: 2.76
   graphics: {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc,
     type: 3}
+  bullets: 5
