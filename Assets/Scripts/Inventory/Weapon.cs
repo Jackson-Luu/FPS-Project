@@ -13,7 +13,7 @@ public class Weapon : ScriptableObject
 
     public GameObject graphics;
 
-    [HideInInspector]
+    //[HideInInspector]
     public int bullets;
 
     public void SetBullets()

@@ -6,7 +6,7 @@ public class EquipmentManager : MonoBehaviour
 
     Inventory inventory;
 
-    private WeaponManager weaponManager;
+    public WeaponManager weaponManager;
 
     public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem, EquipmentSlot slot);
     public OnEquipmentChanged onEquipmentChangedCallback;

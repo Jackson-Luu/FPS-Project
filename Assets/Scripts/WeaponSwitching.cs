@@ -34,17 +34,13 @@ public class WeaponSwitching : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedWeapon = weaponManager.primaryWeapon.name;
+            CheckWeapon();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             selectedWeapon = weaponManager.secondaryWeapon.name;
-        }
-
-        if (selectedWeapon != weaponManager.GetCurrentWeapon().name)
-        {
-            SelectWeapon(selectedWeapon);
-            weaponManager.SwitchWeapon();
+            CheckWeapon();
         }
     }
 

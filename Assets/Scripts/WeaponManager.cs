@@ -25,8 +25,7 @@ public class WeaponManager : NetworkBehaviour
 
     public bool isReloading = false;
 
-    [SerializeField]
-    private Inventory inventory;
+    public Inventory inventory;
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +79,14 @@ public class WeaponManager : NetworkBehaviour
         } else
         {
             currentWeapon = primaryWeapon;
+        }
+    }
+
+    public void ClearBullets()
+    {
+        foreach (Weapon weapon in weapons.Values)
+        {
+            weapon.bullets = 0;
         }
     }
 

@@ -57,14 +57,25 @@ public class Inventory : NetworkBehaviour
         if (onItemChangedCallback != null) { onItemChangedCallback.Invoke(); }
     }
 
-    public void RemoveAmmo()
+    [Command]
+    public void CmdRemoveAmmo()
     {
         if (ammoItem != null)
         {
             items.Remove(ammoItem);
-
-            if (onItemChangedCallback != null) { onItemChangedCallback.Invoke(); }
+            RpcRemoveAmmo();
         }
+        equipmentManager.weaponManager.ClearBullets();
+    }
+
+    [ClientRpc]
+    void RpcRemoveAmmo()
+    {
+        if (ammoItem != null)
+        {
+            Remove(ammoItem);
+        }
+        equipmentManager.weaponManager.ClearBullets();
     }
 
     public void UseItem(int slot)

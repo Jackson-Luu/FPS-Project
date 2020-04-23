@@ -105,7 +105,7 @@ public class PlayerShoot : NetworkBehaviour
                 weaponManager.Reload();
             } else
             {
-                inventory.RemoveAmmo();
+                inventory.CmdRemoveAmmo();
             }
         }
     }
