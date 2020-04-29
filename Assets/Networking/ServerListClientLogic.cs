@@ -95,7 +95,7 @@ namespace NodeListServer
         private IEnumerator RefreshServerList()
         {
             if (popupStatusText != null) popupStatusText.text = "Just wait a moment";
-            print("Refreshing the server list...");
+            //print("Refreshing the server list...");
 
             // DEBUG: Investigating some Unity jank, seems that Unity can get "stuck"
             // on a value and treat it like it's precious
@@ -104,7 +104,7 @@ namespace NodeListServer
             using (UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Post(masterServerUrl, unityRequestForm))
             {
                 isBusy = true;
-                print("Working...");
+                //print("Working...");
 
                 // This will wait until the request is sent.
                 yield return www.SendWebRequest();
@@ -116,8 +116,8 @@ namespace NodeListServer
 
                     if (response != null)
                     {
-                        print("Successful refresh!");
-                        print($"Received a response with {response.count} servers.");
+                        //print("Successful refresh!");
+                        //print($"Received a response with {response.count} servers.");
 
                         if (mainStatusText != null) mainStatusText.text = $"{response.count} servers online.";
 
@@ -150,6 +150,7 @@ namespace NodeListServer
         // So I guess the workaround is to make a bootstrapper.
         private void RefreshList()
         {
+            Debug.Log("REFRESHING");
             // Don't refresh again if we're busy
             if (isBusy) return;
 
@@ -191,6 +192,8 @@ namespace NodeListServer
                     modifiedAddress = listServerListEntries[i].ip;
                 }
 
+                int port = listServerListEntries[i].port;
+
                 entryController.titleText.text = listServerListEntries[i].name;
                 entryController.addressText.text = modifiedAddress;
                 entryController.playersText.text = $"{listServerListEntries[i].players} {(listServerListEntries[i].capacity > 0 ? $"/ {listServerListEntries[i].capacity}" : string.Empty)}";
@@ -203,6 +206,8 @@ namespace NodeListServer
                     // Debug: Prints CLICKY to see if the button actually was clicked or Unity UI was being dumb
                     // print("CLICKY");
                     NetworkManager.singleton.networkAddress = modifiedAddress;
+                    NetworkManager.singleton.GetComponent<TelepathyTransport>().port = (ushort)port;
+                    //GetComponent<Websocket.WebsocketTransport>().port = port;
                     NetworkManager.singleton.StartClient();
                 });
             }

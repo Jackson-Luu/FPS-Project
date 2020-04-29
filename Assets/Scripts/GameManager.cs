@@ -29,12 +29,17 @@ public class GameManager : MonoBehaviour
         if (instance != null)
         {
             Debug.Log("Error: more than one GameManager in scene.");
+            Destroy(gameObject);
+            return;
         } else
         {
             instance = this;
-            for (int i = 0; i < gameWeapons.Length; i++)
+            if (weapons.Count == 0)
             {
-                weapons.Add(gameWeapons[i].name, gameWeapons[i]);
+                for (int i = 0; i < gameWeapons.Length; i++)
+                {
+                    weapons.Add(gameWeapons[i].name, gameWeapons[i]);
+                }
             }
         }
     }

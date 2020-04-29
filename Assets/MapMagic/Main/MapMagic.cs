@@ -5,14 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
 using MapMagic;
-using Mirror;
+//using Mirror;
 
 namespace MapMagic 
 {
 	[SelectionBase]
 	[ExecuteInEditMode]
 	[HelpURL("https://gitlab.com/denispahunov/mapmagic/wikis/home")]
-	public class MapMagic : NetworkBehaviour, ISerializationCallbackReceiver, IMapMagic
+	public class MapMagic : MonoBehaviour, ISerializationCallbackReceiver, IMapMagic
 	{
         public static readonly int version = 199; 
 		public static readonly string versionName = "1.10.8"; 
@@ -29,7 +29,7 @@ namespace MapMagic
         public int totalMeshes = 0;
 
         //main parameters
-        [SyncVar]
+        //[SyncVar]
         public int seed = 12345;
         public bool changeSeed = false;
 		public int terrainSize = 1000; //should be int to avoid terrain start between pixels
@@ -239,15 +239,18 @@ public bool guiInstantUpdateEnabled = false;
 		
 			//do nothing if chink size is zero
 			if (terrainSize < 0.1f) return;
-				
-			//deploy
-			if (!isEditor && generateInfinite) 
-			{
-                //finding camera positions
-                camPoses = Extensions.GetCamPoses(genAroundMainCam: genAroundMainCam, genAroundTag: genAroundObjsTag ? genAroundTag : null, camPoses: camPoses);
-                if (camPoses.Length == 0) return; //no cameras to deploy Voxeland
-                transform.InverseTransformPoint(camPoses);
 
+            //finding camera positions
+            camPoses = Extensions.GetCamPoses(genAroundMainCam: genAroundMainCam, genAroundTag: genAroundObjsTag ? genAroundTag : null, camPoses: camPoses);
+            if (camPoses.Length == 0)
+            {
+                return; //no cameras to deploy Voxeland
+            }
+            transform.InverseTransformPoint(camPoses);
+
+            //deploy
+            if (!isEditor && generateInfinite) 
+			{
                 //finding deploy rects
                 if (deployRects == null || deployRects.Length != camPoses.Length)
                 {
@@ -275,8 +278,12 @@ public bool guiInstantUpdateEnabled = false;
 				float distance = camPoses.DistToRectAxisAligned(chunk.coord.x*terrainSize, chunk.coord.z*terrainSize, terrainSize);
 				chunk.worker.priority = 1f / distance;
 
-				//starting generate
-				if ((distance<MapMagic.instance.generateRange || MapMagic.instance.isEditor) && chunk.worker.blank && !chunk.locked && instantGenerate) chunk.worker.Start(); 
+                //starting generate
+                if ((distance < MapMagic.instance.generateRange || MapMagic.instance.isEditor) && chunk.worker.blank && !chunk.locked && instantGenerate)
+                {
+                    Debug.Log("GENERATE");
+                    chunk.worker.Start();
+                }
 
 				//enabling/disabling (after starting generate to avoid blink)
 				if (!MapMagic.instance.isEditor &&
@@ -287,20 +294,20 @@ public bool guiInstantUpdateEnabled = false;
 								chunk.terrain.gameObject.SetActive(false); 
 						} 
 				else 
-				{ 
-					if (!chunk.terrain.gameObject.activeSelf)
+				{
+                    if (!chunk.terrain.gameObject.activeSelf)
                     {
                         chunk.terrain.gameObject.SetActive(true);
 
                         // Check if terrain finished generating, then build navmesh
-                        if (isServer)
-                        {
-                            meshesBuilt++;
-                            if (meshesBuilt >= totalMeshes)
-                            {
-                                StartCoroutine(BuildMesh());
-                            }
-                        }
+                        //if (isServer)
+                        //{
+                        //    meshesBuilt++;
+                        //    if (meshesBuilt >= totalMeshes)
+                        //    {
+                        //        StartCoroutine(BuildMesh());
+                        //    }
+                        //}
                     }
 				}
 					

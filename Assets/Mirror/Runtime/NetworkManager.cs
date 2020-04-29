@@ -58,7 +58,7 @@ namespace Mirror
         /// Server Update frequency, per second. Use around 60Hz for fast paced games like Counter-Strike to minimize latency. Use around 30Hz for games like WoW to minimize computations. Use around 1-10Hz for slow paced games like EVE.
         /// </summary>
         [Tooltip("Server Update frequency, per second. Use around 60Hz for fast paced games like Counter-Strike to minimize latency. Use around 30Hz for games like WoW to minimize computations. Use around 1-10Hz for slow paced games like EVE.")]
-        public int serverTickRate = 30;
+        public int serverTickRate = 60;
 
         /// <summary>
         /// The scene to switch to when offline.
@@ -606,7 +606,7 @@ namespace Mirror
 
             // shutdown client
             NetworkClient.Disconnect();
-            NetworkClient.Shutdown();
+            //NetworkClient.Shutdown();
 
             // set offline mode BEFORE changing scene so that FinishStartScene
             // doesn't think we need initialize anything.
@@ -1278,13 +1278,13 @@ namespace Mirror
         /// <param name="conn">Connection from client.</param>
         public virtual void OnServerAddPlayer(NetworkConnection conn)
         {
-            Transform startPos = GetStartPosition();
-            startPos.position = new Vector3(startPos.position.x, Terrain.activeTerrain.SampleHeight(startPos.position) + (float)1.01, startPos.position.z);
+            /*Transform startPos = GetStartPosition();
+            //startPos.position = new Vector3(startPos.position.x, Terrain.activeTerrain.SampleHeight(startPos.position) + (float)1.01, startPos.position.z);
             GameObject player = startPos != null
                 ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
                 : Instantiate(playerPrefab);
 
-            NetworkServer.AddPlayerForConnection(conn, player);
+            NetworkServer.AddPlayerForConnection(conn, player);*/
         }
 
         /// <summary>

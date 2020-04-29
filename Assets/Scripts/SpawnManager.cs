@@ -13,17 +13,20 @@ public class SpawnManager : NetworkBehaviour
     private float spawnInterval = 15.0f;
 
     // Object spawning variables (poisson)
-    private float radius = 20;
+    private float radius = 40;
     private Vector2 regionSize = new Vector2(1000, 1000);
     private int rejectionSamples = 30;
-    //private Vector2 offset = new Vector2(-4000, -4000);
+    private float offset = 1000;
 
     private ObjectPooler objectPooler;
+
+    [SerializeField]
+    private Transform map;
 
     public override void OnStartServer()
     {
         objectPooler = ObjectPooler.Instance;
-        InvokeRepeating("SpawnEnemy", GameManager.instance.matchSettings.playerLoadTime, spawnInterval);
+        //InvokeRepeating("SpawnEnemy", GameManager.instance.matchSettings.playerLoadTime, spawnInterval);
         Invoke("SpawnObjects", 20.0f);
     }
 
@@ -46,18 +49,28 @@ public class SpawnManager : NetworkBehaviour
     {
         List<Vector2> points;
         points = PoissonDiscSample.GeneratePoints(radius, regionSize, rejectionSamples);
-
-        foreach (Vector2 point in points)
+        Terrain terrain;
+        int k = 0;
+        for (int i = 0; i < 1; i++)
         {
-            GameObject objectPrefab = objects[Random.Range(0, objects.Length)];
-            Vector3 spawnPoint = new Vector3(point.x, 0, point.y);
-            spawnPoint.y = Terrain.activeTerrain.SampleHeight(spawnPoint);
-            GameObject spawnObject = Instantiate(objectPrefab, spawnPoint, objectPrefab.transform.rotation);
-            AlignTransform(spawnObject.transform);
-            NetworkServer.Spawn(spawnObject);
+            for (int j = 0; j < 1; j++)
+            {
+                terrain = map.GetChild(k).GetComponent<Terrain>();
+                foreach (Vector2 point in points)
+                {
+                    GameObject objectPrefab = objects[Random.Range(0, objects.Length)];
+                    Vector3 spawnPoint = new Vector3(point.x + (j * offset), 0, point.y + (i * offset));
+                    spawnPoint.y = terrain.SampleHeight(spawnPoint) + 0.1f;
+                    GameObject spawnObject = Instantiate(objectPrefab, spawnPoint, objectPrefab.transform.rotation);
+                    AlignTransform(spawnObject.transform, terrain);
+                    NetworkServer.Spawn(spawnObject);
+                }
+                k++;
+            }
         }
     }
 
+    // Calculate random position
     private Vector3 RandomPosition(Transform player)
     {
         float randomX = Random.Range(player.position.x  - spawnRadius, player.position.x + spawnRadius);
@@ -67,18 +80,30 @@ public class SpawnManager : NetworkBehaviour
         return position;
     }
 
-    // Rotate objects to align with terrain
-    private void AlignTransform(Transform transform)
+    // Find terrain height at a specific world position
+    float RaycastHeight(Vector3 position)
     {
-        Vector3 sample = SampleNormal(transform.position);
+        RaycastHit hit;
+        //Raycast up to terrain
+        if (Physics.Raycast(position, Vector3.up, out hit, 1000f))
+        {
+            Debug.Log(hit.point.y);
+            return hit.point.y;
+        }
+        return 0;
+    }
+
+    // Rotate objects to align with terrain
+    private void AlignTransform(Transform transform, Terrain terrain)
+    {
+        Vector3 sample = SampleNormal(transform.position, terrain);
 
         Vector3 proj = transform.forward - (Vector3.Dot(transform.forward, sample)) * sample;
         transform.rotation = Quaternion.LookRotation(proj, sample);
     }
 
-    private Vector3 SampleNormal(Vector3 position)
+    private Vector3 SampleNormal(Vector3 position, Terrain terrain)
     {
-        Terrain terrain = Terrain.activeTerrain;
         var terrainLocalPos = position - terrain.transform.position;
         var normalizedPos = new Vector2(
             Mathf.InverseLerp(0f, terrain.terrainData.size.x, terrainLocalPos.x),

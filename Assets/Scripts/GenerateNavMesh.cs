@@ -13,9 +13,9 @@ public class GenerateNavMesh : NetworkBehaviour
     public override void OnStartServer()
     {
         mapMagic = GetComponent<MapMagic.MapMagic>();
-        mapMagic.seed = (int)(System.DateTime.Now.Ticks % 1000000);
+        //mapMagic.seed = (int)(System.DateTime.Now.Ticks % 1000000);
         //mapMagic.totalMeshes = cameras.transform.childCount * 4;
-        mapMagic.totalMeshes = 1;
+        //mapMagic.totalMeshes = 4;
         mapMagic.enabled = true;
         //MapMagic.MapMagic.OnApplyCompleted += BuildMesh;
     }
@@ -28,8 +28,8 @@ public class GenerateNavMesh : NetworkBehaviour
 
     public void BuildMesh()
     {
-        mapMagic.enabled = false;
-        cameras.SetActive(false);
+        //mapMagic.enabled = false;
+        //cameras.SetActive(false);
         //GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 }

@@ -115,6 +115,7 @@
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GenerateHeightMap.cs" />
     <Compile Include="Assets\Scripts\GenerateNavMesh.cs" />
     <Compile Include="Assets\Scripts\Inventory\Consumable.cs" />
     <Compile Include="Assets\Scripts\Inventory\Equipment.cs" />
@@ -139,11 +140,17 @@
     <Compile Include="Assets\Scripts\PlayerUI.cs" />
     <Compile Include="Assets\Scripts\PoissonDiscSample.cs" />
     <Compile Include="Assets\Scripts\PoissonVisual.cs" />
+    <Compile Include="Assets\Scripts\ServerInit.cs" />
     <Compile Include="Assets\Scripts\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Stats\CharacterStats.cs" />
     <Compile Include="Assets\Scripts\Stats\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\Stats\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Stats\Stat.cs" />
+    <Compile Include="Assets\Scripts\Terrain\LevelGeneration.cs" />
+    <Compile Include="Assets\Scripts\Terrain\NoiseMapGeneration.cs" />
+    <Compile Include="Assets\Scripts\Terrain\RiverGeneration.cs" />
+    <Compile Include="Assets\Scripts\Terrain\TileGeneration.cs" />
+    <Compile Include="Assets\Scripts\Terrain\TreeGeneration.cs" />
     <Compile Include="Assets\Scripts\Util.cs" />
     <Compile Include="Assets\Scripts\WeaponGraphics.cs" />
     <Compile Include="Assets\Scripts\WeaponManager.cs" />

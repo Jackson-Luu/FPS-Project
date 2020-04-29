@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: c47be15cf0a7fd94ca669bf41c840fb9
+  - enabled: 1
+    path: Assets/Scenes/Royale.unity
+    guid: 366926ec63cddca4a9625ae1624f0836
   m_configObjects: {}

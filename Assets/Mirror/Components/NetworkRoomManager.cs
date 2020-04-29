@@ -171,6 +171,8 @@ namespace Mirror
 
             // replace room player with game player
             NetworkServer.ReplacePlayerForConnection(conn, gamePlayer, true);
+            roomPlayer.GetComponent<NetworkRoomPlayer>().RpcDisableRoomPlayer();
+            roomPlayer.SetActive(false);
         }
 
         /// <summary>
@@ -284,15 +286,16 @@ namespace Mirror
                 allPlayersReady = false;
 
                 if (LogFilter.Debug) Debug.LogFormat("NetworkRoomManager.OnServerAddPlayer playerPrefab:{0}", roomPlayerPrefab.name);
-
+                
                 GameObject newRoomGameObject = OnRoomServerCreateRoomPlayer(conn);
                 if (newRoomGameObject == null)
-                    newRoomGameObject = Instantiate(roomPlayerPrefab.gameObject, Vector3.zero, Quaternion.identity);
+                    newRoomGameObject = Instantiate(roomPlayerPrefab.gameObject, GetStartPosition().position, Quaternion.identity);
 
                 NetworkServer.AddPlayerForConnection(conn, newRoomGameObject);
-            }
-            else
+            } else
+            {
                 OnRoomServerAddPlayer(conn);
+            }
         }
 
         public void RecalculateRoomPlayerIndices()
@@ -328,6 +331,7 @@ namespace Mirror
                         // re-add the room object
                         roomPlayer.GetComponent<NetworkRoomPlayer>().readyToBegin = false;
                         NetworkServer.ReplacePlayerForConnection(identity.connectionToClient, roomPlayer.gameObject);
+                        roomPlayer.gameObject.SetActive(true);
                     }
                 }
 
@@ -470,7 +474,9 @@ namespace Mirror
                     CallOnClientEnterRoom();
             }
             else
+            {
                 CallOnClientExitRoom();
+            }
 
             base.OnClientSceneChanged(conn);
             OnRoomClientSceneChanged(conn);
@@ -646,6 +652,20 @@ namespace Mirror
         /// <para>This could be because the room is full, or the connection is not allowed to have more players.</para>
         /// </summary>
         public virtual void OnRoomClientAddPlayerFailed() { }
+
+        /// <summary>
+        /// Disables all room player objects, called via client RPC when changing to game scene.
+        /// </summary>
+        internal void DisableRoomPlayers()
+        {
+            foreach (NetworkRoomPlayer item in roomSlots)
+            {
+                if (item != null)
+                {
+                    item.gameObject.SetActive(false);
+                }
+            }
+        }
 
         #endregion
 

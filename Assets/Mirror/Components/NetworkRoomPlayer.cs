@@ -56,8 +56,9 @@ namespace Mirror
 
                 OnClientEnterRoom();
             }
-            else
+            else { 
                 Debug.LogError("RoomPlayer could not find a NetworkRoomManager. The RoomPlayer requires a NetworkRoomManager object to function. Make sure that there is one in the scene.");
+            }
         }
 
         #endregion
@@ -72,6 +73,16 @@ namespace Mirror
             if (room != null)
             {
                 room.ReadyStatusChanged();
+            }
+        }
+
+        [ClientRpc]
+        public void RpcDisableRoomPlayer()
+        {
+            NetworkRoomManager room = NetworkManager.singleton as NetworkRoomManager;
+            if (room != null)
+            {
+                room.DisableRoomPlayers();
             }
         }
 
@@ -141,16 +152,21 @@ namespace Mirror
                 if (readyToBegin)
                 {
                     if (GUILayout.Button("Cancel"))
-                        CmdChangeReadyState(false);
+                        ChangeReadyState(false);
                 }
                 else
                 {
                     if (GUILayout.Button("Ready"))
-                        CmdChangeReadyState(true);
+                        ChangeReadyState(true);
                 }
 
                 GUILayout.EndArea();
             }
+        }
+
+        void ChangeReadyState(bool state)
+        {
+            CmdChangeReadyState(state);
         }
 
         void DrawPlayerReadyState()

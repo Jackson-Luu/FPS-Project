@@ -858,7 +858,6 @@ namespace MapMagic
 				if (taggedObjects != null)
 					for (int i=0; i<taggedObjects.Length; i++) camPoses[i+counter] = taggedObjects[i].transform.position;
 			}
-
 			return camPoses;		
 		}
 
