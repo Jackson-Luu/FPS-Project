@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public const int MAP_SIZE = 6000;
+
     public MatchSettings matchSettings;
 
     [SerializeField]

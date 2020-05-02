@@ -45,7 +45,7 @@ public class Player : NetworkBehaviour
         }
     }
 
-    
+    /*
     void Update()
     {
     	if (!isLocalPlayer)
@@ -56,7 +56,7 @@ public class Player : NetworkBehaviour
     		Die("KEK");
     	}
     }
-    
+    */
 
     // Setup remote players on server
     [Command]

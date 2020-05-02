@@ -10,7 +10,7 @@ namespace NodeListServer
         public Text titleText;
         public Text playersText;
         public Text latencyText;
-        public Text addressText;
+        public Text statusText;
         public Button joinButton;
     }
 }

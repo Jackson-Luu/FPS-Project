@@ -22,6 +22,9 @@ public class PlayerComponents : NetworkBehaviour
     [HideInInspector]
     public GameObject playerUIInstance;
 
+    [SerializeField]
+    private GameObject terrainGeneratorPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,12 @@ public class PlayerComponents : NetworkBehaviour
             if (ui == null) { Debug.LogError("No PlayerUI on PlayerUI Prefab."); }
 
             ui.SetPlayer(GetComponent<Player>());
+
+            // Create Terrain Generator
+            GameObject terrainObject = Instantiate(terrainGeneratorPrefab);
+            TerrainGenerator terrainGenerator = terrainObject.GetComponent<TerrainGenerator>();
+            terrainGenerator.viewer = gameObject.transform;
+            terrainGenerator.enabled = true;
 
             GetComponent<Player>().SetupPlayer();
         }

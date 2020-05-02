@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System.IO;
 
 public class SpawnManager : NetworkBehaviour
 {
@@ -13,21 +14,21 @@ public class SpawnManager : NetworkBehaviour
     private float spawnInterval = 15.0f;
 
     // Object spawning variables (poisson)
-    private float radius = 40;
-    private Vector2 regionSize = new Vector2(1000, 1000);
+    private float radius = 10;
+    private Vector2 regionSize = new Vector2(120, 120);
     private int rejectionSamples = 30;
-    private float offset = 1000;
+    private int offset = 120;
 
     private ObjectPooler objectPooler;
 
     [SerializeField]
-    private Transform map;
+    private ServerTerrainGenerator serverTerrainGenerator;
 
     public override void OnStartServer()
     {
         objectPooler = ObjectPooler.Instance;
         //InvokeRepeating("SpawnEnemy", GameManager.instance.matchSettings.playerLoadTime, spawnInterval);
-        Invoke("SpawnObjects", 20.0f);
+        Invoke("SpawnObjects", 5.0f);
     }
 
     void SpawnEnemy()
@@ -48,24 +49,33 @@ public class SpawnManager : NetworkBehaviour
     void SpawnObjects()
     {
         List<Vector2> points;
-        points = PoissonDiscSample.GeneratePoints(radius, regionSize, rejectionSamples);
-        Terrain terrain;
-        int k = 0;
-        for (int i = 0; i < 1; i++)
+        int chunks = serverTerrainGenerator.chunkRadius;
+
+        for (int i = -chunks; i <= chunks; i++)
         {
-            for (int j = 0; j < 1; j++)
+            for (int j = -chunks; j <= chunks; j++)
             {
-                terrain = map.GetChild(k).GetComponent<Terrain>();
+                // Generate item spawn points within each chunk
+                points = PoissonDiscSample.GeneratePoints(radius, regionSize, rejectionSamples);
+
                 foreach (Vector2 point in points)
                 {
+                    float xPos = point.x + (i * offset);
+                    float zPos = point.y + (j * offset);
+
+                    // Pick random item to spawn
                     GameObject objectPrefab = objects[Random.Range(0, objects.Length)];
-                    Vector3 spawnPoint = new Vector3(point.x + (j * offset), 0, point.y + (i * offset));
-                    spawnPoint.y = terrain.SampleHeight(spawnPoint) + 0.1f;
+
+                    // Shoot raycast to find terrain height and align item to terrain incline
+                    RaycastHit hit;
+                    Physics.Raycast(new Vector3(xPos, 300, zPos), Vector3.down, out hit, 600);
+
+                    Vector3 spawnPoint = new Vector3(xPos, hit.point.y, zPos);
                     GameObject spawnObject = Instantiate(objectPrefab, spawnPoint, objectPrefab.transform.rotation);
-                    AlignTransform(spawnObject.transform, terrain);
+                    AlignTransform(spawnObject.transform, hit.normal);
                     NetworkServer.Spawn(spawnObject);
                 }
-                k++;
+                Debug.Log(i + " | " + j);
             }
         }
     }
@@ -80,37 +90,10 @@ public class SpawnManager : NetworkBehaviour
         return position;
     }
 
-    // Find terrain height at a specific world position
-    float RaycastHeight(Vector3 position)
-    {
-        RaycastHit hit;
-        //Raycast up to terrain
-        if (Physics.Raycast(position, Vector3.up, out hit, 1000f))
-        {
-            Debug.Log(hit.point.y);
-            return hit.point.y;
-        }
-        return 0;
-    }
-
     // Rotate objects to align with terrain
-    private void AlignTransform(Transform transform, Terrain terrain)
+    private void AlignTransform(Transform transform, Vector3 normal)
     {
-        Vector3 sample = SampleNormal(transform.position, terrain);
-
-        Vector3 proj = transform.forward - (Vector3.Dot(transform.forward, sample)) * sample;
-        transform.rotation = Quaternion.LookRotation(proj, sample);
-    }
-
-    private Vector3 SampleNormal(Vector3 position, Terrain terrain)
-    {
-        var terrainLocalPos = position - terrain.transform.position;
-        var normalizedPos = new Vector2(
-            Mathf.InverseLerp(0f, terrain.terrainData.size.x, terrainLocalPos.x),
-            Mathf.InverseLerp(0f, terrain.terrainData.size.z, terrainLocalPos.z)
-        );
-        var terrainNormal = terrain.terrainData.GetInterpolatedNormal(normalizedPos.x, normalizedPos.y);
-
-        return terrainNormal;
+        Vector3 proj = transform.forward - (Vector3.Dot(transform.forward, normal)) * normal;
+        transform.rotation = Quaternion.LookRotation(proj, normal);
     }
 }

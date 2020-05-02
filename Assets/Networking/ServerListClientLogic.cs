@@ -194,8 +194,18 @@ namespace NodeListServer
 
                 int port = listServerListEntries[i].port;
 
+                string formatStatus = string.Empty;
+                if (listServerListEntries[i].extras.Equals("Open"))
+                {
+                    formatStatus = "<color=green>Open</color>";
+                }
+                else
+                {
+                    formatStatus = "<color=yellow>In-Game</color>";
+                }
+
                 entryController.titleText.text = listServerListEntries[i].name;
-                entryController.addressText.text = modifiedAddress;
+                entryController.statusText.text = formatStatus;
                 entryController.playersText.text = $"{listServerListEntries[i].players} {(listServerListEntries[i].capacity > 0 ? $"/ {listServerListEntries[i].capacity}" : string.Empty)}";
                 // It is up to you to figure out how to do the latency text.
                 entryController.latencyText.text = "-";

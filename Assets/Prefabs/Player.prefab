@@ -623,6 +623,7 @@ MonoBehaviour:
   disableGameObjectsOnDeath:
   - {fileID: 1809381846}
   - {fileID: 309662759}
+  terrainGenerator: {fileID: 0}
 --- !u!114 &-7690100317141515077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,6 +651,8 @@ MonoBehaviour:
   playerUIPrefab: {fileID: 7129251778665541008, guid: 28fa5e87b4d07714fb55880a0ae18415,
     type: 3}
   playerUIInstance: {fileID: 0}
+  terrainGeneratorPrefab: {fileID: 6410826493917607422, guid: 261ebfe959442564d9f26d207b5c71b4,
+    type: 3}
 --- !u!114 &5817435983997789641
 MonoBehaviour:
   m_ObjectHideFlags: 0

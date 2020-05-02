@@ -81,6 +81,13 @@ namespace NodeListServer
         public override void ServerChangeScene(string newSceneName)
         {
             base.ServerChangeScene(newSceneName);
+            if (newSceneName == GameplayScene)
+            {
+                nodeListServerAdapter.CurrentServerInfo.ExtraInformation = "In-Game";
+            } else if (newSceneName == RoomScene)
+            {
+                nodeListServerAdapter.CurrentServerInfo.ExtraInformation = "Open";
+            }
         }
 
         #endregion

@@ -3,6 +3,7 @@ using System.IO;
 
 public class GenerateHeightMap : MonoBehaviour
 {
+    /*
     [SerializeField]
     Transform mapMagic;
 
@@ -19,9 +20,12 @@ public class GenerateHeightMap : MonoBehaviour
         MapMagic.Chunk.Size size = new MapMagic.Chunk.Size(MapMagic.MapMagic.instance.resolution, MapMagic.MapMagic.instance.terrainSize, MapMagic.MapMagic.instance.terrainHeight);
         mapMagicGens.Calculate(0, 0, 1000, results, size, 12345);
 
-        for (int i = 0; i < results.heights.count; i++)
+        for (int i = 0; i < 1000; i++)
         {
-            writer.WriteLine(results.heights.array[i] * 300f);
+            for (int j = 0; j < 1000; j++)
+            {
+                //writer.WriteLine(results.heights.GetInterpolated(j, i) * 1200f);
+            }
         }
         writer.Close();
 
@@ -35,10 +39,10 @@ public class GenerateHeightMap : MonoBehaviour
         {
             for (int j = 0; j < 1000; j++)
             {
-                writer2.WriteLine(Terrain.activeTerrain.SampleHeight(new Vector3(j, 0, i)));
+                //writer2.WriteLine(Terrain.activeTerrain.SampleHeight(new Vector3(j, 0, i)));
             }
         }
         writer2.Close();
         Debug.Log("Sampling done.");
-    }
+    }*/
 }
