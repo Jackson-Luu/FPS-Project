@@ -486,6 +486,7 @@ GameObject:
   - component: {fileID: 792591797}
   - component: {fileID: 792591796}
   - component: {fileID: 792591798}
+  - component: {fileID: 792591799}
   m_Layer: 0
   m_Name: ServerMapGenerator
   m_TagString: Untagged
@@ -543,6 +544,7 @@ MonoBehaviour:
   meshSettings: {fileID: 11400000, guid: 698ab23bd2a397e4fae8a40353521336, type: 2}
   heightMapSettings: {fileID: 11400000, guid: bcdc0e9662dcc0747b06001d03d558d2, type: 2}
   chunkRadius: 0
+  spawnManager: {fileID: 1679994017}
 --- !u!114 &792591798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,6 +557,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d152bac3873ea304581ed9355962475f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &792591799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792591794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &839668039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,6 +1051,41 @@ MonoBehaviour:
   pools:
   - tag: Zombie
     prefab: {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875,
+      type: 3}
+    size: 5
+  - tag: Ammo
+    prefab: {fileID: 5191661886609915004, guid: ab310e3091ca06f47bf8e55466d66d09,
+      type: 3}
+    size: 5
+  - tag: FlakJacket
+    prefab: {fileID: 4692779303801206382, guid: 768900a41796ee24584cd8fbc0c7a2fa,
+      type: 3}
+    size: 5
+  - tag: Helmet
+    prefab: {fileID: 2626519321626455741, guid: 65a23c740ba86a14bae99936f61594b6,
+      type: 3}
+    size: 5
+  - tag: Medkit
+    prefab: {fileID: 2364266859732139422, guid: 8f6b15dc12872944d8598e03c25c09a1,
+      type: 3}
+    size: 5
+  - tag: AK47
+    prefab: {fileID: 3279740696676372436, guid: ca376a012899bde419cc097db75630f4,
+      type: 3}
+    size: 5
+  - tag: LMG
+    prefab: {fileID: 424505108706323481, guid: 449ecc2dbb680104a89496beecbcccc5, type: 3}
+    size: 5
+  - tag: P90
+    prefab: {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc,
+      type: 3}
+    size: 5
+  - tag: Shotgun
+    prefab: {fileID: 6742913958889674848, guid: 889e8039dc0677848933031f29d1ca11,
+      type: 3}
+    size: 5
+  - tag: Sniper
+    prefab: {fileID: 6800427894362089940, guid: 0c52873e8642460438b663c4c8555363,
       type: 3}
     size: 5
 --- !u!1001 &298359902323345021

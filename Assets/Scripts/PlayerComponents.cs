@@ -34,6 +34,8 @@ public class PlayerComponents : NetworkBehaviour
             AssignRemoteLayer();
         } else
         {
+            Player player = GetComponent<Player>();
+
             // Hide player model graphics from the player themselves
             Util.SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayer));
 
@@ -45,15 +47,16 @@ public class PlayerComponents : NetworkBehaviour
             PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
             if (ui == null) { Debug.LogError("No PlayerUI on PlayerUI Prefab."); }
 
-            ui.SetPlayer(GetComponent<Player>());
+            ui.SetPlayer(player);
 
             // Create Terrain Generator
             GameObject terrainObject = Instantiate(terrainGeneratorPrefab);
             TerrainGenerator terrainGenerator = terrainObject.GetComponent<TerrainGenerator>();
             terrainGenerator.viewer = gameObject.transform;
+            terrainGenerator.SetPlayer(player);
             terrainGenerator.enabled = true;
-
-            GetComponent<Player>().SetupPlayer();
+            
+            player.SetupPlayer();
         }
     }
 

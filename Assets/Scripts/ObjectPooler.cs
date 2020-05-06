@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using Mirror;
 
 public class ObjectPooler : NetworkBehaviour
@@ -47,24 +46,24 @@ public class ObjectPooler : NetworkBehaviour
         }
     }
 
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+    public GameObject SpawnFromPool(string tag)
     {
         Queue<GameObject> q = poolDictionary[tag];
-        if (q.Count == 0) {
-            return null;
-        }
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+        if (q.Count == 0)
+        {
+            GameObject obj = Instantiate(objectToSpawn);
+            obj.SetActive(false);
+            obj.name = tag;
+            q.Enqueue(obj);
+        }
 
-        objectToSpawn.GetComponent<NavMeshAgent>().Warp(position);
-        objectToSpawn.transform.rotation = rotation;
         objectToSpawn.SetActive(true);
-
         return objectToSpawn;
     }
 
     public void ReturnToPool(GameObject objectToReturn)
     {
-        Debug.Log(objectToReturn.name);
         poolDictionary[objectToReturn.name].Enqueue(objectToReturn);
         objectToReturn.SetActive(false);
     }

@@ -73,6 +73,7 @@ public class Enemy : NetworkBehaviour
         {
             RpcDie();
             objectPooler.ReturnToPool(gameObject);
+            GetComponent<EnemyMove>().enabled = false;
         }
     }
 

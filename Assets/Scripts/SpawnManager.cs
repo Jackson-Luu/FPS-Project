@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Mirror;
-using System.IO;
 
 public class SpawnManager : NetworkBehaviour
 {
@@ -14,10 +14,11 @@ public class SpawnManager : NetworkBehaviour
     private float spawnInterval = 15.0f;
 
     // Object spawning variables (poisson)
-    private float radius = 10;
+    private float radius = 20;
     private Vector2 regionSize = new Vector2(120, 120);
     private int rejectionSamples = 30;
-    private int offset = 120;
+    private int offset;
+    private int chunkSize;
 
     private ObjectPooler objectPooler;
 
@@ -27,57 +28,60 @@ public class SpawnManager : NetworkBehaviour
     public override void OnStartServer()
     {
         objectPooler = ObjectPooler.Instance;
-        //InvokeRepeating("SpawnEnemy", GameManager.instance.matchSettings.playerLoadTime, spawnInterval);
-        Invoke("SpawnObjects", 5.0f);
+        chunkSize = (int)serverTerrainGenerator.meshSettings.meshWorldSize;
+        offset = chunkSize / 2;
+        InvokeRepeating("SpawnEnemy", 15.0f, spawnInterval);
     }
 
     void SpawnEnemy()
-    {     
+    {
         players = GameManager.GetAllPlayers();        
         foreach (GameObject player in players)
         {
             int randomIndex = Random.Range(0, enemies.Length);
-            GameObject enemy = objectPooler.SpawnFromPool(enemies[randomIndex].name, RandomPosition(player.transform), enemies[randomIndex].transform.rotation);
-            if (enemy != null)
+            Vector3 randomPosition = RandomPosition(player.transform);
+            if (randomPosition != Vector3.down)
             {
-                enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
-                NetworkServer.Spawn(enemy);
+                GameObject enemy = objectPooler.SpawnFromPool(enemies[randomIndex].name);
+                if (enemy != null)
+                {
+                    enemy.GetComponent<NavMeshAgent>().Warp(randomPosition);
+                    enemy.transform.rotation = enemies[randomIndex].transform.rotation;
+                    enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
+                    enemy.GetComponent<EnemyMove>().enabled = true;
+                    NetworkServer.Spawn(enemy);
+                }
             }
         }
     }
 
-    void SpawnObjects()
+    public void SpawnObjects(Vector2 chunkCoord, Mesh mesh, List<ItemPickup> terrainItemsList)
     {
         List<Vector2> points;
-        int chunks = serverTerrainGenerator.chunkRadius;
 
-        for (int i = -chunks; i <= chunks; i++)
+        // Generate item spawn points within each chunk
+        points = PoissonDiscSample.GeneratePoints(radius, regionSize, rejectionSamples);
+
+        foreach (Vector2 point in points)
         {
-            for (int j = -chunks; j <= chunks; j++)
-            {
-                // Generate item spawn points within each chunk
-                points = PoissonDiscSample.GeneratePoints(radius, regionSize, rejectionSamples);
+            // Get world position and height
+            int meshPosition = (int)point.y * chunkSize + (int)point.x;
+            float xPos = mesh.vertices[meshPosition].x + (chunkCoord.x * chunkSize);
+            float zPos = mesh.vertices[meshPosition].z + (chunkCoord.y * chunkSize);
 
-                foreach (Vector2 point in points)
-                {
-                    float xPos = point.x + (i * offset);
-                    float zPos = point.y + (j * offset);
+            Vector3 spawnPoint = new Vector3(xPos, mesh.vertices[meshPosition].y, zPos);
 
-                    // Pick random item to spawn
-                    GameObject objectPrefab = objects[Random.Range(0, objects.Length)];
-
-                    // Shoot raycast to find terrain height and align item to terrain incline
-                    RaycastHit hit;
-                    Physics.Raycast(new Vector3(xPos, 300, zPos), Vector3.down, out hit, 600);
-
-                    Vector3 spawnPoint = new Vector3(xPos, hit.point.y, zPos);
-                    GameObject spawnObject = Instantiate(objectPrefab, spawnPoint, objectPrefab.transform.rotation);
-                    AlignTransform(spawnObject.transform, hit.normal);
-                    NetworkServer.Spawn(spawnObject);
-                }
-                Debug.Log(i + " | " + j);
-            }
+            // Pick random item to spawn
+            int randomIndex = Random.Range(0, objects.Length);
+            GameObject spawnObject = objectPooler.SpawnFromPool(objects[randomIndex].name);
+            spawnObject.transform.position = spawnPoint;
+            spawnObject.transform.rotation = objects[randomIndex].transform.rotation;
+            AlignTransform(spawnObject.transform, mesh.normals[meshPosition]);
+            NetworkServer.Spawn(spawnObject);
+            terrainItemsList.Add(spawnObject.GetComponent<ItemPickup>());
         }
+
+        serverTerrainGenerator.addChunkItems(chunkCoord, terrainItemsList);
     }
 
     // Calculate random position
@@ -85,9 +89,16 @@ public class SpawnManager : NetworkBehaviour
     {
         float randomX = Random.Range(player.position.x  - spawnRadius, player.position.x + spawnRadius);
         float randomZ = Random.Range(player.position.z - spawnRadius, player.position.z + spawnRadius);
-        Vector3 position = new Vector3(randomX, 0, randomZ);
-        position.y = Terrain.activeTerrain.SampleHeight(position);
-        return position;
+
+        // Shoot raycast to find terrain height
+        RaycastHit hit;
+        if (Physics.Raycast(new Vector3(randomX, 500, randomZ), Vector3.down, out hit, 600))
+        {
+            return new Vector3(randomX, hit.point.y + 0.01f, randomZ);
+        }
+
+        // if raycast did not hit return -1 vector
+        return Vector3.down;
     }
 
     // Rotate objects to align with terrain

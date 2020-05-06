@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
+using System.Collections.Generic;
 using Mirror;
 
 public class ServerTerrainGenerator : NetworkBehaviour
@@ -12,22 +14,58 @@ public class ServerTerrainGenerator : NetworkBehaviour
     [HideInInspector]
     public int chunkRadius;
 
-    private void Start()
+    int chunksBuilt = 0;
+
+    // Finish building terrain delegate
+    public delegate void TerrainBuiltCallback();
+    public TerrainBuiltCallback terrainBuiltCallback;
+
+    Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
+    Dictionary<Vector2, List<ItemPickup>> terrainItemsDictionary = new Dictionary<Vector2, List<ItemPickup>>();
+
+    public void addChunkItems(Vector2 chunkCoord, List<ItemPickup> itemsList)
     {
-        UpdateVisibleChunks();    
+        terrainItemsDictionary[chunkCoord] = itemsList;
     }
 
-    public void UpdateVisibleChunks()
+    private NavMeshSurface navMeshSurface;
+    bool navMeshBuilt = false;
+    
+    [SerializeField]
+    private SpawnManager spawnManager;
+
+    private void Start()
     {
-        //int chunkRadius = Mathf.CeilToInt(GameManager.MAP_SIZE / meshSettings.meshWorldSize / 2); 
-        chunkRadius = 3;
-        for (int yOffset = -chunkRadius; yOffset <= chunkRadius; yOffset++)
+        navMeshSurface = GetComponent<NavMeshSurface>();
+    }
+
+    public void UpdateVisibleChunks(Vector2 chunkCoord, bool addChunk)
+    {
+        if (addChunk)
         {
-            for (int xOffset = -chunkRadius; xOffset <= chunkRadius; xOffset++)
-            {
-                TerrainChunk newChunk = new TerrainChunk(new Vector2(xOffset, yOffset), heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, null, null, true);
-                newChunk.Load();
-            }
+            TerrainChunk newChunk = new TerrainChunk(chunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, null, null, true);
+            newChunk.onMeshBuiltCallback += BuildMesh;
+            terrainChunkDictionary.Add(chunkCoord, newChunk);
+            newChunk.Load();
+        } else
+        {
+            Destroy(terrainChunkDictionary[chunkCoord].meshObject);
+            terrainChunkDictionary.Remove(chunkCoord);
+            terrainItemsDictionary.Remove(chunkCoord);
         }
+    }
+
+    public void BuildMesh(Vector2 chunkCoord, Mesh mesh)
+    {
+        if (navMeshBuilt)
+        {
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
+        } else
+        {
+            navMeshSurface.BuildNavMesh();
+            navMeshBuilt = true;
+        }
+        List<ItemPickup> itemsList = new List<ItemPickup>();
+        spawnManager.SpawnObjects(chunkCoord, mesh, itemsList);
     }
 }

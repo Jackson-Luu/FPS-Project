@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Mirror;
 
-public class TerrainGenerator : MonoBehaviour
+public class TerrainGenerator : NetworkBehaviour
 {
 
     const float viewerMoveThresholdForChunkUpdate = 25f;
@@ -27,9 +28,16 @@ public class TerrainGenerator : MonoBehaviour
     Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
     List<TerrainChunk> visibleTerrainChunks = new List<TerrainChunk>();
 
+    private Player player;
+    public void SetPlayer(Player _player)
+    {
+        player = _player;
+    }
+
     void Start()
     {
-        if (textureSettings != null) {
+        if (textureSettings != null)
+        {
             textureSettings.ApplyToMaterial(mapMaterial);
             textureSettings.UpdateMeshHeights(mapMaterial, heightMapSettings.minHeight, heightMapSettings.maxHeight);
         }
@@ -99,18 +107,20 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
 
+    [Client]
     void OnTerrainChunkVisibilityChanged(TerrainChunk chunk, bool isVisible)
     {
         if (isVisible)
         {
             visibleTerrainChunks.Add(chunk);
+            player.CmdAddTerrainChunk(chunk.coord);
         }
         else
         {
             visibleTerrainChunks.Remove(chunk);
+            player.CmdRemoveTerrainChunk(chunk.coord);
         }
     }
-
 }
 
 [System.Serializable]

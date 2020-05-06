@@ -50,13 +50,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.isOn) { return; }
         MovePlayer();
     }
 
     void MovePlayer()
     {
-        if (characterController.isGrounded)
+        if (characterController.isGrounded && !PauseMenu.isOn)
         {
             // We are grounded, so recalculate
             // move direction directly from axes

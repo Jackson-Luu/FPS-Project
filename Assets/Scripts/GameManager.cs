@@ -23,6 +23,45 @@ public class GameManager : MonoBehaviour
         return weapons[weaponName];
     }
 
+    #region Terrain Tracking
+
+    /// <summary> Keeps track of terrain chunks around players </summary>
+    private static Dictionary<Vector2, int> terrainChunks = new Dictionary<Vector2, int>();
+
+    private ServerTerrainGenerator serverTerrainGenerator;
+
+    public static void AddTerrainChunk(Vector2 chunkCoord)
+    {
+        if (!terrainChunks.ContainsKey(chunkCoord))
+        {
+            terrainChunks[chunkCoord] = 1;
+            instance.serverTerrainGenerator.UpdateVisibleChunks(chunkCoord, true);
+        } else
+        {
+            terrainChunks[chunkCoord]++;
+        }
+    }
+
+    public static void RemoveTerrainChunk(Vector2 chunkCoord)
+    {
+        if (terrainChunks.ContainsKey(chunkCoord))
+        {
+            terrainChunks[chunkCoord]--;
+            if (terrainChunks[chunkCoord] == 0)
+            {
+                instance.serverTerrainGenerator.UpdateVisibleChunks(chunkCoord, false);
+                terrainChunks.Remove(chunkCoord);
+            }
+        }
+    }
+
+    public static int GetTerrainPlayerCount(Vector2 coord)
+    {
+        return terrainChunks[coord];
+    }
+
+    #endregion
+
     #region Singleton
 
     void Awake ()
@@ -43,6 +82,7 @@ public class GameManager : MonoBehaviour
                     weapons.Add(gameWeapons[i].name, gameWeapons[i]);
                 }
             }
+            serverTerrainGenerator = FindObjectOfType<ServerTerrainGenerator>();
         }
     }
 

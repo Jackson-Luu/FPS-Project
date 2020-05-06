@@ -7,7 +7,7 @@ public class TerrainChunk
     public event System.Action<TerrainChunk, bool> onVisibilityChanged;
     public Vector2 coord;
 
-    GameObject meshObject;
+    public GameObject meshObject;
     Vector2 sampleCentre;
     Bounds bounds;
 
@@ -31,6 +31,10 @@ public class TerrainChunk
 
     bool server;
 
+    // Mesh delegate for server
+    public delegate void OnMeshBuiltCallback(Vector2 chunkCoord, Mesh mesh);
+    public OnMeshBuiltCallback onMeshBuiltCallback;
+
     public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool server)
     {
         this.coord = coord;
@@ -51,6 +55,7 @@ public class TerrainChunk
 
         meshObject.transform.position = new Vector3(position.x, 0, position.y);
         meshObject.transform.parent = parent;
+
         if (!server)
         {
             meshFilter = meshObject.AddComponent<MeshFilter>();
@@ -189,6 +194,10 @@ public class TerrainChunk
     public void ServerUpdateCallback()
     {
         meshCollider.sharedMesh = lodMeshes[colliderLODIndex].mesh;
+        if (onMeshBuiltCallback != null)
+        {
+            onMeshBuiltCallback.Invoke(coord, lodMeshes[colliderLODIndex].mesh);
+        }
     }
 
     public void SetVisible(bool visible)

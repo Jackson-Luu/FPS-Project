@@ -158,12 +158,9 @@ public class Player : NetworkBehaviour
     {
         yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
 
-        Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
-        transform.position = new Vector3(spawnPoint.position.x, Terrain.activeTerrain.SampleHeight(spawnPoint.position) + (float)1.01, spawnPoint.position.z);
-        transform.rotation = spawnPoint.rotation;
-
         // Reactivate playerController after position has been set to avoid reverting to pre-death position
-        yield return new WaitForSeconds(0.1f);
+        // yield return new WaitForSeconds(0.1f);
+
         SetupPlayer();
     }
 
@@ -190,5 +187,17 @@ public class Player : NetworkBehaviour
     public void RpcAddToInventory(GameObject itemObject)
     {
         GetComponent<Inventory>().Add(itemObject.GetComponent<ItemPickup>().item);
+    }
+
+    [Command]
+    public void CmdAddTerrainChunk(Vector2 coord)
+    {
+        GameManager.AddTerrainChunk(coord);
+    }
+
+    [Command]
+    public void CmdRemoveTerrainChunk(Vector2 coord)
+    {
+        GameManager.RemoveTerrainChunk(coord);
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5190929870973873306}
   - component: {fileID: 5190929870973873304}
   - component: {fileID: 5190929870973873305}
+  - component: {fileID: -7191528704110131154}
   m_Layer: 0
   m_Name: Ammo
   m_TagString: Untagged
@@ -126,6 +127,28 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   item: {fileID: 11400000, guid: cdd201bc51fd2f7468d568f7539657a5, type: 2}
+  networkIdentity: {fileID: 0}
+--- !u!114 &-7191528704110131154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191661886609915004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1731d8de2d0c84333b08ebe1e79f4118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  visRange: 200
+  visUpdateInterval: 1
+  checkMethod: 0
+  forceHidden: 0
+  castLayers:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1001 &2068306443139772803
 PrefabInstance:
   m_ObjectHideFlags: 0
