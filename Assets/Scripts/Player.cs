@@ -192,12 +192,12 @@ public class Player : NetworkBehaviour
     [Command]
     public void CmdAddTerrainChunk(Vector2 coord)
     {
-        GameManager.AddTerrainChunk(coord);
+        GameManager.AddTerrainChunk(coord, connectionToClient);
     }
 
     [Command]
     public void CmdRemoveTerrainChunk(Vector2 coord)
     {
-        GameManager.RemoveTerrainChunk(coord);
+        GameManager.RemoveTerrainChunk(coord, connectionToClient);
     }
 }

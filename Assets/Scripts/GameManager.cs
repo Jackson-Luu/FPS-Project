@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Mirror;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,28 +29,43 @@ public class GameManager : MonoBehaviour
     /// <summary> Keeps track of terrain chunks around players </summary>
     private static Dictionary<Vector2, int> terrainChunks = new Dictionary<Vector2, int>();
 
-    private ServerTerrainGenerator serverTerrainGenerator;
+    /// <summary>
+    /// Delegate for players syncing terrain chunks with server
+    /// </summary>
+    /// <param name="addChunk">True if adding chunk, false otherwise.</param>
+    public delegate void ClientChangeTerrainCallback(Vector2 chunkCoord, bool addChunk);
+    public ClientChangeTerrainCallback clientChangeTerrainCallback;
 
-    public static void AddTerrainChunk(Vector2 chunkCoord)
+    /// <summary>
+    /// Delegate for syncing observers with terrain items
+    /// </summary>
+    /// <param name="observer">Network connectionToClient for observer</param>
+    /// <param name="addObserver">True if adding observers, false otherwise</param>
+    public delegate void TerrainObserverCallback(Vector2 chunkCoord, NetworkConnection observer, bool addObserver);
+    public TerrainObserverCallback terrainObserverCallback;
+
+    public static void AddTerrainChunk(Vector2 chunkCoord, NetworkConnection observer)
     {
         if (!terrainChunks.ContainsKey(chunkCoord))
         {
             terrainChunks[chunkCoord] = 1;
-            instance.serverTerrainGenerator.UpdateVisibleChunks(chunkCoord, true);
+            instance.clientChangeTerrainCallback.Invoke(chunkCoord, true);
         } else
         {
             terrainChunks[chunkCoord]++;
         }
+        instance.terrainObserverCallback.Invoke(chunkCoord, observer, true);
     }
 
-    public static void RemoveTerrainChunk(Vector2 chunkCoord)
+    public static void RemoveTerrainChunk(Vector2 chunkCoord, NetworkConnection observer)
     {
         if (terrainChunks.ContainsKey(chunkCoord))
         {
             terrainChunks[chunkCoord]--;
+            instance.terrainObserverCallback.Invoke(chunkCoord, observer, false);
             if (terrainChunks[chunkCoord] == 0)
             {
-                instance.serverTerrainGenerator.UpdateVisibleChunks(chunkCoord, false);
+                instance.clientChangeTerrainCallback.Invoke(chunkCoord, false);
                 terrainChunks.Remove(chunkCoord);
             }
         }
@@ -82,7 +98,6 @@ public class GameManager : MonoBehaviour
                     weapons.Add(gameWeapons[i].name, gameWeapons[i]);
                 }
             }
-            serverTerrainGenerator = FindObjectOfType<ServerTerrainGenerator>();
         }
     }
 

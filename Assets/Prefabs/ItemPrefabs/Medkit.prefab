@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2362851935928113926}
   - component: {fileID: -5342469434334666445}
   - component: {fileID: -2597628008842942204}
-  - component: {fileID: 5614815442560387664}
   m_Layer: 0
   m_Name: Medkit
   m_TagString: Untagged
@@ -111,7 +110,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   item: {fileID: 11400000, guid: 25f027054f30c98458214a7c21c06bf1, type: 2}
-  networkIdentity: {fileID: 0}
 --- !u!114 &-2597628008842942204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,24 +125,3 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   m_AssetId: 
---- !u!114 &5614815442560387664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2364266859732139422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1731d8de2d0c84333b08ebe1e79f4118, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  visRange: 200
-  visUpdateInterval: 1
-  checkMethod: 0
-  forceHidden: 0
-  castLayers:
-    serializedVersion: 2
-    m_Bits: 512

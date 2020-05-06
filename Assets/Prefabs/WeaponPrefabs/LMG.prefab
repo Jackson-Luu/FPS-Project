@@ -175,7 +175,6 @@ GameObject:
   - component: {fileID: -3360168855521249720}
   - component: {fileID: -3469351024013843014}
   - component: {fileID: -1772919376209287458}
-  - component: {fileID: 2668293592242961692}
   m_Layer: 0
   m_Name: LMG
   m_TagString: Untagged
@@ -293,7 +292,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   item: {fileID: 11400000, guid: 5f2bad2a34c5e1d4cafbc0f8bce7d348, type: 2}
-  networkIdentity: {fileID: 0}
 --- !u!114 &-3469351024013843014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,27 +321,6 @@ MonoBehaviour:
     type: 3}
   impactEffectPrefab: {fileID: 4979655930806489650, guid: 65949bc99ed15cd4fbe27b1b3dc3f76a,
     type: 3}
---- !u!114 &2668293592242961692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424505108706323481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1731d8de2d0c84333b08ebe1e79f4118, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  visRange: 200
-  visUpdateInterval: 1
-  checkMethod: 0
-  forceHidden: 0
-  castLayers:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1 &424677685882122139
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 
@@ -34,9 +35,14 @@ public class ServerTerrainGenerator : NetworkBehaviour
     [SerializeField]
     private SpawnManager spawnManager;
 
+    [SerializeField]
+    private ObjectPooler objectPooler;
+
     private void Start()
     {
         navMeshSurface = GetComponent<NavMeshSurface>();
+        GameManager.instance.clientChangeTerrainCallback += UpdateVisibleChunks;
+        GameManager.instance.terrainObserverCallback += EditChunkObserver;
     }
 
     public void UpdateVisibleChunks(Vector2 chunkCoord, bool addChunk)
@@ -51,6 +57,10 @@ public class ServerTerrainGenerator : NetworkBehaviour
         {
             Destroy(terrainChunkDictionary[chunkCoord].meshObject);
             terrainChunkDictionary.Remove(chunkCoord);
+            foreach (ItemPickup item in terrainItemsDictionary[chunkCoord])
+            {
+                objectPooler.ReturnToPool(item.gameObject);
+            }
             terrainItemsDictionary.Remove(chunkCoord);
         }
     }
@@ -65,7 +75,38 @@ public class ServerTerrainGenerator : NetworkBehaviour
             navMeshSurface.BuildNavMesh();
             navMeshBuilt = true;
         }
-        List<ItemPickup> itemsList = new List<ItemPickup>();
-        spawnManager.SpawnObjects(chunkCoord, mesh, itemsList);
+        spawnManager.SpawnObjects(chunkCoord, mesh);
+    }
+
+    public void EditChunkObserver(Vector2 chunkCoord, NetworkConnection observer, bool addObserver)
+    {
+        if (!terrainItemsDictionary.ContainsKey(chunkCoord))
+        {
+            // Items have not finished being generated, wait for a bit
+            StartCoroutine(WaitForChunk(chunkCoord, observer, addObserver));
+        } else
+        {
+            EditObserver(chunkCoord, observer, addObserver);
+        }
+    }
+
+    // Wait until items have been generated
+    private IEnumerator WaitForChunk(Vector2 chunkCoord, NetworkConnection observer, bool addObserver)
+    {
+        while (!terrainItemsDictionary.ContainsKey(chunkCoord))
+        {
+            yield return new WaitForSeconds(1.0f);
+        }
+
+        EditObserver(chunkCoord, observer, addObserver);
+    }
+
+    // Add or remove observer to item
+    private void EditObserver(Vector2 chunkCoord, NetworkConnection observer, bool addObserver)
+    {
+        foreach (ItemPickup item in terrainItemsDictionary[chunkCoord])
+        {
+            item.EditObservers(observer, addObserver);
+        }
     }
 }

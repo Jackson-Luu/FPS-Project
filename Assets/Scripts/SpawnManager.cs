@@ -55,9 +55,10 @@ public class SpawnManager : NetworkBehaviour
         }
     }
 
-    public void SpawnObjects(Vector2 chunkCoord, Mesh mesh, List<ItemPickup> terrainItemsList)
+    public void SpawnObjects(Vector2 chunkCoord, Mesh mesh)
     {
         List<Vector2> points;
+        List<ItemPickup> terrainItemsList = new List<ItemPickup>();
 
         // Generate item spawn points within each chunk
         points = PoissonDiscSample.GeneratePoints(radius, regionSize, rejectionSamples);
