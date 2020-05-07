@@ -36,6 +36,7 @@ public class TerrainGenerator : NetworkBehaviour
 
     void Start()
     {
+        //heightMapSettings.noiseSettings.seed = GameManager.instance.seed;
         if (textureSettings != null)
         {
             textureSettings.ApplyToMaterial(mapMaterial);

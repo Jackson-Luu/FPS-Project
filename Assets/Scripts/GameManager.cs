@@ -2,12 +2,16 @@
 using UnityEngine;
 using System.Linq;
 using Mirror;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
 
     public const int MAP_SIZE = 6000;
+
+    [SyncVar]
+    public int seed;
 
     public MatchSettings matchSettings;
 
@@ -100,6 +104,17 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public override void OnStartServer()
+    {
+        seed = Random.Range(0, 999999);
+        SceneManager.activeSceneChanged += ChangeSeed;
+    }
+
+    private void ChangeSeed(Scene current, Scene next)
+    {
+        seed = Random.Range(0, 999999);
+    }    
 
     #endregion
 

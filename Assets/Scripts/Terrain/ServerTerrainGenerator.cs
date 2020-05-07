@@ -40,6 +40,7 @@ public class ServerTerrainGenerator : NetworkBehaviour
 
     private void Start()
     {
+        //heightMapSettings.noiseSettings.seed = GameManager.instance.seed;
         navMeshSurface = GetComponent<NavMeshSurface>();
         GameManager.instance.clientChangeTerrainCallback += UpdateVisibleChunks;
         GameManager.instance.terrainObserverCallback += EditChunkObserver;
@@ -55,7 +56,14 @@ public class ServerTerrainGenerator : NetworkBehaviour
             newChunk.Load();
         } else
         {
-            Destroy(terrainChunkDictionary[chunkCoord].meshObject);
+            GameObject mesh = terrainChunkDictionary[chunkCoord].meshObject;
+            // Return trees to object pool
+            foreach (Transform child in mesh.transform)
+            {
+                ObjectPooler.Instance.ReturnToPool(child.gameObject);
+            }
+
+            Destroy(mesh);
             terrainChunkDictionary.Remove(chunkCoord);
             foreach (ItemPickup item in terrainItemsDictionary[chunkCoord])
             {

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class TerrainChunk
 {
@@ -35,6 +36,8 @@ public class TerrainChunk
     public delegate void OnMeshBuiltCallback(Vector2 chunkCoord, Mesh mesh);
     public OnMeshBuiltCallback onMeshBuiltCallback;
 
+    Vector2 regionSize;
+
     public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool server)
     {
         this.coord = coord;
@@ -44,6 +47,7 @@ public class TerrainChunk
         this.meshSettings = meshSettings;
         this.viewer = viewer;
         this.server = server;
+        this.regionSize = new Vector2(meshSettings.meshWorldSize, meshSettings.meshWorldSize);
 
         sampleCentre = coord * meshSettings.meshWorldSize / meshSettings.meshScale;
         Vector2 position = coord * meshSettings.meshWorldSize;
@@ -144,14 +148,18 @@ public class TerrainChunk
                     {
                         previousLODIndex = lodIndex;
                         meshFilter.mesh = lodMesh.mesh;
+
+                        // Generate trees when switching to highest LOD mesh
+                        if (lodIndex == 0)
+                        {
+                            SpawnTrees();
+                        }
                     }
                     else if (!lodMesh.hasRequestedMesh)
                     {
                         lodMesh.RequestMesh(heightMap, meshSettings);
                     }
                 }
-
-
             }
 
             if (wasVisible != visible)
@@ -194,16 +202,53 @@ public class TerrainChunk
     public void ServerUpdateCallback()
     {
         meshCollider.sharedMesh = lodMeshes[colliderLODIndex].mesh;
+        SpawnTrees();
         if (onMeshBuiltCallback != null)
         {
             onMeshBuiltCallback.Invoke(coord, lodMeshes[colliderLODIndex].mesh);
         }
     }
 
+    void SpawnTrees()
+    {
+        List<Vector2> points;
+        int seedOffset = (int)(sampleCentre.x + sampleCentre.y);
+
+        // Generate tree spawn points within each chunk
+        System.Random prng = new System.Random(GameManager.instance.seed + seedOffset);
+        points = PoissonDiscSample.GeneratePoints(prng.Next(5, 15), regionSize, seedOffset, 30);
+
+        foreach (Vector2 point in points)
+        {
+            // Get world position and height
+            int meshPosition = (int)point.y * (int)meshSettings.meshWorldSize + (int)point.x;
+
+            Vector3 spawnPoint = lodMeshes[colliderLODIndex].mesh.vertices[meshPosition];
+            spawnPoint.x += (coord.x * meshSettings.meshWorldSize);
+            spawnPoint.z += (coord.y * meshSettings.meshWorldSize);
+            spawnPoint.y -= 0.1f;
+
+            GameObject spawnObject = ObjectPooler.Instance.SpawnFromPool("Tree");
+            spawnObject.transform.position = spawnPoint;
+            spawnObject.transform.rotation = Quaternion.identity;
+            spawnObject.SetActive(true);
+            spawnObject.transform.parent = meshObject.transform;
+        }
+    }
+
     public void SetVisible(bool visible)
     {
         meshObject.SetActive(visible);
-    }
+        if (!visible)
+        {
+            // Return trees to object pool
+            foreach (Transform child in meshObject.transform)
+            {
+                ObjectPooler.Instance.ReturnToPool(child.gameObject);
+                Debug.Log("Returning Tree");
+            }
+        }
+    } 
 
     public bool IsVisible()
     {

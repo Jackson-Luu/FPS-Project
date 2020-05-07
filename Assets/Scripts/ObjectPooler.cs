@@ -24,6 +24,7 @@ public class ObjectPooler : NetworkBehaviour
     #endregion
 
     public List<Pool> pools;
+    public List<Pool> trees;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
     public override void OnStartServer()
@@ -44,6 +45,32 @@ public class ObjectPooler : NetworkBehaviour
 
             poolDictionary.Add(pool.tag, objectPool);
         }
+
+        AddTreePool();
+    }
+
+    public override void OnStartClient()
+    {
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        AddTreePool();      
+    }
+
+    private void AddTreePool()
+    {
+        Queue<GameObject> objectPool = new Queue<GameObject>();
+
+        foreach (Pool pool in trees)
+        {
+            for (int i = 0; i < pool.size; i++)
+            {
+                GameObject obj = Instantiate(pool.prefab);
+                obj.SetActive(false);
+                obj.name = "Tree";
+                objectPool.Enqueue(obj);
+            }
+        }
+
+        poolDictionary.Add("Tree", objectPool);
     }
 
     public GameObject SpawnFromPool(string tag)

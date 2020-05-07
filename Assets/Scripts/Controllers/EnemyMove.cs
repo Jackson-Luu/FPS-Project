@@ -6,7 +6,7 @@ using Mirror;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMove : NetworkBehaviour
 {
-    public float lookRadius = 10f;
+    public float lookRadius = 20f;
     private float speed = 2f;
 
     // For animation on clients
@@ -23,7 +23,6 @@ public class EnemyMove : NetworkBehaviour
 
     private int layerMask;
     private float patrolRadius = 20f;
-    private float detectRadius = 10f;
     private bool isPatrolling = false;
 
     // Start is called before the first frame update
@@ -34,6 +33,8 @@ public class EnemyMove : NetworkBehaviour
         animator = GetComponent<Animator>();
 
         layerMask = 1 << LayerMask.NameToLayer("RemotePlayer");
+
+        //lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -63,7 +64,7 @@ public class EnemyMove : NetworkBehaviour
                 }
             }
 
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectRadius, layerMask);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, lookRadius, layerMask);
             if (hitColliders.Length > 0)
             {
                 isPatrolling = false;
@@ -105,4 +106,21 @@ public class EnemyMove : NetworkBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
+
+    /*
+    // Helper function for showing agent path
+    private void DrawPath()
+    {
+        lineRenderer.SetPosition(0, transform.position);
+        if (agent.path.corners.Length < 2)
+        { //if the path has 1 or no corners, there is no need
+            return;
+        }
+        lineRenderer.positionCount = agent.path.corners.Length;
+        for (int i = 1; i < agent.path.corners.Length; i++)
+        {
+            lineRenderer.SetPosition(i, agent.path.corners[i]); //go through each corner and set that to the line renderer's position
+        }
+    }
+    */
 }

@@ -59,9 +59,10 @@ public class SpawnManager : NetworkBehaviour
     {
         List<Vector2> points;
         List<ItemPickup> terrainItemsList = new List<ItemPickup>();
+        int seed = (int)(chunkCoord.x * chunkSize + chunkCoord.y * chunkSize);
 
         // Generate item spawn points within each chunk
-        points = PoissonDiscSample.GeneratePoints(radius, regionSize, rejectionSamples);
+        points = PoissonDiscSample.GeneratePoints(radius, regionSize, seed, rejectionSamples);
 
         foreach (Vector2 point in points)
         {

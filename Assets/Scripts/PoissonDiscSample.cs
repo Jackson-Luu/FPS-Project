@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PoissonDiscSample : MonoBehaviour
 {
-    public static List<Vector2> GeneratePoints(float radius, Vector2 sampleRegionSize, int numSamplesBeforeRejection = 30)
+    public static List<Vector2> GeneratePoints(float radius, Vector2 sampleRegionSize, int seed, int numSamplesBeforeRejection = 30)
     {
         float cellSize = radius / Mathf.Sqrt(2);
 
@@ -11,6 +11,7 @@ public class PoissonDiscSample : MonoBehaviour
         List<Vector2> points = new List<Vector2>();
         List<Vector2> spawnPoints = new List<Vector2>();
 
+        Random.InitState(GameManager.instance.seed + seed);        
         spawnPoints.Add(sampleRegionSize / 2);
         while (spawnPoints.Count > 0)
         {
