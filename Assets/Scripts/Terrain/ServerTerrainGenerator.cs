@@ -29,9 +29,6 @@ public class ServerTerrainGenerator : NetworkBehaviour
     [SerializeField]
     private SpawnManager spawnManager;
 
-    [SerializeField]
-    private ObjectPooler objectPooler;
-
     private void Start()
     {
         navMeshSurface = GetComponent<NavMeshSurface>();
@@ -68,7 +65,7 @@ public class ServerTerrainGenerator : NetworkBehaviour
             terrainChunkDictionary.Remove(chunkCoord);
             foreach (ItemPickup item in terrainItemsDictionary[chunkCoord])
             {
-                objectPooler.ReturnToPool(item.gameObject);
+                ObjectPooler.Instance.ReturnToPool(item.gameObject);
             }
             terrainItemsDictionary.Remove(chunkCoord);
         }

@@ -57,7 +57,7 @@ public class SpawnManager : NetworkBehaviour
 
     public void SpawnObjects(Vector2 chunkCoord, Mesh mesh)
     {
-        
+        /*
         List<Vector2> points;
         List<ItemPickup> terrainItemsList = new List<ItemPickup>();
         int seed = (int)(chunkCoord.x * chunkSize + chunkCoord.y * chunkSize);
@@ -85,7 +85,8 @@ public class SpawnManager : NetworkBehaviour
             terrainItemsList.Add(spawnObject.GetComponent<ItemPickup>());
         }
 
-        serverTerrainGenerator.addChunkItems(chunkCoord, terrainItemsList);        
+        serverTerrainGenerator.addChunkItems(chunkCoord, terrainItemsList);
+        */
     }
 
     // Calculate random position

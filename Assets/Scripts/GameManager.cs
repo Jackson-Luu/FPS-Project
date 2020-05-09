@@ -2,7 +2,6 @@
 using UnityEngine;
 using System.Linq;
 using Mirror;
-using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
@@ -12,6 +11,9 @@ public class GameManager : NetworkBehaviour
 
     [SyncVar(hook = "OnSeedGenerated")]
     public int seed;
+
+    [SyncVar]
+    public string scene;
 
     public delegate void OnSeedGeneratedCallback();
     public OnSeedGeneratedCallback onSeedGeneratedCallback;

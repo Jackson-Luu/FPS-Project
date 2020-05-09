@@ -6,11 +6,11 @@ using Mirror;
 public class Player : NetworkBehaviour
 {
     [SyncVar]
-    private bool dead = false;
-    public bool isDead
+    private PlayerStatus status = PlayerStatus.Alive;
+    public PlayerStatus getStatus
     {
-        get { return dead; }
-        protected set { dead = value; }
+        get { return status; }
+        protected set { status = value; }
     }
 
     [SerializeField]
@@ -45,19 +45,6 @@ public class Player : NetworkBehaviour
         }
     }
 
-    /*
-    void Update()
-    {
-    	if (!isLocalPlayer)
-    		return;
-
-    	if (Input.GetKeyDown(KeyCode.K))
-    	{
-    		Die("KEK");
-    	}
-    }
-    */
-
     // Setup remote players on server
     [Command]
     private void CmdBroadcastNewPlayerSetup()
@@ -91,7 +78,7 @@ public class Player : NetworkBehaviour
 
     public void setDefaults()
     {
-        isDead = false;
+        getStatus = PlayerStatus.Alive;
         playerStats.SetDefaults();
         weaponManager.GetCurrentWeapon().bullets = weaponManager.GetCurrentWeapon().maxBullets;
 
@@ -117,8 +104,16 @@ public class Player : NetworkBehaviour
 
     public void Die(string sourceID)
     {
-        if (isDead) { return; }
-        isDead = true;
+        if (getStatus == PlayerStatus.Dead) {
+            return;
+        } else if (getStatus == PlayerStatus.Alive)
+        {
+            if (isServer && GameManager.instance.scene == "Royale")
+            {
+                RoyaleManager.PlayerDied();
+            }
+        }
+        getStatus = PlayerStatus.Dead;
 
         // Show kill feed event
         if (!isServer)
@@ -205,4 +200,6 @@ public class Player : NetworkBehaviour
     {
         GameManager.RemoveTerrainChunk(coord, connectionToClient);
     }
+
+    public enum PlayerStatus { Alive, Dead, Undead }
 }

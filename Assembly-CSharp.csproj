@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\PlayerUI.cs" />
     <Compile Include="Assets\Scripts\PoissonDiscSample.cs" />
     <Compile Include="Assets\Scripts\PoissonVisual.cs" />
+    <Compile Include="Assets\Scripts\RoyaleManager.cs" />
     <Compile Include="Assets\Scripts\ServerInit.cs" />
     <Compile Include="Assets\Scripts\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Stats\CharacterStats.cs" />
