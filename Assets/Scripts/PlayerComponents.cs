@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 using Mirror;
 
 [RequireComponent(typeof(Player))]
@@ -39,24 +41,75 @@ public class PlayerComponents : NetworkBehaviour
             // Hide player model graphics from the player themselves
             Util.SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayer));
 
-            // Create Player UI
-            playerUIInstance = Instantiate(playerUIPrefab);
-            playerUIInstance.name = playerUIPrefab.name;
+            SetupClientOnlyObjects();
+            if (SceneManager.GetActiveScene().name == "Game")
+            {
+                SceneManager.activeSceneChanged += SceneChange;
+            }
 
-            // Configure Player UI
-            PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
-            if (ui == null) { Debug.LogError("No PlayerUI on PlayerUI Prefab."); }
-
-            ui.SetPlayer(player);
-
-            // Create Terrain Generator
-            GameObject terrainObject = Instantiate(terrainGeneratorPrefab);
-            TerrainGenerator terrainGenerator = terrainObject.GetComponent<TerrainGenerator>();
-            terrainGenerator.viewer = gameObject.transform;
-            terrainGenerator.SetPlayer(player);
-            terrainGenerator.enabled = true;
-            
             player.SetupPlayer();
+        }
+    }
+
+    private void SceneChange(Scene current, Scene next)
+    {
+        if (next.name == "Game")
+        {
+            GameManager.instance.onSeedGeneratedCallback += SetupClientOnlyObjects;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+            StartCoroutine(LoadRoomPlayer());
+        }
+    }
+
+    private IEnumerator LoadRoomPlayer()
+    {
+        PlayerController pC = GetComponent<PlayerController>();
+        CharacterController cC = GetComponent<CharacterController>();
+        pC.enabled = false;
+        cC.enabled = false;
+        Vector3 position = new Vector3(transform.position.x, 300, transform.position.z);
+        transform.position = position;
+        CmdMovePlayer(position);
+        yield return new WaitForSeconds(GameManager.instance.matchSettings.playerLoadTime);
+        pC.enabled = true;
+        cC.enabled = true;
+
+        CmdRegisterPlayer(netId.ToString(), gameObject);
+    }
+
+    [Command]
+    void CmdMovePlayer(Vector3 position)
+    {
+        transform.position = position;
+    }
+
+    void SetupClientOnlyObjects()
+    {
+        Player player = GetComponent<Player>();
+
+        // Create Player UI
+        playerUIInstance = Instantiate(playerUIPrefab);
+        playerUIInstance.name = playerUIPrefab.name;
+
+        // Configure Player UI
+        PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
+        if (ui == null) { Debug.LogError("No PlayerUI on PlayerUI Prefab."); }
+
+        ui.SetPlayer(player);
+
+        // Create Terrain Generator
+        GameObject terrainObject = Instantiate(terrainGeneratorPrefab);
+        TerrainGenerator terrainGenerator = terrainObject.GetComponent<TerrainGenerator>();
+        terrainGenerator.viewer = gameObject.transform;
+        terrainGenerator.SetPlayer(player);
+        terrainGenerator.enabled = true;
+
+        if (GameManager.instance.onSeedGeneratedCallback != null)
+        {
+            GameManager.instance.onSeedGeneratedCallback -= SetupClientOnlyObjects;
         }
     }
 

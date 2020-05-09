@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7471222055888681824}
   - component: {fileID: 2803593056064836367}
+  - component: {fileID: 5673912416527571002}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -43,5 +44,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d39de5cc373fc4788664cb479865ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  seed: 0
   matchSettings:
     respawnTime: 5
+    playerLoadTime: 5
+  gameWeapons:
+  - {fileID: 3279740696676372436, guid: ca376a012899bde419cc097db75630f4, type: 3}
+  - {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc, type: 3}
+  - {fileID: 6742913958889674848, guid: 889e8039dc0677848933031f29d1ca11, type: 3}
+  - {fileID: 6800427894362089940, guid: 0c52873e8642460438b663c4c8555363, type: 3}
+  - {fileID: 424505108706323481, guid: 449ecc2dbb680104a89496beecbcccc5, type: 3}
+--- !u!114 &5673912416527571002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6578454534823021287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 

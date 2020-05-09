@@ -37,14 +37,14 @@ public class PlayerController : MonoBehaviour
         playerCollider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
 
-        StartCoroutine(ActivateGravity());
+        StartCoroutine(DeactivateGravity(GameManager.instance.matchSettings.playerLoadTime));
     }
 
-    private IEnumerator ActivateGravity()
+    public IEnumerator DeactivateGravity(float duration)
     {
         float temp = gravity;
         gravity = 0f;
-        yield return new WaitForSeconds(GameManager.instance.matchSettings.playerLoadTime);
+        yield return new WaitForSeconds(duration);
         gravity = temp;
     }
 
@@ -97,13 +97,5 @@ public class PlayerController : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
 
         characterController.Move(moveDirection * Time.deltaTime);        
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Units"))
-        {
-            Physics.IgnoreCollision(playerCollider, collision.collider);
-        }
     }
 }

@@ -15,12 +15,6 @@ public class ServerTerrainGenerator : NetworkBehaviour
     [HideInInspector]
     public int chunkRadius;
 
-    int chunksBuilt = 0;
-
-    // Finish building terrain delegate
-    public delegate void TerrainBuiltCallback();
-    public TerrainBuiltCallback terrainBuiltCallback;
-
     Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
     Dictionary<Vector2, List<ItemPickup>> terrainItemsDictionary = new Dictionary<Vector2, List<ItemPickup>>();
 
@@ -40,11 +34,18 @@ public class ServerTerrainGenerator : NetworkBehaviour
 
     private void Start()
     {
-        //heightMapSettings.noiseSettings.seed = GameManager.instance.seed;
         navMeshSurface = GetComponent<NavMeshSurface>();
         GameManager.instance.clientChangeTerrainCallback += UpdateVisibleChunks;
         GameManager.instance.terrainObserverCallback += EditChunkObserver;
     }
+
+    private void OnDestroy()
+    {
+        // Clear delegates
+        GameManager.instance.clientChangeTerrainCallback -= UpdateVisibleChunks;
+        GameManager.instance.terrainObserverCallback -= EditChunkObserver;
+    }
+    
 
     public void UpdateVisibleChunks(Vector2 chunkCoord, bool addChunk)
     {

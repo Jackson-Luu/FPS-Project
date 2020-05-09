@@ -2,11 +2,9 @@
 
 public class MapPreview : MonoBehaviour
 {
-
     public Renderer textureRender;
     public MeshFilter meshFilter;
     public MeshRenderer meshRenderer;
-
 
     public enum DrawMode { NoiseMap, Mesh, FalloffMap };
     public DrawMode drawMode;
@@ -17,14 +15,9 @@ public class MapPreview : MonoBehaviour
 
     public Material terrainMaterial;
 
-
-
     [Range(0, MeshSettings.numSupportedLODs - 1)]
     public int editorPreviewLOD;
     public bool autoUpdate;
-
-
-
 
     public void DrawMapInEditor()
     {
@@ -45,10 +38,6 @@ public class MapPreview : MonoBehaviour
             DrawTexture(TextureGenerator.TextureFromHeightMap(new HeightMap(FalloffGenerator.GenerateFalloffMap(meshSettings.numVertsPerLine), 0, 1)));
         }
     }
-
-
-
-
 
     public void DrawTexture(Texture2D texture)
     {

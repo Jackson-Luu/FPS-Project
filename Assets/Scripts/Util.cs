@@ -16,6 +16,20 @@ public class Util
         }
     }
 
+    // Activate all children recursively
+    public static void ActivateRecursively(GameObject obj)
+    {
+        if (obj == null) { return; }
+
+        obj.SetActive(true);
+
+        foreach (Transform child in obj.transform)
+        {
+            if (child == null) { continue; }
+            ActivateRecursively(child.gameObject);
+        }
+    }
+
     /*
     // Constrain unit position to within map
     public static void ConstrainPlayerPosition(Transform transform, float groundRadius)

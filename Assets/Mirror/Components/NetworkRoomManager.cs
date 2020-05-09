@@ -331,6 +331,8 @@ namespace Mirror
                         // re-add the room object
                         roomPlayer.GetComponent<NetworkRoomPlayer>().readyToBegin = false;
                         NetworkServer.ReplacePlayerForConnection(identity.connectionToClient, roomPlayer.gameObject);
+                        Vector3 spawnPoint = roomPlayer.gameObject.transform.position;
+                        roomPlayer.gameObject.transform.position = new Vector3(spawnPoint.x, GetStartPosition().position.y, spawnPoint.z);
                         roomPlayer.gameObject.SetActive(true);
                     }
                 }

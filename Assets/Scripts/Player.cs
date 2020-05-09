@@ -126,6 +126,19 @@ public class Player : NetworkBehaviour
             GameManager.instance.onPlayerKilledCallback.Invoke(gameObject.name, sourceID);
         }
 
+        DisableComponents();
+
+        // Activate death screen
+        if (isLocalPlayer)
+        {
+            GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>().deathScreen.SetActive(true);
+        }
+
+        StartCoroutine(Respawn());
+    }
+
+    public void DisableComponents()
+    {
         // Disable components
         for (int i = 0; i < disableOnDeath.Length; i++)
         {
@@ -144,14 +157,6 @@ public class Player : NetworkBehaviour
         {
             col.enabled = false;
         }
-
-        // Activate death screen
-        if (isLocalPlayer)
-        {
-            GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>().deathScreen.SetActive(true);
-        }
-
-        StartCoroutine(Respawn());
     }
 
     private IEnumerator Respawn()

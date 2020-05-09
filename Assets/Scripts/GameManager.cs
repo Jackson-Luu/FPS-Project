@@ -10,8 +10,17 @@ public class GameManager : NetworkBehaviour
 
     public const int MAP_SIZE = 6000;
 
-    [SyncVar]
+    [SyncVar(hook = "OnSeedGenerated")]
     public int seed;
+
+    public delegate void OnSeedGeneratedCallback();
+    public OnSeedGeneratedCallback onSeedGeneratedCallback;
+
+    private void OnSeedGenerated(int oldSeed, int newSeed)
+    {
+        seed = newSeed;
+        if (onSeedGeneratedCallback != null) { onSeedGeneratedCallback.Invoke(); }
+    }
 
     public MatchSettings matchSettings;
 
@@ -95,6 +104,10 @@ public class GameManager : NetworkBehaviour
         } else
         {
             instance = this;
+            if (terrainChunks.Count > 0)
+            {
+                terrainChunks.Clear();
+            }
             if (weapons.Count == 0)
             {
                 for (int i = 0; i < gameWeapons.Length; i++)
@@ -108,14 +121,13 @@ public class GameManager : NetworkBehaviour
     public override void OnStartServer()
     {
         seed = Random.Range(0, 999999);
-        SceneManager.activeSceneChanged += ChangeSeed;
     }
 
-    private void ChangeSeed(Scene current, Scene next)
+    /*
+    private void SceneChange(Scene current, Scene next)
     {
-        seed = Random.Range(0, 999999);
     }    
-
+    */
     #endregion
 
     #region Player Tracking

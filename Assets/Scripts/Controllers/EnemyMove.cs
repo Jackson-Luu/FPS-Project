@@ -33,51 +33,52 @@ public class EnemyMove : NetworkBehaviour
         animator = GetComponent<Animator>();
 
         layerMask = 1 << LayerMask.NameToLayer("RemotePlayer");
-
-        //lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (targetPlayer != null)
-        {
-            Vector3 player = targetPlayer.transform.position;
-            if (isServer)
-            {
-                agent.SetDestination(player);
-            }
-
-            if (Vector3.Distance(player, transform.position) <= (agent.stoppingDistance + 0.1f)) {
-                // Attack
-                Attack();
-                FaceTarget();
-            }
-        } else
-        {
-            if (!isPatrolling)
-            {
-                isPatrolling = true;
-                if (isServer)
-                {
-                    StartCoroutine(Patrol());
-                }
-            }
-
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, lookRadius, layerMask);
-            if (hitColliders.Length > 0)
-            {
-                isPatrolling = false;
-                targetPlayer = hitColliders[0].gameObject;
-            }
-        }
-
-        // Animate movement
         if (isServer)
         {
+            if (targetPlayer != null)
+            {
+                Vector3 player = targetPlayer.transform.position;
+                if (isServer)
+                {
+                    agent.SetDestination(player);
+                }
+
+                if (Vector3.Distance(player, transform.position) <= (agent.stoppingDistance + 0.1f))
+                {
+                    // Attack
+                    Attack();
+                    FaceTarget();
+                }
+            }
+            else
+            {
+                if (!isPatrolling)
+                {
+                    isPatrolling = true;
+                    if (isServer)
+                    {
+                        StartCoroutine(Patrol());
+                    }
+                }
+
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, lookRadius, layerMask);
+                if (hitColliders.Length > 0)
+                {
+                    isPatrolling = false;
+                    targetPlayer = hitColliders[0].gameObject;
+                }
+            }
             currVelocity = agent.velocity.magnitude;
+        } else
+        {
+            // Animate movement on client
+            animator.SetFloat("Speed", currVelocity);
         }
-        animator.SetFloat("Speed", currVelocity);
     }
 
     void Attack()

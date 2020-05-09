@@ -16,8 +16,8 @@ namespace Mirror.Examples.NetworkRoom
         /// <returns>true unless some code in here decides it needs to abort the replacement</returns>
         public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
         {
-            PlayerScore playerScore = gamePlayer.GetComponent<PlayerScore>();
-            playerScore.index = roomPlayer.GetComponent<NetworkRoomPlayer>().index;
+            //PlayerScore playerScore = gamePlayer.GetComponent<PlayerScore>();
+            //playerScore.index = roomPlayer.GetComponent<NetworkRoomPlayer>().index;
             return true;
         }
 

@@ -48,7 +48,7 @@ public class SpawnManager : NetworkBehaviour
                     enemy.GetComponent<NavMeshAgent>().Warp(randomPosition);
                     enemy.transform.rotation = enemies[randomIndex].transform.rotation;
                     enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
-                    enemy.GetComponent<EnemyMove>().enabled = true;
+                    enemy.SetActive(true);
                     NetworkServer.Spawn(enemy);
                 }
             }
@@ -57,6 +57,7 @@ public class SpawnManager : NetworkBehaviour
 
     public void SpawnObjects(Vector2 chunkCoord, Mesh mesh)
     {
+        
         List<Vector2> points;
         List<ItemPickup> terrainItemsList = new List<ItemPickup>();
         int seed = (int)(chunkCoord.x * chunkSize + chunkCoord.y * chunkSize);
@@ -79,11 +80,12 @@ public class SpawnManager : NetworkBehaviour
             spawnObject.transform.position = spawnPoint;
             spawnObject.transform.rotation = objects[randomIndex].transform.rotation;
             AlignTransform(spawnObject.transform, mesh.normals[meshPosition]);
+            spawnObject.SetActive(true);
             NetworkServer.Spawn(spawnObject);
             terrainItemsList.Add(spawnObject.GetComponent<ItemPickup>());
         }
 
-        serverTerrainGenerator.addChunkItems(chunkCoord, terrainItemsList);
+        serverTerrainGenerator.addChunkItems(chunkCoord, terrainItemsList);        
     }
 
     // Calculate random position

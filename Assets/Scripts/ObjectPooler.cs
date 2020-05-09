@@ -85,7 +85,6 @@ public class ObjectPooler : NetworkBehaviour
             q.Enqueue(obj);
         }
 
-        objectToSpawn.SetActive(true);
         return objectToSpawn;
     }
 

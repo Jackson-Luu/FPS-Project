@@ -36,6 +36,10 @@ public class TerrainChunk
     public delegate void OnMeshBuiltCallback(Vector2 chunkCoord, Mesh mesh);
     public OnMeshBuiltCallback onMeshBuiltCallback;
 
+    // Mesh delegate for client
+    public delegate void MeshClientCallback();
+    public MeshClientCallback meshClientCallback;
+
     Vector2 regionSize;
 
     public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool server)
@@ -153,6 +157,10 @@ public class TerrainChunk
                         if (lodIndex == 0)
                         {
                             SpawnTrees();
+                            if (meshClientCallback != null)
+                            {
+                                meshClientCallback.Invoke();
+                            }
                         }
                     }
                     else if (!lodMesh.hasRequestedMesh)
@@ -211,6 +219,7 @@ public class TerrainChunk
 
     void SpawnTrees()
     {
+        /*
         List<Vector2> points;
         int seedOffset = (int)(sampleCentre.x + sampleCentre.y);
 
@@ -234,6 +243,7 @@ public class TerrainChunk
             spawnObject.SetActive(true);
             spawnObject.transform.parent = meshObject.transform;
         }
+        */
     }
 
     public void SetVisible(bool visible)

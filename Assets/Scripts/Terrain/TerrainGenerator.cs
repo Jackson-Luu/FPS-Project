@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Mirror;
 
-public class TerrainGenerator : NetworkBehaviour
+public class TerrainGenerator : MonoBehaviour
 {
 
     const float viewerMoveThresholdForChunkUpdate = 25f;
@@ -34,9 +33,11 @@ public class TerrainGenerator : NetworkBehaviour
         player = _player;
     }
 
+    int chunksBuilt = 16; // tree chunks
+    bool initChunksBuilt = false;
+
     void Start()
     {
-        //heightMapSettings.noiseSettings.seed = GameManager.instance.seed;
         if (textureSettings != null)
         {
             textureSettings.ApplyToMaterial(mapMaterial);
@@ -100,6 +101,7 @@ public class TerrainGenerator : NetworkBehaviour
                         TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false);
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
+                        if (!initChunksBuilt) { newChunk.meshClientCallback += OnTerrainBuilt; }
                         newChunk.Load();
                     }
                 }
@@ -108,7 +110,6 @@ public class TerrainGenerator : NetworkBehaviour
         }
     }
 
-    [Client]
     void OnTerrainChunkVisibilityChanged(TerrainChunk chunk, bool isVisible)
     {
         if (isVisible)
@@ -120,6 +121,15 @@ public class TerrainGenerator : NetworkBehaviour
         {
             visibleTerrainChunks.Remove(chunk);
             player.CmdRemoveTerrainChunk(chunk.coord);
+        }
+    }
+
+    void OnTerrainBuilt()
+    {
+        chunksBuilt--;
+        if (chunksBuilt == 0 && !initChunksBuilt) {
+            initChunksBuilt = true;
+            //player.GetComponent<PlayerComponents>().LoadRoomPlayer();
         }
     }
 }
