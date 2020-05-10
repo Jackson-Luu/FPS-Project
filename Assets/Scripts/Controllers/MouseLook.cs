@@ -51,6 +51,6 @@ public class MouseLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         // Rotate arms/weapon up/down
-        animator.SetFloat("LookAngle", xRotation);
+        animator.SetFloat("Head_Vertical_f", xRotation);
     }
 }

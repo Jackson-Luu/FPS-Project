@@ -6,7 +6,7 @@ using Mirror;
 public class WeaponManager : NetworkBehaviour
 {
     [SerializeField]
-    public string defaultWeapon = "AK47";
+    public string defaultWeapon = "Pistol";
 
     [HideInInspector]
     public Weapon primaryWeapon;

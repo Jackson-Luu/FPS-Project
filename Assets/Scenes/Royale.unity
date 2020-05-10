@@ -326,6 +326,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: gameWeapons.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803593056064836367, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
+        type: 3}
+      propertyPath: gameWeapons.Array.data[5]
+      value: 
+      objectReference: {fileID: 134984, guid: 9b039ab6cb3f58f44a1bddfadc4a00a3, type: 3}
     - target: {fileID: 5673912416527571002, guid: 2d248cea692e3c24d8c86ec58dc8ea29,
         type: 3}
       propertyPath: sceneId

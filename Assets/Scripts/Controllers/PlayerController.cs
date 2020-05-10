@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
             stamina = Mathf.Clamp(stamina, 0f, maxStamina);
 
             // Animate movement
-            animator.SetFloat("Speed", moveZ);
+            animator.SetFloat("Speed_f", moveZ);
         }
 
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
