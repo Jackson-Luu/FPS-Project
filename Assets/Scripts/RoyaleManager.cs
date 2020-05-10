@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Mirror;
 
 public class RoyaleManager : MonoBehaviour
@@ -7,6 +8,8 @@ public class RoyaleManager : MonoBehaviour
     public static RoyaleManager instance;
 
     private int playersAlive = 0;
+    private static Dictionary<string, Player.PlayerStatus> players = new Dictionary<string, Player.PlayerStatus>();
+    private System.DateTime startTime;
 
     #region Singleton
 
@@ -22,29 +25,44 @@ public class RoyaleManager : MonoBehaviour
         else
         {
             instance = this;
-            playersAlive = NetworkManager.singleton.numPlayers;
         }
     }
 
     private void Start()
     {
-        GameManager.instance.scene = "Royale";
+        startTime = System.DateTime.Now;
     }
     #endregion
 
-    public static void PlayerDied()
+    public static void AddPlayer(string player)
+    {
+        players[player] = Player.PlayerStatus.Alive;
+        instance.playersAlive++;
+    }
+
+    public static void PlayerDied(string playerName)
     {
         instance.playersAlive--;
-        if (instance.playersAlive == 0)
+        players[playerName] = Player.PlayerStatus.Undead;
+        if (instance.playersAlive == 1)
         {
-            Debug.Log("Game Over");
+            System.TimeSpan matchTime = System.DateTime.Now - instance.startTime;
+            GameManager.instance.sceneLoaded = false;
+            foreach (var player in players)
+            {
+                if (player.Value == Player.PlayerStatus.Alive)
+                {
+                    GameManager.instance.RpcGameOver(matchTime.Minutes, player.Key);
+                    break;
+                }
+            }
             instance.StartCoroutine(instance.EndGame());
         }
     }
 
     private IEnumerator EndGame()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
 
         NetworkRoomManager nm = NetworkManager.singleton as NetworkRoomManager;
         nm.ServerChangeScene(nm.RoomScene);

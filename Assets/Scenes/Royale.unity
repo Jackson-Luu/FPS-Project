@@ -409,7 +409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &585014842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,7 +840,6 @@ MonoBehaviour:
   heightMapSettings: {fileID: 11400000, guid: bcdc0e9662dcc0747b06001d03d558d2, type: 2}
   chunkRadius: 0
   spawnManager: {fileID: 1679994017}
-  objectPooler: {fileID: 0}
 --- !u!114 &1751137880
 MonoBehaviour:
   m_ObjectHideFlags: 0

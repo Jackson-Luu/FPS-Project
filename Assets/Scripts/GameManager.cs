@@ -9,28 +9,39 @@ public class GameManager : NetworkBehaviour
 
     public const int MAP_SIZE = 6000;
 
-    [SyncVar(hook = "OnSeedGenerated")]
-    public int seed;
+    [SyncVar]
+    public int seed = 0;
+
+    public void OnDisable()
+    {
+        seed = -1;
+    }
+
+    [SyncVar]
+    public bool sceneLoaded = false;
 
     [SyncVar]
     public string scene;
 
-    public delegate void OnSeedGeneratedCallback();
-    public OnSeedGeneratedCallback onSeedGeneratedCallback;
+    public delegate void OnGameOverCallback(int minutes, string player);
+    public OnGameOverCallback onGameOverCallback;
 
-    private void OnSeedGenerated(int oldSeed, int newSeed)
+    [ClientRpc]
+    public void RpcGameOver(int minutes, string player)
     {
-        seed = newSeed;
-        if (onSeedGeneratedCallback != null) { onSeedGeneratedCallback.Invoke(); }
+        if (onGameOverCallback != null)
+        {
+            onGameOverCallback.Invoke(minutes, player);
+        }
     }
+
+    public delegate void OnPlayerKilledCallback(string player, string source);
+    public OnPlayerKilledCallback onPlayerKilledCallback;
 
     public MatchSettings matchSettings;
 
     [SerializeField]
     private GameObject[] gameWeapons;
-
-    public delegate void OnPlayerKilledCallback(string player, string source);
-    public OnPlayerKilledCallback onPlayerKilledCallback;
 
     private static Dictionary<string, GameObject> weapons = new Dictionary<string, GameObject>();
 
@@ -117,19 +128,18 @@ public class GameManager : NetworkBehaviour
                     weapons.Add(gameWeapons[i].name, gameWeapons[i]);
                 }
             }
+            string[] sceneString = NetworkManager.networkSceneName.Split("/"[0]);
+            scene = sceneString[2].Split("."[0])[0];
         }
     }
 
     public override void OnStartServer()
     {
-        seed = Random.Range(0, 999999);
+        // Minimum 1 as zero is used to detect uninitialised seed
+        seed = Random.Range(1, 999999);
+        sceneLoaded = true;
     }
 
-    /*
-    private void SceneChange(Scene current, Scene next)
-    {
-    }    
-    */
     #endregion
 
     #region Player Tracking
@@ -140,6 +150,11 @@ public class GameManager : NetworkBehaviour
     {
         players.Add(playerID, player);
         player.transform.name = playerID;
+        Debug.Log(instance.scene);
+        if (instance.scene == "Royale")
+        {
+            RoyaleManager.AddPlayer(playerID);
+        }
     }
 
     public static void UnRegisterPlayer(string playerID)

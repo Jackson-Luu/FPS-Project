@@ -33,9 +33,6 @@ public class TerrainGenerator : MonoBehaviour
         player = _player;
     }
 
-    int chunksBuilt = 16; // tree chunks
-    bool initChunksBuilt = false;
-
     void Start()
     {
         if (textureSettings != null)
@@ -101,7 +98,6 @@ public class TerrainGenerator : MonoBehaviour
                         TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false);
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
-                        if (!initChunksBuilt) { newChunk.meshClientCallback += OnTerrainBuilt; }
                         newChunk.Load();
                     }
                 }
@@ -121,15 +117,6 @@ public class TerrainGenerator : MonoBehaviour
         {
             visibleTerrainChunks.Remove(chunk);
             player.CmdRemoveTerrainChunk(chunk.coord);
-        }
-    }
-
-    void OnTerrainBuilt()
-    {
-        chunksBuilt--;
-        if (chunksBuilt == 0 && !initChunksBuilt) {
-            initChunksBuilt = true;
-            //player.GetComponent<PlayerComponents>().LoadRoomPlayer();
         }
     }
 }

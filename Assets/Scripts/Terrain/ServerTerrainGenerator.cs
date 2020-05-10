@@ -39,8 +39,11 @@ public class ServerTerrainGenerator : NetworkBehaviour
     private void OnDestroy()
     {
         // Clear delegates
-        GameManager.instance.clientChangeTerrainCallback -= UpdateVisibleChunks;
-        GameManager.instance.terrainObserverCallback -= EditChunkObserver;
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.clientChangeTerrainCallback -= UpdateVisibleChunks;
+            GameManager.instance.terrainObserverCallback -= EditChunkObserver;
+        }
     }
     
 
@@ -63,9 +66,11 @@ public class ServerTerrainGenerator : NetworkBehaviour
 
             Destroy(mesh);
             terrainChunkDictionary.Remove(chunkCoord);
-            foreach (ItemPickup item in terrainItemsDictionary[chunkCoord])
-            {
-                ObjectPooler.Instance.ReturnToPool(item.gameObject);
+            if (terrainItemsDictionary[chunkCoord] != null) {
+                foreach (ItemPickup item in terrainItemsDictionary[chunkCoord])
+                {
+                    ObjectPooler.Instance.ReturnToPool(item.gameObject);
+                }
             }
             terrainItemsDictionary.Remove(chunkCoord);
         }

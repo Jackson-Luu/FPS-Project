@@ -78,6 +78,10 @@ public class Player : NetworkBehaviour
 
     public void setDefaults()
     {
+        if (GameManager.instance.scene == "Royale" && status == PlayerStatus.Dead)
+        {
+            status = PlayerStatus.Undead;
+        }
         getStatus = PlayerStatus.Alive;
         playerStats.SetDefaults();
         weaponManager.GetCurrentWeapon().bullets = weaponManager.GetCurrentWeapon().maxBullets;
@@ -110,7 +114,7 @@ public class Player : NetworkBehaviour
         {
             if (isServer && GameManager.instance.scene == "Royale")
             {
-                RoyaleManager.PlayerDied();
+                RoyaleManager.PlayerDied(netId.ToString());
             }
         }
         getStatus = PlayerStatus.Dead;

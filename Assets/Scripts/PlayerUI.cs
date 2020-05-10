@@ -23,6 +23,12 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     public GameObject deathScreen;
 
+    [SerializeField]
+    GameObject gameOverScreen;
+
+    [SerializeField]
+    TMP_Text gameOverText;
+
     [HideInInspector]
     public Player player;
     private PlayerStats playerStats;
@@ -42,6 +48,7 @@ public class PlayerUI : MonoBehaviour
     void Start()
     {
         PauseMenu.isOn = false;
+        GameManager.instance.onGameOverCallback += GameOverScreen;
     }
 
     void Update()
@@ -105,5 +112,11 @@ public class PlayerUI : MonoBehaviour
     void SetAmmo(int current, int max)
     {
         ammoText.text = current.ToString() + " / " + max.ToString();
+    }
+
+    void GameOverScreen(int minutes, string player)
+    {
+        gameOverText.text = player + " Won!\n\nKills: X\n\nSurvived : " + minutes + " mins";
+        gameOverScreen.SetActive(true);
     }
 }

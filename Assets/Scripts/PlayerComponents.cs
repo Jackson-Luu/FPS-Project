@@ -48,14 +48,17 @@ public class PlayerComponents : NetworkBehaviour
             }
 
             player.SetupPlayer();
+
+            Debug.Log("START");
         }
+        RegisterPlayers();
     }
 
     private void SceneChange(Scene current, Scene next)
     {
         if (next.name == "Game")
         {
-            GameManager.instance.onSeedGeneratedCallback += SetupClientOnlyObjects;
+            Debug.Log("Test");
             foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(true);
@@ -70,6 +73,12 @@ public class PlayerComponents : NetworkBehaviour
         CharacterController cC = GetComponent<CharacterController>();
         pC.enabled = false;
         cC.enabled = false;
+        yield return new WaitForSeconds(1f);
+        while (GameManager.instance.seed <= 0 && !GameManager.instance.sceneLoaded)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        SetupClientOnlyObjects();
         Vector3 position = new Vector3(transform.position.x, 300, transform.position.z);
         transform.position = position;
         CmdMovePlayer(position);
@@ -77,7 +86,7 @@ public class PlayerComponents : NetworkBehaviour
         pC.enabled = true;
         cC.enabled = true;
 
-        CmdRegisterPlayer(netId.ToString(), gameObject);
+        RegisterPlayers();
     }
 
     [Command]
@@ -106,30 +115,28 @@ public class PlayerComponents : NetworkBehaviour
         terrainGenerator.viewer = gameObject.transform;
         terrainGenerator.SetPlayer(player);
         terrainGenerator.enabled = true;
-
-        if (GameManager.instance.onSeedGeneratedCallback != null)
-        {
-            GameManager.instance.onSeedGeneratedCallback -= SetupClientOnlyObjects;
-        }
     }
 
-    public override void OnStartClient()
+    /*
+    [Command]
+    public void CmdPrint(string str)
     {
-        base.OnStartClient();
+        Debug.Log(str);
+    }
+    */
+
+    private void RegisterPlayers()
+    {
+        Debug.Log("Client start");
 
         string netID = GetComponent<NetworkIdentity>().netId.ToString();
 
         GameManager.RegisterPlayer(netID, gameObject);
         if (isLocalPlayer)
         {
-            CmdRegisterPlayer(netID, gameObject);
+            Debug.Log("LOCALPALYER");
+            //CmdRegisterPlayer(netID, gameObject);
         }
-    }
-
-    [Command]
-    void CmdRegisterPlayer(string netID, GameObject player)
-    {
-        GameManager.RegisterPlayer(netID, player);
     }
 
     void DisableComponents()
