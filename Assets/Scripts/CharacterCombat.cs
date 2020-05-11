@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
+using Mirror;
 
 [RequireComponent(typeof(CharacterStats))]
-public class CharacterCombat : MonoBehaviour
+public class CharacterCombat : NetworkBehaviour
 {
-    public float attackSpeed = 1f;
-    private float attackCooldown = 0f;
+    public float attackSpeed = 0.5f;
+    public float attackCooldown = 0f;
 
     CharacterStats myStats;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         myStats = GetComponent<CharacterStats>();
     }
@@ -17,15 +18,18 @@ public class CharacterCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        attackCooldown -= Time.deltaTime;
+        if (attackCooldown > 0)
+        {
+            attackCooldown -= Time.deltaTime;
+        }
     }
 
     public void Attack(CharacterStats targetStats)
     {
         if (attackCooldown <= 0f)
         {
-            targetStats.TakeDamage(myStats.damage.GetValue(), gameObject.name);
             attackCooldown = 1f / attackSpeed;
+            targetStats.TakeDamage(myStats.damage.GetValue(), gameObject.name);
         }
     }
 }

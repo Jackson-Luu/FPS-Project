@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float sprintMultiplier = 3f;
+    private bool sprinting = false;
 
     [SerializeField]
     private float staminaBurnRate = 1.5f;
@@ -30,12 +31,19 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
     private Collider playerCollider;
+    private PlayerCombat playerCombat;
+    private WeaponManager weaponManager;
+
+    [SerializeField]
+    private Animator weaponAnimator;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         playerCollider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
+        playerCombat = GetComponent<PlayerCombat>();
+        weaponManager = GetComponent<WeaponManager>();
 
         StartCoroutine(DeactivateGravity(GameManager.instance.matchSettings.playerLoadTime));
     }
@@ -55,40 +63,55 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        if (characterController.isGrounded && !PauseMenu.isOn)
+        if (!PauseMenu.isOn)
         {
-            // We are grounded, so recalculate
-            // move direction directly from axes
-            float moveX = Input.GetAxis("Horizontal");
-            float moveZ = Input.GetAxis("Vertical");
-
-            moveDirection =  moveX * transform.right + moveZ * transform.forward;
-            moveDirection *= speed;
-
-            if (Input.GetButton("Jump"))
+            if (characterController.isGrounded)
             {
-                moveDirection.y = jumpSpeed;
-            }
+                // We are grounded, so recalculate
+                // move direction directly from axes
+                float moveX = Input.GetAxis("Horizontal");
+                float moveZ = Input.GetAxis("Vertical");
 
-            if (Input.GetButton("Sprint") && stamina > 0f)
-            {
-                stamina -= staminaBurnRate * Time.deltaTime;
-                if (stamina >= 0.01f)
+                moveDirection = moveX * transform.right + moveZ * transform.forward;
+                moveDirection *= speed;
+
+                if (Input.GetButtonDown("Jump"))
                 {
-                    moveDirection.x *= sprintMultiplier;
-                    moveDirection.y *= 1.05f;
-                    moveDirection.z *= sprintMultiplier;
+                    moveDirection.y = jumpSpeed;
+                    animator.SetTrigger("Jump_t");
                 }
-            } else
-            {
-                stamina += staminaRegenRate * Time.deltaTime;
+
+                if (Input.GetButton("Sprint") && stamina > 0f)
+                {
+                    stamina -= staminaBurnRate * Time.deltaTime;
+                    if (stamina >= 0.01f)
+                    {
+                        moveDirection.x *= sprintMultiplier;
+                        moveDirection.y *= 1.05f;
+                        moveDirection.z *= sprintMultiplier;
+                    }
+                }
+                else
+                {
+                    stamina += staminaRegenRate * Time.deltaTime;
+                }
+
+                // Restrict max stamina
+                stamina = Mathf.Clamp(stamina, 0f, maxStamina);
+
+                // Animate movement
+                animator.SetFloat("Speed_f", moveZ);
             }
 
-            // Restrict max stamina
-            stamina = Mathf.Clamp(stamina, 0f, maxStamina);
-
-            // Animate movement
-            animator.SetFloat("Speed_f", moveZ);
+            if (Input.GetButtonDown("Melee"))
+            {
+                if (playerCombat.attackCooldown <= 0f)
+                {
+                    Debug.Log(Time.time);
+                    playerCombat.Melee();
+                    StartCoroutine(MeleeAnimation());
+                }
+            }
         }
 
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
@@ -97,5 +120,16 @@ public class PlayerController : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
 
         characterController.Move(moveDirection * Time.deltaTime);        
+    }
+
+    private IEnumerator MeleeAnimation()
+    {
+        weaponManager.Melee();
+        animator.SetInteger("WeaponType_int", 12);
+        animator.SetInteger("MeleeType_int", 2);
+        weaponAnimator.SetTrigger("Melee_t");
+        yield return new WaitForSeconds(1.3f);
+        weaponManager.EquipCurrent();
+        animator.SetInteger("WeaponType_int", 1);
     }
 }

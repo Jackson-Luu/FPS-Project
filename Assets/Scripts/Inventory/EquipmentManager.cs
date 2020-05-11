@@ -71,6 +71,6 @@ public class EquipmentManager : MonoBehaviour
 
     public void EquipDefault(Transform weaponHolder)
     {
-        Equip((Equipment)weaponHolder.GetChild(0).GetComponent<ItemPickup>().item);
+        Equip((Equipment)weaponHolder.Find(weaponManager.defaultWeapon).GetComponent<ItemPickup>().item);
     }
 }

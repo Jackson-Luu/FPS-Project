@@ -39,7 +39,7 @@ public class PlayerComponents : NetworkBehaviour
             Player player = GetComponent<Player>();
 
             // Hide player model graphics from the player themselves
-            Util.SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayer));
+            Util.SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayer), "WeaponHolder");
 
             SetupClientOnlyObjects();
             if (SceneManager.GetActiveScene().name == "Game")
@@ -48,8 +48,6 @@ public class PlayerComponents : NetworkBehaviour
             }
 
             player.SetupPlayer();
-
-            Debug.Log("START");
         }
         RegisterPlayers();
     }
@@ -58,7 +56,6 @@ public class PlayerComponents : NetworkBehaviour
     {
         if (next.name == "Game")
         {
-            Debug.Log("Test");
             foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(true);
@@ -127,14 +124,11 @@ public class PlayerComponents : NetworkBehaviour
 
     private void RegisterPlayers()
     {
-        Debug.Log("Client start");
-
         string netID = GetComponent<NetworkIdentity>().netId.ToString();
 
         GameManager.RegisterPlayer(netID, gameObject);
         if (isLocalPlayer)
         {
-            Debug.Log("LOCALPALYER");
             //CmdRegisterPlayer(netID, gameObject);
         }
     }

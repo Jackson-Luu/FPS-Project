@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: -3888182565463694203}
   - component: {fileID: 4697340158727636901}
   - component: {fileID: 2456189400625672371}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -174,7 +174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0611b0873e9e2444b9fad35c83d08c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1
+  syncMode: 0
+  syncInterval: 0.1
+  attackSpeed: 0.5
 --- !u!95 &-3888182565463694203
 Animator:
   serializedVersion: 3

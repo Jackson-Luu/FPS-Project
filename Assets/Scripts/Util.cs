@@ -3,7 +3,7 @@
 public class Util
 {
     // Add all children recursively to new layer
-    public static void SetLayerRecursively(GameObject obj, int newLayer)
+    public static void SetLayerRecursively(GameObject obj, int newLayer, string exclude = null)
     {
         if (obj == null) { return; }
 
@@ -12,47 +12,8 @@ public class Util
         foreach (Transform child in obj.transform)
         {
             if (child == null) { continue; }
-            SetLayerRecursively(child.gameObject, newLayer);
+            if (exclude != null && child.name.Equals(exclude)) { continue; }
+            SetLayerRecursively(child.gameObject, newLayer, exclude);
         }
     }
-
-    // Activate all children recursively
-    public static void ActivateRecursively(GameObject obj)
-    {
-        if (obj == null) { return; }
-
-        obj.SetActive(true);
-
-        foreach (Transform child in obj.transform)
-        {
-            if (child == null) { continue; }
-            ActivateRecursively(child.gameObject);
-        }
-    }
-
-    /*
-    // Constrain unit position to within map
-    public static void ConstrainPlayerPosition(Transform transform, float groundRadius)
-    {
-        if (transform.position.x > groundRadius)
-        {
-            transform.position = new Vector3(groundRadius, transform.position.y, transform.position.z);
-        }
-
-        if (transform.position.z > groundRadius)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, groundRadius);
-        }
-
-        if (transform.position.x < -groundRadius)
-        {
-            transform.position = new Vector3(-groundRadius, transform.position.y, transform.position.z);
-        }
-
-        if (transform.position.z < -groundRadius)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -groundRadius);
-        }
-    }
-    */
 }

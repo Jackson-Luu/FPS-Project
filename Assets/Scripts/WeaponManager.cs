@@ -7,6 +7,7 @@ public class WeaponManager : NetworkBehaviour
 {
     [SerializeField]
     public string defaultWeapon = "Pistol";
+    public string meleeWeapon = "Knife";
 
     [HideInInspector]
     public Weapon primaryWeapon;
@@ -14,7 +15,7 @@ public class WeaponManager : NetworkBehaviour
     public Weapon secondaryWeapon;
 
     [SerializeField]
-    private Transform weaponHolder;
+    public Transform weaponHolder;
 
     private Weapon currentWeapon;
     private WeaponGraphics weaponGraphics;
@@ -50,7 +51,6 @@ public class WeaponManager : NetworkBehaviour
             weaponInstance.name = weaponName;
             weaponInstance.GetComponent<Collider>().enabled = false;
 
-
             weaponGraphics = weaponInstance.GetComponent<WeaponGraphics>();
             if (weaponGraphics == null)
             {
@@ -80,6 +80,16 @@ public class WeaponManager : NetworkBehaviour
         {
             currentWeapon = primaryWeapon;
         }
+    }
+
+    public void Melee()
+    {
+        weaponSwitcher.SelectWeapon(meleeWeapon);
+    }
+
+    public void EquipCurrent()
+    {
+        weaponSwitcher.SelectWeapon(currentWeapon.name);
     }
 
     public void ClearBullets()
