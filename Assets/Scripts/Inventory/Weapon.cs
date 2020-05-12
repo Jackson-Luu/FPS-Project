@@ -12,6 +12,9 @@ public class Weapon : ScriptableObject
     public float reloadTime = 2f;
 
     public GameObject graphics;
+    public AudioClip fire;
+    public AudioClip reloadOut;
+    public AudioClip reloadIn;
 
     //[HideInInspector]
     public int bullets;

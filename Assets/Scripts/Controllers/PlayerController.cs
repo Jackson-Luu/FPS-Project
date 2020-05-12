@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     private float stamina = 5f;
     private float maxStamina = 5f;
 
+    private float moveX;
+    private float moveZ;
     private Vector3 moveDirection = Vector3.zero;
 
     private Animator animator;
@@ -37,6 +39,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Animator weaponAnimator;
 
+    [SerializeField]
+    private AudioSource audioSource;
+    private AudioClip footsteps0;
+    private AudioClip footsteps1;
+    bool footstepsPlaying = false;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -46,6 +54,8 @@ public class PlayerController : MonoBehaviour
         weaponManager = GetComponent<WeaponManager>();
 
         StartCoroutine(DeactivateGravity(GameManager.instance.matchSettings.playerLoadTime));
+        footsteps0 = AudioManager.instance.soundLibrary.GetClip("Footsteps", 0);
+        footsteps1 = AudioManager.instance.soundLibrary.GetClip("Footsteps", 1);
     }
 
     public IEnumerator DeactivateGravity(float duration)
@@ -69,8 +79,13 @@ public class PlayerController : MonoBehaviour
             {
                 // We are grounded, so recalculate
                 // move direction directly from axes
-                float moveX = Input.GetAxis("Horizontal");
-                float moveZ = Input.GetAxis("Vertical");
+                moveX = Input.GetAxis("Horizontal");
+                moveZ = Input.GetAxis("Vertical");
+
+                if (moveX == 0 && moveZ == 0)
+                {
+                    audioSource.Stop();
+                }
 
                 moveDirection = moveX * transform.right + moveZ * transform.forward;
                 moveDirection *= speed;
@@ -79,6 +94,15 @@ public class PlayerController : MonoBehaviour
                 {
                     moveDirection.y = jumpSpeed;
                     animator.SetTrigger("Jump_t");
+                    audioSource.Stop();
+                    footstepsPlaying = false;
+                } else
+                {
+                    if (!footstepsPlaying && (moveX != 0 || moveZ != 0))
+                    {
+                        StartCoroutine(Footsteps());
+                        footstepsPlaying = true;
+                    }
                 }
 
                 if (Input.GetButton("Sprint") && stamina > 0f)
@@ -100,14 +124,19 @@ public class PlayerController : MonoBehaviour
                 stamina = Mathf.Clamp(stamina, 0f, maxStamina);
 
                 // Animate movement
-                animator.SetFloat("Speed_f", moveZ);
+                if (moveZ != 0)
+                {
+                    animator.SetFloat("Speed_f", moveZ);
+                } else if (moveX != 0)
+                {
+                    animator.SetFloat("Speed_f", moveX);
+                }
             }
 
             if (Input.GetButtonDown("Melee"))
             {
                 if (playerCombat.attackCooldown <= 0f)
                 {
-                    Debug.Log(Time.time);
                     playerCombat.Melee();
                     StartCoroutine(MeleeAnimation());
                 }
@@ -131,5 +160,21 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1.3f);
         weaponManager.EquipCurrent();
         animator.SetInteger("WeaponType_int", 1);
+    }
+
+    private IEnumerator Footsteps()
+    {
+        while ((moveX != 0 || moveZ != 0) && characterController.isGrounded)
+        {
+            audioSource.clip = footsteps0;
+            audioSource.Play();
+            Debug.Log("PLAYING CLIP 1");
+            yield return new WaitForSeconds(audioSource.clip.length);
+            audioSource.clip = footsteps1;
+            audioSource.Play();
+            Debug.Log("PLAYING CLIP 2");
+            yield return new WaitForSeconds(audioSource.clip.length);
+        }
+        footstepsPlaying = false;
     }
 }

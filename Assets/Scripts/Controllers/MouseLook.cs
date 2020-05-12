@@ -15,7 +15,7 @@ public class MouseLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerBody = transform.parent;
+        playerBody = transform.root;
         animator = playerBody.GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -49,6 +49,7 @@ public class MouseLook : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
 
         // Rotate arms/weapon up/down
         animator.SetFloat("Head_Vertical_f", xRotation);

@@ -10,7 +10,7 @@ public class WeaponSwitching : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        selectedWeapon = weaponManager.GetCurrentWeapon().name;
+        selectedWeapon = weaponManager.currentWeapon.name;
 
         /*if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
@@ -51,16 +51,23 @@ public class WeaponSwitching : MonoBehaviour
             if (weapon.name == weaponName)
             {
                 weapon.gameObject.SetActive(true);
+                weaponManager.currentWeaponObject = weapon.gameObject;
+                weaponManager.audioSource = weapon.gameObject.GetComponent<AudioSource>();
             } else
             {
                 weapon.gameObject.SetActive(false);
             }
         }
+
+        if (weaponManager.onWeaponSwitched != null)
+        {
+            weaponManager.onWeaponSwitched.Invoke();
+        }        
     }
 
     private void CheckWeapon()
     {
-        if (selectedWeapon != weaponManager.GetCurrentWeapon().name)
+        if (selectedWeapon != weaponManager.currentWeapon.name)
         {
             SelectWeapon(selectedWeapon);
             weaponManager.SwitchWeapon();

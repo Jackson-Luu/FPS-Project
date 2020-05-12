@@ -17,7 +17,8 @@ public class WeaponManager : NetworkBehaviour
     [SerializeField]
     public Transform weaponHolder;
 
-    private Weapon currentWeapon;
+    public Weapon currentWeapon;
+    public GameObject currentWeaponObject;
     private WeaponGraphics weaponGraphics;
 
     private WeaponSwitching weaponSwitcher;
@@ -28,9 +29,16 @@ public class WeaponManager : NetworkBehaviour
 
     public Inventory inventory;
 
+    public delegate void OnWeaponSwitched();
+    public OnWeaponSwitched onWeaponSwitched;
+
+    public AudioSource audioSource;
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         weaponSwitcher = weaponHolder.GetComponent<WeaponSwitching>();
         EquipWeapon(defaultWeapon);
         GetComponent<EquipmentManager>().EquipDefault(weaponHolder);
@@ -100,11 +108,6 @@ public class WeaponManager : NetworkBehaviour
         }
     }
 
-    public Weapon GetCurrentWeapon()
-    {
-        return currentWeapon;
-    }
-
     public WeaponGraphics GetWeaponGraphics()
     {
         return weaponGraphics;
@@ -120,7 +123,13 @@ public class WeaponManager : NetworkBehaviour
     {
         isReloading = true;
         CmdOnReload();
-        yield return new WaitForSeconds(currentWeapon.reloadTime);
+        audioSource.clip = currentWeapon.reloadOut;
+        audioSource.Play();
+        animator.SetTrigger("Reload_t");
+        yield return new WaitForSeconds(currentWeapon.reloadTime / 2);
+        audioSource.clip = currentWeapon.reloadIn;
+        audioSource.Play();
+        yield return new WaitForSeconds(currentWeapon.reloadTime / 2);
 
         currentWeapon.bullets = Mathf.Min(currentWeapon.maxBullets, inventory.ammo);
         isReloading = false;
