@@ -331,7 +331,6 @@ GameObject:
   - component: {fileID: 63851056931893285}
   - component: {fileID: 9205596634361497583}
   - component: {fileID: 7551485469900014651}
-  - component: {fileID: 6656348360141601279}
   m_Layer: 0
   m_Name: Sniper
   m_TagString: Untagged
@@ -460,19 +459,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 6c97e25c6c2a7bb47affd41612309b2e, type: 2}
---- !u!114 &6656348360141601279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6800427894362089940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be652d58144cd7d458c5bfbe396f925e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzleFlash: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
-    type: 3}
-  impactEffectPrefab: {fileID: 4979655930806489650, guid: 65949bc99ed15cd4fbe27b1b3dc3f76a,
-    type: 3}

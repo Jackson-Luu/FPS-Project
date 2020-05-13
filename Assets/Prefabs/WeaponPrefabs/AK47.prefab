@@ -279,7 +279,6 @@ GameObject:
   - component: {fileID: 3285021329405667338}
   - component: {fileID: 3310441021300284296}
   - component: {fileID: 3301832434461470570}
-  - component: {fileID: 1756661500}
   - component: {fileID: 1921560177}
   - component: {fileID: 6381648090304680242}
   - component: {fileID: 1861025506513138206}
@@ -357,21 +356,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1756661500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3279740696676372436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be652d58144cd7d458c5bfbe396f925e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzleFlash: {fileID: 198234348172792469}
-  impactEffectPrefab: {fileID: 4979655930806489650, guid: 65949bc99ed15cd4fbe27b1b3dc3f76a,
-    type: 3}
 --- !u!95 &1921560177
 Animator:
   serializedVersion: 3
@@ -559,12 +543,6 @@ PrefabInstance:
 --- !u!4 &4300532288218075 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4300533007854612, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1831161807}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &198234348172792469 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
     type: 3}
   m_PrefabInstance: {fileID: 1831161807}
   m_PrefabAsset: {fileID: 0}

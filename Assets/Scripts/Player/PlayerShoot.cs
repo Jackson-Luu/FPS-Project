@@ -31,6 +31,9 @@ public class PlayerShoot : NetworkBehaviour
 
     private AudioSource audioSource;
 
+    [SerializeField]
+    private ParticleSystem muzzleFlash;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,24 +48,47 @@ public class PlayerShoot : NetworkBehaviour
         weaponManager.onWeaponSwitched += SwitchWeapon;
         weaponHolder = weaponManager.weaponHolder;
         weaponInitialAngle = weaponHolder.localEulerAngles;
+
+        // Parent muzzle flash to main camera of local player
+        if (isLocalPlayer)
+        {
+            muzzleFlash.transform.SetParent(cam.transform);
+            muzzleFlash.transform.localEulerAngles = Vector3.zero;
+            muzzleFlash.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        }
     }
 
     private void SwitchWeapon()
     {
         currentWeapon = weaponManager.currentWeapon;
         audioSource = weaponManager.currentWeaponObject.GetComponent<AudioSource>();
+
+        // Calibrate muzzle flash position to new weapon
+        if (currentWeapon != null && isLocalPlayer)
+        {
+            if (isLocalPlayer)
+            {
+                muzzleFlash.transform.localPosition = currentWeapon.muzzleFlashPosition;
+            } else
+            {
+                muzzleFlash.transform.localPosition = currentWeapon.worldMuzzleFlashPosition;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PauseMenu.isOn) { return; }
+        if (PauseMenu.isOn || !isLocalPlayer) { return; }
 
         if (currentWeapon.bullets < currentWeapon.maxBullets)
         {
             if (Input.GetButton("Reload"))
             {
-                weaponManager.Reload();
+                if ((inventory.ammo - currentWeapon.bullets) > 0)
+                {
+                    weaponManager.Reload();
+                }
             }
         }
 
@@ -107,8 +133,7 @@ public class PlayerShoot : NetworkBehaviour
         }
 
         // Play sound effect
-        audioSource.clip = currentWeapon.fire;
-        audioSource.PlayOneShot(audioSource.clip);
+        CmdPlayClip();
 
         // Use gun bullets and inventory ammo
         currentWeapon.bullets--;
@@ -158,7 +183,7 @@ public class PlayerShoot : NetworkBehaviour
     [ClientRpc]
     void RpcDoShootEffect()
     {
-        weaponManager.GetWeaponGraphics().muzzleFlash.Play();
+        muzzleFlash.Play();
     }
 
     // Called on server when we hit something
@@ -173,8 +198,8 @@ public class PlayerShoot : NetworkBehaviour
     void RpcDoHitEffect(Vector3 pos, Vector3 normal)
     {
         // TODO : Object pool effects
-        GameObject hitEffect = (GameObject)Instantiate(weaponManager.GetWeaponGraphics().impactEffectPrefab, pos, Quaternion.LookRotation(normal));
-        Destroy(hitEffect, 2f);
+        //GameObject hitEffect = (GameObject)Instantiate(weaponManager.GetWeaponGraphics().impactEffectPrefab, pos, Quaternion.LookRotation(normal));
+        //Destroy(hitEffect, 2f);
     }
 
     // Method only called on server
@@ -183,5 +208,18 @@ public class PlayerShoot : NetworkBehaviour
     {
         CharacterStats character = target.GetComponent<CharacterStats>();
         character.TakeDamage(damage, sourceID);
+    }
+
+    // Play firing audio clips
+    [Command]
+    void CmdPlayClip()
+    {
+        RpcPlayClip();
+    }
+
+    [ClientRpc]
+    void RpcPlayClip()
+    {
+        audioSource.PlayOneShot(currentWeapon.fire);
     }
 }

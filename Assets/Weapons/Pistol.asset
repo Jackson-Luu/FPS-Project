@@ -22,4 +22,6 @@ MonoBehaviour:
   fire: {fileID: 8300000, guid: 91cf7c7d20c3b0942adb93ae45f46474, type: 3}
   reloadOut: {fileID: 8300000, guid: 3d3436d1a2f84a84c9fb5590cbaaced0, type: 3}
   reloadIn: {fileID: 8300000, guid: acb4e686f93f2e646b137b4b794a5ca8, type: 3}
+  muzzleFlashPosition: {x: 0.06, y: -0.05, z: 0.5}
+  worldMuzzleFlashPosition: {x: 0.45, y: 0, z: 0.15}
   bullets: 7

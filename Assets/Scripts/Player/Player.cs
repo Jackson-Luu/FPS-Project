@@ -24,11 +24,13 @@ public class Player : NetworkBehaviour
 
     private PlayerStats playerStats;
     private WeaponManager weaponManager;
+    private AudioSource audioSource;
 
     private void Start()
     {
         playerStats = GetComponent<PlayerStats>();
         weaponManager = GetComponent<WeaponManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void SetupPlayer()

@@ -30,7 +30,7 @@ public class SpawnManager : NetworkBehaviour
         objectPooler = ObjectPooler.Instance;
         chunkSize = (int)serverTerrainGenerator.meshSettings.meshWorldSize;
         offset = chunkSize / 2;
-        InvokeRepeating("SpawnEnemy", 15.0f, spawnInterval);
+        //InvokeRepeating("SpawnEnemy", 15.0f, spawnInterval);
     }
 
     void SpawnEnemy()

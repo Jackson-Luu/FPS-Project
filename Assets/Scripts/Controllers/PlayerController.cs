@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Mirror;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
@@ -17,7 +18,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float sprintMultiplier = 3f;
-    private bool sprinting = false;
 
     [SerializeField]
     private float staminaBurnRate = 1.5f;
@@ -32,17 +32,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
 
     private Animator animator;
+    private NetworkAnimator networkAnimator;
     private Collider playerCollider;
     private PlayerCombat playerCombat;
     private WeaponManager weaponManager;
 
     [SerializeField]
-    private Animator weaponAnimator;
-
-    [SerializeField]
-    private AudioSource audioSource;
-    private AudioClip footsteps0;
-    private AudioClip footsteps1;
+    private AudioController audioController;
     bool footstepsPlaying = false;
 
     void Start()
@@ -50,12 +46,11 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerCollider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
         playerCombat = GetComponent<PlayerCombat>();
         weaponManager = GetComponent<WeaponManager>();
 
         StartCoroutine(DeactivateGravity(GameManager.instance.matchSettings.playerLoadTime));
-        footsteps0 = AudioManager.instance.soundLibrary.GetClip("Footsteps", 0);
-        footsteps1 = AudioManager.instance.soundLibrary.GetClip("Footsteps", 1);
     }
 
     public IEnumerator DeactivateGravity(float duration)
@@ -82,29 +77,38 @@ public class PlayerController : MonoBehaviour
                 moveX = Input.GetAxis("Horizontal");
                 moveZ = Input.GetAxis("Vertical");
 
-                if (moveX == 0 && moveZ == 0)
-                {
-                    audioSource.Stop();
-                }
-
                 moveDirection = moveX * transform.right + moveZ * transform.forward;
                 moveDirection *= speed;
 
                 if (Input.GetButtonDown("Jump"))
                 {
                     moveDirection.y = jumpSpeed;
-                    animator.SetTrigger("Jump_t");
-                    audioSource.Stop();
-                    footstepsPlaying = false;
+                    networkAnimator.SetTrigger("Jump_t");
+
+                    // If jumping, stop footsteps
+                    if (footstepsPlaying)
+                    {
+                        audioController.StopClip();
+                        footstepsPlaying = false;
+                    }
                 } else
                 {
-                    if (!footstepsPlaying && (moveX != 0 || moveZ != 0))
+                    // Stop footsteps if stationary
+                    if (moveX == 0 && moveZ == 0)
                     {
-                        StartCoroutine(Footsteps());
-                        footstepsPlaying = true;
+                        if (footstepsPlaying)
+                        {
+                            audioController.StopClip();
+                            footstepsPlaying = false;
+                        }
+                    }
+                    else if (!footstepsPlaying) {
+                            audioController.PlayClip();
+                            footstepsPlaying = true;
                     }
                 }
 
+                // Sprinting calls
                 if (Input.GetButton("Sprint") && stamina > 0f)
                 {
                     stamina -= staminaBurnRate * Time.deltaTime;
@@ -127,8 +131,9 @@ public class PlayerController : MonoBehaviour
                 if (moveZ != 0)
                 {
                     animator.SetFloat("Speed_f", moveZ);
-                } else if (moveX != 0)
-                {
+                } else {
+
+                    // Set animation to moveX or 0 if not moving
                     animator.SetFloat("Speed_f", moveX);
                 }
             }
@@ -156,25 +161,8 @@ public class PlayerController : MonoBehaviour
         weaponManager.Melee();
         animator.SetInteger("WeaponType_int", 12);
         animator.SetInteger("MeleeType_int", 2);
-        weaponAnimator.SetTrigger("Melee_t");
         yield return new WaitForSeconds(1.3f);
         weaponManager.EquipCurrent();
         animator.SetInteger("WeaponType_int", 1);
-    }
-
-    private IEnumerator Footsteps()
-    {
-        while ((moveX != 0 || moveZ != 0) && characterController.isGrounded)
-        {
-            audioSource.clip = footsteps0;
-            audioSource.Play();
-            Debug.Log("PLAYING CLIP 1");
-            yield return new WaitForSeconds(audioSource.clip.length);
-            audioSource.clip = footsteps1;
-            audioSource.Play();
-            Debug.Log("PLAYING CLIP 2");
-            yield return new WaitForSeconds(audioSource.clip.length);
-        }
-        footstepsPlaying = false;
     }
 }

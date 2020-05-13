@@ -12,7 +12,7 @@ public class Util
         foreach (Transform child in obj.transform)
         {
             if (child == null) { continue; }
-            if (exclude != null && child.name.Equals(exclude)) { continue; }
+            if (exclude != null && child.name.Equals(exclude)) { break; }
             SetLayerRecursively(child.gameObject, newLayer, exclude);
         }
     }

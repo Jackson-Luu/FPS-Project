@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\CharacterCombat.cs" />
+    <Compile Include="Assets\Scripts\Controllers\AudioController.cs" />
     <Compile Include="Assets\Scripts\Controllers\EnemyMove.cs" />
     <Compile Include="Assets\Scripts\Controllers\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
@@ -83,7 +84,6 @@
     <Compile Include="Assets\Scripts\KillFeed.cs" />
     <Compile Include="Assets\Scripts\KillFeedItem.cs" />
     <Compile Include="Assets\Scripts\MatchSettings.cs" />
-    <Compile Include="Assets\Scripts\MusicManager.cs" />
     <Compile Include="Assets\Scripts\ObjectPooler.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
@@ -117,7 +117,6 @@
     <Compile Include="Assets\Scripts\Terrain\TextureGenerator.cs" />
     <Compile Include="Assets\Scripts\Terrain\ThreadedDataRequester.cs" />
     <Compile Include="Assets\Scripts\Util.cs" />
-    <Compile Include="Assets\Scripts\WeaponGraphics.cs" />
     <Compile Include="Assets\Scripts\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\WeaponStats.cs" />
     <Compile Include="Assets\Scripts\WeaponSwitching.cs" />

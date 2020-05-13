@@ -16,6 +16,9 @@ public class Weapon : ScriptableObject
     public AudioClip reloadOut;
     public AudioClip reloadIn;
 
+    public Vector3 muzzleFlashPosition;
+    public Vector3 worldMuzzleFlashPosition;
+
     //[HideInInspector]
     public int bullets;
 

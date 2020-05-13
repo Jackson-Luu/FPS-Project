@@ -331,7 +331,6 @@ GameObject:
   - component: {fileID: 8473125088081740522}
   - component: {fileID: 304413297797784474}
   - component: {fileID: -2723822708694884144}
-  - component: {fileID: -4600733494586020412}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -460,22 +459,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 8bd5476c9ebd8e84abd90cac4bf8194d, type: 2}
---- !u!114 &-4600733494586020412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6742913958889674848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be652d58144cd7d458c5bfbe396f925e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzleFlash: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
-    type: 3}
-  impactEffectPrefab: {fileID: 4979655930806489650, guid: 65949bc99ed15cd4fbe27b1b3dc3f76a,
-    type: 3}
 --- !u!1 &6742950241833300586
 GameObject:
   m_ObjectHideFlags: 0

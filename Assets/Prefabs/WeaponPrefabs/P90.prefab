@@ -173,7 +173,6 @@ GameObject:
   - component: {fileID: -323227013066200255}
   - component: {fileID: -8099009584010086335}
   - component: {fileID: -5439921935486976598}
-  - component: {fileID: -4081300548368975826}
   m_Layer: 0
   m_Name: P90
   m_TagString: Untagged
@@ -301,22 +300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: a446053bf0fde154c9683b76a989597b, type: 2}
---- !u!114 &-4081300548368975826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8409054689440713046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be652d58144cd7d458c5bfbe396f925e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzleFlash: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
-    type: 3}
-  impactEffectPrefab: {fileID: 4979655930806489650, guid: 65949bc99ed15cd4fbe27b1b3dc3f76a,
-    type: 3}
 --- !u!1 &8409226269657976904
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,6 @@ public class WeaponManager : NetworkBehaviour
 
     public Weapon currentWeapon;
     public GameObject currentWeaponObject;
-    private WeaponGraphics weaponGraphics;
 
     private WeaponSwitching weaponSwitcher;
 
@@ -33,12 +32,12 @@ public class WeaponManager : NetworkBehaviour
     public OnWeaponSwitched onWeaponSwitched;
 
     public AudioSource audioSource;
-    private Animator animator;
+    private NetworkAnimator networkAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
         weaponSwitcher = weaponHolder.GetComponent<WeaponSwitching>();
         EquipWeapon(defaultWeapon);
         GetComponent<EquipmentManager>().EquipDefault(weaponHolder);
@@ -58,12 +57,6 @@ public class WeaponManager : NetworkBehaviour
             weaponInstance.transform.localPosition = weaponPrefab.transform.position;
             weaponInstance.name = weaponName;
             weaponInstance.GetComponent<Collider>().enabled = false;
-
-            weaponGraphics = weaponInstance.GetComponent<WeaponGraphics>();
-            if (weaponGraphics == null)
-            {
-                Debug.LogError("No WeaponGraphics on weapon: " + weaponInstance.name);
-            }
 
             if (isLocalPlayer)
             {
@@ -108,24 +101,19 @@ public class WeaponManager : NetworkBehaviour
         }
     }
 
-    public WeaponGraphics GetWeaponGraphics()
-    {
-        return weaponGraphics;
-    }
-
     public void Reload()
     {
         if (isReloading) { return; }
-        StartCoroutine(Reload_Coroutine());
+
+        isReloading = true;
+        networkAnimator.SetTrigger("Reload_t");
+        CmdPlayClip();
     }
 
     private IEnumerator Reload_Coroutine()
     {
-        isReloading = true;
-        CmdOnReload();
         audioSource.clip = currentWeapon.reloadOut;
         audioSource.Play();
-        animator.SetTrigger("Reload_t");
         yield return new WaitForSeconds(currentWeapon.reloadTime / 2);
         audioSource.clip = currentWeapon.reloadIn;
         audioSource.Play();
@@ -136,18 +124,14 @@ public class WeaponManager : NetworkBehaviour
     }
 
     [Command]
-    void CmdOnReload()
+    void CmdPlayClip()
     {
-        RpcOnReload();
+        RpcPlayClip();
     }
 
     [ClientRpc]
-    void RpcOnReload()
+    void RpcPlayClip()
     {
-        Animator anim = weaponGraphics.GetComponent<Animator>();
-        if (anim != null)
-        {
-            anim.SetTrigger("Reload");
-        }
+        StartCoroutine(Reload_Coroutine());
     }
 }

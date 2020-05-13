@@ -174,7 +174,6 @@ GameObject:
   - component: {fileID: -7648849397871142726}
   - component: {fileID: -3360168855521249720}
   - component: {fileID: -3469351024013843014}
-  - component: {fileID: -1772919376209287458}
   m_Layer: 0
   m_Name: LMG
   m_TagString: Untagged
@@ -305,22 +304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 057970efee4c397458b71ef719fe9dce, type: 2}
---- !u!114 &-1772919376209287458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424505108706323481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be652d58144cd7d458c5bfbe396f925e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzleFlash: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
-    type: 3}
-  impactEffectPrefab: {fileID: 4979655930806489650, guid: 65949bc99ed15cd4fbe27b1b3dc3f76a,
-    type: 3}
 --- !u!1 &424677685882122139
 GameObject:
   m_ObjectHideFlags: 0
