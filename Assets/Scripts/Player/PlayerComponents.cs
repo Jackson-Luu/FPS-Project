@@ -114,14 +114,6 @@ public class PlayerComponents : NetworkBehaviour
         terrainGenerator.enabled = true;
     }
 
-    /*
-    [Command]
-    public void CmdPrint(string str)
-    {
-        Debug.Log(str);
-    }
-    */
-
     private void RegisterPlayers()
     {
         string netID = GetComponent<NetworkIdentity>().netId.ToString();

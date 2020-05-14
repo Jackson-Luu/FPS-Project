@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     TMP_Text gameOverText;
 
+    [SerializeField]
+    Animator crosshair;
+
     [HideInInspector]
     public Player player;
     private PlayerStats playerStats;
@@ -49,6 +53,7 @@ public class PlayerUI : MonoBehaviour
     {
         PauseMenu.isOn = false;
         GameManager.instance.onGameOverCallback += GameOverScreen;
+        player.GetComponent<PlayerShoot>().crosshair = crosshair;
     }
 
     void Update()

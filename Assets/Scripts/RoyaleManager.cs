@@ -44,6 +44,7 @@ public class RoyaleManager : MonoBehaviour
     {
         instance.playersAlive--;
         players[playerName] = Player.PlayerStatus.Undead;
+        /*
         if (instance.playersAlive == 1)
         {
             System.TimeSpan matchTime = System.DateTime.Now - instance.startTime;
@@ -58,6 +59,7 @@ public class RoyaleManager : MonoBehaviour
             }
             instance.StartCoroutine(instance.EndGame());
         }
+        */
     }
 
     private IEnumerator EndGame()

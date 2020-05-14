@@ -17,7 +17,9 @@ public class WeaponManager : NetworkBehaviour
     [SerializeField]
     public Transform weaponHolder;
 
+    [HideInInspector]
     public Weapon currentWeapon;
+    [HideInInspector]
     public GameObject currentWeaponObject;
 
     private WeaponSwitching weaponSwitcher;
@@ -41,6 +43,7 @@ public class WeaponManager : NetworkBehaviour
         weaponSwitcher = weaponHolder.GetComponent<WeaponSwitching>();
         EquipWeapon(defaultWeapon);
         GetComponent<EquipmentManager>().EquipDefault(weaponHolder);
+        GetComponent<Player>().zombifyPlayer += Disarm;
     }
 
     public void EquipWeapon(string weaponName)
@@ -101,6 +104,11 @@ public class WeaponManager : NetworkBehaviour
         }
     }
 
+    void Disarm()
+    {
+        currentWeaponObject.SetActive(false);
+    }
+
     public void Reload()
     {
         if (isReloading) { return; }
@@ -133,5 +141,16 @@ public class WeaponManager : NetworkBehaviour
     void RpcPlayClip()
     {
         StartCoroutine(Reload_Coroutine());
+    }
+
+    [Command]
+    void CmdEquipWeapon()
+    {
+    }
+
+    [ClientRpc]
+    void RpcEquipWeapon()
+    {
+
     }
 }

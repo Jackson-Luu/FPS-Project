@@ -43,10 +43,8 @@ public class EnemyMove : NetworkBehaviour
             if (targetPlayer != null)
             {
                 Vector3 player = targetPlayer.transform.position;
-                if (isServer)
-                {
-                    agent.SetDestination(player);
-                }
+                agent.SetDestination(player);
+
 
                 if (Vector3.Distance(player, transform.position) <= (agent.stoppingDistance + 0.1f))
                 {
@@ -60,10 +58,7 @@ public class EnemyMove : NetworkBehaviour
                 if (!isPatrolling)
                 {
                     isPatrolling = true;
-                    if (isServer)
-                    {
-                        StartCoroutine(Patrol());
-                    }
+                    StartCoroutine(Patrol());
                 }
 
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position, lookRadius, layerMask);

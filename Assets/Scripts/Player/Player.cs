@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
@@ -14,7 +15,7 @@ public class Player : NetworkBehaviour
     }
 
     [SerializeField]
-    private Behaviour[] disableOnDeath;
+    private List<Behaviour> disableOnDeath = new List<Behaviour>();
     private bool[] wasEnabled;
 
     [SerializeField]
@@ -26,11 +27,33 @@ public class Player : NetworkBehaviour
     private WeaponManager weaponManager;
     private AudioSource audioSource;
 
+    [SerializeField]
+    private Material localPlayerMaterial;
+    [SerializeField]
+    private Material localZombieMaterial;
+    [SerializeField]
+    private Renderer playerRenderer;
+    [SerializeField]
+    private Renderer zombieRenderer;
+
+    public delegate void ZombifyPlayer();
+    public ZombifyPlayer zombifyPlayer;
+
     private void Start()
     {
         playerStats = GetComponent<PlayerStats>();
         weaponManager = GetComponent<WeaponManager>();
         audioSource = GetComponent<AudioSource>();
+
+        if (isLocalPlayer)
+        {
+            // Set local player skins
+            playerRenderer.material = localPlayerMaterial;
+            zombieRenderer.material = localZombieMaterial;
+
+            // Disable username canvas
+            transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     public void SetupPlayer()
@@ -39,10 +62,6 @@ public class Player : NetworkBehaviour
         if (isLocalPlayer)
         {
             GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>().deathScreen.SetActive(false);
-        }
-
-        if (!isServer)
-        {
             CmdBroadcastNewPlayerSetup();
         }
     }
@@ -66,12 +85,6 @@ public class Player : NetworkBehaviour
     {
         if (firstSetup)
         {
-            wasEnabled = new bool[disableOnDeath.Length];
-            for (int i = 0; i < wasEnabled.Length; i++)
-            {
-                wasEnabled[i] = disableOnDeath[i].enabled;
-            }
-
             firstSetup = false;
         }
 
@@ -89,9 +102,9 @@ public class Player : NetworkBehaviour
         weaponManager.currentWeapon.bullets = weaponManager.currentWeapon.maxBullets;
 
         // Enable player components
-        for (int i = 0; i < disableOnDeath.Length; i++)
+        foreach (Behaviour behaviour in disableOnDeath)
         {
-            disableOnDeath[i].enabled = wasEnabled[i];
+            behaviour.enabled = true;
         }
 
         // Enable player gameObjects
@@ -114,9 +127,14 @@ public class Player : NetworkBehaviour
             return;
         } else if (getStatus == PlayerStatus.Alive)
         {
-            if (isServer && GameManager.instance.scene == "Royale")
+            if (GameManager.instance.scene == "Royale")
             {
-                RoyaleManager.PlayerDied(netId.ToString());
+                if (isServer)
+                {
+                    RoyaleManager.PlayerDied(netId.ToString());
+                }
+
+                Zombify();
             }
         }
         getStatus = PlayerStatus.Dead;
@@ -138,12 +156,27 @@ public class Player : NetworkBehaviour
         StartCoroutine(Respawn());
     }
 
+    private void Zombify()
+    {
+        playerRenderer.gameObject.SetActive(false);
+        zombieRenderer.gameObject.SetActive(true);
+        zombifyPlayer.Invoke();
+
+        foreach (Behaviour behaviour in disableOnDeath)
+        {
+            if (behaviour.name == "PlayerShoot")
+            {
+                disableOnDeath.Remove(behaviour);
+            }
+        }
+    }
+
     public void DisableComponents()
     {
         // Disable components
-        for (int i = 0; i < disableOnDeath.Length; i++)
+        foreach (Behaviour behaviour in disableOnDeath)
         {
-            disableOnDeath[i].enabled = false;
+            behaviour.enabled = false;
         }
 
         // Disable player gameObjects
@@ -163,9 +196,6 @@ public class Player : NetworkBehaviour
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
-
-        // Reactivate playerController after position has been set to avoid reverting to pre-death position
-        // yield return new WaitForSeconds(0.1f);
 
         SetupPlayer();
     }

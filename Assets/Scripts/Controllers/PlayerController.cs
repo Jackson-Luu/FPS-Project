@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
     private NetworkAnimator networkAnimator;
     private Collider playerCollider;
     private PlayerCombat playerCombat;
-    private WeaponManager weaponManager;
 
     [SerializeField]
     private AudioController audioController;
@@ -48,9 +47,10 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         networkAnimator = GetComponent<NetworkAnimator>();
         playerCombat = GetComponent<PlayerCombat>();
-        weaponManager = GetComponent<WeaponManager>();
 
         StartCoroutine(DeactivateGravity(GameManager.instance.matchSettings.playerLoadTime));
+        animator.SetFloat("Body_Horizontal_f", -0.005f);
+        animator.SetFloat("Body_Vertical_f", -0.01f);
     }
 
     public IEnumerator DeactivateGravity(float duration)
@@ -131,19 +131,11 @@ public class PlayerController : MonoBehaviour
                 if (moveZ != 0)
                 {
                     animator.SetFloat("Speed_f", moveZ);
-                } else {
-
+                }
+                else
+                {
                     // Set animation to moveX or 0 if not moving
                     animator.SetFloat("Speed_f", moveX);
-                }
-            }
-
-            if (Input.GetButtonDown("Melee"))
-            {
-                if (playerCombat.attackCooldown <= 0f)
-                {
-                    playerCombat.Melee();
-                    StartCoroutine(MeleeAnimation());
                 }
             }
         }
@@ -154,15 +146,5 @@ public class PlayerController : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
 
         characterController.Move(moveDirection * Time.deltaTime);        
-    }
-
-    private IEnumerator MeleeAnimation()
-    {
-        weaponManager.Melee();
-        animator.SetInteger("WeaponType_int", 12);
-        animator.SetInteger("MeleeType_int", 2);
-        yield return new WaitForSeconds(1.3f);
-        weaponManager.EquipCurrent();
-        animator.SetInteger("WeaponType_int", 1);
     }
 }

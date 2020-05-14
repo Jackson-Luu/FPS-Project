@@ -11,13 +11,16 @@ public class Weapon : ScriptableObject
     public int maxBullets = 20;
     public float reloadTime = 2f;
 
+    public bool auto = false;
+
     public GameObject graphics;
     public AudioClip fire;
     public AudioClip reloadOut;
     public AudioClip reloadIn;
 
     public Vector3 muzzleFlashPosition;
-    public Vector3 worldMuzzleFlashPosition;
+
+    public Vector3 ADSPosition;
 
     //[HideInInspector]
     public int bullets;

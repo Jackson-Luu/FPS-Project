@@ -3,7 +3,6 @@ using TMPro;
 
 public class PlayerNameplate : MonoBehaviour
 {
-    // TODO: assign usernames to this variable when login is done
     [SerializeField]
     private TMP_Text usernameText;
 

@@ -53,5 +53,7 @@ public class MouseLook : MonoBehaviour
 
         // Rotate arms/weapon up/down
         animator.SetFloat("Head_Vertical_f", xRotation);
+
+        animator.SetFloat("Body_Vertical_f", -xRotation / 90f);
     }
 }

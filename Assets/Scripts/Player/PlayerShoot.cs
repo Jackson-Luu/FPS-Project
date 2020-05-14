@@ -25,14 +25,26 @@ public class PlayerShoot : NetworkBehaviour
     private Vector3 recoilSmoothDampVelocity;
     private float recoilRotSmoothDampVelocity;
     private float recoilAngle;
+    private Vector3 weaponHolderOrigin;
 
     [SerializeField]
     private Transform camParent;
+
+    [SerializeField]
+    private Animator weaponCamera;
 
     private AudioSource audioSource;
 
     [SerializeField]
     private ParticleSystem muzzleFlash;
+
+    private float shootCooldown = 0f;
+
+    // ADS variables
+    private bool ads = false;
+    private Vector3 scopedMuzzleFlash = new Vector3(0f, 0f, 0.5f);
+    [HideInInspector]
+    public Animator crosshair;
 
     // Start is called before the first frame update
     void Start()
@@ -47,15 +59,8 @@ public class PlayerShoot : NetworkBehaviour
         inventory = GetComponent<Inventory>();
         weaponManager.onWeaponSwitched += SwitchWeapon;
         weaponHolder = weaponManager.weaponHolder;
+        weaponHolderOrigin = weaponHolder.transform.localPosition;
         weaponInitialAngle = weaponHolder.localEulerAngles;
-
-        // Parent muzzle flash to main camera of local player
-        if (isLocalPlayer)
-        {
-            muzzleFlash.transform.SetParent(cam.transform);
-            muzzleFlash.transform.localEulerAngles = Vector3.zero;
-            muzzleFlash.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-        }
     }
 
     private void SwitchWeapon()
@@ -64,15 +69,9 @@ public class PlayerShoot : NetworkBehaviour
         audioSource = weaponManager.currentWeaponObject.GetComponent<AudioSource>();
 
         // Calibrate muzzle flash position to new weapon
-        if (currentWeapon != null && isLocalPlayer)
+        if (currentWeapon != null)
         {
-            if (isLocalPlayer)
-            {
-                muzzleFlash.transform.localPosition = currentWeapon.muzzleFlashPosition;
-            } else
-            {
-                muzzleFlash.transform.localPosition = currentWeapon.worldMuzzleFlashPosition;
-            }
+            muzzleFlash.transform.localPosition = currentWeapon.muzzleFlashPosition;
         }
     }
 
@@ -92,30 +91,43 @@ public class PlayerShoot : NetworkBehaviour
             }
         }
 
-        // Non-auto weapon
-        if (currentWeapon.fireRate <= 0)
+        // Aim Down Sight
+        if (Input.GetButtonDown("ADS"))
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (ads)
             {
-                Shoot();
-
-                // May have to use waitForSeconds to prevent spamming a non-auto weapon
+                // Zoom out
+                weaponCamera.SetBool("Scoped_b", !ads);
+                crosshair.SetBool("Scoped_b", !ads);
+            } else
+            {
+                // Zoom in
+                weaponCamera.SetBool("Scoped_b", !ads);
+                crosshair.SetBool("Scoped_b", !ads);
             }
+            ads = !ads;
+        }
 
         // Automatic weapon
+        if (currentWeapon.auto)
+        {
+            if (Input.GetButton("Fire1") && Time.time >= shootCooldown)
+            {
+                shootCooldown = Time.time + 1f / currentWeapon.fireRate;
+                Shoot();
+            }
+        // Non-auto weapon
         } else
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && Time.time >= shootCooldown)
             {
-                InvokeRepeating("Shoot", 0f, 1f / currentWeapon.fireRate);
-            } else if (Input.GetButtonUp("Fire1"))
-            {
-                CancelInvoke("Shoot");
+                shootCooldown = Time.time + 1f / currentWeapon.fireRate;
+                Shoot();
             }
         }
 
         // Recoil
-        weaponHolder.localPosition = Vector3.SmoothDamp(weaponHolder.localPosition, Vector3.zero, ref recoilSmoothDampVelocity, recoilSettleTime);
+        weaponHolder.localPosition = Vector3.SmoothDamp(weaponHolder.localPosition, weaponHolderOrigin, ref recoilSmoothDampVelocity, recoilSettleTime);
         recoilAngle = Mathf.SmoothDamp(recoilAngle, 0, ref recoilRotSmoothDampVelocity, recoilRotateSettleTime);
         weaponHolder.localEulerAngles = weaponInitialAngle + Vector3.down * recoilAngle;
         camParent.localEulerAngles = Vector3.left * recoilAngle / 10f;

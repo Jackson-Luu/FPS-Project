@@ -16,8 +16,9 @@ public class CharacterCombat : NetworkBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
+        if (!isLocalPlayer && !isServer) { return; }
         if (attackCooldown > 0)
         {
             attackCooldown -= Time.deltaTime;
