@@ -23,34 +23,45 @@ public class SpawnManager : NetworkBehaviour
     private ObjectPooler objectPooler;
 
     [SerializeField]
-    private ServerTerrainGenerator serverTerrainGenerator;
+    private ServerTerrainGenerator serverTerrainGenerator = null;
 
     public override void OnStartServer()
     {
         objectPooler = ObjectPooler.Instance;
         chunkSize = (int)serverTerrainGenerator.meshSettings.meshWorldSize;
         offset = chunkSize / 2;
-        //InvokeRepeating("SpawnEnemy", 15.0f, spawnInterval);
+        //InvokeRepeating("PlayersToSpawnEnemy", 15.0f, spawnInterval);
+        Invoke("PlayersToSpawnEnemy", 15.0f);
     }
 
-    void SpawnEnemy()
+    void PlayersToSpawnEnemy()
     {
-        players = GameManager.GetAllPlayers();        
-        foreach (GameObject player in players)
+        players = GameManager.GetAllPlayers();
+        if (GameManager.instance.scene == "Royale")
         {
-            int randomIndex = Random.Range(0, enemies.Length);
-            Vector3 randomPosition = RandomPosition(player.transform);
-            if (randomPosition != Vector3.down)
+            foreach (GameObject player in players) {
+                if (RoyaleManager.GetStatus(player.name) == Player.PlayerStatus.Alive) { SpawnEnemy(player); }
+            }
+        } else
+        {
+            foreach (GameObject player in players) { SpawnEnemy(player); }
+        }
+    }
+
+    void SpawnEnemy(GameObject player)
+    {
+        int randomIndex = Random.Range(0, enemies.Length);
+        Vector3 randomPosition = RandomPosition(player.transform.position);
+        if (randomPosition != Vector3.down)
+        {
+            GameObject enemy = objectPooler.SpawnFromPool(enemies[randomIndex].name);
+            if (enemy != null)
             {
-                GameObject enemy = objectPooler.SpawnFromPool(enemies[randomIndex].name);
-                if (enemy != null)
-                {
-                    enemy.GetComponent<NavMeshAgent>().Warp(randomPosition);
-                    enemy.transform.rotation = enemies[randomIndex].transform.rotation;
-                    enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
-                    enemy.SetActive(true);
-                    NetworkServer.Spawn(enemy);
-                }
+                enemy.GetComponent<NavMeshAgent>().Warp(randomPosition);
+                enemy.transform.rotation = enemies[randomIndex].transform.rotation;
+                enemy.GetComponent<EnemyMove>().SetPlayer = player.gameObject;
+                enemy.SetActive(true);
+                NetworkServer.Spawn(enemy);
             }
         }
     }
@@ -90,10 +101,10 @@ public class SpawnManager : NetworkBehaviour
     }
 
     // Calculate random position
-    private Vector3 RandomPosition(Transform player)
+    private Vector3 RandomPosition(Vector3 position)
     {
-        float randomX = Random.Range(player.position.x  - spawnRadius, player.position.x + spawnRadius);
-        float randomZ = Random.Range(player.position.z - spawnRadius, player.position.z + spawnRadius);
+        float randomX = Random.Range(position.x  - spawnRadius, position.x + spawnRadius);
+        float randomZ = Random.Range(position.z - spawnRadius, position.z + spawnRadius);
 
         // Shoot raycast to find terrain height
         RaycastHit hit;

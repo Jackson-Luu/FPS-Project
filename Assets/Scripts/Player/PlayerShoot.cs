@@ -57,6 +57,7 @@ public class PlayerShoot : NetworkBehaviour
 
         weaponManager = GetComponent<WeaponManager>();
         inventory = GetComponent<Inventory>();
+
         weaponManager.onWeaponSwitched += SwitchWeapon;
         weaponHolder = weaponManager.weaponHolder;
         weaponHolderOrigin = weaponHolder.transform.localPosition;

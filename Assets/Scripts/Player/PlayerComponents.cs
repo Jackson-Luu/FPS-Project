@@ -119,10 +119,6 @@ public class PlayerComponents : NetworkBehaviour
         string netID = GetComponent<NetworkIdentity>().netId.ToString();
 
         GameManager.RegisterPlayer(netID, gameObject);
-        if (isLocalPlayer)
-        {
-            //CmdRegisterPlayer(netID, gameObject);
-        }
     }
 
     void DisableComponents()

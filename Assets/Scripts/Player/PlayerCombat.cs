@@ -18,6 +18,8 @@ public class PlayerCombat : CharacterCombat
     [SerializeField]
     private WeaponManager weaponManager;
 
+    private float meleeAnimationTime;
+
     protected override void Start()
     {
         base.Start();
@@ -25,7 +27,13 @@ public class PlayerCombat : CharacterCombat
         LayerMask players = 1 << LayerMask.NameToLayer("RemotePlayer");
         layerMask = units | players;
 
+        isPlayer = true;
         GetComponent<Player>().zombifyPlayer += ActivateMeleeMode;
+        AnimationClip[] clips = playerAnimator.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            if (clip.name == "Melee_TwoHanded") { meleeAnimationTime = clip.length; }
+        }
     }
 
     protected override void Update()
@@ -67,8 +75,6 @@ public class PlayerCombat : CharacterCombat
     void ActivateMeleeMode()
     {
         meleeMode = true;
-        playerAnimator.SetInteger("WeaponType_int", 0);
-        playerAnimator.SetInteger("MeleeType_int", 2);
     }
 
     private IEnumerator MeleeAnimation()
@@ -76,7 +82,7 @@ public class PlayerCombat : CharacterCombat
         weaponManager.Melee();
         playerAnimator.SetInteger("WeaponType_int", 12);
         playerAnimator.SetInteger("MeleeType_int", 2);
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(meleeAnimationTime);
         weaponManager.EquipCurrent();
         playerAnimator.SetInteger("WeaponType_int", 1);
     }
@@ -84,7 +90,9 @@ public class PlayerCombat : CharacterCombat
     private IEnumerator UnarmedMeleeAnimation()
     {
         playerAnimator.SetInteger("WeaponType_int", 12);
-        yield return new WaitForSeconds(1.3f);
+        playerAnimator.SetInteger("MeleeType_int", 2);
+        yield return new WaitForSeconds(meleeAnimationTime);
         playerAnimator.SetInteger("WeaponType_int", 0);
     }
+    
 }

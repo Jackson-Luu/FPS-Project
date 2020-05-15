@@ -15,13 +15,13 @@ public class Player : NetworkBehaviour
     }
 
     [SerializeField]
-    private List<Behaviour> disableOnDeath = new List<Behaviour>();
+    private Behaviour[] disableOnDeath;
     private bool[] wasEnabled;
+
+    private bool firstSetup = true;
 
     [SerializeField]
     private GameObject[] disableGameObjectsOnDeath;
-
-    private bool firstSetup = true;
 
     private PlayerStats playerStats;
     private WeaponManager weaponManager;
@@ -39,6 +39,9 @@ public class Player : NetworkBehaviour
     public delegate void ZombifyPlayer();
     public ZombifyPlayer zombifyPlayer;
 
+    public delegate void PlayerDied();
+    public PlayerDied playerDied;
+
     private void Start()
     {
         playerStats = GetComponent<PlayerStats>();
@@ -55,6 +58,16 @@ public class Player : NetworkBehaviour
             transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
         }
     }
+
+    /*
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Die("Seppuku");
+        }        
+    }
+    */
 
     public void SetupPlayer()
     {
@@ -85,6 +98,12 @@ public class Player : NetworkBehaviour
     {
         if (firstSetup)
         {
+            wasEnabled = new bool[disableOnDeath.Length];
+            for (int i = 0; i < wasEnabled.Length; i++)
+            {
+                wasEnabled[i] = disableOnDeath[i].enabled;
+            }
+
             firstSetup = false;
         }
 
@@ -96,15 +115,19 @@ public class Player : NetworkBehaviour
         if (GameManager.instance.scene == "Royale" && status == PlayerStatus.Dead)
         {
             status = PlayerStatus.Undead;
+        } else
+        {
+            status = PlayerStatus.Alive;
         }
-        getStatus = PlayerStatus.Alive;
+
         playerStats.SetDefaults();
         weaponManager.currentWeapon.bullets = weaponManager.currentWeapon.maxBullets;
 
         // Enable player components
-        foreach (Behaviour behaviour in disableOnDeath)
+        for (int i = 0; i < disableOnDeath.Length; i++)
         {
-            behaviour.enabled = true;
+            if (disableOnDeath[i] is PlayerShoot && status == PlayerStatus.Undead) { continue; }
+            disableOnDeath[i].enabled = wasEnabled[i];
         }
 
         // Enable player gameObjects
@@ -139,6 +162,11 @@ public class Player : NetworkBehaviour
         }
         getStatus = PlayerStatus.Dead;
 
+        if (isServer && playerDied != null)
+        {
+            playerDied.Invoke();
+        }
+
         // Show kill feed event
         if (!isServer)
         {
@@ -160,23 +188,18 @@ public class Player : NetworkBehaviour
     {
         playerRenderer.gameObject.SetActive(false);
         zombieRenderer.gameObject.SetActive(true);
+        Animator playerAnimator = GetComponent<Animator>();
+        playerAnimator.SetInteger("WeaponType_int", 0);
+        playerAnimator.SetBool("Zombie_b", true);
         zombifyPlayer.Invoke();
-
-        foreach (Behaviour behaviour in disableOnDeath)
-        {
-            if (behaviour.name == "PlayerShoot")
-            {
-                disableOnDeath.Remove(behaviour);
-            }
-        }
     }
 
     public void DisableComponents()
     {
         // Disable components
-        foreach (Behaviour behaviour in disableOnDeath)
+        for (int i = 0; i < disableOnDeath.Length; i++)
         {
-            behaviour.enabled = false;
+            disableOnDeath[i].enabled = false;
         }
 
         // Disable player gameObjects

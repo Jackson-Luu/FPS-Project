@@ -34,6 +34,11 @@ public class RoyaleManager : MonoBehaviour
     }
     #endregion
 
+    public static Player.PlayerStatus GetStatus(string player)
+    {
+        return players[player];
+    }
+
     public static void AddPlayer(string player)
     {
         players[player] = Player.PlayerStatus.Alive;

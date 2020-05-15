@@ -9,6 +9,11 @@ public class CharacterCombat : NetworkBehaviour
 
     CharacterStats myStats;
 
+    protected bool isPlayer = false;
+
+    [SerializeField]
+    protected NetworkAnimator networkAnimator;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -18,6 +23,7 @@ public class CharacterCombat : NetworkBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        // Return if this is a remote player on clients
         if (!isLocalPlayer && !isServer) { return; }
         if (attackCooldown > 0)
         {
@@ -31,6 +37,10 @@ public class CharacterCombat : NetworkBehaviour
         {
             attackCooldown = 1f / attackSpeed;
             targetStats.TakeDamage(myStats.damage.GetValue(), gameObject.name);
+            if (!isPlayer)
+            {
+                networkAnimator.SetTrigger("Melee_t");
+            }
         }
     }
 }

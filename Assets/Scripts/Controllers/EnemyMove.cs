@@ -7,7 +7,6 @@ using Mirror;
 public class EnemyMove : NetworkBehaviour
 {
     public float lookRadius = 20f;
-    private float speed = 2f;
 
     // For animation on clients
     [SyncVar]
@@ -17,7 +16,7 @@ public class EnemyMove : NetworkBehaviour
     private CharacterCombat combat;
 
     private GameObject targetPlayer;
-    public GameObject SetPlayer { set { targetPlayer = value; } }
+    public GameObject SetPlayer { set { targetPlayer = value; targetPlayer.GetComponent<Player>().playerDied += ResetPlayer; } }
 
     private Animator animator;
 
@@ -45,7 +44,6 @@ public class EnemyMove : NetworkBehaviour
                 Vector3 player = targetPlayer.transform.position;
                 agent.SetDestination(player);
 
-
                 if (Vector3.Distance(player, transform.position) <= (agent.stoppingDistance + 0.1f))
                 {
                     // Attack
@@ -61,18 +59,34 @@ public class EnemyMove : NetworkBehaviour
                     StartCoroutine(Patrol());
                 }
 
+                // Check if any players are within lookRadius
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position, lookRadius, layerMask);
                 if (hitColliders.Length > 0)
                 {
-                    isPatrolling = false;
-                    targetPlayer = hitColliders[0].gameObject;
+                    foreach (Collider collider in hitColliders)
+                    {
+                        // If royale, only target human players
+                        if (GameManager.instance.scene == "Royale")
+                        {
+                            if (RoyaleManager.GetStatus(collider.name) != Player.PlayerStatus.Alive)
+                            {
+                                continue;
+                            }
+                        }
+
+                        // Set player as new pathing target
+                        targetPlayer = collider.gameObject;
+                        isPatrolling = false;
+                        targetPlayer.GetComponent<Player>().playerDied += ResetPlayer;
+                        break;
+                    }
                 }
             }
             currVelocity = agent.velocity.magnitude;
         } else
         {
             // Animate movement on client
-            animator.SetFloat("Speed", currVelocity);
+            animator.SetFloat("Speed_f", currVelocity);
         }
     }
 
@@ -92,9 +106,20 @@ public class EnemyMove : NetworkBehaviour
     {
         while (isPatrolling)
         {
-            agent.SetDestination(transform.position + (Random.insideUnitSphere * patrolRadius));
+            Vector3 pos = transform.position + (Random.insideUnitSphere * patrolRadius);
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(pos, out hit, patrolRadius, NavMesh.AllAreas))
+            {
+                agent.SetDestination(hit.position);
+            }
             yield return new WaitForSeconds(5f);
         }
+    }
+
+    private void ResetPlayer()
+    {
+        targetPlayer.GetComponent<Player>().playerDied -= ResetPlayer;
+        targetPlayer = null;
     }
 
     private void OnDrawGizmosSelected()

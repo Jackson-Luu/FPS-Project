@@ -41,6 +41,8 @@ public class PlayerUI : MonoBehaviour
 
     private GameObject item;
 
+    private bool zombie = false;
+
     public void SetPlayer (Player _player)
     {
         player = _player;
@@ -54,14 +56,19 @@ public class PlayerUI : MonoBehaviour
         PauseMenu.isOn = false;
         GameManager.instance.onGameOverCallback += GameOverScreen;
         player.GetComponent<PlayerShoot>().crosshair = crosshair;
+
+        player.zombifyPlayer += ZombifyUI;
     }
 
     void Update()
     {
         // Update UI health and ammo elements
         SetHealth(playerStats.GetHealthPct());
-        int bullets = weaponManager.currentWeapon.bullets;
-        SetAmmo(Mathf.Min(bullets, inventory.ammo), Mathf.Max(0, inventory.ammo - bullets));   // min updates weapon ammo to inventory ammo after switching, max clamps ammo > 0 
+        if (!zombie)
+        {
+            int bullets = weaponManager.currentWeapon.bullets;
+            SetAmmo(Mathf.Min(bullets, inventory.ammo), Mathf.Max(0, inventory.ammo - bullets));   // min updates weapon ammo to inventory ammo after switching, max clamps ammo > 0 
+        }
         LayoutRebuilder.ForceRebuildLayoutImmediate(ammoPanel);
 
         // Toggle pause menu
@@ -79,6 +86,13 @@ public class PlayerUI : MonoBehaviour
                 player.TakeItem(item);
             }
         }
+    }
+
+    void ZombifyUI()
+    {
+        zombie = true;
+        ammoText.text = "- / -";
+        crosshair.gameObject.SetActive(false);
     }
 
     public void TogglePauseMenu()

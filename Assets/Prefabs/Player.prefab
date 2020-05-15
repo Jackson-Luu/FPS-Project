@@ -497,7 +497,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 1000
+  far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -645,7 +645,6 @@ MonoBehaviour:
   - {fileID: 6985681534727514472}
   disableGameObjectsOnDeath:
   - {fileID: 1809381846}
-  - {fileID: 1826423571}
   localPlayerMaterial: {fileID: 2100000, guid: 565a36848934faa4db08756381f0ec23, type: 2}
   localZombieMaterial: {fileID: 2100000, guid: 1e7365b0dbd943740940ea49c4baf535, type: 2}
   playerRenderer: {fileID: 196138915}
@@ -739,6 +738,7 @@ MonoBehaviour:
   syncInterval: 0.1
   attackSpeed: 0.5
   attackCooldown: 0
+  networkAnimator: {fileID: 494979740115838203}
   cam: {fileID: 212466795052579923}
   meleeRange: 2
   playerAnimator: {fileID: 137953025}
@@ -912,8 +912,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
+  m_PlayOnAwake: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
