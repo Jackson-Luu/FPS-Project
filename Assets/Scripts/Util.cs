@@ -16,4 +16,11 @@ public class Util
             SetLayerRecursively(child.gameObject, newLayer, exclude);
         }
     }
+
+    // Rotate objects to align with normal
+    public static void AlignTransform(Transform transform, Vector3 normal)
+    {
+        Vector3 proj = transform.forward - (Vector3.Dot(transform.forward, normal)) * normal;
+        transform.rotation = Quaternion.LookRotation(proj, normal);
+    }
 }

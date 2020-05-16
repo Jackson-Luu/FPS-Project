@@ -24,7 +24,7 @@ public class ObjectPooler : NetworkBehaviour
     #endregion
 
     public List<Pool> pools;
-    public List<Pool> trees;
+    public List<Pool> terrain;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
     public override void OnStartServer()
@@ -46,31 +46,31 @@ public class ObjectPooler : NetworkBehaviour
             poolDictionary.Add(pool.tag, objectPool);
         }
 
-        AddTreePool();
+        AddTerrainPool();
     }
 
     public override void OnStartClient()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
-        AddTreePool();      
+        AddTerrainPool();      
     }
 
-    private void AddTreePool()
+    private void AddTerrainPool()
     {
-        Queue<GameObject> objectPool = new Queue<GameObject>();
-
-        foreach (Pool pool in trees)
+        foreach (Pool pool in terrain)
         {
+            Queue<GameObject> objectPool = new Queue<GameObject>();
+
             for (int i = 0; i < pool.size; i++)
             {
                 GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false);
-                obj.name = "Tree";
+                obj.name = pool.tag;
                 objectPool.Enqueue(obj);
             }
-        }
 
-        poolDictionary.Add("Tree", objectPool);
+            poolDictionary.Add(pool.tag, objectPool);
+        }
     }
 
     public GameObject SpawnFromPool(string tag)
@@ -79,6 +79,7 @@ public class ObjectPooler : NetworkBehaviour
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
         if (q.Count == 0)
         {
+            Debug.Log("Pool empty! Adding extra objects.");
             GameObject obj = Instantiate(objectToSpawn);
             obj.SetActive(false);
             obj.name = tag;
@@ -86,6 +87,11 @@ public class ObjectPooler : NetworkBehaviour
         }
 
         return objectToSpawn;
+    }
+
+    public GameObject RandomlySpawnFromPool(List<Pool> pool)
+    {
+        return SpawnFromPool(pool[Random.Range(0, pool.Count)].tag);
     }
 
     public void ReturnToPool(GameObject objectToReturn)

@@ -211,13 +211,12 @@ public class TerrainChunk
 
     void SpawnTrees()
     {
-        /*
         List<Vector2> points;
         int seedOffset = (int)(sampleCentre.x + sampleCentre.y);
 
         // Generate tree spawn points within each chunk
         System.Random prng = new System.Random(GameManager.instance.seed + seedOffset);
-        points = PoissonDiscSample.GeneratePoints(prng.Next(5, 15), regionSize, seedOffset, 30);
+        points = PoissonDiscSample.GeneratePoints(prng.Next(5, 10), regionSize, seedOffset, 30);
 
         foreach (Vector2 point in points)
         {
@@ -229,13 +228,13 @@ public class TerrainChunk
             spawnPoint.z += (coord.y * meshSettings.meshWorldSize);
             spawnPoint.y -= 0.1f;
 
-            GameObject spawnObject = ObjectPooler.Instance.SpawnFromPool("Tree");
+            GameObject spawnObject = ObjectPooler.Instance.RandomlySpawnFromPool(ObjectPooler.Instance.terrain);
             spawnObject.transform.position = spawnPoint;
-            spawnObject.transform.rotation = Quaternion.identity;
+            //spawnObject.transform.rotation = Quaternion.identity;
+            Util.AlignTransform(spawnObject.transform, lodMeshes[colliderLODIndex].mesh.normals[meshPosition]);
             spawnObject.SetActive(true);
             spawnObject.transform.parent = meshObject.transform;
-        }
-        */
+        } 
     }
 
     public void SetVisible(bool visible)

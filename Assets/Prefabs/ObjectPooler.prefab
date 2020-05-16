@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3775195340264047265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3775195340264047264}
+  - component: {fileID: 3775195340264047295}
+  - component: {fileID: 3775195340264047294}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3775195340264047264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3775195340264047265}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3775195340264047295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3775195340264047265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &3775195340264047294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3775195340264047265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa9de71c81825149a3a3cf07117aff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  pools:
+  - tag: Zombie
+    prefab: {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875,
+      type: 3}
+    size: 5
+  - tag: Ammo
+    prefab: {fileID: 5191661886609915004, guid: ab310e3091ca06f47bf8e55466d66d09,
+      type: 3}
+    size: 5
+  - tag: FlakJacket
+    prefab: {fileID: 4692779303801206382, guid: 768900a41796ee24584cd8fbc0c7a2fa,
+      type: 3}
+    size: 5
+  - tag: Helmet
+    prefab: {fileID: 2626519321626455741, guid: 65a23c740ba86a14bae99936f61594b6,
+      type: 3}
+    size: 5
+  - tag: Medkit
+    prefab: {fileID: 2364266859732139422, guid: 8f6b15dc12872944d8598e03c25c09a1,
+      type: 3}
+    size: 5
+  - tag: AK47
+    prefab: {fileID: 3279740696676372436, guid: ca376a012899bde419cc097db75630f4,
+      type: 3}
+    size: 5
+  - tag: LMG
+    prefab: {fileID: 424505108706323481, guid: 449ecc2dbb680104a89496beecbcccc5, type: 3}
+    size: 5
+  - tag: P90
+    prefab: {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc,
+      type: 3}
+    size: 5
+  - tag: Shotgun
+    prefab: {fileID: 6742913958889674848, guid: 889e8039dc0677848933031f29d1ca11,
+      type: 3}
+    size: 5
+  - tag: Sniper
+    prefab: {fileID: 6800427894362089940, guid: 0c52873e8642460438b663c4c8555363,
+      type: 3}
+    size: 5
+  terrain:
+  - tag: Campfire
+    prefab: {fileID: 5756380937654934529, guid: e0f64d5ff5b10064991267f8098b5137,
+      type: 3}
+    size: 20
+  - tag: TreePine-01
+    prefab: {fileID: 107868, guid: 9ee196e526432054abfb1e0754ee1912, type: 3}
+    size: 200
+  - tag: TreeLog_A-01
+    prefab: {fileID: 158320, guid: add9d40b7f3ec5647a5a44cf431831d7, type: 3}
+    size: 200
+  - tag: Grass-01
+    prefab: {fileID: 159364, guid: cc8c6187150da4a4a859c1f7ef948598, type: 3}
+    size: 200
+  - tag: MushroomRed-01
+    prefab: {fileID: 164532, guid: d343a3607ee02c647920063ec2a46eda, type: 3}
+    size: 200
+  - tag: RockCliff-01
+    prefab: {fileID: 187852, guid: a5561fd9a635eae46807e75869f1c71e, type: 3}
+    size: 200
+  - tag: TreeBirch-03
+    prefab: {fileID: 136828, guid: fe2c76e1e8b350841b06638f315a34d7, type: 3}
+    size: 200
+  - tag: Bush-01
+    prefab: {fileID: 147284, guid: b5371d5bf67ec554bb326e3c14a28f77, type: 3}
+    size: 200
+  - tag: Tree-05
+    prefab: {fileID: 160754, guid: 9f5e24fafa2f5ec4e9b7907bb573e7cc, type: 3}
+    size: 200
+  - tag: SM_Generic_Tree_03
+    prefab: {fileID: 1138684863123908, guid: a55a5493fb3426d43a13a5b082e02558, type: 3}
+    size: 200
+  - tag: SM_Generic_Tree_01
+    prefab: {fileID: 1138376770595666, guid: 57bca5bb26005a249ad8ad0575e31693, type: 3}
+    size: 200

@@ -90,7 +90,7 @@ public class SpawnManager : NetworkBehaviour
             GameObject spawnObject = objectPooler.SpawnFromPool(objects[randomIndex].name);
             spawnObject.transform.position = spawnPoint;
             spawnObject.transform.rotation = objects[randomIndex].transform.rotation;
-            AlignTransform(spawnObject.transform, mesh.normals[meshPosition]);
+            Util.AlignTransform(spawnObject.transform, mesh.normals[meshPosition]);
             spawnObject.SetActive(true);
             NetworkServer.Spawn(spawnObject);
             terrainItemsList.Add(spawnObject.GetComponent<ItemPickup>());
@@ -115,12 +115,5 @@ public class SpawnManager : NetworkBehaviour
 
         // if raycast did not hit return -1 vector
         return Vector3.down;
-    }
-
-    // Rotate objects to align with terrain
-    private void AlignTransform(Transform transform, Vector3 normal)
-    {
-        Vector3 proj = transform.forward - (Vector3.Dot(transform.forward, normal)) * normal;
-        transform.rotation = Quaternion.LookRotation(proj, normal);
     }
 }
