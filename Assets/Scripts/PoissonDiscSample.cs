@@ -11,7 +11,8 @@ public class PoissonDiscSample : MonoBehaviour
         List<Vector2> points = new List<Vector2>();
         List<Vector2> spawnPoints = new List<Vector2>();
 
-        Random.InitState(GameManager.instance.seed + seed);        
+        Random.InitState(GameManager.instance.seed + seed);
+        
         spawnPoints.Add(sampleRegionSize / 2);
         while (spawnPoints.Count > 0)
         {

@@ -6,6 +6,8 @@ using Mirror;
 
 public class ServerTerrainGenerator : NetworkBehaviour
 {
+    public static ServerTerrainGenerator instance = null;
+
     public int colliderLODIndex;
     public LODInfo[] detailLevels;
 
@@ -23,11 +25,28 @@ public class ServerTerrainGenerator : NetworkBehaviour
         terrainItemsDictionary[chunkCoord] = itemsList;
     }
 
+    public void addChunkItem(Vector2 chunkCoord, ItemPickup item)
+    {
+        terrainItemsDictionary[chunkCoord].Add(item);
+    }
+
     private NavMeshSurface navMeshSurface;
     bool navMeshBuilt = false;
     
     [SerializeField]
     private SpawnManager spawnManager;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        } else
+        {
+            Debug.Log("Duplicate server terrain generator.");
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {

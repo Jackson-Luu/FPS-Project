@@ -7,7 +7,7 @@ public class ObjectPooler : NetworkBehaviour
     [System.Serializable]
     public class Pool
     {
-        public string tag;
+        public float probability;
         public GameObject prefab;
         public int size;
     }
@@ -23,29 +23,26 @@ public class ObjectPooler : NetworkBehaviour
 
     #endregion
 
-    public List<Pool> pools;
+    public List<Pool> items;
     public List<Pool> terrain;
+    public List<Pool> enemies;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
+    private float[] probs;
+    private float probTotal = 0;
 
     public override void OnStartServer()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-        foreach (Pool pool in pools)
+        foreach (Pool pool in items)
         {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-
-            for (int i = 0; i < pool.size; i++)
-            {
-                GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false);
-                obj.name = pool.tag;
-                objectPool.Enqueue(obj);
-            }
-
-            poolDictionary.Add(pool.tag, objectPool);
+            InitPool(pool);
         }
 
+        foreach (Pool pool in enemies)
+        {
+            InitPool(pool);
+        }
         AddTerrainPool();
     }
 
@@ -57,20 +54,34 @@ public class ObjectPooler : NetworkBehaviour
 
     private void AddTerrainPool()
     {
+        probs = new float[terrain.Count];
+        int index = 0;
         foreach (Pool pool in terrain)
         {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-
-            for (int i = 0; i < pool.size; i++)
-            {
-                GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false);
-                obj.name = pool.tag;
-                objectPool.Enqueue(obj);
-            }
-
-            poolDictionary.Add(pool.tag, objectPool);
+            InitPool(pool);
+            probs[index] = pool.probability;
+            index++;
         }
+
+        for (int i = 0; i < probs.Length; i++)
+        {
+            probTotal += probs[i];
+        }
+    }
+
+    private void InitPool(Pool pool)
+    {
+        Queue<GameObject> objectPool = new Queue<GameObject>();
+
+        for (int i = 0; i < pool.size; i++)
+        {
+            GameObject obj = Instantiate(pool.prefab);
+            obj.SetActive(false);
+            obj.name = pool.prefab.name;
+            objectPool.Enqueue(obj);
+        }
+
+        poolDictionary.Add(pool.prefab.name, objectPool);
     }
 
     public GameObject SpawnFromPool(string tag)
@@ -89,14 +100,32 @@ public class ObjectPooler : NetworkBehaviour
         return objectToSpawn;
     }
 
-    public GameObject RandomlySpawnFromPool(List<Pool> pool)
+    public GameObject RandomlySpawnFromPool(List<Pool> pool, float random)
     {
-        return SpawnFromPool(pool[Random.Range(0, pool.Count)].tag);
+        return SpawnFromPool(pool[ChooseProbability(random)].prefab.name);
     }
 
     public void ReturnToPool(GameObject objectToReturn)
     {
         poolDictionary[objectToReturn.name].Enqueue(objectToReturn);
         objectToReturn.SetActive(false);
+    }
+
+    private int ChooseProbability(float random)
+    {
+        float randomPoint = random * probTotal;
+
+        for (int i = 0; i < probs.Length; i++)
+        {
+            if (randomPoint < probs[i])
+            {
+                return i;
+            }
+            else
+            {
+                randomPoint -= probs[i];
+            }
+        }
+        return probs.Length - 1;
     }
 }

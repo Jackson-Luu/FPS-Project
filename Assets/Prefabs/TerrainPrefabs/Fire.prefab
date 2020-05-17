@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2644742631061138266}
   - component: {fileID: 2644742631061138267}
   - component: {fileID: 2644742631061138264}
+  - component: {fileID: -2401009501930744584}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -48,7 +49,7 @@ ParticleSystem:
   lengthInSec: 8
   simulationSpeed: 1
   stopAction: 0
-  cullingMode: 3
+  cullingMode: 2
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
@@ -2085,7 +2086,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 0
     inWorldSpace: 1
-    randomizePerFrame: 1
+    randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
     enabled: 0
@@ -2148,7 +2149,7 @@ ParticleSystem:
       m_Bits: 4294967295
     influenceList: []
   ClampVelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -4552,6 +4553,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-2401009501930744584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2644742631061138265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6308fb5deb8797144946fe254acc7f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2644742631514356630
 GameObject:
   m_ObjectHideFlags: 0
@@ -4640,7 +4653,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 8.943819e-10}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -4687,7 +4700,7 @@ ParticleSystem:
   lengthInSec: 8
   simulationSpeed: 1
   stopAction: 0
-  cullingMode: 3
+  cullingMode: 2
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
@@ -4749,7 +4762,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -7028,7 +7041,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 0
     inWorldSpace: 1
-    randomizePerFrame: 1
+    randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
     enabled: 0
@@ -9538,7 +9551,7 @@ ParticleSystem:
   lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
-  cullingMode: 3
+  cullingMode: 2
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
@@ -11647,7 +11660,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 0
     inWorldSpace: 1
-    randomizePerFrame: 1
+    randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
     enabled: 0
@@ -11710,7 +11723,7 @@ ParticleSystem:
       m_Bits: 4294967295
     influenceList: []
   ClampVelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -14157,7 +14170,7 @@ ParticleSystem:
   lengthInSec: 8
   simulationSpeed: 1
   stopAction: 0
-  cullingMode: 3
+  cullingMode: 2
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
@@ -14219,7 +14232,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -16266,7 +16279,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 0
     inWorldSpace: 1
-    randomizePerFrame: 1
+    randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
     enabled: 0
@@ -16329,7 +16342,7 @@ ParticleSystem:
       m_Bits: 4294967295
     influenceList: []
   ClampVelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -18776,7 +18789,7 @@ ParticleSystem:
   lengthInSec: 8
   simulationSpeed: 1
   stopAction: 0
-  cullingMode: 3
+  cullingMode: 2
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
@@ -18838,7 +18851,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -20876,7 +20889,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 0
     inWorldSpace: 1
-    randomizePerFrame: 1
+    randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
     enabled: 0
@@ -20939,7 +20952,7 @@ ParticleSystem:
       m_Bits: 4294967295
     influenceList: []
   ClampVelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0

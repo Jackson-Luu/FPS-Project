@@ -152,7 +152,7 @@ public class TerrainChunk
                         // Generate trees when switching to highest LOD mesh
                         if (lodIndex == 0)
                         {
-                            SpawnTrees();
+                            SpawnTerrain();
                         }
                     }
                     else if (!lodMesh.hasRequestedMesh)
@@ -202,21 +202,21 @@ public class TerrainChunk
     public void ServerUpdateCallback()
     {
         meshCollider.sharedMesh = lodMeshes[colliderLODIndex].mesh;
-        SpawnTrees();
+        SpawnTerrain();
         if (onMeshBuiltCallback != null)
         {
             onMeshBuiltCallback.Invoke(coord, lodMeshes[colliderLODIndex].mesh);
         }
     }
 
-    void SpawnTrees()
+    void SpawnTerrain()
     {
         List<Vector2> points;
         int seedOffset = (int)(sampleCentre.x + sampleCentre.y);
 
         // Generate tree spawn points within each chunk
-        System.Random prng = new System.Random(GameManager.instance.seed + seedOffset);
-        points = PoissonDiscSample.GeneratePoints(prng.Next(5, 10), regionSize, seedOffset, 30);
+        Random.InitState(GameManager.instance.seed + seedOffset);
+        points = PoissonDiscSample.GeneratePoints(Random.Range(5, 10), regionSize, seedOffset, 30);
 
         foreach (Vector2 point in points)
         {
@@ -228,13 +228,13 @@ public class TerrainChunk
             spawnPoint.z += (coord.y * meshSettings.meshWorldSize);
             spawnPoint.y -= 0.1f;
 
-            GameObject spawnObject = ObjectPooler.Instance.RandomlySpawnFromPool(ObjectPooler.Instance.terrain);
+            GameObject spawnObject = ObjectPooler.Instance.RandomlySpawnFromPool(ObjectPooler.Instance.terrain, Random.value);
             spawnObject.transform.position = spawnPoint;
             //spawnObject.transform.rotation = Quaternion.identity;
             Util.AlignTransform(spawnObject.transform, lodMeshes[colliderLODIndex].mesh.normals[meshPosition]);
             spawnObject.SetActive(true);
             spawnObject.transform.parent = meshObject.transform;
-        } 
+        }
     }
 
     public void SetVisible(bool visible)

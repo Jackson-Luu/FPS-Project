@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\Inventory\ItemPickup.cs" />
     <Compile Include="Assets\Scripts\Inventory\Weapon.cs" />
+    <Compile Include="Assets\Scripts\IsPlaying.cs" />
     <Compile Include="Assets\Scripts\KillFeed.cs" />
     <Compile Include="Assets\Scripts\KillFeedItem.cs" />
     <Compile Include="Assets\Scripts\MatchSettings.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Assets\Scripts\Terrain\TerrainGenerator.cs" />
     <Compile Include="Assets\Scripts\Terrain\TextureGenerator.cs" />
     <Compile Include="Assets\Scripts\Terrain\ThreadedDataRequester.cs" />
+    <Compile Include="Assets\Scripts\TerrainLandmark.cs" />
     <Compile Include="Assets\Scripts\Util.cs" />
     <Compile Include="Assets\Scripts\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\WeaponStats.cs" />
