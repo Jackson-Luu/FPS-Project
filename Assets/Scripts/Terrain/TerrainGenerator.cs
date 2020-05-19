@@ -98,6 +98,7 @@ public class TerrainGenerator : MonoBehaviour
                         TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false);
                         terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
                         newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
+                        newChunk.onHighestLODCallback += OnHighestLOD;
                         newChunk.Load();
                     }
                 }
@@ -111,13 +112,20 @@ public class TerrainGenerator : MonoBehaviour
         if (isVisible)
         {
             visibleTerrainChunks.Add(chunk);
-            player.CmdAddTerrainChunk(chunk.coord);
         }
         else
         {
             visibleTerrainChunks.Remove(chunk);
-            player.CmdRemoveTerrainChunk(chunk.coord);
+            if (chunk.highestLODset)
+            {
+                player.CmdRemoveTerrainChunk(chunk.coord);
+            }
         }
+    }
+
+    void OnHighestLOD(Vector2 chunkCoord)
+    {
+        player.CmdAddTerrainChunk(chunkCoord);
     }
 }
 

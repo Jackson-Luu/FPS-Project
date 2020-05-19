@@ -23,6 +23,10 @@ public class GameManager : NetworkBehaviour
     [SyncVar]
     public string scene;
 
+    public bool server = false;
+
+    public static System.Random RNG;
+
     public delegate void OnGameOverCallback(int minutes, string player);
     public OnGameOverCallback onGameOverCallback;
 
@@ -53,7 +57,12 @@ public class GameManager : NetworkBehaviour
     #region Terrain Tracking
 
     /// <summary> Keeps track of terrain chunks around players </summary>
-    private static Dictionary<Vector2, int> terrainChunks = new Dictionary<Vector2, int>();
+    private static Dictionary<Vector2, List<NetworkConnection>> terrainChunks = new Dictionary<Vector2, List<NetworkConnection>>();
+
+    public static List<NetworkConnection> GetObservers(Vector2 chunkCoord)
+    {
+        return terrainChunks[chunkCoord];
+    }
 
     /// <summary>
     /// Delegate for players syncing terrain chunks with server
@@ -62,44 +71,33 @@ public class GameManager : NetworkBehaviour
     public delegate void ClientChangeTerrainCallback(Vector2 chunkCoord, bool addChunk);
     public ClientChangeTerrainCallback clientChangeTerrainCallback;
 
-    /// <summary>
-    /// Delegate for syncing observers with terrain items
-    /// </summary>
-    /// <param name="observer">Network connectionToClient for observer</param>
-    /// <param name="addObserver">True if adding observers, false otherwise</param>
-    public delegate void TerrainObserverCallback(Vector2 chunkCoord, NetworkConnection observer, bool addObserver);
-    public TerrainObserverCallback terrainObserverCallback;
-
     public static void AddTerrainChunk(Vector2 chunkCoord, NetworkConnection observer)
     {
         if (!terrainChunks.ContainsKey(chunkCoord))
         {
-            terrainChunks[chunkCoord] = 1;
+            terrainChunks[chunkCoord] = new List<NetworkConnection>();
             instance.clientChangeTerrainCallback.Invoke(chunkCoord, true);
         } else
         {
-            terrainChunks[chunkCoord]++;
+            var callback = ServerTerrainGenerator.instance.GetChunk(chunkCoord).onObserverChangedCallback;
+            if (callback != null) { callback.Invoke(observer, true); }
         }
-        instance.terrainObserverCallback.Invoke(chunkCoord, observer, true);
+        terrainChunks[chunkCoord].Add(observer);
     }
 
     public static void RemoveTerrainChunk(Vector2 chunkCoord, NetworkConnection observer)
     {
         if (terrainChunks.ContainsKey(chunkCoord))
         {
-            terrainChunks[chunkCoord]--;
-            instance.terrainObserverCallback.Invoke(chunkCoord, observer, false);
-            if (terrainChunks[chunkCoord] == 0)
+            terrainChunks[chunkCoord].Remove(observer);
+            var callback = ServerTerrainGenerator.instance.GetChunk(chunkCoord).onObserverChangedCallback;
+            if (callback != null) { callback.Invoke(observer, false); }
+            if (terrainChunks[chunkCoord].Count == 0)
             {
                 instance.clientChangeTerrainCallback.Invoke(chunkCoord, false);
                 terrainChunks.Remove(chunkCoord);
             }
         }
-    }
-
-    public static int GetTerrainPlayerCount(Vector2 coord)
-    {
-        return terrainChunks[coord];
     }
 
     #endregion
@@ -138,6 +136,8 @@ public class GameManager : NetworkBehaviour
         // Minimum 1 as zero is used to detect uninitialised seed
         seed = Random.Range(1, 999999);
         sceneLoaded = true;
+        server = true;
+        RNG = new System.Random(seed);
     }
 
     #endregion

@@ -21,6 +21,7 @@ public class AudioController : NetworkBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(0.2f);
             audioSource.clip = footsteps0;
             audioSource.Play();
             yield return new WaitForSeconds(footsteps0.length);
@@ -32,13 +33,11 @@ public class AudioController : NetworkBehaviour
 
     public void PlayClip()
     {
-        Debug.Log("Footsetpping");
         footstepsCoroutine = StartCoroutine(PlayFootsteps());
     }
 
     public void StopClip()
     {
-        Debug.Log("NOT Footsetpping");
         if (footstepsCoroutine != null)
         {
             StopCoroutine(footstepsCoroutine);

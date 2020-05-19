@@ -61,25 +61,22 @@ public class EnemyMove : NetworkBehaviour
 
                 // Check if any players are within lookRadius
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position, lookRadius, layerMask);
-                if (hitColliders.Length > 0)
+                foreach (Collider collider in hitColliders)
                 {
-                    foreach (Collider collider in hitColliders)
+                    // If royale, only target human players
+                    if (GameManager.instance.scene == "Royale")
                     {
-                        // If royale, only target human players
-                        if (GameManager.instance.scene == "Royale")
+                        if (RoyaleManager.GetStatus(collider.name) != Player.PlayerStatus.Alive)
                         {
-                            if (RoyaleManager.GetStatus(collider.name) != Player.PlayerStatus.Alive)
-                            {
-                                continue;
-                            }
+                            continue;
                         }
-
-                        // Set player as new pathing target
-                        targetPlayer = collider.gameObject;
-                        isPatrolling = false;
-                        targetPlayer.GetComponent<Player>().playerDied += ResetPlayer;
-                        break;
                     }
+
+                    // Set player as new pathing target
+                    targetPlayer = collider.gameObject;
+                    isPatrolling = false;
+                    targetPlayer.GetComponent<Player>().playerDied += ResetPlayer;
+                    break;
                 }
             }
             currVelocity = agent.velocity.magnitude;

@@ -50,6 +50,7 @@ public class WeaponManager : NetworkBehaviour
     {
         if (weapons.ContainsKey(weaponName))
         {
+            currentWeapon = weapons[weaponName];
             weaponSwitcher.SelectWeapon(weaponName);
         } else
         {
@@ -68,11 +69,10 @@ public class WeaponManager : NetworkBehaviour
             }
 
             weapons[weaponName] = weaponInstance.GetComponent<WeaponStats>().weapon;
-            weaponSwitcher.SelectWeapon(weaponName);
+            currentWeapon = weapons[weaponName];
             weapons[weaponName].SetBullets();
+            weaponSwitcher.SelectWeapon(weaponName);
         }
-
-        currentWeapon = weapons[weaponName];
     }
 
     public void SwitchWeapon()

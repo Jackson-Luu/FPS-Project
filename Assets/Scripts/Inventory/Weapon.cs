@@ -11,6 +11,9 @@ public class Weapon : ScriptableObject
     public int maxBullets = 20;
     public float reloadTime = 2f;
 
+    public Vector2 kickMinMax = new Vector2(0.01f, 0.05f);
+    public Vector2 recoilAngleMinMax = new Vector2(5f, 8f);
+
     public bool auto = false;
 
     public GameObject graphics;
@@ -18,9 +21,10 @@ public class Weapon : ScriptableObject
     public AudioClip reloadOut;
     public AudioClip reloadIn;
 
+    public Vector3 weaponCameraPosition;
+    public Vector3 weaponCameraRotation;
     public Vector3 muzzleFlashPosition;
-
-    public Vector3 ADSPosition;
+    public int weaponType;
 
     //[HideInInspector]
     public int bullets;

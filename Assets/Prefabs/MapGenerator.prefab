@@ -47,7 +47,7 @@ MonoBehaviour:
   colliderLODIndex: 0
   detailLevels:
   - lod: 0
-    visibleDstThreshold: 350
+    visibleDstThreshold: 300
   - lod: 1
     visibleDstThreshold: 400
   meshSettings: {fileID: 11400000, guid: 698ab23bd2a397e4fae8a40353521336, type: 2}

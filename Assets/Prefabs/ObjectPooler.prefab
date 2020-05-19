@@ -98,40 +98,40 @@ MonoBehaviour:
       type: 3}
     size: 10
   terrain:
-  - probability: 0.005
+  - probability: 0
     prefab: {fileID: 5756380937654934529, guid: e0f64d5ff5b10064991267f8098b5137,
       type: 3}
-    size: 20
+    size: 40
   - probability: 0.1
     prefab: {fileID: 107868, guid: 9ee196e526432054abfb1e0754ee1912, type: 3}
-    size: 200
+    size: 650
   - probability: 0.1
     prefab: {fileID: 158320, guid: add9d40b7f3ec5647a5a44cf431831d7, type: 3}
-    size: 200
+    size: 650
   - probability: 0.16
     prefab: {fileID: 159364, guid: cc8c6187150da4a4a859c1f7ef948598, type: 3}
-    size: 200
+    size: 1000
   - probability: 0.1
     prefab: {fileID: 164532, guid: d343a3607ee02c647920063ec2a46eda, type: 3}
-    size: 200
+    size: 650
   - probability: 0.035
     prefab: {fileID: 187852, guid: a5561fd9a635eae46807e75869f1c71e, type: 3}
-    size: 200
+    size: 650
   - probability: 0.1
     prefab: {fileID: 136828, guid: fe2c76e1e8b350841b06638f315a34d7, type: 3}
-    size: 200
+    size: 650
   - probability: 0.1
     prefab: {fileID: 147284, guid: b5371d5bf67ec554bb326e3c14a28f77, type: 3}
-    size: 200
+    size: 650
   - probability: 0.1
     prefab: {fileID: 160754, guid: 9f5e24fafa2f5ec4e9b7907bb573e7cc, type: 3}
-    size: 200
+    size: 650
   - probability: 0.1
     prefab: {fileID: 1138684863123908, guid: a55a5493fb3426d43a13a5b082e02558, type: 3}
-    size: 200
+    size: 650
   - probability: 0.1
     prefab: {fileID: 1138376770595666, guid: 57bca5bb26005a249ad8ad0575e31693, type: 3}
-    size: 200
+    size: 650
   enemies:
   - probability: 0
     prefab: {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875,

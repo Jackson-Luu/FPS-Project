@@ -103,8 +103,8 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                     else if (!footstepsPlaying) {
-                            audioController.PlayClip();
-                            footstepsPlaying = true;
+                        audioController.PlayClip();
+                        footstepsPlaying = true;
                     }
                 }
 

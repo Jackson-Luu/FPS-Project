@@ -11,7 +11,7 @@ public class ItemPickup : NetworkBehaviour
     private HashSet<NetworkConnection> _observers = new HashSet<NetworkConnection>();
     private NetworkIdentity networkIdentity;
 
-    private void Start()
+    private void Awake()
     {
         networkIdentity = GetComponent<NetworkIdentity>();
     }
@@ -51,16 +51,26 @@ public class ItemPickup : NetworkBehaviour
     }
 
     // Edit observers list
+    [Server]
     public void EditObservers(NetworkConnection netConn, bool addObserver)
     {
-        if (addObserver)
+        if (addObserver && !_observers.Contains(netConn))
         {
             _observers.Add(netConn);
+            networkIdentity.RebuildObservers(false);
+            TargetSyncObserver(netConn, gameObject.transform.position, gameObject.transform.rotation);
         } else
         {
             _observers.Remove(netConn);
+            networkIdentity.RebuildObservers(false);
         }
-        networkIdentity.RebuildObservers(false);
+    }
+
+    [TargetRpc]
+    void TargetSyncObserver(NetworkConnection conn, Vector3 position, Quaternion rotation)
+    {
+        gameObject.transform.position = position;
+        gameObject.transform.rotation = rotation;
     }
 
     public void Despawn()

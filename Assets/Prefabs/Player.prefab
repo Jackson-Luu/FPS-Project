@@ -505,7 +505,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4919
+    m_Bits: 21303
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -761,7 +761,9 @@ MonoBehaviour:
   recoilSettleTime: 0.1
   recoilRotateSettleTime: 0.5
   camParent: {fileID: 6625806560328260205}
-  weaponCamera: {fileID: 5248212678461266300}
+  weaponCameraAnim: {fileID: 5248212678461266300}
+  weaponCamera: {fileID: 1014055004}
+  playerAnimator: {fileID: 137953025}
   muzzleFlash: {fileID: 4349661502378221559}
   crosshair: {fileID: 0}
 --- !u!114 &-74100932089430960

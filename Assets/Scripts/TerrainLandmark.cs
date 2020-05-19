@@ -4,35 +4,61 @@ using Mirror;
 public class TerrainLandmark : NetworkBehaviour
 {
     [SerializeField]
-    Transform[] itemSpawnPoints;
+    Transform[] itemSpawnPoint;
 
-    bool server = false;
+    LayerMask layerMask;
 
-    public override void OnStartServer()
+    private void Start()
     {
-        server = true;
+        layerMask = 1 << LayerMask.NameToLayer("Terrain");
     }
 
-    void OnEnable()
+    public void Setup(Vector2 chunkCoord)
     {
-        if (server)
+        if (GameManager.instance.server)
         {
-            Debug.Log("TESTSTST");
-            Random.InitState(GameManager.instance.seed + (int)(transform.position.x + transform.position.y));
-            int length = ObjectPooler.Instance.items.Count;
-            float meshWorldSize = ServerTerrainGenerator.instance.meshSettings.meshWorldSize;
-            Vector2 chunkCoord = new Vector2(Mathf.RoundToInt(transform.position.x / meshWorldSize), Mathf.RoundToInt(transform.position.y / meshWorldSize));
-
-            foreach (Transform item in itemSpawnPoints)
+            System.Random prng = new System.Random(GameManager.instance.seed + (int)(transform.position.x + transform.position.y));
+            var pool = ObjectPooler.Instance.items;
+            foreach (Transform item in itemSpawnPoint)
             {
-                GameObject newItem = ObjectPooler.Instance.SpawnFromPool(ObjectPooler.Instance.items[Random.Range(0, length)].prefab.name);
+                GameObject newItem = ObjectPooler.Instance.IndexSpawnFromPool(pool, prng.Next(0, pool.Count));
                 newItem.transform.position = item.position;
-                newItem.transform.rotation = Quaternion.identity;
-                newItem.transform.SetParent(item);
+                newItem.transform.rotation = transform.rotation;
                 newItem.SetActive(true);
-                ServerTerrainGenerator.instance.addChunkItem(chunkCoord, newItem.GetComponent<ItemPickup>());
 
                 NetworkServer.Spawn(newItem);
+                ItemPickup itemPickup = newItem.GetComponent<ItemPickup>();
+                ServerTerrainGenerator.instance.GetChunk(chunkCoord).onObserverChangedCallback += itemPickup.EditObservers;
+                foreach (NetworkConnection observer in GameManager.GetObservers(chunkCoord))
+                {
+                    itemPickup.EditObservers(observer, true);
+                }
+                newItem.transform.SetParent(item);
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        ClearSpace();
+    }
+
+    void ClearSpace()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5, 1 << LayerMask.NameToLayer("Terrain"));
+        foreach (Collider collider in hitColliders)
+        {
+            ObjectPooler.Instance.ReturnToPool(collider.gameObject);
+        }
+    }
+
+    private void OnDisable()
+    {
+        foreach (Transform item in itemSpawnPoint)
+        {
+            if (item.childCount > 0)
+            {
+                ObjectPooler.Instance.ReturnToPool(item.GetChild(0).gameObject);
             }
         }
     }

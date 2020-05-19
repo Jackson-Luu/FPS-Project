@@ -14,20 +14,11 @@ public class ServerTerrainGenerator : NetworkBehaviour
     public MeshSettings meshSettings;
     public HeightMapSettings heightMapSettings;
 
-    [HideInInspector]
-    public int chunkRadius;
-
     Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
-    Dictionary<Vector2, List<ItemPickup>> terrainItemsDictionary = new Dictionary<Vector2, List<ItemPickup>>();
 
-    public void addChunkItems(Vector2 chunkCoord, List<ItemPickup> itemsList)
+    public TerrainChunk GetChunk(Vector2 chunkCoord)
     {
-        terrainItemsDictionary[chunkCoord] = itemsList;
-    }
-
-    public void addChunkItem(Vector2 chunkCoord, ItemPickup item)
-    {
-        terrainItemsDictionary[chunkCoord].Add(item);
+        return instance.terrainChunkDictionary[chunkCoord];
     }
 
     private NavMeshSurface navMeshSurface;
@@ -52,7 +43,6 @@ public class ServerTerrainGenerator : NetworkBehaviour
     {
         navMeshSurface = GetComponent<NavMeshSurface>();
         GameManager.instance.clientChangeTerrainCallback += UpdateVisibleChunks;
-        GameManager.instance.terrainObserverCallback += EditChunkObserver;
     }
 
     private void OnDestroy()
@@ -61,7 +51,6 @@ public class ServerTerrainGenerator : NetworkBehaviour
         if (GameManager.instance != null)
         {
             GameManager.instance.clientChangeTerrainCallback -= UpdateVisibleChunks;
-            GameManager.instance.terrainObserverCallback -= EditChunkObserver;
         }
     }
     
@@ -85,13 +74,6 @@ public class ServerTerrainGenerator : NetworkBehaviour
 
             Destroy(mesh);
             terrainChunkDictionary.Remove(chunkCoord);
-            if (terrainItemsDictionary[chunkCoord] != null) {
-                foreach (ItemPickup item in terrainItemsDictionary[chunkCoord])
-                {
-                    ObjectPooler.Instance.ReturnToPool(item.gameObject);
-                }
-            }
-            terrainItemsDictionary.Remove(chunkCoord);
         }
     }
 
@@ -104,39 +86,6 @@ public class ServerTerrainGenerator : NetworkBehaviour
         {
             navMeshSurface.BuildNavMesh();
             navMeshBuilt = true;
-        }
-        spawnManager.SpawnObjects(chunkCoord, mesh);
-    }
-
-    public void EditChunkObserver(Vector2 chunkCoord, NetworkConnection observer, bool addObserver)
-    {
-        if (!terrainItemsDictionary.ContainsKey(chunkCoord))
-        {
-            // Items have not finished being generated, wait for a bit
-            StartCoroutine(WaitForChunk(chunkCoord, observer, addObserver));
-        } else
-        {
-            EditObserver(chunkCoord, observer, addObserver);
-        }
-    }
-
-    // Wait until items have been generated
-    private IEnumerator WaitForChunk(Vector2 chunkCoord, NetworkConnection observer, bool addObserver)
-    {
-        while (!terrainItemsDictionary.ContainsKey(chunkCoord))
-        {
-            yield return new WaitForSeconds(1.0f);
-        }
-
-        EditObserver(chunkCoord, observer, addObserver);
-    }
-
-    // Add or remove observer to item
-    private void EditObserver(Vector2 chunkCoord, NetworkConnection observer, bool addObserver)
-    {
-        foreach (ItemPickup item in terrainItemsDictionary[chunkCoord])
-        {
-            item.EditObservers(observer, addObserver);
         }
     }
 }

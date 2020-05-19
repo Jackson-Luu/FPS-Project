@@ -18,6 +18,15 @@ MonoBehaviour:
   fireRate: 2
   maxBullets: 8
   reloadTime: 3.2
+  kickMinMax: {x: 0.01, y: 0.05}
+  recoilAngleMinMax: {x: 5, y: 8}
+  auto: 0
   graphics: {fileID: 6742913958889674848, guid: 889e8039dc0677848933031f29d1ca11,
     type: 3}
+  fire: {fileID: 8300000, guid: b5bf563932908934fbf3223d92326ee2, type: 3}
+  reloadOut: {fileID: 8300000, guid: 41c87470e73404849bb08a38889a9ae7, type: 3}
+  reloadIn: {fileID: 8300000, guid: 3a2c8383a463d6745b26f6a56d1b6bd7, type: 3}
+  muzzleFlashPosition: {x: 0, y: 0, z: 0}
+  ADSPosition: {x: 0, y: 0, z: 0}
+  weaponType: 4
   bullets: 8

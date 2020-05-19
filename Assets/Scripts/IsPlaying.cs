@@ -10,6 +10,6 @@ public class IsPlaying : MonoBehaviour
 
     void isPlaying()
     {
-        if (GetComponent<ParticleSystem>().isPlaying) { Debug.Log("I AM PLAYING " + Time.time); }
+        //if (GetComponent<ParticleSystem>().isPlaying) { Debug.Log("I AM PLAYING " + Time.time); }
     }
 }

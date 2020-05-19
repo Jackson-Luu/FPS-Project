@@ -31,7 +31,12 @@ public class PlayerShoot : NetworkBehaviour
     private Transform camParent;
 
     [SerializeField]
-    private Animator weaponCamera;
+    private Animator weaponCameraAnim;
+    [SerializeField]
+    private Transform weaponCamera;
+
+    [SerializeField]
+    private Animator playerAnimator;
 
     private AudioSource audioSource;
 
@@ -67,7 +72,12 @@ public class PlayerShoot : NetworkBehaviour
     private void SwitchWeapon()
     {
         currentWeapon = weaponManager.currentWeapon;
+        playerAnimator.SetInteger("WeaponType_int", currentWeapon.weaponType);
+        weaponCamera.position = currentWeapon.weaponCameraPosition;
+        weaponCamera.localEulerAngles = currentWeapon.weaponCameraRotation;
         audioSource = weaponManager.currentWeaponObject.GetComponent<AudioSource>();
+        kickMinMax = currentWeapon.kickMinMax;
+        recoilAngleMinMax = currentWeapon.recoilAngleMinMax;
 
         // Calibrate muzzle flash position to new weapon
         if (currentWeapon != null)
@@ -98,12 +108,12 @@ public class PlayerShoot : NetworkBehaviour
             if (ads)
             {
                 // Zoom out
-                weaponCamera.SetBool("Scoped_b", !ads);
+                weaponCameraAnim.SetBool("Scoped_b", !ads);
                 crosshair.SetBool("Scoped_b", !ads);
             } else
             {
                 // Zoom in
-                weaponCamera.SetBool("Scoped_b", !ads);
+                weaponCameraAnim.SetBool("Scoped_b", !ads);
                 crosshair.SetBool("Scoped_b", !ads);
             }
             ads = !ads;

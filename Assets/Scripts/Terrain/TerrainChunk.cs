@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Mirror;
 
 public class TerrainChunk
 {
@@ -31,12 +32,25 @@ public class TerrainChunk
     Transform viewer;
 
     bool server;
+    public bool highestLODset = false;
 
     // Mesh delegate for server
     public delegate void OnMeshBuiltCallback(Vector2 chunkCoord, Mesh mesh);
     public OnMeshBuiltCallback onMeshBuiltCallback;
 
+    // Highest LOD selected delegate for client
+    public delegate void OnHighestLODCallback(Vector2 chunkCoord);
+    public OnHighestLODCallback onHighestLODCallback;
+
     Vector2 regionSize;
+
+    /// <summary>
+    /// Delegate fired to signal items to add or remove an observer
+    /// </summary>
+    /// <param name="observer"></param>
+    /// <param name="addObserver"> true if adding observer </param>
+    public delegate void OnObserverChangedCallback(NetworkConnection observer, bool addObserver);
+    public OnObserverChangedCallback onObserverChangedCallback;
 
     public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material, bool server)
     {
@@ -90,8 +104,6 @@ public class TerrainChunk
     {
         ThreadedDataRequester.RequestData(() => HeightMapGenerator.GenerateHeightMap(meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, heightMapSettings, sampleCentre), OnHeightMapReceived);
     }
-
-
 
     void OnHeightMapReceived(object heightMapObject)
     {
@@ -152,7 +164,12 @@ public class TerrainChunk
                         // Generate trees when switching to highest LOD mesh
                         if (lodIndex == 0)
                         {
+                            if (onHighestLODCallback != null)
+                            {
+                                onHighestLODCallback.Invoke(coord);
+                            }
                             SpawnTerrain();
+                            highestLODset = true;
                         }
                     }
                     else if (!lodMesh.hasRequestedMesh)
@@ -201,6 +218,10 @@ public class TerrainChunk
 
     public void ServerUpdateCallback()
     {
+        if (meshCollider == null)
+        {
+            return;
+        }
         meshCollider.sharedMesh = lodMeshes[colliderLODIndex].mesh;
         SpawnTerrain();
         if (onMeshBuiltCallback != null)
@@ -216,7 +237,8 @@ public class TerrainChunk
 
         // Generate tree spawn points within each chunk
         Random.InitState(GameManager.instance.seed + seedOffset);
-        points = PoissonDiscSample.GeneratePoints(Random.Range(5, 10), regionSize, seedOffset, 30);
+
+        points = PoissonDiscSample.GeneratePoints(Random.Range(10, 15), regionSize, seedOffset, 30);
 
         foreach (Vector2 point in points)
         {
@@ -235,7 +257,42 @@ public class TerrainChunk
             spawnObject.SetActive(true);
             spawnObject.transform.parent = meshObject.transform;
         }
+
+        SpawnLandmarks();
     }
+
+    
+    void SpawnLandmarks()
+    {
+        List<Vector2> points;
+        int seedOffset = (int)(sampleCentre.x + sampleCentre.y);
+
+        // Generate tree spawn points within each chunk
+        Random.InitState(GameManager.instance.seed + seedOffset);
+
+        points = PoissonDiscSample.GeneratePoints(Random.Range(70, 80), regionSize, seedOffset, 30);
+
+        foreach (Vector2 point in points)
+        {
+            // Get world position and height
+            int meshPosition = (int)point.y * (int)meshSettings.meshWorldSize + (int)point.x;
+
+            Vector3 spawnPoint = lodMeshes[colliderLODIndex].mesh.vertices[meshPosition];
+            spawnPoint.x += (coord.x * meshSettings.meshWorldSize);
+            spawnPoint.z += (coord.y * meshSettings.meshWorldSize);
+
+            GameObject spawnObject = ObjectPooler.Instance.SpawnFromPool("Campfire");
+            spawnObject.transform.position = spawnPoint;
+            Util.AlignTransform(spawnObject.transform, lodMeshes[colliderLODIndex].mesh.normals[meshPosition]);
+            spawnObject.SetActive(true);
+            spawnObject.transform.parent = meshObject.transform;
+            if (server)
+            {
+                spawnObject.GetComponent<TerrainLandmark>().Setup(coord);
+            }
+        }
+    }
+    
 
     public void SetVisible(bool visible)
     {

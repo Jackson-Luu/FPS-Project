@@ -90,7 +90,7 @@ public class ObjectPooler : NetworkBehaviour
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
         if (q.Count == 0)
         {
-            Debug.Log("Pool empty! Adding extra objects.");
+            Debug.Log("Pool empty! Adding extra: " + tag);
             GameObject obj = Instantiate(objectToSpawn);
             obj.SetActive(false);
             obj.name = tag;
@@ -105,10 +105,17 @@ public class ObjectPooler : NetworkBehaviour
         return SpawnFromPool(pool[ChooseProbability(random)].prefab.name);
     }
 
+    public GameObject IndexSpawnFromPool(List<Pool> pool, int index)
+    {
+        return SpawnFromPool(pool[index].prefab.name);
+    }
+
     public void ReturnToPool(GameObject objectToReturn)
     {
+        Debug.Log(objectToReturn.name);
         poolDictionary[objectToReturn.name].Enqueue(objectToReturn);
         objectToReturn.SetActive(false);
+        objectToReturn.transform.SetParent(null);
     }
 
     private int ChooseProbability(float random)
