@@ -79,6 +79,9 @@ public class PlayerShoot : NetworkBehaviour
         kickMinMax = currentWeapon.kickMinMax;
         recoilAngleMinMax = currentWeapon.recoilAngleMinMax;
 
+        weaponCameraAnim.SetInteger("Weapon_int", currentWeapon.weaponType);
+        playerAnimator.SetFloat("Reload_f", 1 / currentWeapon.reloadTime);
+
         // Calibrate muzzle flash position to new weapon
         if (currentWeapon != null)
         {

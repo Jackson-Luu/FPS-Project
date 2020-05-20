@@ -19,8 +19,8 @@ TagManager:
   - 
   - LocalPlayer
   - RemotePlayer
-  - DontDraw
   - Weapon
+  - DontDraw
   - Units
   - PostProcessing
   - Terrain

@@ -26,7 +26,8 @@ MonoBehaviour:
   fire: {fileID: 8300000, guid: 6108e5fa7abf58a4ead029ec7e85367d, type: 3}
   reloadOut: {fileID: 8300000, guid: bb0acc070b6bbad409bc83bed9bb4ca4, type: 3}
   reloadIn: {fileID: 8300000, guid: 0ef60a2414b08cd46b68af70b09ad876, type: 3}
+  weaponCameraPosition: {x: -0.62, y: -0.21, z: -0.16}
+  weaponCameraRotation: {x: -204.26, y: 180, z: -90}
   muzzleFlashPosition: {x: 0, y: 0, z: 0}
-  ADSPosition: {x: 0, y: 0, z: 0}
   weaponType: 5
-  bullets: 5
+  bullets: 2

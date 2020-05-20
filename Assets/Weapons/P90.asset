@@ -19,7 +19,7 @@ MonoBehaviour:
   maxBullets: 20
   reloadTime: 2.76
   kickMinMax: {x: 0.01, y: 0.05}
-  recoilAngleMinMax: {x: 1, y: 2}
+  recoilAngleMinMax: {x: 0.5, y: 1}
   auto: 1
   graphics: {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc,
     type: 3}
@@ -29,6 +29,5 @@ MonoBehaviour:
   weaponCameraPosition: {x: -0.62, y: -0.21, z: -0.16}
   weaponCameraRotation: {x: -204.26, y: 180, z: -90}
   muzzleFlashPosition: {x: 0, y: 0, z: 0}
-  ADSPosition: {x: 0, y: 0, z: 0}
   weaponType: 7
-  bullets: 15
+  bullets: 19
