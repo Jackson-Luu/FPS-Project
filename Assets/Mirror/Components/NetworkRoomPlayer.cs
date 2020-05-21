@@ -41,7 +41,7 @@ namespace Mirror
         /// <summary>
         /// Do not use Start - Override OnStartrHost / OnStartClient instead!
         /// </summary>
-        public void Start()
+        public virtual void Start()
         {
             if (NetworkManager.singleton is NetworkRoomManager room)
             {
@@ -86,6 +86,18 @@ namespace Mirror
             }
         }
 
+        [ClientRpc]
+        public void RpcDisconnectRoomPlayer()
+        {
+            NetworkRoomManager room = NetworkManager.singleton as NetworkRoomManager;
+            if (room != null)
+            {
+                room.roomSlots.Remove(this);
+                room.roomPlayers--;
+                room.onRoomStatusChanged.Invoke(false);
+            }
+        }
+
         #endregion
 
         #region SyncVar Hooks
@@ -124,72 +136,13 @@ namespace Mirror
         /// <summary>
         /// Render a UI for the room.   Override to provide your on UI
         /// </summary>
-        public virtual void OnGUI()
-        {
-            if (!showRoomGUI)
-                return;
+        public virtual void OnGUI() { }
 
-            NetworkRoomManager room = NetworkManager.singleton as NetworkRoomManager;
-            if (room)
-            {
-                if (!room.showRoomGUI)
-                    return;
-
-                if (!NetworkManager.IsSceneActive(room.RoomScene))
-                    return;
-
-                DrawPlayerReadyState();
-                DrawPlayerReadyButton();
-            }
-        }
-
-        void DrawPlayerReadyButton()
-        {
-            if (NetworkClient.active && isLocalPlayer)
-            {
-                GUILayout.BeginArea(new Rect(20f, 300f, 120f, 20f));
-
-                if (readyToBegin)
-                {
-                    if (GUILayout.Button("Cancel"))
-                        ChangeReadyState(false);
-                }
-                else
-                {
-                    if (GUILayout.Button("Ready"))
-                        ChangeReadyState(true);
-                }
-
-                GUILayout.EndArea();
-            }
-        }
-
-        void ChangeReadyState(bool state)
-        {
-            CmdChangeReadyState(state);
-        }
-
-        void DrawPlayerReadyState()
-        {
-            GUILayout.BeginArea(new Rect(20f + (index * 100), 200f, 90f, 130f));
-
-            GUILayout.Label($"Player [{index + 1}]");
-
-            if (readyToBegin)
-                GUILayout.Label("Ready");
-            else
-                GUILayout.Label("Not Ready");
-
-            if (((isServer && index > 0) || isServerOnly) && GUILayout.Button("REMOVE"))
-            {
-                // This button only shows on the Host for all players other than the Host
-                // Host and Players can't remove themselves (stop the client instead)
-                // Host can kick a Player this way.
-                GetComponent<NetworkIdentity>().connectionToClient.Disconnect();
-            }
-
-            GUILayout.EndArea();
-        }
+        /// <summary>
+        /// Signal clients to begin royale mode countdown
+        /// </summary>
+        [TargetRpc]
+        public virtual void TargetBeginRoyaleCountdown(NetworkConnection conn) { }
 
         #endregion
     }

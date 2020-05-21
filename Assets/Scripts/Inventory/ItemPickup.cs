@@ -20,7 +20,7 @@ public class ItemPickup : NetworkBehaviour
     {
         if (other.CompareTag("Player") && other.GetComponent<Player>().isLocalPlayer)
         {
-            playerUI = other.gameObject.GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>();
+            playerUI = other.gameObject.GetComponent<PlayerComponents>().playerUIInstance;
             playerUI.ItemPickupEnable(gameObject, item.name);
         }
     }
@@ -29,7 +29,7 @@ public class ItemPickup : NetworkBehaviour
     {
         if (other.CompareTag("Player") && other.GetComponent<Player>().isLocalPlayer)
         {
-            playerUI = other.gameObject.GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>();
+            playerUI = other.gameObject.GetComponent<PlayerComponents>().playerUIInstance;
             playerUI.ItemPickupDisable();
         }
     }

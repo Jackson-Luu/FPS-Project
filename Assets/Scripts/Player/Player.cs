@@ -74,7 +74,7 @@ public class Player : NetworkBehaviour
         // De-activate death screen
         if (isLocalPlayer)
         {
-            GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>().deathScreen.SetActive(false);
+            GetComponent<PlayerComponents>().playerUIInstance.deathScreen.SetActive(false);
             CmdBroadcastNewPlayerSetup();
         }
     }
@@ -178,7 +178,7 @@ public class Player : NetworkBehaviour
         // Activate death screen
         if (isLocalPlayer)
         {
-            GetComponent<PlayerComponents>().playerUIInstance.GetComponent<PlayerUI>().deathScreen.SetActive(true);
+            GetComponent<PlayerComponents>().playerUIInstance.deathScreen.SetActive(true);
         }
 
         StartCoroutine(Respawn());

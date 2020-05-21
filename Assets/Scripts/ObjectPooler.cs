@@ -112,7 +112,6 @@ public class ObjectPooler : NetworkBehaviour
 
     public void ReturnToPool(GameObject objectToReturn)
     {
-        Debug.Log(objectToReturn.name);
         poolDictionary[objectToReturn.name].Enqueue(objectToReturn);
         objectToReturn.SetActive(false);
         objectToReturn.transform.SetParent(null);

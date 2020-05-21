@@ -23,7 +23,7 @@ public class TerrainLandmark : NetworkBehaviour
             {
                 GameObject newItem = ObjectPooler.Instance.IndexSpawnFromPool(pool, prng.Next(0, pool.Count));
                 newItem.transform.position = item.position;
-                newItem.transform.rotation = transform.rotation;
+                newItem.transform.Rotate(transform.rotation.eulerAngles);
                 newItem.SetActive(true);
 
                 NetworkServer.Spawn(newItem);

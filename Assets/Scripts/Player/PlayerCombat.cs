@@ -39,6 +39,7 @@ public class PlayerCombat : CharacterCombat
     protected override void Update()
     {
         base.Update();
+        if (!isLocalPlayer) { return; }
         if (Input.GetButtonDown("Melee") || (Input.GetButtonDown("Fire1") && meleeMode))
         {
             if (attackCooldown <= 0f)

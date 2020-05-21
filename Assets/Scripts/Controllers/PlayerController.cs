@@ -4,7 +4,7 @@ using Mirror;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Animator))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     CharacterController characterController;
 
@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!isLocalPlayer) { return; }
         MovePlayer();
     }
 

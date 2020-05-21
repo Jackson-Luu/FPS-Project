@@ -303,7 +303,6 @@ public class TerrainChunk
             foreach (Transform child in meshObject.transform)
             {
                 ObjectPooler.Instance.ReturnToPool(child.gameObject);
-                Debug.Log("Returning Tree");
             }
         }
     } 

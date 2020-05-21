@@ -28,6 +28,6 @@ MonoBehaviour:
   reloadIn: {fileID: 8300000, guid: 3a2c8383a463d6745b26f6a56d1b6bd7, type: 3}
   weaponCameraPosition: {x: -0.57, y: -0.21, z: -0.16}
   weaponCameraRotation: {x: -204.26, y: 180, z: -90}
-  muzzleFlashPosition: {x: 0, y: 0, z: 0}
+  muzzleFlashPosition: {x: 2.406, y: 1.052, z: 0.226}
   weaponType: 4
-  bullets: 5
+  bullets: 4

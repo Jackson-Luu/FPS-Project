@@ -333,6 +333,7 @@ namespace NodeListServer
             is set as DontDestroyOnLoad = true.
         */
 
+        /*
         bool showStartButton;
 
         public override void OnRoomServerPlayersReady()
@@ -356,6 +357,8 @@ namespace NodeListServer
                 ServerChangeScene(GameplayScene);
             }
         }
+
+        */
         #endregion
     }
 

@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
+using Mirror;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -31,6 +32,15 @@ public class PlayerUI : MonoBehaviour
     TMP_Text gameOverText;
 
     [SerializeField]
+    GameObject readyPanel;
+    [SerializeField]
+    TMP_Text readyStatus;
+    [SerializeField]
+    GameObject readyButton;
+    [SerializeField]
+    TMP_Text waitingStatus;
+
+    [SerializeField]
     Animator crosshair;
 
     [HideInInspector]
@@ -49,7 +59,11 @@ public class PlayerUI : MonoBehaviour
         weaponManager = player.GetComponent<WeaponManager>();
         playerStats = player.GetComponent<PlayerStats>();
         inventory = player.GetComponent<Inventory>();
+        roomPlayer = player.GetComponent<RoomPlayer>();
     }
+
+    private NetworkRoomManager room;
+    private RoomPlayer roomPlayer;
 
     void Start()
     {
@@ -57,6 +71,27 @@ public class PlayerUI : MonoBehaviour
         GameManager.instance.onGameOverCallback += GameOverScreen;
         player.GetComponent<PlayerShoot>().crosshair = crosshair;
 
+        // Enable room UI
+        room = NetworkManager.singleton as NetworkRoomManager;
+        if (room)
+        {
+            if (NetworkManager.IsSceneActive(room.RoomScene))
+            {
+                readyPanel.SetActive(true);
+            }
+            room.onRoomStatusChanged += UpdateReadyStatus;
+            foreach (NetworkRoomPlayer player in room.roomSlots)
+            {
+                if (player.readyToBegin) room.playersReady++;
+            }
+            if (room.countdown > 0)
+            {
+                UpdateReadyStatus(true, room.countdown);
+            } else
+            {
+                UpdateReadyStatus(false);
+            }
+        }
         player.zombifyPlayer += ZombifyUI;
     }
 
@@ -137,5 +172,33 @@ public class PlayerUI : MonoBehaviour
     {
         gameOverText.text = player + " Won!\n\nKills: X\n\nSurvived : " + minutes + " mins";
         gameOverScreen.SetActive(true);
+    }
+
+    public void UpdateReadyStatus(bool allReady, int countdown = 60)
+    {
+        if (allReady)
+        {
+            readyButton.SetActive(false);
+            waitingStatus.gameObject.SetActive(true);
+            StartCoroutine(RoyaleCountdown(countdown));
+        }
+        readyStatus.text = room.playersReady + " / " + room.roomPlayers + " Players Ready";
+    }
+
+    IEnumerator RoyaleCountdown(int countdown)
+    {
+        for (int i = countdown; i > 0; i--)
+        {
+            waitingStatus.text = "Game starting in " + i;
+            yield return new WaitForSeconds(1);
+        }
+        waitingStatus.text = "Game starting";
+    }
+
+    public void ReadyButton()
+    {
+        roomPlayer.CmdChangeReadyState(true);
+        readyButton.SetActive(false);
+        waitingStatus.gameObject.SetActive(true);
     }
 }

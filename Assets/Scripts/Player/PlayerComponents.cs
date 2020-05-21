@@ -22,7 +22,7 @@ public class PlayerComponents : NetworkBehaviour
     [SerializeField]
     GameObject playerUIPrefab;
     [HideInInspector]
-    public GameObject playerUIInstance;
+    public PlayerUI playerUIInstance;
 
     [SerializeField]
     private GameObject terrainGeneratorPrefab;
@@ -97,14 +97,10 @@ public class PlayerComponents : NetworkBehaviour
         Player player = GetComponent<Player>();
 
         // Create Player UI
-        playerUIInstance = Instantiate(playerUIPrefab);
-        playerUIInstance.name = playerUIPrefab.name;
-
-        // Configure Player UI
-        PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
-        if (ui == null) { Debug.LogError("No PlayerUI on PlayerUI Prefab."); }
-
-        ui.SetPlayer(player);
+        GameObject playerUIObject = Instantiate(playerUIPrefab);
+        playerUIObject.name = playerUIPrefab.name;
+        playerUIInstance = playerUIObject.GetComponent<PlayerUI>();
+        playerUIInstance.SetPlayer(player);
 
         // Create Terrain Generator
         GameObject terrainObject = Instantiate(terrainGeneratorPrefab);
@@ -136,7 +132,10 @@ public class PlayerComponents : NetworkBehaviour
 
     void OnDisable()
     {
-        Destroy(playerUIInstance);
+        if (playerUIInstance != null)
+        {
+            Destroy(playerUIInstance.gameObject);
+        }
 
         GameManager.UnRegisterPlayer(transform.name);
     }

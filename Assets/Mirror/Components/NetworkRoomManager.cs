@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -76,6 +77,18 @@ namespace Mirror
         [Tooltip("List of Room Player objects")]
         public List<NetworkRoomPlayer> roomSlots = new List<NetworkRoomPlayer>();
 
+        public delegate void OnRoomStatusChanged(bool allReady, int countdown = 60);
+        public OnRoomStatusChanged onRoomStatusChanged;
+
+        public int roomPlayers = 0;
+        public int playersReady = 0;
+        private int countingDown = -1;
+        public int countdown
+        {
+            get { return countingDown; }
+            set { countingDown = value; }
+        }
+
         public override void OnValidate()
         {
             // always >= 0
@@ -115,10 +128,7 @@ namespace Mirror
                 }
             }
 
-            if (CurrentPlayers == ReadyPlayers)
-                CheckReadyToBegin();
-            else
-                allPlayersReady = false;
+            CheckReadyToBegin();
         }
 
         /// <summary>
@@ -181,13 +191,33 @@ namespace Mirror
         /// </summary>
         public void CheckReadyToBegin()
         {
-            if (!IsSceneActive(RoomScene))
+            Debug.Log(countingDown);
+            if (!IsSceneActive(RoomScene) || (countingDown >= 0))
                 return;
 
+            // Use this if game should start only when all players are ready
             if (minPlayers > 0 && NetworkServer.connections.Count(conn => conn.Value != null && conn.Value.identity.gameObject.GetComponent<NetworkRoomPlayer>().readyToBegin) < minPlayers)
             {
                 allPlayersReady = false;
                 return;
+            }
+
+            StartCoroutine(RoyaleCountdown());
+        }
+
+        IEnumerator RoyaleCountdown()
+        {
+            foreach (NetworkRoomPlayer player in roomSlots)
+            {
+                if (player != null)
+                {
+                    player.TargetBeginRoyaleCountdown(player.connectionToClient);
+                }
+            }
+
+            for (countingDown = 60; countingDown > 0; countingDown--)
+            {
+                yield return new WaitForSeconds(1);
             }
 
             pendingPlayers.Clear();
@@ -251,6 +281,7 @@ namespace Mirror
             if (conn.identity != null)
             {
                 NetworkRoomPlayer player = conn.identity.GetComponent<NetworkRoomPlayer>();
+                player.RpcDisconnectRoomPlayer();
 
                 if (player != null)
                     roomSlots.Remove(player);
