@@ -215,7 +215,7 @@ namespace Mirror
                 }
             }
 
-            for (countingDown = 60; countingDown > 0; countingDown--)
+            for (countingDown = 5; countingDown > 0; countingDown--)
             {
                 yield return new WaitForSeconds(1);
             }
@@ -260,13 +260,13 @@ namespace Mirror
                 return;
             }
 
-            // cannot join game in progress
+            /* cannot join game in progress
             if (!IsSceneActive(RoomScene))
             {
                 conn.Disconnect();
                 return;
             }
-
+            */
             base.OnServerConnect(conn);
             OnRoomServerConnect(conn);
         }
@@ -281,12 +281,15 @@ namespace Mirror
             if (conn.identity != null)
             {
                 NetworkRoomPlayer player = conn.identity.GetComponent<NetworkRoomPlayer>();
-                player.RpcDisconnectRoomPlayer();
 
                 if (player != null)
+                {
+                    player.RpcDisconnectRoomPlayer();
                     roomSlots.Remove(player);
+                }
             }
 
+            /*
             allPlayersReady = false;
 
             foreach (NetworkRoomPlayer player in roomSlots)
@@ -294,6 +297,7 @@ namespace Mirror
                 if (player != null)
                     player.GetComponent<NetworkRoomPlayer>().readyToBegin = false;
             }
+            */
 
             if (IsSceneActive(RoomScene))
                 RecalculateRoomPlayerIndices();
@@ -320,7 +324,9 @@ namespace Mirror
                 
                 GameObject newRoomGameObject = OnRoomServerCreateRoomPlayer(conn);
                 if (newRoomGameObject == null)
+                {
                     newRoomGameObject = Instantiate(roomPlayerPrefab.gameObject, GetStartPosition().position, Quaternion.identity);
+                }
 
                 NetworkServer.AddPlayerForConnection(conn, newRoomGameObject);
             } else

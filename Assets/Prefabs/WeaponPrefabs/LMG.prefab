@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 7361161857173671095}
   m_Layer: 0
   m_Name: LMG
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,7 +189,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424505108706323481}
-  m_LocalRotation: {x: -0.14845802, y: 0.22857122, z: -0.6913467, w: 0.66914517}
+  m_LocalRotation: {x: 0.056648582, y: 0.26659992, z: -0.015698861, w: 0.962013}
   m_LocalPosition: {x: -0.107, y: 0.081, z: 0.154}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_Children:
@@ -201,7 +201,7 @@ Transform:
   - {fileID: 428712198643570339}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 6.74, y: 30.979002, z: -90}
+  m_LocalEulerAnglesHint: {x: 6.74, y: 30.979002, z: 0}
 --- !u!33 &403841449436708899
 MeshFilter:
   m_ObjectHideFlags: 0

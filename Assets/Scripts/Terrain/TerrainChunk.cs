@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Mirror;
+using System.IO;
 
 public class TerrainChunk
 {
@@ -43,6 +44,8 @@ public class TerrainChunk
     public OnHighestLODCallback onHighestLODCallback;
 
     Vector2 regionSize;
+    int meshArrayDimension;
+    int meshDimension;
 
     /// <summary>
     /// Delegate fired to signal items to add or remove an observer
@@ -62,6 +65,8 @@ public class TerrainChunk
         this.viewer = viewer;
         this.server = server;
         this.regionSize = new Vector2(meshSettings.meshWorldSize, meshSettings.meshWorldSize);
+        this.meshArrayDimension = (int)meshSettings.meshWorldSize + 1;
+        this.meshDimension = (int)meshSettings.meshWorldSize;
 
         sampleCentre = coord * meshSettings.meshWorldSize / meshSettings.meshScale;
         Vector2 position = coord * meshSettings.meshWorldSize;
@@ -243,11 +248,11 @@ public class TerrainChunk
         foreach (Vector2 point in points)
         {
             // Get world position and height
-            int meshPosition = (int)point.y * (int)meshSettings.meshWorldSize + (int)point.x;
+            int meshPosition = ((meshDimension - (int)point.y) * meshArrayDimension) + (int)point.x;
 
             Vector3 spawnPoint = lodMeshes[colliderLODIndex].mesh.vertices[meshPosition];
-            spawnPoint.x += (coord.x * meshSettings.meshWorldSize);
-            spawnPoint.z += (coord.y * meshSettings.meshWorldSize);
+            spawnPoint.x += (coord.x * meshDimension);
+            spawnPoint.z += (coord.y * meshDimension);
             spawnPoint.y -= 0.1f;
 
             GameObject spawnObject = ObjectPooler.Instance.RandomlySpawnFromPool(ObjectPooler.Instance.terrain, Random.value);
@@ -270,18 +275,19 @@ public class TerrainChunk
         // Generate tree spawn points within each chunk
         Random.InitState(GameManager.instance.seed + seedOffset);
 
-        points = PoissonDiscSample.GeneratePoints(Random.Range(70, 80), regionSize, seedOffset, 30);
+        points = PoissonDiscSample.GeneratePoints(Random.Range(65, 75), regionSize, seedOffset, 30);
 
         foreach (Vector2 point in points)
         {
             // Get world position and height
-            int meshPosition = (int)point.y * (int)meshSettings.meshWorldSize + (int)point.x;
+            int meshPosition = ((meshDimension - (int)point.y) * meshArrayDimension) + (int)point.x;
 
             Vector3 spawnPoint = lodMeshes[colliderLODIndex].mesh.vertices[meshPosition];
-            spawnPoint.x += (coord.x * meshSettings.meshWorldSize);
-            spawnPoint.z += (coord.y * meshSettings.meshWorldSize);
+            spawnPoint.x += (coord.x * meshDimension);
+            spawnPoint.z += (coord.y * meshDimension);
+            spawnPoint.y += 0.01f;
 
-            GameObject spawnObject = ObjectPooler.Instance.SpawnFromPool("Campfire");
+            GameObject spawnObject = ObjectPooler.Instance.IndexSpawnFromPool(ObjectPooler.Instance.terrainLandmarks, 0);
             spawnObject.transform.position = spawnPoint;
             Util.AlignTransform(spawnObject.transform, lodMeshes[colliderLODIndex].mesh.normals[meshPosition]);
             spawnObject.SetActive(true);

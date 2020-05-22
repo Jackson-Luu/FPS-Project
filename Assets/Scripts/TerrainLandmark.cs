@@ -22,8 +22,15 @@ public class TerrainLandmark : NetworkBehaviour
             foreach (Transform item in itemSpawnPoint)
             {
                 GameObject newItem = ObjectPooler.Instance.IndexSpawnFromPool(pool, prng.Next(0, pool.Count));
-                newItem.transform.position = item.position;
-                newItem.transform.Rotate(transform.rotation.eulerAngles);
+                newItem.transform.rotation = item.rotation;
+                if (newItem.CompareTag("Weapon"))
+                {
+                    newItem.transform.Rotate(new Vector3(0, 0, 90));
+                    newItem.transform.position = item.position + new Vector3(0, 0.05f, 0);
+                } else
+                {
+                    newItem.transform.position = item.position;
+                }
                 newItem.SetActive(true);
 
                 NetworkServer.Spawn(newItem);

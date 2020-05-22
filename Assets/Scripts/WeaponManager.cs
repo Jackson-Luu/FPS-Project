@@ -51,7 +51,6 @@ public class WeaponManager : NetworkBehaviour
         if (weapons.ContainsKey(weaponName))
         {
             currentWeapon = weapons[weaponName];
-            weaponSwitcher.SelectWeapon(weaponName);
         } else
         {
             GameObject weaponPrefab = GameManager.GetWeapon(weaponName);
@@ -62,17 +61,18 @@ public class WeaponManager : NetworkBehaviour
             weaponInstance.name = weaponName;
             weaponInstance.GetComponent<Collider>().enabled = false;
 
+            weapons[weaponName] = weaponInstance.GetComponent<WeaponStats>().weapon;
+            currentWeapon = weapons[weaponName];
+            weapons[weaponName].SetBullets();
+
             if (isLocalPlayer)
             {
                 // Add weapon to weapon camera layer to prevent seeing gun clipping into objects
                 Util.SetLayerRecursively(weaponInstance, LayerMask.NameToLayer("Weapon"));
             }
-
-            weapons[weaponName] = weaponInstance.GetComponent<WeaponStats>().weapon;
-            currentWeapon = weapons[weaponName];
-            weapons[weaponName].SetBullets();
-            weaponSwitcher.SelectWeapon(weaponName);
         }
+
+        weaponSwitcher.SelectWeapon(weaponName);
     }
 
     public void SwitchWeapon()
@@ -86,13 +86,10 @@ public class WeaponManager : NetworkBehaviour
         }
     }
 
-    public void Melee()
+    public IEnumerator Melee(float meleeAnimationTime)
     {
         weaponSwitcher.SelectWeapon(meleeWeapon);
-    }
-
-    public void EquipCurrent()
-    {
+        yield return new WaitForSeconds(meleeAnimationTime);
         weaponSwitcher.SelectWeapon(currentWeapon.name);
     }
 
@@ -141,16 +138,5 @@ public class WeaponManager : NetworkBehaviour
     void RpcPlayClip()
     {
         StartCoroutine(Reload_Coroutine());
-    }
-
-    [Command]
-    void CmdEquipWeapon()
-    {
-    }
-
-    [ClientRpc]
-    void RpcEquipWeapon()
-    {
-
     }
 }

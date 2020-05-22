@@ -3,18 +3,16 @@ using UnityEngine;
 
 public class PoissonVisual : MonoBehaviour
 {
-    public float radius = 300;
-    public Vector2 regionSize = new Vector2(8000,8000);
+    public float radius = 50;
+    public Vector2 regionSize = new Vector2(120, 120);
     public int rejectionSamples = 30;
     public float displayRadius = 75;
-
-    public Vector2 offset = new Vector2(-4000, -4000);
 
     List<Vector2> points;
 
     void OnValidate()
     {
-        points = PoissonDiscSample.GeneratePoints(radius, regionSize, rejectionSamples);
+        points = PoissonDiscSample.GeneratePoints(radius, regionSize, 0, rejectionSamples);
     }
 
     void OnDrawGizmos()
@@ -24,7 +22,7 @@ public class PoissonVisual : MonoBehaviour
         {
             foreach (Vector2 point in points)
             {
-                Gizmos.DrawSphere(point + offset, displayRadius);
+                Gizmos.DrawSphere(point, displayRadius);
             }
         }
     }

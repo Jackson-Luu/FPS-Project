@@ -80,12 +80,12 @@ public class PlayerCombat : CharacterCombat
 
     private IEnumerator MeleeAnimation()
     {
-        weaponManager.Melee();
+        StartCoroutine(weaponManager.Melee(meleeAnimationTime));
+        CmdEquipMelee();
         playerAnimator.SetInteger("WeaponType_int", 12);
         playerAnimator.SetInteger("MeleeType_int", 2);
         yield return new WaitForSeconds(meleeAnimationTime);
-        weaponManager.EquipCurrent();
-        playerAnimator.SetInteger("WeaponType_int", 1);
+        playerAnimator.SetInteger("WeaponType_int", weaponManager.currentWeapon.weaponType);
     }
 
     private IEnumerator UnarmedMeleeAnimation()
@@ -96,4 +96,17 @@ public class PlayerCombat : CharacterCombat
         playerAnimator.SetInteger("WeaponType_int", 0);
     }
     
+    [Command]
+    void CmdEquipMelee()
+    {
+        RpcEquipMelee();
+        StartCoroutine(weaponManager.Melee(meleeAnimationTime));
+    }
+
+    [ClientRpc]
+    void RpcEquipMelee()
+    {
+        if (isLocalPlayer) { return; }
+        StartCoroutine(weaponManager.Melee(meleeAnimationTime));
+    }
 }

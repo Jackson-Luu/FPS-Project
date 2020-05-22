@@ -26,6 +26,7 @@ public class ObjectPooler : NetworkBehaviour
     public List<Pool> items;
     public List<Pool> terrain;
     public List<Pool> enemies;
+    public List<Pool> terrainLandmarks;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
     private float[] probs;
     private float probTotal = 0;
@@ -43,16 +44,16 @@ public class ObjectPooler : NetworkBehaviour
         {
             InitPool(pool);
         }
-        AddTerrainPool();
+        AddTerrainPools();
     }
 
     public override void OnStartClient()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
-        AddTerrainPool();      
+        AddTerrainPools();      
     }
 
-    private void AddTerrainPool()
+    private void AddTerrainPools()
     {
         probs = new float[terrain.Count];
         int index = 0;
@@ -61,6 +62,11 @@ public class ObjectPooler : NetworkBehaviour
             InitPool(pool);
             probs[index] = pool.probability;
             index++;
+        }
+
+        foreach (Pool pool in terrainLandmarks)
+        {
+            InitPool(pool);
         }
 
         for (int i = 0; i < probs.Length; i++)
@@ -90,7 +96,7 @@ public class ObjectPooler : NetworkBehaviour
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
         if (q.Count == 0)
         {
-            Debug.Log("Pool empty! Adding extra: " + tag);
+            //Debug.Log("Pool empty! Adding extra: " + tag);
             GameObject obj = Instantiate(objectToSpawn);
             obj.SetActive(false);
             obj.name = tag;

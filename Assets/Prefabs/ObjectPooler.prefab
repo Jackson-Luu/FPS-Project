@@ -98,23 +98,16 @@ MonoBehaviour:
       type: 3}
     size: 10
   terrain:
-  - probability: 0
-    prefab: {fileID: 5756380937654934529, guid: e0f64d5ff5b10064991267f8098b5137,
-      type: 3}
-    size: 40
   - probability: 0.1
     prefab: {fileID: 107868, guid: 9ee196e526432054abfb1e0754ee1912, type: 3}
     size: 650
   - probability: 0.1
     prefab: {fileID: 158320, guid: add9d40b7f3ec5647a5a44cf431831d7, type: 3}
     size: 650
-  - probability: 0.16
+  - probability: 0.275
     prefab: {fileID: 159364, guid: cc8c6187150da4a4a859c1f7ef948598, type: 3}
     size: 1000
-  - probability: 0.1
-    prefab: {fileID: 164532, guid: d343a3607ee02c647920063ec2a46eda, type: 3}
-    size: 650
-  - probability: 0.035
+  - probability: 0.025
     prefab: {fileID: 187852, guid: a5561fd9a635eae46807e75869f1c71e, type: 3}
     size: 650
   - probability: 0.1
@@ -137,3 +130,8 @@ MonoBehaviour:
     prefab: {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875,
       type: 3}
     size: 5
+  terrainLandmarks:
+  - probability: 0
+    prefab: {fileID: 5756380937654934529, guid: e0f64d5ff5b10064991267f8098b5137,
+      type: 3}
+    size: 20

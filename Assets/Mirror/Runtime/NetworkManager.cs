@@ -1276,13 +1276,12 @@ namespace Mirror
         /// <param name="conn">Connection from client.</param>
         public virtual void OnServerAddPlayer(NetworkConnection conn)
         {
-            /*Transform startPos = GetStartPosition();
-            //startPos.position = new Vector3(startPos.position.x, Terrain.activeTerrain.SampleHeight(startPos.position) + (float)1.01, startPos.position.z);
+            Transform startPos = GetStartPosition();
             GameObject player = startPos != null
                 ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
                 : Instantiate(playerPrefab);
 
-            NetworkServer.AddPlayerForConnection(conn, player);*/
+            NetworkServer.AddPlayerForConnection(conn, player);
         }
 
         /// <summary>
