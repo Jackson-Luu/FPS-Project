@@ -49,6 +49,17 @@ public class InventoryUI : MonoBehaviour
         {
             inventorySlots[i].index = i;
         }
+
+        // Re-adding any saved items
+        UpdateInventory();
+        UpdateEquipmentAll();
+    }
+
+    // Important to remove delegates when switching scenes as room player persists
+    private void OnDestroy()
+    {
+        inventory.onItemChangedCallback -= UpdateInventory;
+        equipmentManager.onEquipmentChangedCallback -= UpdateEquipment;
     }
 
     private void Update()
@@ -97,6 +108,17 @@ public class InventoryUI : MonoBehaviour
         } else
         {
             equipmentSlots[(int)slot].ClearSlot();
+        }
+    }
+
+    void UpdateEquipmentAll()
+    {
+        for (int i = 0; i < equipmentManager.currentEquipment.Length; i++)
+        {
+            if (equipmentManager.currentEquipment[i] != null)
+            {
+                equipmentSlots[i].AddItem(equipmentManager.currentEquipment[i]);
+            }
         }
     }
 }

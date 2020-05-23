@@ -10,12 +10,12 @@ public class SpawnManager : NetworkBehaviour
 
     // Enemy spawning variables
     private float spawnRadius = 50;
-    private float spawnInterval = 15.0f;
+    private float spawnInterval = 10.0f;
 
     public override void OnStartServer()
     {
-        //InvokeRepeating("PlayersToSpawnEnemy", 15.0f, spawnInterval);
-        Invoke("PlayersToSpawnEnemy", 15.0f);
+        InvokeRepeating("PlayersToSpawnEnemy", 15.0f, spawnInterval);
+        //Invoke("PlayersToSpawnEnemy", 15.0f);
     }
 
     void PlayersToSpawnEnemy()

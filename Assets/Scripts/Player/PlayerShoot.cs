@@ -69,6 +69,11 @@ public class PlayerShoot : NetworkBehaviour
         weaponInitialAngle = weaponHolder.localEulerAngles;
     }
 
+    private void OnDestroy()
+    {
+        weaponManager.onWeaponSwitched -= SwitchWeapon;
+    }
+
     private void SwitchWeapon()
     {
         currentWeapon = weaponManager.currentWeapon;

@@ -95,6 +95,12 @@ public class PlayerUI : MonoBehaviour
         player.zombifyPlayer += ZombifyUI;
     }
 
+    private void OnDestroy()
+    {
+        room.onRoomStatusChanged -= UpdateReadyStatus;
+        GameManager.instance.onGameOverCallback -= GameOverScreen;
+    }
+
     void Update()
     {
         // Update UI health and ammo elements

@@ -7,6 +7,8 @@
         [SyncVar(hook = nameof(SyncCountdown))]
         public int countingDown;
 
+        private bool firstSetup = true;
+
         void SyncCountdown(int _, int countDown)
         {
             (NetworkManager.singleton as NetworkRoomManager).countdown = countDown;
@@ -27,7 +29,15 @@
         public override void OnClientEnterRoom()
         {
             if (nrm == null) { return; }
-            nrm.roomPlayers++;
+            if (firstSetup)
+            {
+                nrm.roomPlayers++;
+                firstSetup = false;
+            } else
+            {
+                // No need to register, returning to room player
+                return;
+            }
             if (nrm.onRoomStatusChanged != null)
             {
                 nrm.onRoomStatusChanged.Invoke(false);

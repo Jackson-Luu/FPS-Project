@@ -2,7 +2,7 @@
 
 public class EquipmentManager : MonoBehaviour
 {
-    Equipment[] currentEquipment;
+    public Equipment[] currentEquipment;
 
     Inventory inventory;
 
@@ -45,7 +45,6 @@ public class EquipmentManager : MonoBehaviour
 
     public void UnEquip(EquipmentSlot slot)
     {
-        Debug.Log("EqManager: " + slot);
         int slotIndex = (int)slot;
 
         Equipment oldItem = null;

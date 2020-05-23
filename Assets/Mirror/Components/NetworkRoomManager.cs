@@ -191,11 +191,9 @@ namespace Mirror
         /// </summary>
         public void CheckReadyToBegin()
         {
-            Debug.Log(countingDown);
             if (!IsSceneActive(RoomScene) || (countingDown >= 0))
                 return;
 
-            // Use this if game should start only when all players are ready
             if (minPlayers > 0 && NetworkServer.connections.Count(conn => conn.Value != null && conn.Value.identity.gameObject.GetComponent<NetworkRoomPlayer>().readyToBegin) < minPlayers)
             {
                 allPlayersReady = false;
@@ -215,7 +213,7 @@ namespace Mirror
                 }
             }
 
-            for (countingDown = 5; countingDown > 0; countingDown--)
+            for (countingDown = 60; countingDown > 0; countingDown--)
             {
                 yield return new WaitForSeconds(1);
             }
@@ -355,6 +353,9 @@ namespace Mirror
         {
             if (newSceneName == RoomScene)
             {
+                // Reset countdown
+                countingDown = -1;
+
                 foreach (NetworkRoomPlayer roomPlayer in roomSlots)
                 {
                     if (roomPlayer == null)
@@ -684,7 +685,11 @@ namespace Mirror
         /// This is called on the client when the client is finished loading a new networked scene.
         /// </summary>
         /// <param name="conn">The connection that finished loading a new networked scene.</param>
-        public virtual void OnRoomClientSceneChanged(NetworkConnection conn) { }
+        public virtual void OnRoomClientSceneChanged(NetworkConnection conn) {
+
+            // Reset players ready count
+            playersReady = 0;
+        }
 
         /// <summary>
         /// Called on the client when adding a player to the room fails.
@@ -728,8 +733,10 @@ namespace Mirror
                 GUILayout.EndArea();
             }
 
+            /*
             if (IsSceneActive(RoomScene))
                 GUI.Box(new Rect(10f, 180f, 520f, 150f), "PLAYERS");
+            */
         }
 
         #endregion

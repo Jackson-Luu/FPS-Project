@@ -60,7 +60,7 @@ namespace NodeListServer
 
             if (refreshButton)
             {
-                refreshButton.onClick.AddListener(() => Invoke(nameof(RefreshServerList), 0f));
+                refreshButton.onClick.AddListener(() => Invoke(nameof(RefreshList), 0f));
             }
 
             // For experts only
@@ -83,6 +83,7 @@ namespace NodeListServer
             }
         }
 
+        /*
         private void LateUpdate()
         {
             if (popup != null)
@@ -90,11 +91,13 @@ namespace NodeListServer
                 popup.SetActive(isBusy);
             }
         }
+        */
 
         // -- Coroutines -- //
         private IEnumerator RefreshServerList()
         {
-            if (popupStatusText != null) popupStatusText.text = "Just wait a moment";
+            //if (popupStatusText != null) popupStatusText.text = "Just wait a moment";
+            if (mainStatusText != null) mainStatusText.text = "Refreshing...";
             //print("Refreshing the server list...");
 
             // DEBUG: Investigating some Unity jank, seems that Unity can get "stuck"
@@ -150,7 +153,6 @@ namespace NodeListServer
         // So I guess the workaround is to make a bootstrapper.
         private void RefreshList()
         {
-            Debug.Log("REFRESHING");
             // Don't refresh again if we're busy
             if (isBusy) return;
 
@@ -204,7 +206,7 @@ namespace NodeListServer
                     formatStatus = "<color=yellow>In-Game</color>";
                 }
 
-                entryController.titleText.text = listServerListEntries[i].name;
+                entryController.titleText.text = "World " + i;
                 entryController.statusText.text = formatStatus;
                 entryController.playersText.text = $"{listServerListEntries[i].players} {(listServerListEntries[i].capacity > 0 ? $"/ {listServerListEntries[i].capacity}" : string.Empty)}";
                 // It is up to you to figure out how to do the latency text.
@@ -228,8 +230,9 @@ namespace NodeListServer
         // -- BONUS -- //
         private void BonusButton()
         {
+            bonusButton.GetComponentInChildren<Text>().text = "Hi!";
             // Hmmm...
-            NetworkManager.singleton.StartServer();
+            //NetworkManager.singleton.StartServer();
         }
     }
 }

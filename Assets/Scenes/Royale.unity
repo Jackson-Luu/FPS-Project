@@ -843,7 +843,6 @@ MonoBehaviour:
   - {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc, type: 3}
   - {fileID: 6742913958889674848, guid: 889e8039dc0677848933031f29d1ca11, type: 3}
   - {fileID: 6800427894362089940, guid: 0c52873e8642460438b663c4c8555363, type: 3}
-  serverTerrainGenerator: {fileID: 0}
 --- !u!114 &1679994018
 MonoBehaviour:
   m_ObjectHideFlags: 0

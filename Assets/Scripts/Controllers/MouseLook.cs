@@ -19,6 +19,9 @@ public class MouseLook : MonoBehaviour
         animator = playerBody.GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // if inventory is open, close
+        if (InventoryUI.isOn) { InventoryUI.isOn = false; }
     }
 
     // Late update lets the camera wait for movement calculations to occur first to reduce jittering

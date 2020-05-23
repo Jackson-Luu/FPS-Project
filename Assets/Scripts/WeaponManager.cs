@@ -46,6 +46,15 @@ public class WeaponManager : NetworkBehaviour
         GetComponent<Player>().zombifyPlayer += Disarm;
     }
 
+    private void OnEnable()
+    {
+        // Send weapon type to animator when returning to room player
+        if (currentWeapon != null)
+        {
+            onWeaponSwitched.Invoke();
+        }
+    }
+
     public void EquipWeapon(string weaponName)
     {
         if (weapons.ContainsKey(weaponName))
