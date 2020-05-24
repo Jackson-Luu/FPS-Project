@@ -16,7 +16,8 @@ public class EnemyMove : NetworkBehaviour
     private CharacterCombat combat;
 
     private GameObject targetPlayer;
-    public GameObject SetPlayer { set { targetPlayer = value; targetPlayer.GetComponent<Player>().playerDied += ResetPlayer; } }
+    private Player player;
+    public GameObject SetPlayer { set { targetPlayer = value; player = targetPlayer.GetComponent<Player>(); player.playerDied += ResetPlayer; } }
 
     private Animator animator;
 
@@ -32,6 +33,11 @@ public class EnemyMove : NetworkBehaviour
         animator = GetComponent<Animator>();
 
         layerMask = 1 << LayerMask.NameToLayer("RemotePlayer");
+    }
+
+    private void OnDisable()
+    {
+        if (targetPlayer != null) { player.playerDied -= ResetPlayer; targetPlayer = null; }
     }
 
     // Update is called once per frame
@@ -115,7 +121,7 @@ public class EnemyMove : NetworkBehaviour
 
     private void ResetPlayer()
     {
-        targetPlayer.GetComponent<Player>().playerDied -= ResetPlayer;
+        player.playerDied -= ResetPlayer;
         targetPlayer = null;
     }
 

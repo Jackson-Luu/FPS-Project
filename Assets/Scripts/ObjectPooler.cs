@@ -50,6 +50,11 @@ public class ObjectPooler : NetworkBehaviour
     public override void OnStartClient()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
+
+        foreach (Pool pool in enemies)
+        {
+            InitPool(pool);
+        }
         AddTerrainPools();      
     }
 

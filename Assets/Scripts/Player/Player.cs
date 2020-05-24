@@ -41,6 +41,9 @@ public class Player : NetworkBehaviour
     public delegate void PlayerDied();
     public PlayerDied playerDied;
 
+    [SerializeField]
+    private PlayerShoot playerShoot;
+
     private void Start()
     {
         playerStats = GetComponent<PlayerStats>();
@@ -64,8 +67,9 @@ public class Player : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             Die("Seppuku");
-        }        
+        }
     }
+
     */
 
     public void SetupPlayer()
@@ -141,6 +145,9 @@ public class Player : NetworkBehaviour
         {
             col.enabled = true;
         }
+
+        // Recalibrate weapon camera weapon type
+        if (isLocalPlayer) { playerShoot.SetupPlayer(); }
     }
 
     public void Die(string sourceID)

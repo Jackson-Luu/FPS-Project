@@ -20,79 +20,23 @@ public class Enemy : NetworkBehaviour
     private void OnEnable()
     {
         Enable();
-
-        if (isServer)
-        {
-            RpcEnable();
-        }
     }
 
     void Start()
     {
-        if (isServer)
-        {
-            objectPooler = ObjectPooler.Instance;
-        }
-    }
-
-    [ClientRpc]
-    private void RpcEnable()
-    {
-        gameObject.SetActive(true);
+        objectPooler = ObjectPooler.Instance;
     }
 
     private void Enable()
     {
-        // Initial enable interaction with object pooler enabling bug
-        if (firstSetup) {
-            firstSetup = false;
-            return;
-        }
-
-        // Enable enemy graphics and collider
-        enemyGFX.SetActive(true);
-
-        Collider col = GetComponent<Collider>();
-        if (col != null)
-        {
-            col.enabled = true;
-        }
-
-        if (enemyStats == null)
-        {
-            Debug.Log("WTF");
-        }
         enemyStats.SetDefaults();
     }
 
     // Enemy disabled on clientrpc call then returned to object pool
+    [Server]
     public void Die(string sourceID)
     {
-        Disable();
-        if (isServer)
-        {
-            RpcDie();
-            objectPooler.ReturnToPool(gameObject);
-            GetComponent<EnemyMove>().enabled = false;
-        }
-    }
-
-    [ClientRpc]
-    public void RpcDie()
-    {
-        Disable();
-        gameObject.SetActive(false);
-    }
-
-    public void Disable()
-    {
-        // Disable enemy graphics and collider
-        enemyGFX.SetActive(false);
-
-        Collider col = GetComponent<Collider>();
-        if (col != null)
-        {
-            col.enabled = false;
-        }
+        objectPooler.ReturnToPool(gameObject);
+        NetworkServer.UnSpawn(gameObject);
     }
 }

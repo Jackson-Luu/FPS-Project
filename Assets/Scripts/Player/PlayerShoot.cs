@@ -74,12 +74,18 @@ public class PlayerShoot : NetworkBehaviour
         weaponManager.onWeaponSwitched -= SwitchWeapon;
     }
 
+    public void SetupPlayer()
+    {
+        if (currentWeapon != null)
+        {
+            weaponCameraAnim.SetInteger("Weapon_int", currentWeapon.weaponType);
+        }
+    }
+
     private void SwitchWeapon()
     {
         currentWeapon = weaponManager.currentWeapon;
         playerAnimator.SetInteger("WeaponType_int", currentWeapon.weaponType);
-        weaponCamera.position = currentWeapon.weaponCameraPosition;
-        weaponCamera.localEulerAngles = currentWeapon.weaponCameraRotation;
         audioSource = weaponManager.currentWeaponObject.GetComponent<AudioSource>();
         kickMinMax = currentWeapon.kickMinMax;
         recoilAngleMinMax = currentWeapon.recoilAngleMinMax;

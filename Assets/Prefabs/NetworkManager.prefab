@@ -64,7 +64,6 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
-  - {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875, type: 3}
   - {fileID: 2364266859732139422, guid: 8f6b15dc12872944d8598e03c25c09a1, type: 3}
   - {fileID: 2626519321626455741, guid: 65a23c740ba86a14bae99936f61594b6, type: 3}
   - {fileID: 4692779303801206382, guid: 768900a41796ee24584cd8fbc0c7a2fa, type: 3}
@@ -81,6 +80,8 @@ MonoBehaviour:
   GameplayScene: Assets/Scenes/Royale.unity
   allPlayersReady: 0
   roomSlots: []
+  roomPlayers: 0
+  playersReady: 0
   nodeListServerAdapter: {fileID: 4106758218964250649}
 --- !u!114 &4106758218130366467
 MonoBehaviour:
