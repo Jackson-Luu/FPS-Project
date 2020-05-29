@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class TerrainGenerator : MonoBehaviour
     {
         player = _player;
     }
+
+    Queue<Vector2> chunkGenQueue = new Queue<Vector2>();
+    WaitForSeconds staggerWait = new WaitForSeconds(0.2f);
+    bool staggerRunning = false;
 
     void Start()
     {
@@ -89,22 +94,38 @@ public class TerrainGenerator : MonoBehaviour
                 Vector2 viewedChunkCoord = new Vector2(currentChunkCoordX + xOffset, currentChunkCoordY + yOffset);
                 if (!alreadyUpdatedChunkCoords.Contains(viewedChunkCoord))
                 {
-                    if (terrainChunkDictionary.ContainsKey(viewedChunkCoord))
+                    chunkGenQueue.Enqueue(viewedChunkCoord);
+                    if (!staggerRunning)
                     {
-                        terrainChunkDictionary[viewedChunkCoord].UpdateTerrainChunk();
-                    }
-                    else
-                    {
-                        TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false);
-                        terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
-                        newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
-                        newChunk.onHighestLODCallback += OnHighestLOD;
-                        newChunk.Load();
+                        staggerRunning = true;
+                        StartCoroutine(StaggerChunkGen());
                     }
                 }
-
             }
         }
+    }
+
+    private IEnumerator StaggerChunkGen()
+    {
+        while (chunkGenQueue.Count > 0)
+        {
+            Vector2 viewedChunkCoord = chunkGenQueue.Dequeue();
+            if (terrainChunkDictionary.ContainsKey(viewedChunkCoord))
+            {
+                terrainChunkDictionary[viewedChunkCoord].UpdateTerrainChunk();
+            }
+            else
+            {
+                TerrainChunk newChunk = new TerrainChunk(viewedChunkCoord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, transform, viewer, mapMaterial, false);
+                terrainChunkDictionary.Add(viewedChunkCoord, newChunk);
+                newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
+                newChunk.onHighestLODCallback += OnHighestLOD;
+                newChunk.Load();
+            }
+
+            yield return staggerWait;
+        }
+        staggerRunning = false;
     }
 
     void OnTerrainChunkVisibilityChanged(TerrainChunk chunk, bool isVisible)

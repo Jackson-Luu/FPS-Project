@@ -1,10 +1,10 @@
 ﻿// This file is part of the NodeListServer Example package.
 using Mirror;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace NodeListServer
 {
@@ -23,16 +23,13 @@ namespace NodeListServer
         [SerializeField] private int refreshInterval = 10;
 
         [Header("Cosmetics")]
-        public GameObject popup;
-        public Text mainStatusText;
-        public Text popupStatusText;
+        public TMP_Text mainStatusText;
         public GameObject ListElementPrefab;
         public GameObject ListElementContainer;
 
 
         [Header("For Experts only")]
         public Button refreshButton;
-        public Button bonusButton;    // <-- This one is a joke, tbh. You can get rid of it.
 
         // Stop editing from this point onwards //
         private bool isBusy = false;
@@ -62,12 +59,6 @@ namespace NodeListServer
             {
                 refreshButton.onClick.AddListener(() => Invoke(nameof(RefreshList), 0f));
             }
-
-            // For experts only
-            if (bonusButton)
-            {
-                bonusButton.onClick.AddListener(BonusButton);
-            }
         }
 
         private void Start()
@@ -83,20 +74,9 @@ namespace NodeListServer
             }
         }
 
-        /*
-        private void LateUpdate()
-        {
-            if (popup != null)
-            {
-                popup.SetActive(isBusy);
-            }
-        }
-        */
-
         // -- Coroutines -- //
         private IEnumerator RefreshServerList()
         {
-            //if (popupStatusText != null) popupStatusText.text = "Just wait a moment";
             if (mainStatusText != null) mainStatusText.text = "Refreshing...";
             //print("Refreshing the server list...");
 
@@ -219,20 +199,12 @@ namespace NodeListServer
                     // print("CLICKY");
                     NetworkManager.singleton.networkAddress = modifiedAddress;
                     NetworkManager.singleton.GetComponent<TelepathyTransport>().port = (ushort)port;
-                    //GetComponent<Websocket.WebsocketTransport>().port = port;
+                    //NetworkManager.singleton.GetComponent<Mirror.Websocket.WebsocketTransport>().port = port;
                     NetworkManager.singleton.StartClient();
                 });
             }
 
             // Done here.
-        }
-
-        // -- BONUS -- //
-        private void BonusButton()
-        {
-            bonusButton.GetComponentInChildren<Text>().text = "Hi!";
-            // Hmmm...
-            //NetworkManager.singleton.StartServer();
         }
     }
 }

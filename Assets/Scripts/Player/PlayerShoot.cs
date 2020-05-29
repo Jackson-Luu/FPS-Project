@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using Mirror;
 
 [RequireComponent(typeof(WeaponManager))]
@@ -51,6 +52,10 @@ public class PlayerShoot : NetworkBehaviour
     [HideInInspector]
     public Animator crosshair;
 
+    public GameObject sniperScope;
+    private WaitForSeconds sniperScopeWait = new WaitForSeconds(0.15f);
+    private float normalFOV;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +72,8 @@ public class PlayerShoot : NetworkBehaviour
         weaponHolder = weaponManager.weaponHolder;
         weaponHolderOrigin = weaponHolder.transform.localPosition;
         weaponInitialAngle = weaponHolder.localEulerAngles;
+
+        normalFOV = cam.fieldOfView;
     }
 
     private void OnDestroy()
@@ -107,7 +114,7 @@ public class PlayerShoot : NetworkBehaviour
 
         if (currentWeapon.bullets < currentWeapon.maxBullets)
         {
-            if (Input.GetButton("Reload"))
+            if (Input.GetButton("Reload") && !GameManager.instance.chatSelected)
             {
                 if ((inventory.ammo - currentWeapon.bullets) > 0)
                 {
@@ -124,11 +131,22 @@ public class PlayerShoot : NetworkBehaviour
                 // Zoom out
                 weaponCameraAnim.SetBool("Scoped_b", !ads);
                 crosshair.SetBool("Scoped_b", !ads);
+                if (currentWeapon.weaponType == 5)
+                {
+                    sniperScope.SetActive(false);
+                    weaponCamera.gameObject.SetActive(true);
+                    weaponCameraAnim.SetInteger("Weapon_int", currentWeapon.weaponType);
+                    cam.fieldOfView = normalFOV;
+                }
             } else
             {
                 // Zoom in
                 weaponCameraAnim.SetBool("Scoped_b", !ads);
                 crosshair.SetBool("Scoped_b", !ads);
+                if (currentWeapon.weaponType == 5)
+                {
+                    StartCoroutine(SniperScope());
+                }
             }
             ads = !ads;
         }
@@ -258,5 +276,13 @@ public class PlayerShoot : NetworkBehaviour
     void RpcPlayClip()
     {
         audioSource.PlayOneShot(currentWeapon.fire);
+    }
+
+    IEnumerator SniperScope()
+    {
+        yield return sniperScopeWait;
+        sniperScope.SetActive(true);
+        weaponCamera.gameObject.SetActive(false);
+        cam.fieldOfView = 15f;
     }
 }

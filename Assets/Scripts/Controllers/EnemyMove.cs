@@ -21,9 +21,16 @@ public class EnemyMove : NetworkBehaviour
 
     private Animator animator;
 
+    [SerializeField]
+    private AudioSource audioSource;
+
     private int layerMask;
     private float patrolRadius = 20f;
     private bool isPatrolling = false;
+
+    private Coroutine audioCoroutine = null;
+    private WaitForSeconds zombieAudioWait = new WaitForSeconds(20f);
+    private bool client = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,11 +40,21 @@ public class EnemyMove : NetworkBehaviour
         animator = GetComponent<Animator>();
 
         layerMask = 1 << LayerMask.NameToLayer("RemotePlayer");
+        if (isClient)
+        {
+            audioCoroutine = StartCoroutine(zombieAudio());
+            client = true;
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (client && targetPlayer != null) { audioCoroutine = StartCoroutine(zombieAudio()); };
     }
 
     private void OnDisable()
     {
-        if (targetPlayer != null) { player.playerDied -= ResetPlayer; targetPlayer = null; }
+        if (targetPlayer != null) { player.playerDied -= ResetPlayer; targetPlayer = null; audioSource.Stop(); }
     }
 
     // Update is called once per frame
@@ -70,7 +87,7 @@ public class EnemyMove : NetworkBehaviour
                 foreach (Collider collider in hitColliders)
                 {
                     // If royale, only target human players
-                    if (GameManager.instance.scene == "Royale")
+                    if (GameManager.instance.isRoyale)
                     {
                         if (RoyaleManager.GetStatus(collider.name) != Player.PlayerStatus.Alive)
                         {
@@ -123,6 +140,15 @@ public class EnemyMove : NetworkBehaviour
     {
         player.playerDied -= ResetPlayer;
         targetPlayer = null;
+    }
+
+    IEnumerator zombieAudio()
+    {
+        while (targetPlayer != null)
+        {
+            yield return zombieAudioWait;
+            audioSource.Play();
+        }
     }
 
     private void OnDrawGizmosSelected()

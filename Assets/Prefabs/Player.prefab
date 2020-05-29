@@ -680,11 +680,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  speed: 10
+  speed: 8
   jumpSpeed: 5
-  gravity: 20
+  gravity: 18
   mouseSens: 2
-  sprintMultiplier: 2
+  sprintMultiplier: 1.5
   staminaBurnRate: 1.5
   staminaRegenRate: 0.7
   audioController: {fileID: 6781486896963532831}

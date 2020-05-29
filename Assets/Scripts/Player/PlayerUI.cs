@@ -41,6 +41,9 @@ public class PlayerUI : MonoBehaviour
     TMP_Text waitingStatus;
 
     [SerializeField]
+    TMP_Text countdownText;
+
+    [SerializeField]
     Animator crosshair;
 
     [HideInInspector]
@@ -51,6 +54,9 @@ public class PlayerUI : MonoBehaviour
 
     private GameObject item;
 
+    [SerializeField]
+    private GameObject scope;
+
     private bool zombie = false;
 
     public void SetPlayer (Player _player)
@@ -60,16 +66,21 @@ public class PlayerUI : MonoBehaviour
         playerStats = player.GetComponent<PlayerStats>();
         inventory = player.GetComponent<Inventory>();
         roomPlayer = player.GetComponent<RoomPlayer>();
+        GetComponent<PlayerChat>().player = player;
     }
 
     private NetworkRoomManager room;
     private RoomPlayer roomPlayer;
 
+    WaitForSeconds countdownWait = new WaitForSeconds(1);
+
     void Start()
     {
         PauseMenu.isOn = false;
         GameManager.instance.onGameOverCallback += GameOverScreen;
-        player.GetComponent<PlayerShoot>().crosshair = crosshair;
+        PlayerShoot playerShoot = player.GetComponent<PlayerShoot>();
+        playerShoot.crosshair = crosshair;
+        playerShoot.sniperScope = scope;
 
         // Enable room UI
         room = NetworkManager.singleton as NetworkRoomManager;
@@ -93,6 +104,8 @@ public class PlayerUI : MonoBehaviour
             }
         }
         player.zombifyPlayer += ZombifyUI;
+
+        StartCoroutine(Countdown((int)GameManager.instance.matchSettings.playerLoadTime));
     }
 
     private void OnDestroy()
@@ -113,18 +126,23 @@ public class PlayerUI : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(ammoPanel);
 
         // Toggle pause menu
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("PauseMenu"))
         {
             TogglePauseMenu();
         }
 
-        if (!PauseMenu.isOn)
+        if (!PauseMenu.isOn && !GameManager.instance.chatSelected)
         {
             // Pick up item
             if (Input.GetKeyDown(KeyCode.F))
             {
                 ItemPickupDisable();
                 player.TakeItem(item);
+            }
+
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                ReadyButton();
             }
         }
     }
@@ -196,15 +214,43 @@ public class PlayerUI : MonoBehaviour
         for (int i = countdown; i > 0; i--)
         {
             waitingStatus.text = "Game starting in " + i;
-            yield return new WaitForSeconds(1);
+            yield return countdownWait;
         }
         waitingStatus.text = "Game starting";
     }
 
+    IEnumerator Countdown(int countdown)
+    {
+        countdownText.gameObject.SetActive(true);
+        for (int i = countdown; i > 0; i--)
+        {
+            countdownText.text = i.ToString();
+            yield return countdownWait;
+        }
+        countdownText.gameObject.SetActive(false);
+    }
+
     public void ReadyButton()
     {
-        roomPlayer.CmdChangeReadyState(true);
-        readyButton.SetActive(false);
-        waitingStatus.gameObject.SetActive(true);
+        if (readyButton.activeSelf)
+        {
+            roomPlayer.CmdChangeReadyState(true);
+            readyButton.SetActive(false);
+            waitingStatus.gameObject.SetActive(true);
+        }
+    }
+
+    public void SelectObject(GameObject selected)
+    {
+        foreach (Transform child in pauseMenu.transform)
+        {
+            if (ReferenceEquals(child.gameObject, selected))
+            {
+                child.gameObject.SetActive(true);
+            } else
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
     }
 }

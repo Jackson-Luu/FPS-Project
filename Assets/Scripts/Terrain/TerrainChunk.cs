@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Mirror;
-using System.IO;
 
 public class TerrainChunk
 {
@@ -107,7 +106,14 @@ public class TerrainChunk
 
     public void Load()
     {
-        ThreadedDataRequester.RequestData(() => HeightMapGenerator.GenerateHeightMap(meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, heightMapSettings, sampleCentre), OnHeightMapReceived);
+        if (server)
+        {
+            ThreadedDataRequester.RequestData(() => HeightMapGenerator.GenerateHeightMap(meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, heightMapSettings, sampleCentre), OnHeightMapReceived);
+        }
+        else
+        {
+            OnHeightMapReceived(HeightMapGenerator.GenerateHeightMap(meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, heightMapSettings, sampleCentre));
+        }
     }
 
     void OnHeightMapReceived(object heightMapObject)
@@ -120,7 +126,7 @@ public class TerrainChunk
             UpdateTerrainChunk();
         } else
         {
-            lodMeshes[colliderLODIndex].RequestMesh(heightMap, meshSettings);
+            lodMeshes[colliderLODIndex].RequestMesh(heightMap, meshSettings, server);
         }
     }
 
@@ -179,7 +185,7 @@ public class TerrainChunk
                     }
                     else if (!lodMesh.hasRequestedMesh)
                     {
-                        lodMesh.RequestMesh(heightMap, meshSettings);
+                        lodMesh.RequestMesh(heightMap, meshSettings, server);
                     }
                 }
             }
@@ -206,7 +212,7 @@ public class TerrainChunk
             {
                 if (!lodMeshes[colliderLODIndex].hasRequestedMesh)
                 {
-                    lodMeshes[colliderLODIndex].RequestMesh(heightMap, meshSettings);
+                    lodMeshes[colliderLODIndex].RequestMesh(heightMap, meshSettings, server);
                 }
             }
 
@@ -342,10 +348,15 @@ class LODMesh
         updateCallback();
     }
 
-    public void RequestMesh(HeightMap heightMap, MeshSettings meshSettings)
+    public void RequestMesh(HeightMap heightMap, MeshSettings meshSettings, bool server)
     {
         hasRequestedMesh = true;
-        ThreadedDataRequester.RequestData(() => MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, lod), OnMeshDataReceived);
+        if (server) {
+            ThreadedDataRequester.RequestData(() => MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, lod), OnMeshDataReceived);
+        } else
+        {
+            OnMeshDataReceived(MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, lod));
+        }
     }
 
 }

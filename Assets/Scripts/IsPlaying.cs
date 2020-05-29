@@ -5,7 +5,7 @@ public class IsPlaying : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("isPlaying", 15f, 2f);
+        //InvokeRepeating("isPlaying", 15f, 2f);
     }
 
     void isPlaying()

@@ -42,7 +42,7 @@ public class SpawnManager : NetworkBehaviour
         players = GameManager.GetAllPlayers();
 
         System.Guid randomId = assetIds[Random.Range(0, enemies.Length)];
-        if (GameManager.instance.scene == "Royale")
+        if (GameManager.instance.isRoyale)
         {
             foreach (GameObject player in players) {
                 if (RoyaleManager.GetStatus(player.name) == Player.PlayerStatus.Alive) { SpawnEnemy(player, randomId); }
@@ -77,7 +77,6 @@ public class SpawnManager : NetworkBehaviour
 
     public void UnSpawnObject(GameObject spawned)
     {
-        Debug.Log("Re-pooling GameObject " + spawned.name);
         ObjectPooler.Instance.ReturnToPool(spawned);
     }
 

@@ -5,7 +5,7 @@ using System.Threading;
 
 public class ThreadedDataRequester : MonoBehaviour
 {
-
+    
     static ThreadedDataRequester instance;
     Queue<ThreadInfo> dataQueue = new Queue<ThreadInfo>();
 
@@ -57,4 +57,5 @@ public class ThreadedDataRequester : MonoBehaviour
         }
 
     }
+    
 }

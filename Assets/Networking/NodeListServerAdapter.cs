@@ -1,6 +1,7 @@
 ﻿// This file is part of the NodeListServer Example package.
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace NodeListServer

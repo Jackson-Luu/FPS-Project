@@ -115,7 +115,7 @@ public class Player : NetworkBehaviour
 
     public void setDefaults()
     {
-        if (GameManager.instance.scene == "Royale" && status == PlayerStatus.Dead)
+        if (GameManager.instance.isRoyale && status == PlayerStatus.Dead)
         {
             status = PlayerStatus.Undead;
         } else
@@ -156,7 +156,7 @@ public class Player : NetworkBehaviour
             return;
         } else if (getStatus == PlayerStatus.Alive)
         {
-            if (GameManager.instance.scene == "Royale")
+            if (GameManager.instance.isRoyale)
             {
                 if (isServer)
                 {
@@ -231,7 +231,10 @@ public class Player : NetworkBehaviour
 
     public void TakeItem(GameObject itemObject)
     {
-        CmdPickup(itemObject);
+        if (itemObject != null)
+        {
+            CmdPickup(itemObject);
+        }
     }
 
     [Command]
@@ -264,6 +267,19 @@ public class Player : NetworkBehaviour
     public void CmdRemoveTerrainChunk(Vector2 coord)
     {
         GameManager.RemoveTerrainChunk(coord, connectionToClient);
+    }
+
+    [Command]
+    public void CmdChatMessage(string message)
+    {
+        RpcChatMessage(message);
+    }
+
+    [ClientRpc]
+    public void RpcChatMessage(string message)
+    {
+        if (isLocalPlayer) { return; }
+        if (GameManager.instance.chatMessageCallback != null) { GameManager.instance.chatMessageCallback.Invoke(message); }
     }
 
     public enum PlayerStatus { Alive, Dead, Undead }

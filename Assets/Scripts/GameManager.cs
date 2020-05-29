@@ -21,11 +21,13 @@ public class GameManager : NetworkBehaviour
     public bool sceneLoaded = false;
 
     [SyncVar]
-    public string scene;
+    public bool isRoyale;
 
     public bool server = false;
 
     public static System.Random RNG;
+
+    public bool chatSelected = false;
 
     public delegate void OnGameOverCallback(int minutes, string player);
     public OnGameOverCallback onGameOverCallback;
@@ -41,6 +43,9 @@ public class GameManager : NetworkBehaviour
 
     public delegate void OnPlayerKilledCallback(string player, string source);
     public OnPlayerKilledCallback onPlayerKilledCallback;
+
+    public delegate void ChatMessageCallback(string message);
+    public ChatMessageCallback chatMessageCallback;
 
     public MatchSettings matchSettings;
 
@@ -127,7 +132,15 @@ public class GameManager : NetworkBehaviour
                 }
             }
             string[] sceneString = NetworkManager.networkSceneName.Split("/"[0]);
-            scene = sceneString[2].Split("."[0])[0];
+            string scene = sceneString[2].Split("."[0])[0];
+
+            if (scene == "Game")
+            {
+                isRoyale = false;
+            } else
+            {
+                isRoyale = true;
+            }
         }
     }
 
@@ -150,8 +163,7 @@ public class GameManager : NetworkBehaviour
     {
         players.Add(playerID, player);
         player.transform.name = playerID;
-        Debug.Log(instance.scene);
-        if (instance.scene == "Royale")
+        if (instance.isRoyale)
         {
             RoyaleManager.AddPlayer(playerID);
         }

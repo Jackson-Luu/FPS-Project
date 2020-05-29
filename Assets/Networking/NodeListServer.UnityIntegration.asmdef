@@ -2,7 +2,8 @@
     "name": "NodeListServer.UnityIntegration",
     "references": [
         "Mirror",
-        "Mirror.Components"
+        "Mirror.Components",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

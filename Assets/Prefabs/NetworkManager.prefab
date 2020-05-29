@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4106758218130366465}
   - component: {fileID: 3087988364514736469}
-  - component: {fileID: 4106758218130366467}
   - component: {fileID: 444454098}
   - component: {fileID: 4106758218130366468}
   - component: {fileID: 4106758218964250649}
@@ -55,14 +54,14 @@ MonoBehaviour:
   serverTickRate: 60
   offlineScene: Assets/Scenes/Lobby.unity
   onlineScene: Assets/Scenes/Game.unity
-  transport: {fileID: 4106758218130366467}
+  transport: {fileID: 444454098}
   networkAddress: localhost
   maxConnections: 50
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 212466796382139187, guid: 84f6668d0391aa64c8bf75543282fcc8,
     type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 2364266859732139422, guid: 8f6b15dc12872944d8598e03c25c09a1, type: 3}
   - {fileID: 2626519321626455741, guid: 65a23c740ba86a14bae99936f61594b6, type: 3}
@@ -72,9 +71,11 @@ MonoBehaviour:
   - {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc, type: 3}
   - {fileID: 6742913958889674848, guid: 889e8039dc0677848933031f29d1ca11, type: 3}
   - {fileID: 6800427894362089940, guid: 0c52873e8642460438b663c4c8555363, type: 3}
+  - {fileID: 134984, guid: 9b039ab6cb3f58f44a1bddfadc4a00a3, type: 3}
+  - {fileID: 3279740696676372436, guid: ca376a012899bde419cc097db75630f4, type: 3}
   showRoomGUI: 1
   minPlayers: 1
-  roomPlayerPrefab: {fileID: 114033720796874720, guid: deae2134a1d77704b9c595efe69767dd,
+  roomPlayerPrefab: {fileID: -6242976964897571766, guid: a0e12a09c6628fc4690b1646d3dd353d,
     type: 3}
   RoomScene: Assets/Scenes/Game.unity
   GameplayScene: Assets/Scenes/Royale.unity
@@ -83,46 +84,6 @@ MonoBehaviour:
   roomPlayers: 0
   playersReady: 0
   nodeListServerAdapter: {fileID: 4106758218964250649}
---- !u!114 &4106758218130366467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4106758218130366469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnClientConnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientDataReceived:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientError:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientDisconnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerConnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerDataReceived:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerError:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerDisconnected:
-    m_PersistentCalls:
-      m_Calls: []
-  port: 7777
-  NoDelay: 1
-  serverMaxMessageSize: 16384
-  clientMaxMessageSize: 16384
 --- !u!114 &444454098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +91,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4106758218130366469}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f039183eda8945448b822a77e2a9d0e, type: 3}
   m_Name: 

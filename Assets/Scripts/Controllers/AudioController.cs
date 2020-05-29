@@ -10,24 +10,29 @@ public class AudioController : NetworkBehaviour
     private AudioClip footsteps1;
 
     private Coroutine footstepsCoroutine;
+    WaitForSeconds footstepsWait = new WaitForSeconds(0.2f);
+    WaitForSeconds footsteps0Wait;
+    WaitForSeconds footsteps1Wait;
 
     private void Start()
     {
         footsteps0 = AudioManager.instance.soundLibrary.GetClip("Footsteps", 0);
         footsteps1 = AudioManager.instance.soundLibrary.GetClip("Footsteps", 1);
+        footsteps0Wait = new WaitForSeconds(footsteps0.length);
+        footsteps1Wait = new WaitForSeconds(footsteps1.length);
     }
 
     private IEnumerator PlayFootsteps()
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return footstepsWait;
             audioSource.clip = footsteps0;
             audioSource.Play();
-            yield return new WaitForSeconds(footsteps0.length);
+            yield return footsteps0Wait;
             audioSource.clip = footsteps1;
             audioSource.Play();
-            yield return new WaitForSeconds(footsteps1.length);
+            yield return footsteps1Wait;
         }
     }
 

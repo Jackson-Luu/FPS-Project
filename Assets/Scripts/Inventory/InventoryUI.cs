@@ -64,7 +64,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Inventory"))
+        if (Input.GetButtonDown("Inventory") && !GameManager.instance.chatSelected)
         {
             ToggleInventory();
         }

@@ -30,6 +30,8 @@ public class PlayerComponents : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.name = "Guest " + GetComponent<NetworkIdentity>().netId.ToString();
+
         if (!isLocalPlayer)
         {
             DisableComponents();
@@ -112,9 +114,7 @@ public class PlayerComponents : NetworkBehaviour
 
     private void RegisterPlayers()
     {
-        string netID = GetComponent<NetworkIdentity>().netId.ToString();
-
-        GameManager.RegisterPlayer(netID, gameObject);
+        GameManager.RegisterPlayer(gameObject.name, gameObject);
     }
 
     void DisableComponents()

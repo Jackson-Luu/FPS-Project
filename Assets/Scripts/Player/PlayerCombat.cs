@@ -42,7 +42,7 @@ public class PlayerCombat : CharacterCombat
         if (!isLocalPlayer) { return; }
         if (Input.GetButtonDown("Melee") || (Input.GetButtonDown("Fire1") && meleeMode))
         {
-            if (attackCooldown <= 0f)
+            if (!GameManager.instance.chatSelected && attackCooldown <= 0f)
             {
                 Melee();
             }

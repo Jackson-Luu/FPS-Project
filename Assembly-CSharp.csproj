@@ -84,10 +84,12 @@
     <Compile Include="Assets\Scripts\IsPlaying.cs" />
     <Compile Include="Assets\Scripts\KillFeed.cs" />
     <Compile Include="Assets\Scripts\KillFeedItem.cs" />
+    <Compile Include="Assets\Scripts\LoginUI.cs" />
     <Compile Include="Assets\Scripts\MatchSettings.cs" />
     <Compile Include="Assets\Scripts\ObjectPooler.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerChat.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerComponents.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerNameplate.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerUI.cs" />
     <Compile Include="Assets\Scripts\PoissonDiscSample.cs" />
     <Compile Include="Assets\Scripts\PoissonVisual.cs" />
+    <Compile Include="Assets\Scripts\RegisterAccount.cs" />
     <Compile Include="Assets\Scripts\RoomPlayer.cs" />
     <Compile Include="Assets\Scripts\RoyaleManager.cs" />
     <Compile Include="Assets\Scripts\ServerInit.cs" />
@@ -170,8 +173,14 @@
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Jackson/Desktop/Test/Shooter Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>C:/Users/Jackson/Desktop/Test/Shooter Project/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Users/Jackson/Desktop/Test/Shooter Project/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.MemoryProfiler">
+      <HintPath>C:/Users/Jackson/Desktop/Test/Shooter Project/Library/ScriptAssemblies/Unity.MemoryProfiler.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>C:/Users/Jackson/Desktop/Test/Shooter Project/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
@@ -199,6 +208,9 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Users/Jackson/Desktop/Test/Shooter Project/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.MemoryProfiler.Editor">
+      <HintPath>C:/Users/Jackson/Desktop/Test/Shooter Project/Library/ScriptAssemblies/Unity.MemoryProfiler.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -1012,20 +1012,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectPooler
       objectReference: {fileID: 0}
-    - target: {fileID: 3775195340264047294, guid: 7a1aeed7202afbc48b46107cb7502a9d,
-        type: 3}
-      propertyPath: enemies.Array.data[0].size
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 3775195340264047295, guid: 7a1aeed7202afbc48b46107cb7502a9d,
         type: 3}
       propertyPath: sceneId
-      value: 4246055379
-      objectReference: {fileID: 0}
-    - target: {fileID: 3775195340264047295, guid: 7a1aeed7202afbc48b46107cb7502a9d,
-        type: 3}
-      propertyPath: m_AssetId
-      value: 7a1aeed7202afbc48b46107cb7502a9d
+      value: 2212102509
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a1aeed7202afbc48b46107cb7502a9d, type: 3}

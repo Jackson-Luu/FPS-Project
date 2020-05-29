@@ -94,6 +94,7 @@ namespace Mirror
             {
                 room.roomSlots.Remove(this);
                 room.roomPlayers--;
+                if (readyToBegin) { room.playersReady--; }
                 room.onRoomStatusChanged.Invoke(false);
             }
         }

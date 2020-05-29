@@ -73,44 +73,49 @@ public class PlayerController : NetworkBehaviour
         {
             if (characterController.isGrounded)
             {
-                // We are grounded, so recalculate
-                // move direction directly from axes
-                moveX = Input.GetAxis("Horizontal");
-                moveZ = Input.GetAxis("Vertical");
-
-                moveDirection = moveX * transform.right + moveZ * transform.forward;
-                moveDirection *= speed;
-
-                if (Input.GetButtonDown("Jump"))
+                if (!GameManager.instance.chatSelected)
                 {
-                    moveDirection.y = jumpSpeed;
-                    networkAnimator.SetTrigger("Jump_t");
+                    // We are grounded, so recalculate
+                    // move direction directly from axes
+                    moveX = Input.GetAxis("Horizontal");
+                    moveZ = Input.GetAxis("Vertical");
 
-                    // If jumping, stop footsteps
-                    if (footstepsPlaying)
+                    moveDirection = moveX * transform.right + moveZ * transform.forward;
+                    moveDirection *= speed;
+
+                    if (Input.GetButtonDown("Jump"))
                     {
-                        audioController.StopClip();
-                        footstepsPlaying = false;
-                    }
-                } else
-                {
-                    // Stop footsteps if stationary
-                    if (moveX == 0 && moveZ == 0)
-                    {
+                        moveDirection.y = jumpSpeed;
+                        networkAnimator.SetTrigger("Jump_t");
+
+                        // If jumping, stop footsteps
                         if (footstepsPlaying)
                         {
                             audioController.StopClip();
                             footstepsPlaying = false;
                         }
                     }
-                    else if (!footstepsPlaying) {
-                        audioController.PlayClip();
-                        footstepsPlaying = true;
+                    else
+                    {
+                        // Stop footsteps if stationary
+                        if (moveX == 0 && moveZ == 0)
+                        {
+                            if (footstepsPlaying)
+                            {
+                                audioController.StopClip();
+                                footstepsPlaying = false;
+                            }
+                        }
+                        else if (!footstepsPlaying)
+                        {
+                            audioController.PlayClip();
+                            footstepsPlaying = true;
+                        }
                     }
                 }
 
                 // Sprinting calls
-                if (Input.GetButton("Sprint") && stamina > 0f)
+                if (Input.GetButton("Sprint") && !GameManager.instance.chatSelected && stamina > 0f)
                 {
                     stamina -= staminaBurnRate * Time.deltaTime;
                     if (stamina >= 0.01f)
