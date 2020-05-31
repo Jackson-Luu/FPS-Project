@@ -162,7 +162,6 @@ public class GameManager : NetworkBehaviour
     public static void RegisterPlayer(string playerID, GameObject player)
     {
         players.Add(playerID, player);
-        player.transform.name = playerID;
         if (instance.isRoyale)
         {
             RoyaleManager.AddPlayer(playerID);

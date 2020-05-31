@@ -1,33 +1,65 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class RegisterAccount : MonoBehaviour
 {
     [SerializeField]
+    LoginUI loginUI;
+
+    [SerializeField]
     TMP_InputField usernameInput;
     [SerializeField]
     TMP_InputField passwordInput;
 
+    [SerializeField]
+    GameObject submitButton;
+    [SerializeField]
+    TMP_Text statusText;
+    [SerializeField]
+    GameObject inputFields;
+
+    public void OnRegisterSubmit()
+    {
+        submitButton.SetActive(false);
+        StartCoroutine(Register());
+        inputFields.SetActive(false);
+        statusText.text = "Creating account...";
+        statusText.gameObject.SetActive(true);
+    }
+
     IEnumerator Register()
     {
+        string username = usernameInput.text;
         WWWForm form = new WWWForm();
-        form.AddField("username", usernameInput.text);
+        form.AddField("username", username);
         form.AddField("password", passwordInput.text);
-        UnityEngine.Networking.UnityWebRequest request = UnityEngine.Networking.UnityWebRequest.Post("http://localhost/sqlconnect/register.php", form);
+        UnityEngine.Networking.UnityWebRequest request = UnityEngine.Networking.UnityWebRequest.Post("http://localhost:8000/register/", form);
         yield return request.SendWebRequest();
-        if (request.responseCode == 0)
+        if (request.responseCode == 200)
         {
-            Debug.Log("REGISTER SUCCESS");
+            statusText.text = "<color=green>Account created!</color>";
+            loginUI.mainLoginButton.interactable = false;
+            LoginManager.instance.user = username;
+            yield return new WaitForSeconds(2.0f);
+            loginUI.registerPanel.SetActive(false);
+            loginUI.mainLoginText.text = "Welcome, " + LoginManager.instance.user;
         }
         else
         {
-            Debug.Log("REGISTER FAILED ");
+            statusText.text = "<color=red>Register failed : " + request.downloadHandler.text + "</color>";
+            yield return new WaitForSeconds(2.0f);
+            statusText.gameObject.SetActive(false);
+            inputFields.SetActive(true);
+            submitButton.SetActive(true);
         }
+        usernameInput.text = "";
+        passwordInput.text = "";
     }
 
-    void VerifyInputs()
+    public void Close()
     {
-
+        loginUI.registerPanel.SetActive(false);
     }
 }
