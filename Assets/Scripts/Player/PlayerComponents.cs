@@ -114,21 +114,22 @@ public class PlayerComponents : NetworkBehaviour
     {
         string netID = GetComponent<NetworkIdentity>().netId.ToString();
         GameManager.RegisterPlayer(netID, gameObject);
-        /*
         if (isLocalPlayer)
         {
-            if (LoginManager.instance.user != null)
+            if (LoginManager.instance.loggedIn)
             {
                 CmdSetPlayerName(LoginManager.instance.user);
+            } else
+            {
+                CmdSetPlayerName("Guest " + netID);
             }
         }
-        */
-        gameObject.name = "Guest " + netID;
     }
-    /*
+
     [Command]
     void CmdSetPlayerName(string name)
     {
+        gameObject.name = name;
         RpcSetPlayerName(name);
     }
 
@@ -137,7 +138,6 @@ public class PlayerComponents : NetworkBehaviour
     {
         gameObject.name = name;
     }
-    */
 
     void DisableComponents()
     {

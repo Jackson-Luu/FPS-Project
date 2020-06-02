@@ -834,15 +834,6 @@ MonoBehaviour:
   enemies:
   - {fileID: 8811054376540113807, guid: fb20762c5a85ae543b1f02d18c08b875, type: 3}
   players: []
-  objects:
-  - {fileID: 2364266859732139422, guid: 8f6b15dc12872944d8598e03c25c09a1, type: 3}
-  - {fileID: 5191661886609915004, guid: ab310e3091ca06f47bf8e55466d66d09, type: 3}
-  - {fileID: 2626519321626455741, guid: 65a23c740ba86a14bae99936f61594b6, type: 3}
-  - {fileID: 4692779303801206382, guid: 768900a41796ee24584cd8fbc0c7a2fa, type: 3}
-  - {fileID: 424505108706323481, guid: 449ecc2dbb680104a89496beecbcccc5, type: 3}
-  - {fileID: 8409054689440713046, guid: b711d54e8a5a4334899b49be7ee20dbc, type: 3}
-  - {fileID: 6742913958889674848, guid: 889e8039dc0677848933031f29d1ca11, type: 3}
-  - {fileID: 6800427894362089940, guid: 0c52873e8642460438b663c4c8555363, type: 3}
 --- !u!114 &1679994018
 MonoBehaviour:
   m_ObjectHideFlags: 0

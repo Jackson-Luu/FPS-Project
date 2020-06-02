@@ -17,8 +17,8 @@ namespace Mirror
                 if (args[i].Equals("-port"))
                 {
                     serverPort = int.Parse(args[i + 1]);
-                    GetComponent<TelepathyTransport>().port = (ushort)serverPort;
-                    //GetComponent<Websocket.WebsocketTransport>().port = webServerPort;
+                    //GetComponent<TelepathyTransport>().port = (ushort)serverPort;
+                    GetComponent<Websocket.WebsocketTransport>().port = webServerPort;
                     GetComponent<NodeListServer.NodeListServerAdapter>().CurrentServerInfo.Port = webServerPort;
                     NetworkManager.singleton.StartServer();
                 }

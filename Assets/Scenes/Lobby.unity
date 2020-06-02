@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: 
+  loggedIn: 0
 --- !u!1 &331280583
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +736,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 444454098, guid: e4a03a3a63fb34245ba31db0b90c0c54, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3087988364514736469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
         type: 3}
@@ -766,7 +767,7 @@ PrefabInstance:
         type: 3}
       propertyPath: transport
       value: 
-      objectReference: {fileID: 1538352750}
+      objectReference: {fileID: 1538352754}
     - target: {fileID: 4106758218130366465, guid: e4a03a3a63fb34245ba31db0b90c0c54,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4973,52 +4974,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523863615}
   m_CullTransparentMesh: 0
---- !u!1 &1538352749 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4106758218130366469, guid: e4a03a3a63fb34245ba31db0b90c0c54,
+--- !u!114 &1538352754 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 444454098, guid: e4a03a3a63fb34245ba31db0b90c0c54,
     type: 3}
   m_PrefabInstance: {fileID: 444454096}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1538352750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538352749}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f039183eda8945448b822a77e2a9d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnClientConnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientDataReceived:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientError:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientDisconnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerConnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerDataReceived:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerError:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerDisconnected:
-    m_PersistentCalls:
-      m_Calls: []
-  port: 7777
-  NoDelay: 1
-  serverMaxMessageSize: 16384
-  clientMaxMessageSize: 16384
 --- !u!1 &1569662163
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,12 +35,13 @@ public class RegisterAccount : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", username);
         form.AddField("password", passwordInput.text);
-        UnityEngine.Networking.UnityWebRequest request = UnityEngine.Networking.UnityWebRequest.Post("http://localhost:8000/register/", form);
+        UnityEngine.Networking.UnityWebRequest request = UnityEngine.Networking.UnityWebRequest.Post("http://ec2-18-237-89-43.us-west-2.compute.amazonaws.com/register/", form);
         yield return request.SendWebRequest();
         if (request.responseCode == 200)
         {
             statusText.text = "<color=green>Account created!</color>";
             loginUI.mainLoginButton.interactable = false;
+            LoginManager.instance.loggedIn = true;
             LoginManager.instance.user = username;
             yield return new WaitForSeconds(2.0f);
             loginUI.registerPanel.SetActive(false);

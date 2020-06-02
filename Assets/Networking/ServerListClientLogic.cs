@@ -198,8 +198,8 @@ namespace NodeListServer
                     // Debug: Prints CLICKY to see if the button actually was clicked or Unity UI was being dumb
                     // print("CLICKY");
                     NetworkManager.singleton.networkAddress = modifiedAddress;
-                    NetworkManager.singleton.GetComponent<TelepathyTransport>().port = (ushort)port;
-                    //NetworkManager.singleton.GetComponent<Mirror.Websocket.WebsocketTransport>().port = port;
+                    //NetworkManager.singleton.GetComponent<TelepathyTransport>().port = (ushort)port;
+                    NetworkManager.singleton.GetComponent<Mirror.Websocket.WebsocketTransport>().port = port;
                     NetworkManager.singleton.StartClient();
                 });
             }

@@ -6,6 +6,8 @@ using Mirror;
 public class SpawnManager : NetworkBehaviour
 {
     public GameObject[] enemies;
+
+    [HideInInspector]
     public GameObject[] players;
 
     private System.Guid[] assetIds;
