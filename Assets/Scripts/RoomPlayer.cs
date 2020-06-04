@@ -26,6 +26,11 @@
             countingDown = (NetworkManager.singleton as NetworkRoomManager).countdown;
         }
 
+        private void OnDisable()
+        {
+            if (readyToBegin) { readyToBegin = false; nrm.playersReady--; }
+        }
+
         public override void OnClientEnterRoom()
         {
             if (nrm == null) { return; }

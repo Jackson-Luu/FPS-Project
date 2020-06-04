@@ -3,11 +3,7 @@ using TMPro;
 
 public class PlayerNameplate : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text usernameText;
-
-    [SerializeField]
-    private Player player;
+    public TMP_Text usernameText;
 
     private Camera cam;
 

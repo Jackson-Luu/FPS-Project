@@ -63,10 +63,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Username
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9ac4fcbac6397de4e90d0578e181f118, type: 2}
+  m_sharedMaterial: {fileID: -7872805399659319223, guid: 9ac4fcbac6397de4e90d0578e181f118,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -132,13 +133,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 753116335}
-    characterCount: 8
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -362,7 +363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usernameText: {fileID: 753116335}
-  player: {fileID: -8844148147066375850}
 --- !u!1 &1809381846
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,6 +713,8 @@ MonoBehaviour:
   playerRenderer: {fileID: 196138915}
   zombieRenderer: {fileID: 4178274974354933950}
   playerShoot: {fileID: 5817435983997789641}
+  username: 
+  playerNameplate: {fileID: 1133964703}
 --- !u!114 &-7690100317141515077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,6 +771,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 137953025}
   muzzleFlash: {fileID: 4349661502378221559}
   crosshair: {fileID: 0}
+  sniperScope: {fileID: 0}
 --- !u!114 &-74100932089430960
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -31,12 +31,12 @@ public class CharacterCombat : NetworkBehaviour
         }
     }
 
-    public void Attack(CharacterStats targetStats)
+    public void Attack(CharacterStats targetStats, string source = null)
     {
         if (attackCooldown <= 0f)
         {
             attackCooldown = 1f / attackSpeed;
-            targetStats.TakeDamage(myStats.damage.GetValue(), gameObject.name);
+            targetStats.TakeDamage(myStats.damage.GetValue(), (source != null) ? source : gameObject.name);
             if (!isPlayer)
             {
                 networkAnimator.SetTrigger("Melee_t");

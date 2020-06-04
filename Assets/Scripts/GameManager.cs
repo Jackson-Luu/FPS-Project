@@ -166,6 +166,7 @@ public class GameManager : NetworkBehaviour
         {
             RoyaleManager.AddPlayer(playerID);
         }
+        Debug.Log(playerID);
     }
 
     public static void UnRegisterPlayer(string playerID)

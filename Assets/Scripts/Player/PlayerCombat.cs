@@ -19,6 +19,7 @@ public class PlayerCombat : CharacterCombat
     private WeaponManager weaponManager;
 
     private float meleeAnimationTime;
+    private Player player;
 
     protected override void Start()
     {
@@ -34,6 +35,8 @@ public class PlayerCombat : CharacterCombat
         {
             if (clip.name == "Melee_TwoHanded") { meleeAnimationTime = clip.length; }
         }
+
+        player = GetComponent<Player>();
     }
 
     protected override void Update()
@@ -70,7 +73,7 @@ public class PlayerCombat : CharacterCombat
     void CmdMelee(GameObject target)
     {
         // Cooldown double checked on server in attack function
-        Attack(target.GetComponent<CharacterStats>());
+        Attack(target.GetComponent<CharacterStats>(), player.username);
     }
 
     void ActivateMeleeMode()

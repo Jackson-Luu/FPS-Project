@@ -84,6 +84,7 @@ public class PlayerComponents : NetworkBehaviour
         cC.enabled = true;
 
         RegisterPlayers();
+        CmdRegisterPlayer();
     }
 
     [Command]
@@ -112,31 +113,14 @@ public class PlayerComponents : NetworkBehaviour
 
     private void RegisterPlayers()
     {
-        string netID = GetComponent<NetworkIdentity>().netId.ToString();
-        GameManager.RegisterPlayer(netID, gameObject);
-        if (isLocalPlayer)
-        {
-            if (LoginManager.instance.loggedIn)
-            {
-                CmdSetPlayerName(LoginManager.instance.user);
-            } else
-            {
-                CmdSetPlayerName("Guest " + netID);
-            }
-        }
+        gameObject.name = GetComponent<NetworkIdentity>().netId.ToString();
+        GameManager.RegisterPlayer(gameObject.name, gameObject);
     }
 
     [Command]
-    void CmdSetPlayerName(string name)
+    void CmdRegisterPlayer()
     {
-        gameObject.name = name;
-        RpcSetPlayerName(name);
-    }
-
-    [ClientRpc]
-    void RpcSetPlayerName(string name)
-    {
-        gameObject.name = name;
+        RegisterPlayers();
     }
 
     void DisableComponents()

@@ -249,8 +249,7 @@ public class TerrainChunk
         // Generate tree spawn points within each chunk
         Random.InitState(GameManager.instance.seed + seedOffset);
 
-        points = PoissonDiscSample.GeneratePoints(Random.Range(10, 15), regionSize, seedOffset, 30);
-
+        points = PoissonDiscSample.GeneratePoints(Random.Range(10, 15), regionSize, seedOffset, 5);
         foreach (Vector2 point in points)
         {
             // Get world position and height
@@ -275,18 +274,19 @@ public class TerrainChunk
     
     void SpawnLandmarks()
     {
-        List<Vector2> points;
+        Vector2[] points = new Vector2[2];
         int seedOffset = (int)(sampleCentre.x + sampleCentre.y);
 
         // Generate tree spawn points within each chunk
         Random.InitState(GameManager.instance.seed + seedOffset);
 
-        points = PoissonDiscSample.GeneratePoints(Random.Range(65, 75), regionSize, seedOffset, 30);
+        points[0] = new Vector2(Random.Range(10, 110), Random.Range(50, 110));
+        points[1] = new Vector2(Random.Range(10, 110), Random.Range(10, 50));
 
-        foreach (Vector2 point in points)
+        for (int i = 0; i < points.Length; i++)
         {
             // Get world position and height
-            int meshPosition = ((meshDimension - (int)point.y) * meshArrayDimension) + (int)point.x;
+            int meshPosition = ((meshDimension - (int)points[i].y) * meshArrayDimension) + (int)points[i].x;
 
             Vector3 spawnPoint = lodMeshes[colliderLODIndex].mesh.vertices[meshPosition];
             spawnPoint.x += (coord.x * meshDimension);

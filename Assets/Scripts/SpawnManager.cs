@@ -5,12 +5,16 @@ using Mirror;
 
 public class SpawnManager : NetworkBehaviour
 {
+    public static SpawnManager instance = null;
+
     public GameObject[] enemies;
+    public GameObject[] items;
 
     [HideInInspector]
     public GameObject[] players;
 
-    private System.Guid[] assetIds;
+    private System.Guid[] enemyIds;
+    public System.Guid[] itemIds;
     public Dictionary<System.Guid, GameObject> prefabs;
 
     public delegate GameObject SpawnDelegate(Vector3 position, System.Guid assetId);
@@ -20,30 +24,42 @@ public class SpawnManager : NetworkBehaviour
     private float spawnRadius = 50;
     private float spawnInterval = 10.0f;
 
-    void Start()
+    void Awake()
     {
-        assetIds = new System.Guid[enemies.Length];
+        if (instance != null) { Destroy(instance); }
+        instance = this;
+
+        enemyIds = new System.Guid[enemies.Length];
         prefabs = new Dictionary<System.Guid, GameObject>();
         for (int i = 0; i < enemies.Length; i++)
         {
             System.Guid assetId = enemies[i].GetComponent<NetworkIdentity>().assetId;
-            assetIds[i] = assetId;
+            enemyIds[i] = assetId;
             prefabs.Add(assetId, enemies[i]);
+            ClientScene.RegisterSpawnHandler(assetId, SpawnObject, UnSpawnObject);
+        }
+
+        itemIds = new System.Guid[items.Length];
+        for (int i = 0; i < items.Length; i++)
+        {
+            System.Guid assetId = items[i].GetComponent<NetworkIdentity>().assetId;
+            itemIds[i] = assetId;
+            prefabs.Add(assetId, items[i]);
             ClientScene.RegisterSpawnHandler(assetId, SpawnObject, UnSpawnObject);
         }
     }
 
     public override void OnStartServer()
     {
-        InvokeRepeating("PlayersToSpawnEnemy", 15.0f, spawnInterval);
-        //Invoke("PlayersToSpawnEnemy", 15.0f);
+        InvokeRepeating("PlayersToSpawnEnemy", 20.0f, spawnInterval);
+        //Invoke("PlayersToSpawnEnemy", 20.0f);
     }
 
     void PlayersToSpawnEnemy()
     {
         players = GameManager.GetAllPlayers();
 
-        System.Guid randomId = assetIds[Random.Range(0, enemies.Length)];
+        System.Guid randomId = enemyIds[Random.Range(0, enemies.Length)];
         if (GameManager.instance.isRoyale)
         {
             foreach (GameObject player in players) {

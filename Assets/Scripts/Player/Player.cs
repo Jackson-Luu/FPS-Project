@@ -44,6 +44,13 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private PlayerShoot playerShoot;
 
+    [HideInInspector]
+    [SyncVar(hook = nameof(OnNameChange))]
+    public string username = null;
+
+    [SerializeField]
+    PlayerNameplate playerNameplate;
+
     private void Start()
     {
         playerStats = GetComponent<PlayerStats>();
@@ -52,13 +59,33 @@ public class Player : NetworkBehaviour
 
         if (isLocalPlayer)
         {
+            if (LoginManager.instance.loggedIn)
+            {
+                CmdSetPlayerName(LoginManager.instance.user);
+            }
+            else
+            {
+                CmdSetPlayerName("Guest " + GetComponent<NetworkIdentity>().netId.ToString());
+            }
+
             // Set local player skins
             playerRenderer.material = localPlayerMaterial;
             zombieRenderer.material = localZombieMaterial;
 
             // Disable username canvas
-            transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
+            playerNameplate.gameObject.SetActive(false);
         }
+    }
+
+    [Command]
+    void CmdSetPlayerName(string name)
+    {
+        username = name;
+    }
+
+    void OnNameChange(string old, string name)
+    {
+        playerNameplate.usernameText.text = name;
     }
 
     /*
@@ -176,7 +203,7 @@ public class Player : NetworkBehaviour
         // Show kill feed event
         if (!isServer)
         {
-            GameManager.instance.onPlayerKilledCallback.Invoke(gameObject.name, sourceID);
+            GameManager.instance.onPlayerKilledCallback.Invoke(username, sourceID);
         }
 
         DisableComponents();

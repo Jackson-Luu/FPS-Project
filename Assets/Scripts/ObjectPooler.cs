@@ -12,17 +12,6 @@ public class ObjectPooler : NetworkBehaviour
         public int size;
     }
 
-    #region Singleton
-
-    public static ObjectPooler Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-    #endregion
-
     public List<Pool> items;
     public List<Pool> terrain;
     public List<Pool> enemies;
@@ -31,8 +20,12 @@ public class ObjectPooler : NetworkBehaviour
     private float[] probs;
     private float probTotal = 0;
 
-    public override void OnStartServer()
+    public static ObjectPooler Instance;
+
+    private void Awake()
     {
+        Instance = this;
+
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
         foreach (Pool pool in items)
@@ -45,17 +38,6 @@ public class ObjectPooler : NetworkBehaviour
             InitPool(pool);
         }
         AddTerrainPools();
-    }
-
-    public override void OnStartClient()
-    {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
-        foreach (Pool pool in enemies)
-        {
-            InitPool(pool);
-        }
-        AddTerrainPools();      
     }
 
     private void AddTerrainPools()

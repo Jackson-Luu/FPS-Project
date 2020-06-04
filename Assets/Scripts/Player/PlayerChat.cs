@@ -44,7 +44,7 @@ public class PlayerChat : MonoBehaviour
         string message = chatInput.text.Trim();
         if (!string.IsNullOrEmpty(message))
         {
-            message = player.name + ": " + message;
+            message = player.username + ": " + message;
             DisplayMessage(message);
             player.CmdChatMessage(message);
         }

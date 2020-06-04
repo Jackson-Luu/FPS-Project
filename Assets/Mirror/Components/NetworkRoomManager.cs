@@ -82,7 +82,7 @@ namespace Mirror
 
         public int roomPlayers = 0;
         public int playersReady = 0;
-        private int countingDown = -1;
+        protected int countingDown = -1;
         public int countdown
         {
             get { return countingDown; }
@@ -168,11 +168,7 @@ namespace Mirror
             GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
             if (gamePlayer == null)
             {
-                // get start position from base class
-                Transform startPos = GetStartPosition();
-                gamePlayer = startPos != null
-                    ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-                    : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+                gamePlayer = Instantiate(playerPrefab, GetStartPosition(), Quaternion.identity);
                 gamePlayer.name = playerPrefab.name;
             }
 
@@ -213,7 +209,7 @@ namespace Mirror
                 }
             }
 
-            for (countingDown = 60; countingDown > 0; countingDown--)
+            for (countingDown = 5; countingDown > 0; countingDown--)
             {
                 yield return new WaitForSeconds(1);
             }
@@ -323,7 +319,7 @@ namespace Mirror
                 GameObject newRoomGameObject = OnRoomServerCreateRoomPlayer(conn);
                 if (newRoomGameObject == null)
                 {
-                    newRoomGameObject = Instantiate(roomPlayerPrefab.gameObject, GetStartPosition().position, Quaternion.identity);
+                    newRoomGameObject = Instantiate(roomPlayerPrefab.gameObject, GetStartPosition(), Quaternion.identity);
                 }
 
                 NetworkServer.AddPlayerForConnection(conn, newRoomGameObject);
@@ -349,35 +345,7 @@ namespace Mirror
         /// <para>Clients that connect to this server will automatically switch to this scene. This is called autmatically if onlineScene or offlineScene are set, but it can be called from user code to switch scenes again while the game is in progress. This automatically sets clients to be not-ready. The clients must call NetworkClient.Ready() again to participate in the new scene.</para>
         /// </summary>
         /// <param name="newSceneName"></param>
-        public override void ServerChangeScene(string newSceneName)
-        {
-            if (newSceneName == RoomScene)
-            {
-                // Reset countdown
-                countingDown = -1;
-
-                foreach (NetworkRoomPlayer roomPlayer in roomSlots)
-                {
-                    if (roomPlayer == null)
-                        continue;
-
-                    // find the game-player object for this connection, and destroy it
-                    NetworkIdentity identity = roomPlayer.GetComponent<NetworkIdentity>();
-
-                    if (NetworkServer.active)
-                    {
-                        // re-add the room object
-                        roomPlayer.GetComponent<NetworkRoomPlayer>().readyToBegin = false;
-                        NetworkServer.ReplacePlayerForConnection(identity.connectionToClient, roomPlayer.gameObject);
-                        Vector3 spawnPoint = roomPlayer.gameObject.transform.position;
-                        roomPlayer.gameObject.transform.position = new Vector3(spawnPoint.x, GetStartPosition().position.y, spawnPoint.z);
-                        roomPlayer.gameObject.SetActive(true);
-                    }
-                }
-
-                allPlayersReady = false;
-            }
-
+        public override void ServerChangeScene(string newSceneName) {
             base.ServerChangeScene(newSceneName);
         }
 
@@ -516,6 +484,8 @@ namespace Mirror
             else
             {
                 CallOnClientExitRoom();
+                countdown = 0;
+                playersReady = 0;
             }
 
             base.OnClientSceneChanged(conn);

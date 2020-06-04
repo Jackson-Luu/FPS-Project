@@ -5,6 +5,8 @@ using Mirror;
 [RequireComponent(typeof(WeaponManager))]
 public class PlayerShoot : NetworkBehaviour
 {
+    private Player player;
+
     [SerializeField]
     private Camera cam;
 
@@ -74,6 +76,7 @@ public class PlayerShoot : NetworkBehaviour
         weaponInitialAngle = weaponHolder.localEulerAngles;
 
         normalFOV = cam.fieldOfView;
+        player = GetComponent<Player>();
     }
 
     private void OnDestroy()
@@ -208,7 +211,7 @@ public class PlayerShoot : NetworkBehaviour
         {
             if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Enemy")) // Second case removes self damage bug at time of writing && hit.collider.transform.name != transform.name
             {
-                CmdTargetShot(hit.collider.gameObject, currentWeapon.damage, gameObject.name);
+                CmdTargetShot(hit.collider.gameObject, currentWeapon.damage, player.username);
             }
 
             // Call hit effects on impact point

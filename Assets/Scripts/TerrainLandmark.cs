@@ -21,7 +21,8 @@ public class TerrainLandmark : NetworkBehaviour
             var pool = ObjectPooler.Instance.items;
             foreach (Transform item in itemSpawnPoint)
             {
-                GameObject newItem = ObjectPooler.Instance.IndexSpawnFromPool(pool, prng.Next(0, pool.Count));
+                int random = prng.Next(0, pool.Count);
+                GameObject newItem = ObjectPooler.Instance.IndexSpawnFromPool(pool, random);
                 newItem.transform.rotation = item.rotation;
                 if (newItem.CompareTag("Weapon"))
                 {
@@ -33,7 +34,7 @@ public class TerrainLandmark : NetworkBehaviour
                 }
                 newItem.SetActive(true);
 
-                NetworkServer.Spawn(newItem);
+                NetworkServer.Spawn(newItem, SpawnManager.instance.itemIds[random]);
                 ItemPickup itemPickup = newItem.GetComponent<ItemPickup>();
                 ServerTerrainGenerator.instance.GetChunk(chunkCoord).onObserverChangedCallback += itemPickup.EditObservers;
                 foreach (NetworkConnection observer in GameManager.GetObservers(chunkCoord))

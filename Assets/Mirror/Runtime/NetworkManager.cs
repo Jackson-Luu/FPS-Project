@@ -1276,9 +1276,9 @@ namespace Mirror
         /// <param name="conn">Connection from client.</param>
         public virtual void OnServerAddPlayer(NetworkConnection conn)
         {
-            Transform startPos = GetStartPosition();
+            Vector3 startPos = GetStartPosition();
             GameObject player = startPos != null
-                ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+                ? Instantiate(playerPrefab, startPos, Quaternion.identity)
                 : Instantiate(playerPrefab);
 
             NetworkServer.AddPlayerForConnection(conn, player);
@@ -1289,24 +1289,9 @@ namespace Mirror
         /// <para>This is used by the default implementation of OnServerAddPlayer.</para>
         /// </summary>
         /// <returns>Returns the transform to spawn a player at, or null.</returns>
-        public Transform GetStartPosition()
+        public virtual Vector3 GetStartPosition()
         {
-            // first remove any dead transforms
-            startPositions.RemoveAll(t => t == null);
-
-            if (startPositions.Count == 0)
-                return null;
-
-            if (playerSpawnMethod == PlayerSpawnMethod.Random)
-            {
-                return startPositions[UnityEngine.Random.Range(0, startPositions.Count)];
-            }
-            else
-            {
-                Transform startPosition = startPositions[startPositionIndex];
-                startPositionIndex = (startPositionIndex + 1) % startPositions.Count;
-                return startPosition;
-            }
+            return Vector3.zero;
         }
 
         /// <summary>

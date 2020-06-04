@@ -65,6 +65,18 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) { return; }
         MovePlayer();
+
+        if (transform.position.y < -100)
+        {
+            ResetPlayerPos();
+        }
+    }
+
+    void ResetPlayerPos()
+    {
+        characterController.enabled = false;
+        transform.position = new Vector3(transform.position.x, 400, transform.position.z);
+        characterController.enabled = true;
     }
 
     void MovePlayer()
